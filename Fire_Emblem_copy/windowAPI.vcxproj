@@ -159,6 +159,7 @@
     <ClInclude Include="iniDataManager.h" />
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
+    <ClInclude Include="mapTool.h" />
     <ClInclude Include="playGround.h" />
     <ClInclude Include="progressBar.h" />
     <ClInclude Include="randomFunction.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="tankScene.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="tileNode.h" />
+    <ClInclude Include="tileSet.h" />
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="txtData.h" />
@@ -189,6 +191,7 @@
     <ClCompile Include="iniDataManager.cpp" />
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
+    <ClCompile Include="mapTool.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="progressBar.cpp" />
     <ClCompile Include="sceneManager.cpp" />
@@ -202,6 +205,7 @@
     <ClCompile Include="tank.cpp" />
     <ClCompile Include="tankMap.cpp" />
     <ClCompile Include="tankScene.cpp" />
+    <ClCompile Include="tileSet.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="txtData.cpp" />

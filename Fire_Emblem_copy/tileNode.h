@@ -21,11 +21,6 @@
 #define ATTR_FROZEN 0x00000008	//레릿꼬~
 
 
-//지형
-enum TERRAIN
-{
-	TR_CEMENT, TR_DESERT, TR_GRASS, TR_WATER, TR_END
-};
 
 //오브젝트
 enum OBJECT
@@ -36,11 +31,7 @@ enum OBJECT
 	OBJ_NONE
 };
 
-//포지션
-enum POS
-{
-	POS_FLAG1, POS_FLAG2, POS_TANK1, POS_TANK2
-};
+
 
 //타일 정보 담은 구조체
 struct tagTile

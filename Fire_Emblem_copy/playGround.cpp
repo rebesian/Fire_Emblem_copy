@@ -16,10 +16,13 @@ HRESULT playGround::init()
 {
 	gameNode::init(true);
 
-	SCENEMANAGER->addScene("¶¥²ô¾À", new tankScene);
+	//SCENEMANAGER->addScene("¶¥²ô¾À", new tankScene);
 
-	SCENEMANAGER->changeScene("¶¥²ô¾À");
-	
+	//SCENEMANAGER->changeScene("¶¥²ô¾À");
+
+	IMAGEMANAGER->addFrameImage("TR_Grass", "image/Tileset/TR_GRASS.bmp", 288, 336, 6, 7, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("TR_KingDom", "image/Tileset/TR_KingDom.bmp", 144, 336, 3, 7, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("TR_MT", "image/Tileset/TR_MT.bmp", 384, 288, 8, 6, true, RGB(255, 0, 255));
 	
 	return S_OK;
 }

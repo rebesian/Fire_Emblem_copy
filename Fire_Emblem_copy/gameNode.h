@@ -3,6 +3,21 @@
 
 static image* _backBuffer = IMAGEMANAGER->addImage("backBuffer", WINSIZEX, WINSIZEY);
 
+enum TERRAIN
+{
+	TR_NONE,TR_GRASS, TR_KINGDOM, TR_MOUNTIN
+};
+
+enum CTRL
+{
+	CTRL_SAVE,			//세이브		버튼
+	CTRL_LOAD,			//로드		버튼
+	CTRL_TERRAINDRAW,	//지형		버튼
+	CTRL_OBJDRAW,		//오브젝트	버튼
+	CTRL_ERASER,		//지우개		버튼
+	CTRL_END
+};
+
 class gameNode
 {
 private:
