@@ -52,9 +52,6 @@
     <Filter Include="2DGameFramework\action">
       <UniqueIdentifier>{936fa078-09d7-4d41-8553-9de447d9f438}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\tankScene">
-      <UniqueIdentifier>{2f7c8211-58c1-4fda-b057-833f025f7a9b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -132,18 +129,6 @@
     <ClInclude Include="iniDataManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="tank.h">
-      <Filter>playGround\tankScene</Filter>
-    </ClInclude>
-    <ClInclude Include="tankMap.h">
-      <Filter>playGround\tankScene</Filter>
-    </ClInclude>
-    <ClInclude Include="tankScene.h">
-      <Filter>playGround\tankScene</Filter>
-    </ClInclude>
-    <ClInclude Include="tileNode.h">
-      <Filter>playGround\tankScene</Filter>
-    </ClInclude>
     <ClInclude Include="mapTool.h">
       <Filter>playGround</Filter>
     </ClInclude>
@@ -214,15 +199,6 @@
     </ClCompile>
     <ClCompile Include="iniDataManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="tank.cpp">
-      <Filter>playGround\tankScene</Filter>
-    </ClCompile>
-    <ClCompile Include="tankMap.cpp">
-      <Filter>playGround\tankScene</Filter>
-    </ClCompile>
-    <ClCompile Include="tankScene.cpp">
-      <Filter>playGround\tankScene</Filter>
     </ClCompile>
     <ClCompile Include="mapTool.cpp">
       <Filter>playGround</Filter>

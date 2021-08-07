@@ -1,4 +1,5 @@
 #pragma once
+#include "gameNode.h"
 #include <vector>
 #include "tileSet.h"
 
@@ -25,15 +26,15 @@ struct tagCurrentTile
 	int terrainFrameY;
 };
 
-class mapTool
+class mapTool : public gameNode
 {
 	
 	int _ctrSelect; // 현재 선택할모드 
 	tagCurrentTile _currentTile; //현재 선택된타일
 
 	tagSampleTile _TR_GRASS[SAMPLEGRASSX *SAMPLEGRASSY];
-	//tagSampleTile _TR_KD[SAMPLEKINGDOMX *SAMPLEKINGDOMY];
-	//tagSampleTile _TR_MT[SAMPLEMTX * SAMPLEMTY];
+	tagSampleTile _TR_KD[SAMPLEKINGDOMX *SAMPLEKINGDOMY];
+	tagSampleTile _TR_MT[SAMPLEMTX * SAMPLEMTY];
 
 	
 	tileSet* _tileSet;
@@ -45,5 +46,8 @@ public:
 	void render();
 
 	void selectTileSet();
+	void setUp();
+
+	void setLinkMemoryTileSet(tileSet* tileset) { _tileSet = tileset; }
 };
 

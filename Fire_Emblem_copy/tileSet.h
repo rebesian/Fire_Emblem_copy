@@ -25,8 +25,12 @@ public:
 	void render();
 
 	void setup();
-	
+	void drawTile(TERRAIN _terrain, int frameX, int frameY);
+
+
+
 	int getTileX() { return _tileX; }
 	int getTileY() { return _tileY; }
+	
 };
 

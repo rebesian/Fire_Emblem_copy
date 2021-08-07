@@ -23,7 +23,13 @@ HRESULT playGround::init()
 	IMAGEMANAGER->addFrameImage("TR_Grass", "image/Tileset/TR_GRASS.bmp", 288, 336, 6, 7, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("TR_KingDom", "image/Tileset/TR_KingDom.bmp", 144, 336, 3, 7, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("TR_MT", "image/Tileset/TR_MT.bmp", 384, 288, 8, 6, true, RGB(255, 0, 255));
-	
+	_mapTool = new mapTool;
+	_tileSet = new tileSet;
+	_mapTool->init();
+	_tileSet->init();
+	_mapTool->setLinkMemoryTileSet(_tileSet);
+
+
 	return S_OK;
 }
 
@@ -40,8 +46,11 @@ void playGround::update()
 {
 	gameNode::update();
 
-	SCENEMANAGER->update();
+	//SCENEMANAGER->update();
 	
+	_mapTool->update();
+
+
 }
 
 
@@ -50,7 +59,10 @@ void playGround::render()
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//================제발 이 사이에 좀 그립시다==========================
 
-	SCENEMANAGER->render();
+	//SCENEMANAGER->render();
+
+	_mapTool->render();
+	_tileSet->render();
 
 
 	//TIMEMANAGER->render(getMemDC());
