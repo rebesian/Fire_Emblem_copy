@@ -11,7 +11,12 @@
 
 #define SAMPLEMTX 8
 #define SAMPLEMTY 6
-
+enum CATALOG
+{
+	GRASS,
+	KINGDOM,
+	MOUNTIN
+};
 struct tagSampleTile
 {
 	RECT tileRc;
@@ -31,6 +36,10 @@ class mapTool : public gameNode
 	
 	int _ctrSelect; // 현재 선택할모드 
 	tagCurrentTile _currentTile; //현재 선택된타일
+
+	RECT leftCatalog, rightCatalog;
+
+	CATALOG _catalog;
 
 	tagSampleTile _TR_GRASS[SAMPLEGRASSX *SAMPLEGRASSY];
 	tagSampleTile _TR_KD[SAMPLEKINGDOMX *SAMPLEKINGDOMY];
