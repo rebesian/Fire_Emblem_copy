@@ -26,21 +26,32 @@ void mapTool::release()
 
 void mapTool::render()
 {
-
+	char str[3];
 	Rectangle(getMemDC(), leftCatalog);
+	sprintf_s(str , "<");
+	TextOut(getMemDC(), leftCatalog.left+6, leftCatalog.top+6, str, strlen(str));
 	Rectangle(getMemDC(), rightCatalog);
+	sprintf_s(str, ">");
+	TextOut(getMemDC(), rightCatalog.left+6 ,rightCatalog.top+6, str, strlen(str));
+	char label[123];
 
 
 	if (_catalog == GRASS)
 	{
+		sprintf_s(label, "GRASS");
+		TextOut(getMemDC(), leftCatalog.right + 50, leftCatalog.top + 6, label, strlen(label));
 		IMAGEMANAGER->render("TR_Grass", getMemDC(), WINSIZEX - IMAGEMANAGER->findImage("TR_Grass")->getWidth() - 150, 100);
 	}
 	else if (_catalog == KINGDOM)
 	{
+		sprintf_s(label, "KINGDOM");
+		TextOut(getMemDC(), leftCatalog.right + 50, leftCatalog.top + 6, label, strlen(label));
 		IMAGEMANAGER->render("TR_KingDom", getMemDC(), WINSIZEX - IMAGEMANAGER->findImage("TR_KingDom")->getWidth() - 150, 100);
 	}
 	else if (_catalog == MOUNTIN)
 	{
+		sprintf_s(label, "MOUNTIN");
+		TextOut(getMemDC(), leftCatalog.right + 50, leftCatalog.top + 6, label, strlen(label));
 		IMAGEMANAGER->render("TR_MT", getMemDC(), WINSIZEX - IMAGEMANAGER->findImage("TR_MT")->getWidth() - 150, 100);
 	}
 
@@ -133,8 +144,8 @@ void mapTool::setUp()
 	_currentTile.terrainFrameX = 0;
 	_currentTile.terrainFrameY = 0;
 
-	leftCatalog = RectMakeCenter(TILESIZE * 20 + 150, 25, 50, 50);
-	rightCatalog = RectMakeCenter(TILESIZE * 20 + 300, 25, 50, 50);
+	leftCatalog = RectMakeCenter(TILESIZE * 20 + 150, 50, 25, 25);
+	rightCatalog = RectMakeCenter(TILESIZE * 20 + 350, 50, 25, 25);
 
 
 
