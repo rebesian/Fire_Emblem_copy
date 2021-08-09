@@ -157,3 +157,53 @@ void tileSet::drawTile(TERRAIN _terrain, int startx, int starty, int endx, int e
 
 }
 
+void tileSet::save()
+{
+	//저장이요
+	HANDLE file;
+	DWORD write;
+	_savedX = _tileX;
+	_savedY = _tileY;
+	tagTile *tile = new tagTile[_savedX * _savedY];
+	for (int i = 0; i < _tiles.size(); i++)
+	{
+		for (int j = 0; j < _tiles[i].size(); j++)
+		{
+			tile[i * _savedX + j] = _tiles[i][j];
+		}
+	}
+
+	file = CreateFile("tile_save.map", GENERIC_WRITE, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	WriteFile(file, tile, sizeof(tagTile) * _savedX * _savedY, &write, NULL);
+
+	CloseHandle(file);
+	delete[] tile;
+}
+
+void tileSet::load()
+{
+	HANDLE file;
+	DWORD read;
+	tagTile *tile = new tagTile[_savedX * _savedY];
+	file = CreateFile("tile_save.map", GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	ReadFile(file, tile, sizeof(tagTile) * _savedX * _savedY, &read, NULL);
+
+	_tiles.clear();
+	for (int i = 0; i < _savedY; i++)
+	{
+		vector<tagTile> vTile;
+		for (int j = 0; j < _savedX; j++)
+		{
+			vTile.push_back(tile[i * _savedX + j]);
+		}
+		_tiles.push_back(vTile);
+	}
+
+	_tileX = _savedX;
+	_tileY = _savedY;
+
+	CloseHandle(file);
+	delete[] tile;
+}
+

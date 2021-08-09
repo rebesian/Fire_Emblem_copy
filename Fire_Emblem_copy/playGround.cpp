@@ -57,13 +57,10 @@ void playGround::render()
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//================제발 이 사이에 좀 그립시다==========================
 
-	//SCENEMANAGER->render();
-
 	_mapTool->render();
 	_tileSet->render();
 
 
-	//TIMEMANAGER->render(getMemDC());
 	//==================================================
 	this->getBackBuffer()->render(getHDC(), 0, 0);
 	

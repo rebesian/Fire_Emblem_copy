@@ -68,7 +68,6 @@ public:
 
 	void selectTileSet();
 	void setUp();
-
 	
 	void setLinkMemoryTileSet(tileSet* tileset) { _tileSet = tileset; }
 	

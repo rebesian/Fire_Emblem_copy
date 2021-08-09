@@ -33,6 +33,9 @@ public:
 	void drawTile(TERRAIN _terrain, int frameX, int frameY);
 	void drawTile(TERRAIN _terrain, int startx, int starty, int endx, int endy);
 
+	void save();
+	void load();
+
 	int getTileX() { return _tileX; }
 	int getTileY() { return _tileY; }
 	
