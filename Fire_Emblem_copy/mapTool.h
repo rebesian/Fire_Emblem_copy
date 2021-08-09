@@ -17,6 +17,7 @@ enum CATALOG
 	KINGDOM,
 	MOUNTIN
 };
+
 struct tagSampleTile
 {
 	RECT tileRc;
@@ -31,15 +32,26 @@ struct tagCurrentTile
 	int terrainFrameY;
 };
 
+struct tagPicking
+{
+	RECT rc;
+	TERRAIN catalog;
+	int indexX;
+	int indexY;
+};
 class mapTool : public gameNode
 {
-	
+	int startX , startY;
+	int endX, endY;
+
 	int _ctrSelect; // 현재 선택할모드 
 	tagCurrentTile _currentTile; //현재 선택된타일
 
 	RECT leftCatalog, rightCatalog;
 
 	CATALOG _catalog;
+
+	vector<tagPicking> _picking;
 
 	tagSampleTile _TR_GRASS[SAMPLEGRASSX *SAMPLEGRASSY];
 	tagSampleTile _TR_KD[SAMPLEKINGDOMX *SAMPLEKINGDOMY];
@@ -57,6 +69,8 @@ public:
 	void selectTileSet();
 	void setUp();
 
+	
 	void setLinkMemoryTileSet(tileSet* tileset) { _tileSet = tileset; }
+	
 };
 

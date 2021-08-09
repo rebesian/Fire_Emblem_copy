@@ -31,6 +31,7 @@ HRESULT gameNode::init(bool managerInit)
 		IMAGEMANAGER->init();
 		TIMEMANAGER->init();
 		EFFECTMANAGER->init();
+		CAMERAMANAGER->init();
 		SCENEMANAGER->init();
 		SOUNDMANAGER->init();
 		KEYANIMANAGER->init();

@@ -16,9 +16,6 @@ HRESULT playGround::init()
 {
 	gameNode::init(true);
 
-	//SCENEMANAGER->addScene("¶¥²ô¾À", new tankScene);
-
-	//SCENEMANAGER->changeScene("¶¥²ô¾À");
 
 	IMAGEMANAGER->addFrameImage("TR_Grass", "image/Tileset/TR_GRASS.bmp", 288, 336, 6, 7, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("TR_KingDom", "image/Tileset/TR_KingDom.bmp", 144, 336, 3, 7, true, RGB(255, 0, 255));
@@ -49,6 +46,7 @@ void playGround::update()
 	//SCENEMANAGER->update();
 	
 	_mapTool->update();
+	
 
 
 }
@@ -68,4 +66,5 @@ void playGround::render()
 	//TIMEMANAGER->render(getMemDC());
 	//==================================================
 	this->getBackBuffer()->render(getHDC(), 0, 0);
+	
 }
