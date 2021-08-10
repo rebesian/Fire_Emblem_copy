@@ -3,8 +3,8 @@
 
 HRESULT tileSet::init()
 {
-	_tileX = 20;
-	_tileY = 21; 
+	_tileX =  20;
+	_tileY =  21;
 	_tileBuffer = new image;
 	_tileBuffer->init(BACKGROUNDX, BACKGROUNDY);
 	setup();
@@ -162,20 +162,18 @@ void tileSet::save()
 	//저장이요
 	HANDLE file;
 	DWORD write;
-	_savedX = _tileX;
-	_savedY = _tileY;
-	tagTile *tile = new tagTile[_savedX * _savedY];
+	tagTile *tile = new tagTile[_tileX * _tileY];
 	for (int i = 0; i < _tiles.size(); i++)
 	{
 		for (int j = 0; j < _tiles[i].size(); j++)
 		{
-			tile[i * _savedX + j] = _tiles[i][j];
+			tile[i * _tileX + j] = _tiles[i][j];
 		}
 	}
 
 	file = CreateFile("tile_save.map", GENERIC_WRITE, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
-	WriteFile(file, tile, sizeof(tagTile) * _savedX * _savedY, &write, NULL);
+	WriteFile(file, tile, sizeof(tagTile) *_tileX * _tileY, &write, NULL);
 
 	CloseHandle(file);
 	delete[] tile;
@@ -185,23 +183,23 @@ void tileSet::load()
 {
 	HANDLE file;
 	DWORD read;
-	tagTile *tile = new tagTile[_savedX * _savedY];
+	tagTile *tile = new tagTile[_tileX * _tileY];
 	file = CreateFile("tile_save.map", GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-	ReadFile(file, tile, sizeof(tagTile) * _savedX * _savedY, &read, NULL);
+	ReadFile(file, tile, sizeof(tagTile) * _tileX * _tileY, &read, NULL);
 
 	_tiles.clear();
-	for (int i = 0; i < _savedY; i++)
+	for (int i = 0; i < _tileY; i++)
 	{
 		vector<tagTile> vTile;
-		for (int j = 0; j < _savedX; j++)
+		for (int j = 0; j < _tileX; j++)
 		{
-			vTile.push_back(tile[i * _savedX + j]);
+			vTile.push_back(tile[i * _tileX + j]);
 		}
 		_tiles.push_back(vTile);
 	}
 
-	_tileX = _savedX;
-	_tileY = _savedY;
+	_tileX = _tileX;
+	_tileY = _tileY;
 
 	CloseHandle(file);
 	delete[] tile;

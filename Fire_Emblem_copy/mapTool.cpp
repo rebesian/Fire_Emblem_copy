@@ -4,7 +4,7 @@
 HRESULT mapTool::init()
 {
 	setUp();
-
+	ispick = false;
 	return S_OK;
 }
 
@@ -14,11 +14,8 @@ void mapTool::update()
 	selectTileSet();
 	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
 	{
-		if (endX==0 &&endY==0)
-			_tileSet->drawTile(_currentTile.terrain, _currentTile.terrainFrameX, _currentTile.terrainFrameY);
-		else
-			_tileSet->drawTile(_currentTile.terrain, startX, startY, endX, endY);
-
+		if(!_picking.empty())
+		_tileSet->drawTile(_currentTile.terrain, startX, startY, endX, endY);
 	}
 	_tileSet->update();
 
@@ -39,12 +36,16 @@ void mapTool::render()
 	sprintf_s(str, ">");
 	TextOut(getMemDC(), rightCatalog.left+6 ,rightCatalog.top+6, str, strlen(str));
 	char label[123];
-
+	Rectangle(getMemDC(), save);
+	IMAGEMANAGER->render("save", getMemDC(), save.left, save.top);
+	IMAGEMANAGER->render("load", getMemDC(), load.left, load.top);
+	//Rectangle(getMemDC(), load);
+	Rectangle(getMemDC(), SelectTileset);
 	//SetBkMode(getMemDC(), TRANSPARENT);
 	HBRUSH myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
 	HBRUSH oldBrush = (HBRUSH)SelectObject(getMemDC(), myBrush);
-	HPEN myPen = (HPEN)CreatePen(0, 0, RGB(255, 255, 255));
-	SelectObject(getMemDC(), myPen);
+	HPEN myPen = (HPEN)CreatePen(0, 2, RGB(0, 0, 255));
+	HPEN oldPen = (HPEN)CreatePen(0, 0, RGB(0, 0, 0));
 	switch (_catalog)
 	{
 	case GRASS:
@@ -72,15 +73,65 @@ void mapTool::render()
 		for (int i = 0; i < SAMPLEMTX *SAMPLEMTY; ++i)
 		{
 			Rectangle(getMemDC(), _TR_MT[i].tileRc);
+
 		}
 		break;
 	}
-	DeleteObject(myPen);
-	for (int i = 0; i < _picking.size(); i++)
-	{
 
-		Rectangle(getMemDC(), _picking[i].rc);
+	for (int y = startY; y <= endY; ++y)
+	{
+		for (int x = startX; x <= endX; ++x)
+		{
+			SelectObject(getMemDC(), myPen);
+			switch (_catalog)
+			{
+			case GRASS:
+				SelectObject(getMemDC(), myPen);
+				Rectangle(getMemDC(), _TR_GRASS[x +y].tileRc);
+				SelectObject(getMemDC(), oldPen);
+				break;
+			case KINGDOM:
+				SelectObject(getMemDC(), myPen);
+				Rectangle(getMemDC(), _TR_KD[x + y].tileRc);
+				SelectObject(getMemDC(), oldPen);
+				break;
+			case MOUNTIN:
+				SelectObject(getMemDC(), myPen);
+				Rectangle(getMemDC(), _TR_MT[x + y].tileRc);
+				SelectObject(getMemDC(), oldPen);
+				break;
+			}
+		}
 	}
+
+	if (!_picking.empty())
+	{
+		for (int i = 0; i < _picking.size(); ++i)
+		{
+			switch (_picking[i].catalog)
+			{
+			case TR_GRASS:
+				IMAGEMANAGER->frameRender("TR_Grass", getMemDC(), 
+					((SelectTileset.left + SelectTileset.right) / 2 - TILESIZE * (endX - startX)) + (i % (endX - startX + 1)) * TILESIZE,
+					((SelectTileset.top + SelectTileset.bottom) / 2 - TILESIZE * (endY - startY)) + (i / (endX - startX + 1)) * TILESIZE,
+					_picking[i].indexX, _picking[i].indexY);
+				break;
+			case TR_KINGDOM:
+				IMAGEMANAGER->frameRender("TR_KingDom", getMemDC(),
+					((SelectTileset.left + SelectTileset.right) / 2 - TILESIZE * (endX - startX)) + (i % (endX - startX + 1)) * TILESIZE,
+					((SelectTileset.top + SelectTileset.bottom) / 2 - TILESIZE * (endY - startY)) + (i / (endX - startX + 1)) * TILESIZE,
+					_picking[i].indexX, _picking[i].indexY);
+				break;
+			case TR_MOUNTIN:
+				IMAGEMANAGER->frameRender("TR_MT", getMemDC(),
+					((SelectTileset.left + SelectTileset.right) / 2 - TILESIZE * (endX - startX)) + (i % (endX - startX + 1)) * TILESIZE,
+					((SelectTileset.top + SelectTileset.bottom) / 2 - TILESIZE * (endY - startY)) + (i / (endX - startX + 1)) * TILESIZE,
+					_picking[i].indexX, _picking[i].indexY);
+				break;
+			}
+		}
+	}
+
 
 }
 
@@ -157,11 +208,22 @@ void mapTool::selectTileSet()
 				_catalog = GRASS;
 			}
 		}
+
+		if (PtInRect(&save, _ptMouse))
+		{
+			_tileSet->save();
+		}
+
+		if (PtInRect(&load, _ptMouse))
+		{
+			_tileSet->load();
+		}
 	}
 	//ÇÇÅ·
 	if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
 	{
 		_picking.clear();
+		ispick = false;
 		startX = startY = endX = endY = 0;
 		if (_catalog == GRASS)
 		{
@@ -169,14 +231,11 @@ void mapTool::selectTileSet()
 			{
 				if (PtInRect(&_TR_GRASS[i].tileRc, _ptMouse))
 				{
-					//tagPicking pick;
+
 					startX = _TR_GRASS[i].terrainFrameX;
 					startY = _TR_GRASS[i].terrainFrameY;
 					_currentTile.terrain = TR_GRASS;
-					//pick.indexX = _TR_GRASS[i].terrainFrameX;
-					//pick.indexY = _TR_GRASS[i].terrainFrameY;
-					//pick.rc = _TR_GRASS[i].tileRc;
-					//_picking.push_back(pick);
+				
 				}
 			}
 		}
@@ -186,14 +245,11 @@ void mapTool::selectTileSet()
 			{
 				if (PtInRect(&_TR_KD[i].tileRc, _ptMouse))
 				{
-					//tagPicking pick;
+
 					startX = _TR_KD[i].terrainFrameX;
 					startY = _TR_KD[i].terrainFrameY;
 					_currentTile.terrain = TR_KINGDOM;
-					//pick.indexX = _TR_KD[i].terrainFrameX;
-					//pick.indexY = _TR_KD[i].terrainFrameY;
-					//pick.rc = _TR_KD[i].tileRc;
-					//_picking.push_back(pick);
+			
 				}
 			}
 		}
@@ -203,14 +259,10 @@ void mapTool::selectTileSet()
 			{
 				if (PtInRect(&_TR_MT[i].tileRc, _ptMouse))
 				{
-					//tagPicking pick;
+				
 					startX = _TR_MT[i].terrainFrameX;
 					startY = _TR_MT[i].terrainFrameY;
 					_currentTile.terrain = TR_MOUNTIN;
-					//pick.indexX = _TR_MT[i].terrainFrameX;
-					//pick.indexY = _TR_MT[i].terrainFrameY;
-					//pick.rc = _TR_MT[i].tileRc;
-					//_picking.push_back(pick);
 				}
 			}
 		}
@@ -255,12 +307,9 @@ void mapTool::selectTileSet()
 			{
 				if (PtInRect(&_TR_GRASS[i].tileRc, _ptMouse))
 				{
-					//tagPicking pick;
 					endX = _TR_GRASS[i].terrainFrameX;
 					endY = _TR_GRASS[i].terrainFrameY;
-					//pick.indexX = _TR_GRASS[i].terrainFrameX;
-					//pick.indexY = _TR_GRASS[i].terrainFrameY;
-					//pick.rc = _TR_GRASS[i].tileRc;
+					ispick = true;
 			
 				}
 			}
@@ -271,13 +320,9 @@ void mapTool::selectTileSet()
 			{
 				if (PtInRect(&_TR_KD[i].tileRc, _ptMouse))
 				{
-					//tagPicking pick;
 					endX = _TR_KD[i].terrainFrameX;
 					endY = _TR_KD[i].terrainFrameY;
-					//pick.indexX = _TR_KD[i].terrainFrameX;
-					//pick.indexY = _TR_KD[i].terrainFrameY;
-					//pick.rc = _TR_KD[i].tileRc;
-					//_picking.push_back(pick);
+					ispick = true;
 				}
 			}
 		}
@@ -287,13 +332,10 @@ void mapTool::selectTileSet()
 			{
 				if (PtInRect(&_TR_MT[i].tileRc, _ptMouse))
 				{
-					//tagPicking pick;
+
 					endX = _TR_MT[i].terrainFrameX;
 					endY = _TR_MT[i].terrainFrameY;
-					//pick.indexX = _TR_MT[i].terrainFrameX;
-					//pick.indexY = _TR_GRASS[i].terrainFrameY;
-					//pick.rc = _TR_MT[i].tileRc;
-					//_picking.push_back(pick);
+					ispick = true;
 				}
 			}
 		}
@@ -301,22 +343,21 @@ void mapTool::selectTileSet()
 
 	if (KEYMANAGER->isOnceKeyUp(VK_RBUTTON))
 	{
-		
-		for (int y = startY; y <= endY; ++y)
+		if (ispick) 
 		{
-			for (int x = startX; x <= endX; ++x)
+			for (int y = startY; y <= endY; ++y)
 			{
-				HPEN myPen = (HPEN)CreatePen(0, 0, RGB(0, 0, 255));
-				SelectObject(getMemDC(), myPen);
-				tagPicking _pick;
-				_pick.indexX = x;
-				_pick.indexY = y;
-				_pick.rc = RectMake(WINSIZEX - 400 + x * TILESIZE, 100 + y * TILESIZE, TILESIZE, TILESIZE);
-				_pick.catalog = _currentTile.terrain;
-				_picking.push_back(_pick);
+				for (int x = startX; x <= endX; ++x)
+				{
+					tagPicking _pick;
+					_pick.indexX = x;
+					_pick.indexY = y;
+					_pick.rc = RectMake(WINSIZEX - 400 + x * TILESIZE, 100 + y * TILESIZE, TILESIZE, TILESIZE);
+					_pick.catalog = _currentTile.terrain;
+					_picking.push_back(_pick);
+				}
 			}
 		}
-	
 	}
 
 }
@@ -333,9 +374,9 @@ void mapTool::setUp()
 
 	leftCatalog = RectMakeCenter(TILESIZE * 20 + 150, 50, 25, 25);
 	rightCatalog = RectMakeCenter(TILESIZE * 20 + 350, 50, 25, 25);
-
-
-
+	save = RectMakeCenter(TILESIZE * 20 + 150, 500, 64, 64);
+	load = RectMakeCenter(TILESIZE * 20 + 350, 500, 64, 64);
+	SelectTileset = RectMakeCenter(TILESIZE * 20 -50 , 300, 300, 300);
 	for (int y = 0; y < SAMPLEGRASSY; ++y)
 	{
 		for (int x = 0; x < SAMPLEGRASSX; ++x)

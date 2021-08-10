@@ -43,11 +43,11 @@ class mapTool : public gameNode
 {
 	int startX , startY;
 	int endX, endY;
-
+	bool ispick;
 	int _ctrSelect; // 현재 선택할모드 
 	tagCurrentTile _currentTile; //현재 선택된타일
 
-	RECT leftCatalog, rightCatalog;
+	RECT leftCatalog, rightCatalog , save, load , SelectTileset;
 
 	CATALOG _catalog;
 
