@@ -239,7 +239,7 @@ void mapTool::selectTileSet()
 
 		if (PtInRect(&resize, _ptMouse))
 		{
-			_tileSet->resizeTile(resizeX, resizeY);
+			_tileSet->resizeTile(stoi(resizeX), stoi(resizeY));
 		}
 	}
 
@@ -397,6 +397,8 @@ void mapTool::setUp()
 	_currentTile.terrainFrameX = 0;
 	_currentTile.terrainFrameY = 0;
 
+	resizeX = to_string(_tileSet->getTileX());
+	resizeY = to_string(_tileSet->getTileY());
 
 	DRAW = RectMake(0, 0, CAMERAX, CAMERAY);
 	leftCatalog = RectMakeCenter(TILESIZE * 20 + 150, 50, 25, 25);
@@ -404,6 +406,8 @@ void mapTool::setUp()
 	save = RectMakeCenter(TILESIZE * 20 + 170, 500, 64, 64);
 	load = RectMakeCenter(TILESIZE * 20 + 370, 500, 64, 64);
 	SelectTileset = RectMakeCenter(TILESIZE * 20 -50 , 300, 300, 300);
+	sizeX = RectMakeCenter(SelectTileset.left+50, SelectTileset.bottom+100, 80,30);
+	sizeY = RectMakeCenter(sizeY.right+100, sizeX.top , 80, 30);
 
 	resize = RectMakeCenter(load.left, load.bottom +100, 80, 30);
 	for (int y = 0; y < SAMPLEGRASSY; ++y)
