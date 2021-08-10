@@ -44,7 +44,6 @@ void playGround::update()
 {
 	gameNode::update();
 
-	//SCENEMANAGER->update();
 	
 	_mapTool->update();
 	
@@ -58,9 +57,11 @@ void playGround::render()
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//================제발 이 사이에 좀 그립시다==========================
 
-	_mapTool->render();
 	_tileSet->render();
-
+	_mapTool->render();
+	char str[20];
+	sprintf_s(str, "x : %d, y : %d", _ptMouse.x, _ptMouse.y);
+	TextOut(getMemDC(), _ptMouse.x, _ptMouse.y, str, strlen(str));
 
 	//==================================================
 	this->getBackBuffer()->render(getHDC(), 0, 0);

@@ -152,8 +152,66 @@ void tileSet::drawTile(TERRAIN _terrain, int startx, int starty, int endx, int e
 			_tiles[presenty + y][presentx + x].terrainFrameY = starty + y;
 		}
 	}
+}
+
+void tileSet::resizeTile(int tilex, int tiley)
+{
+	if (_tileX > tilex)
+	{
+		for (int i = 0; i < _tileY; ++i)
+		{
+			for (int j = _tileX - 1; j >= tilex; --j)
+			{
+				_tiles[i].erase(_tiles[i].begin() + j);
+			}
+		}
+		_tileX = tilex;
+	}
+	else
+	{
+		for (int y = 0; y < _tileY; ++y)
+		{
+			for (int x = _tileX; x < tilex; ++x)
+			{
+				tagTile tile;
+				tile.rc = RectMake(x * TILESIZE, y * TILESIZE, TILESIZE, TILESIZE);
+				tile.terrain = TR_NONE;
+				tile.terrainFrameX = 0;
+				tile.terrainFrameY = 0;
+				tile.indexX = x;
+				tile.indexY = y;
+			}
+		}
+	}
 
 
+	if (_tileY > tiley)
+	{
+		for (int i = _tileY - 1; i >= tiley; --i)
+		{
+			_tiles[i].clear();
+			_tiles.erase(_tiles.begin() + i);
+		}
+		_tileY = tiley;
+	}
+	else
+	{
+		for (int y = _tileY; y < tiley; ++y)
+		{
+			vector<tagTile> vTile;
+			for (int x = 0; x < _tileX; ++x)
+			{
+				tagTile tile;
+				tile.rc = RectMake(x*TILESIZE , y * TILESIZE, TILESIZE, TILESIZE);
+				tile.terrain = TR_NONE;
+				tile.terrainFrameX = 0;
+				tile.terrainFrameY = 0;
+				vTile.push_back(tile);
+			}
+			_tiles.push_back(vTile);
+		}
+		_tileY = tiley;
+	}
 
 }
 

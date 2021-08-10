@@ -32,7 +32,7 @@ public:
 	void setup();
 	void drawTile(TERRAIN _terrain, int frameX, int frameY);
 	void drawTile(TERRAIN _terrain, int startx, int starty, int endx, int endy);
-
+	void resizeTile(int tilex, int tiley);
 	void save();
 	void load();
 

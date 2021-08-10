@@ -14,8 +14,8 @@ void mapTool::update()
 	selectTileSet();
 	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
 	{
-		if(!_picking.empty())
-		_tileSet->drawTile(_currentTile.terrain, startX, startY, endX, endY);
+		if(PtInRect(&DRAW, _ptMouse)&& !_picking.empty())
+			_tileSet->drawTile(_currentTile.terrain, startX, startY, endX, endY);
 	}
 	_tileSet->update();
 
@@ -29,23 +29,38 @@ void mapTool::render()
 {
 
 	char str[3];
+
 	Rectangle(getMemDC(), leftCatalog);
 	sprintf_s(str , "<");
 	TextOut(getMemDC(), leftCatalog.left+6, leftCatalog.top+6, str, strlen(str));
+	
 	Rectangle(getMemDC(), rightCatalog);
 	sprintf_s(str, ">");
 	TextOut(getMemDC(), rightCatalog.left+6 ,rightCatalog.top+6, str, strlen(str));
-	char label[123];
-	Rectangle(getMemDC(), save);
+	
+	char label[30];
+
+	sprintf_s(label, "SAVE");
+	TextOut(getMemDC(), save.left+20 , save.bottom + 6, label, strlen(label));
 	IMAGEMANAGER->render("save", getMemDC(), save.left, save.top);
+
+	sprintf_s(label, "LOAD");
+	TextOut(getMemDC(), load.left+20 , load.bottom + 6, label, strlen(label));
 	IMAGEMANAGER->render("load", getMemDC(), load.left, load.top);
-	//Rectangle(getMemDC(), load);
+
+	sprintf_s(label, "현재 타일");
+	TextOut(getMemDC(), SelectTileset.left + 110, SelectTileset.top - 30, label, strlen(label));
 	Rectangle(getMemDC(), SelectTileset);
+
 	//SetBkMode(getMemDC(), TRANSPARENT);
 	HBRUSH myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
 	HBRUSH oldBrush = (HBRUSH)SelectObject(getMemDC(), myBrush);
 	HPEN myPen = (HPEN)CreatePen(0, 2, RGB(0, 0, 255));
 	HPEN oldPen = (HPEN)CreatePen(0, 0, RGB(0, 0, 0));
+	
+	Rectangle(getMemDC(), DRAW);
+	Rectangle(getMemDC(), resize);
+
 	switch (_catalog)
 	{
 	case GRASS:
@@ -78,28 +93,30 @@ void mapTool::render()
 		break;
 	}
 
-	for (int y = startY; y <= endY; ++y)
-	{
-		for (int x = startX; x <= endX; ++x)
+	if (ispick) {
+		for (int y = startY; y <= endY; ++y)
 		{
-			SelectObject(getMemDC(), myPen);
-			switch (_catalog)
+			for (int x = startX; x <= endX; ++x)
 			{
-			case GRASS:
 				SelectObject(getMemDC(), myPen);
-				Rectangle(getMemDC(), _TR_GRASS[x +y].tileRc);
-				SelectObject(getMemDC(), oldPen);
-				break;
-			case KINGDOM:
-				SelectObject(getMemDC(), myPen);
-				Rectangle(getMemDC(), _TR_KD[x + y].tileRc);
-				SelectObject(getMemDC(), oldPen);
-				break;
-			case MOUNTIN:
-				SelectObject(getMemDC(), myPen);
-				Rectangle(getMemDC(), _TR_MT[x + y].tileRc);
-				SelectObject(getMemDC(), oldPen);
-				break;
+				switch (_catalog)
+				{
+				case GRASS:
+					SelectObject(getMemDC(), myPen);
+					Rectangle(getMemDC(), _TR_GRASS[x + SAMPLEGRASSX * y].tileRc);
+					SelectObject(getMemDC(), oldPen);
+					break;
+				case KINGDOM:
+					SelectObject(getMemDC(), myPen);
+					Rectangle(getMemDC(), _TR_KD[x + SAMPLEKINGDOMX * y].tileRc);
+					SelectObject(getMemDC(), oldPen);
+					break;
+				case MOUNTIN:
+					SelectObject(getMemDC(), myPen);
+					Rectangle(getMemDC(), _TR_MT[x + SAMPLEMTX * y].tileRc);
+					SelectObject(getMemDC(), oldPen);
+					break;
+				}
 			}
 		}
 	}
@@ -112,20 +129,20 @@ void mapTool::render()
 			{
 			case TR_GRASS:
 				IMAGEMANAGER->frameRender("TR_Grass", getMemDC(), 
-					((SelectTileset.left + SelectTileset.right) / 2 - TILESIZE * (endX - startX)) + (i % (endX - startX + 1)) * TILESIZE,
-					((SelectTileset.top + SelectTileset.bottom) / 2 - TILESIZE * (endY - startY)) + (i / (endX - startX + 1)) * TILESIZE,
+					((SelectTileset.left + SelectTileset.right) / 2 - TILESIZE * (endX - startX+1)) + (i % (endX - startX + 1)) *  TILESIZE + 30 * (endX - startX),
+					((SelectTileset.top + SelectTileset.bottom) / 2 - TILESIZE * (endY - startY+1)) + (i / (endX - startX + 1)) * TILESIZE + 30 * (endY - startY),
 					_picking[i].indexX, _picking[i].indexY);
 				break;
 			case TR_KINGDOM:
 				IMAGEMANAGER->frameRender("TR_KingDom", getMemDC(),
-					((SelectTileset.left + SelectTileset.right) / 2 - TILESIZE * (endX - startX)) + (i % (endX - startX + 1)) * TILESIZE,
-					((SelectTileset.top + SelectTileset.bottom) / 2 - TILESIZE * (endY - startY)) + (i / (endX - startX + 1)) * TILESIZE,
+					((SelectTileset.left + SelectTileset.right) / 2 - TILESIZE * (endX - startX+1)) + (i % (endX - startX + 1)) * TILESIZE + 30 * (endX - startX ),
+					((SelectTileset.top + SelectTileset.bottom) / 2 - TILESIZE * (endY - startY+1)) + (i / (endX - startX + 1)) * TILESIZE + 30 * (endY - startY),
 					_picking[i].indexX, _picking[i].indexY);
 				break;
 			case TR_MOUNTIN:
 				IMAGEMANAGER->frameRender("TR_MT", getMemDC(),
-					((SelectTileset.left + SelectTileset.right) / 2 - TILESIZE * (endX - startX)) + (i % (endX - startX + 1)) * TILESIZE,
-					((SelectTileset.top + SelectTileset.bottom) / 2 - TILESIZE * (endY - startY)) + (i / (endX - startX + 1)) * TILESIZE,
+					((SelectTileset.left + SelectTileset.right) / 2 - TILESIZE * (endX - startX+1)) + (i % (endX - startX + 1)) * TILESIZE + 30 * (endX - startX),
+					((SelectTileset.top + SelectTileset.bottom) / 2 - TILESIZE * (endY - startY+1)) + (i / (endX - startX + 1)) * TILESIZE + 30 * (endY - startY),
 					_picking[i].indexX, _picking[i].indexY);
 				break;
 			}
@@ -141,6 +158,7 @@ void mapTool::selectTileSet()
 
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
+
 		if (_catalog == GRASS)
 		{
 			for (int i = 0; i < SAMPLEGRASSY*SAMPLEGRASSX; ++i)
@@ -153,7 +171,7 @@ void mapTool::selectTileSet()
 				}
 			}
 		}
-		else if (_catalog == KINGDOM) 
+		else if (_catalog == KINGDOM)
 		{
 			for (int i = 0; i < SAMPLEKINGDOMY*SAMPLEKINGDOMX; ++i)
 			{
@@ -218,7 +236,14 @@ void mapTool::selectTileSet()
 		{
 			_tileSet->load();
 		}
+
+		if (PtInRect(&resize, _ptMouse))
+		{
+			_tileSet->resizeTile(resizeX, resizeY);
+		}
 	}
+
+
 	//피킹
 	if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
 	{
@@ -372,11 +397,15 @@ void mapTool::setUp()
 	_currentTile.terrainFrameX = 0;
 	_currentTile.terrainFrameY = 0;
 
+
+	DRAW = RectMake(0, 0, CAMERAX, CAMERAY);
 	leftCatalog = RectMakeCenter(TILESIZE * 20 + 150, 50, 25, 25);
 	rightCatalog = RectMakeCenter(TILESIZE * 20 + 350, 50, 25, 25);
-	save = RectMakeCenter(TILESIZE * 20 + 150, 500, 64, 64);
-	load = RectMakeCenter(TILESIZE * 20 + 350, 500, 64, 64);
+	save = RectMakeCenter(TILESIZE * 20 + 170, 500, 64, 64);
+	load = RectMakeCenter(TILESIZE * 20 + 370, 500, 64, 64);
 	SelectTileset = RectMakeCenter(TILESIZE * 20 -50 , 300, 300, 300);
+
+	resize = RectMakeCenter(load.left, load.bottom +100, 80, 30);
 	for (int y = 0; y < SAMPLEGRASSY; ++y)
 	{
 		for (int x = 0; x < SAMPLEGRASSX; ++x)
