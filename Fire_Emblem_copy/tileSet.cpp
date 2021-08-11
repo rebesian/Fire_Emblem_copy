@@ -184,45 +184,40 @@ void tileSet::drawTile(TERRAIN _terrain, int startx, int starty, int endx, int e
 				if (startx + x == 1&& starty + y == 2)
 				{
 					_tiles[presenty + y][presentx + x].name = "마을";
-					_tiles[presenty + y][presentx + x].isMove = false;
 					_tiles[presenty + y][presentx + x].def = 0;
-					_tiles[presenty + y][presentx + x].avo = 0;
+					_tiles[presenty + y][presentx + x].avo = 10;
 				}
-				else if ()
+				else if (startx + x == 1 && starty + y == 5)
 				{
 					_tiles[presenty + y][presentx + x].name = "성문";
-					_tiles[presenty + y][presentx + x].isMove = false;
 					_tiles[presenty + y][presentx + x].def = 0;
-					_tiles[presenty + y][presentx + x].avo = 0;
+					_tiles[presenty + y][presentx + x].avo = 10;
 				}
-				else if ()
+				else if (startx + x == 0 && starty + y == 6)
 				{
 					_tiles[presenty + y][presentx + x].name = "민가";
-					_tiles[presenty + y][presentx + x].isMove = false;
 					_tiles[presenty + y][presentx + x].def = 0;
-					_tiles[presenty + y][presentx + x].avo = 0;
+					_tiles[presenty + y][presentx + x].avo = 10;
 				}
-				else if ()
+				else if (startx + x == 1 && starty + y ==6)
 				{
-					_tiles[presenty + y][presentx + x].name = "민가";
-					_tiles[presenty + y][presentx + x].isMove = false;
+					_tiles[presenty + y][presentx + x].name = "상점";
 					_tiles[presenty + y][presentx + x].def = 0;
-					_tiles[presenty + y][presentx + x].avo = 0;
+					_tiles[presenty + y][presentx + x].avo = 10;
 				}
 				//새? def2 
-				else if ()
+				else if (startx + x == 2 && starty + y == 6)
 				{
-					_tiles[presenty + y][presentx + x].name = "민가";
-					_tiles[presenty + y][presentx + x].isMove = false;
+					_tiles[presenty + y][presentx + x].name = "요새";
 					_tiles[presenty + y][presentx + x].def = 0;
-					_tiles[presenty + y][presentx + x].avo = 0;
+					_tiles[presenty + y][presentx + x].avo = 10;
 				}
 				else
 				{
 					_tiles[presenty + y][presentx + x].name = "성벽";
 					_tiles[presenty + y][presentx + x].isMove = false;
 					_tiles[presenty + y][presentx + x].def = 0;
-					_tiles[presenty + y][presentx + x].avo = 0;
+					_tiles[presenty + y][presentx + x].avo = 10;
 				}
 			}
 		}
