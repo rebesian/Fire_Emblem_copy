@@ -149,7 +149,82 @@ void tileSet::drawTile(TERRAIN _terrain, int startx, int starty, int endx, int e
 		{ 
 			_tiles[presenty + y][presentx + x].terrain = _terrain;
 			_tiles[presenty + y][presentx + x].terrainFrameX = startx + x;
-			_tiles[presenty + y][presentx + x].terrainFrameY = starty + y;
+			_tiles[presenty + y][presentx + x].terrainFrameY = starty + y;	
+			if (_terrain == TR_GRASS)
+			{
+
+				if ((startx + x == 3 || startx + x == 4)&&starty + y ==5)
+				{
+					_tiles[presenty + y][presentx + x].name = "Ç®";
+					_tiles[presenty + y][presentx + x].def = 1;
+					_tiles[presenty + y][presentx + x].avo = 20;
+				}
+				else if (startx + x == 5&& starty + y == 6)
+				{
+					_tiles[presenty + y][presentx + x].name = "½£";
+					_tiles[presenty + y][presentx + x].def = 1;
+					_tiles[presenty + y][presentx + x].avo = 20;
+				}
+				else
+				{
+					_tiles[presenty + y][presentx + x].name = "ÆòÁö";
+					_tiles[presenty + y][presentx + x].def = 0;
+					_tiles[presenty + y][presentx + x].avo = 0;
+				}
+			}
+			else if (_terrain == TR_MOUNTIN)
+			{
+				_tiles[presenty + y][presentx + x].name = "»ê¸Æ";
+				_tiles[presenty + y][presentx + x].isMove = false;
+				_tiles[presenty + y][presentx + x].def = 0;
+				_tiles[presenty + y][presentx + x].avo = 0;
+			}
+			else if (_terrain == TR_KINGDOM)
+			{
+				if (startx + x == 1&& starty + y == 2)
+				{
+					_tiles[presenty + y][presentx + x].name = "¸¶À»";
+					_tiles[presenty + y][presentx + x].isMove = false;
+					_tiles[presenty + y][presentx + x].def = 0;
+					_tiles[presenty + y][presentx + x].avo = 0;
+				}
+				else if ()
+				{
+					_tiles[presenty + y][presentx + x].name = "¼º¹®";
+					_tiles[presenty + y][presentx + x].isMove = false;
+					_tiles[presenty + y][presentx + x].def = 0;
+					_tiles[presenty + y][presentx + x].avo = 0;
+				}
+				else if ()
+				{
+					_tiles[presenty + y][presentx + x].name = "¹Î°¡";
+					_tiles[presenty + y][presentx + x].isMove = false;
+					_tiles[presenty + y][presentx + x].def = 0;
+					_tiles[presenty + y][presentx + x].avo = 0;
+				}
+				else if ()
+				{
+					_tiles[presenty + y][presentx + x].name = "¹Î°¡";
+					_tiles[presenty + y][presentx + x].isMove = false;
+					_tiles[presenty + y][presentx + x].def = 0;
+					_tiles[presenty + y][presentx + x].avo = 0;
+				}
+				//»õ? def2 
+				else if ()
+				{
+					_tiles[presenty + y][presentx + x].name = "¹Î°¡";
+					_tiles[presenty + y][presentx + x].isMove = false;
+					_tiles[presenty + y][presentx + x].def = 0;
+					_tiles[presenty + y][presentx + x].avo = 0;
+				}
+				else
+				{
+					_tiles[presenty + y][presentx + x].name = "¼ºº®";
+					_tiles[presenty + y][presentx + x].isMove = false;
+					_tiles[presenty + y][presentx + x].def = 0;
+					_tiles[presenty + y][presentx + x].avo = 0;
+				}
+			}
 		}
 	}
 }
@@ -158,11 +233,11 @@ void tileSet::resizeTile(int tilex, int tiley)
 {
 	if (_tileX > tilex)
 	{
-		for (int i = 0; i < _tileY; ++i)
+		for (int y = 0; y < _tileY; ++y)
 		{
-			for (int j = _tileX - 1; j >= tilex; --j)
+			for (int x = _tileX - 1; x >= tilex; --x)
 			{
-				_tiles[i].erase(_tiles[i].begin() + j);
+				_tiles[y].erase(_tiles[y].begin() + x);
 			}
 		}
 		_tileX = tilex;
@@ -180,8 +255,10 @@ void tileSet::resizeTile(int tilex, int tiley)
 				tile.terrainFrameY = 0;
 				tile.indexX = x;
 				tile.indexY = y;
+				_tiles[y].push_back(tile);
 			}
 		}
+		_tileX = tilex;
 	}
 
 

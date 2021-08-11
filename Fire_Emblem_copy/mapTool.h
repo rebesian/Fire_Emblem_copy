@@ -43,7 +43,7 @@ class mapTool : public gameNode
 {
 	int startX , startY;
 	int endX, endY;
-	bool ispick;
+	bool ispick,isSizeX, isSizeY;
 	int _ctrSelect; // 현재 선택할모드 
 	string resizeX, resizeY;
 	tagCurrentTile _currentTile; //현재 선택된타일

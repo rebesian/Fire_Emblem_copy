@@ -26,7 +26,7 @@ HRESULT playGround::init()
 	_mapTool->init();
 	_tileSet->init();
 	_mapTool->setLinkMemoryTileSet(_tileSet);
-
+	_mapTool->setUp();
 
 	return S_OK;
 }

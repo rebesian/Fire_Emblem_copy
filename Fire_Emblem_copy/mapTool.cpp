@@ -3,8 +3,7 @@
 
 HRESULT mapTool::init()
 {
-	setUp();
-	ispick = false;
+	ispick = isSizeX = isSizeY =false;
 	return S_OK;
 }
 
@@ -16,6 +15,36 @@ void mapTool::update()
 	{
 		if(PtInRect(&DRAW, _ptMouse)&& !_picking.empty())
 			_tileSet->drawTile(_currentTile.terrain, startX, startY, endX, endY);
+	}
+	if (isSizeX)
+	{
+		if (KEYMANAGER->isOnceKeyDown(VK_BACK))
+		{
+			if (!resizeX.empty())
+				resizeX.pop_back();
+		}
+		for (int i = 0; i < 10; ++i)
+		{
+			if (KEYMANAGER->isOnceKeyDown(char(i + 48)))
+			{
+				resizeX.append(to_string(char(i)));
+			}
+		}
+	}
+	if (isSizeY)
+	{
+		if (KEYMANAGER->isOnceKeyDown(VK_BACK))
+		{
+			if (!resizeY.empty())
+				resizeY.pop_back();
+		}
+		for (int i = 0; i < 10; ++i) 
+		{
+			if (KEYMANAGER->isOnceKeyDown(char(i + 48)))
+			{
+				resizeY.append(to_string(char(i)));
+			}
+		}
 	}
 	_tileSet->update();
 
@@ -60,6 +89,36 @@ void mapTool::render()
 	
 	Rectangle(getMemDC(), DRAW);
 	Rectangle(getMemDC(), resize);
+	if (isSizeX)
+	{
+		SelectObject(getMemDC(), myPen);
+		Rectangle(getMemDC(), sizeX);
+		SelectObject(getMemDC(), oldPen);
+	}
+	else
+	{
+		Rectangle(getMemDC(), sizeX);
+	}
+	if (isSizeY)
+	{
+		SelectObject(getMemDC(), myPen);
+		Rectangle(getMemDC(), sizeY);
+		SelectObject(getMemDC(), oldPen);
+	}
+	else
+	{
+		Rectangle(getMemDC(), sizeY);
+	}
+	DrawText(getMemDC(), resizeX.c_str(), strlen(resizeX.c_str()), &sizeX, DT_CENTER | DT_SINGLELINE | DT_VCENTER);
+	DrawText(getMemDC(), resizeY.c_str(), strlen(resizeY.c_str()), &sizeY, DT_CENTER | DT_SINGLELINE | DT_VCENTER);
+	
+	sprintf_s(label, "sizeX");
+	TextOut(getMemDC(), sizeX.left - 50, sizeX.top+10, label, strlen(label));
+	sprintf_s(label, "sizeY");
+	TextOut(getMemDC(), sizeY.left - 50, sizeY.top+10 , label, strlen(label));
+	sprintf_s(label, "resize");
+	DrawText(getMemDC(), label, strlen(label), &resize, DT_CENTER | DT_SINGLELINE | DT_VCENTER);
+
 
 	switch (_catalog)
 	{
@@ -237,6 +296,18 @@ void mapTool::selectTileSet()
 			_tileSet->load();
 		}
 
+
+		if (PtInRect(&sizeX, _ptMouse))
+		{
+			if(!isSizeX)isSizeX = true;
+			else isSizeX = false;
+		}
+
+		if (PtInRect(&sizeY, _ptMouse))
+		{
+			if(!isSizeY)isSizeY = true;
+			else isSizeY = false;
+		}
 		if (PtInRect(&resize, _ptMouse))
 		{
 			_tileSet->resizeTile(stoi(resizeX), stoi(resizeY));
@@ -406,10 +477,10 @@ void mapTool::setUp()
 	save = RectMakeCenter(TILESIZE * 20 + 170, 500, 64, 64);
 	load = RectMakeCenter(TILESIZE * 20 + 370, 500, 64, 64);
 	SelectTileset = RectMakeCenter(TILESIZE * 20 -50 , 300, 300, 300);
-	sizeX = RectMakeCenter(SelectTileset.left+50, SelectTileset.bottom+100, 80,30);
-	sizeY = RectMakeCenter(sizeY.right+100, sizeX.top , 80, 30);
+	resize = RectMakeCenter(load.left, load.bottom + 100, 80, 30);
+	sizeX = RectMakeCenter(resize.left-150, resize.top+15, 80,30);
+	sizeY = RectMakeCenter(sizeX.left-150, sizeX.top+15 , 80, 30);
 
-	resize = RectMakeCenter(load.left, load.bottom +100, 80, 30);
 	for (int y = 0; y < SAMPLEGRASSY; ++y)
 	{
 		for (int x = 0; x < SAMPLEGRASSX; ++x)

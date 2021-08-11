@@ -8,10 +8,14 @@ struct tagTile
 {
 	TERRAIN terrain;
 	RECT rc;
+	string name;
 	int terrainFrameX;
 	int terrainFrameY;
 	int indexX;
 	int indexY;
+	bool isMove = true;
+	int def;
+	int avo;
 };
 
 class tileSet : public gameNode
