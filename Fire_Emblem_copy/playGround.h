@@ -1,13 +1,14 @@
 #pragma once
 #include "gameNode.h"
-#include "mapTool.h"
-#include "tileSet.h"
+#include "mapToolScene.h"
+#include "stageScene.h"
+
 class playGround : public gameNode
 {
 private:
 
-	mapTool* _mapTool;
-	tileSet* _tileSet;
+	mapToolScene* _mapTool;
+	stageScene* _stageScene;
 
 public:
 	playGround();

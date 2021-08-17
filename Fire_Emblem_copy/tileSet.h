@@ -42,6 +42,9 @@ public:
 
 	int getTileX() { return _tileX; }
 	int getTileY() { return _tileY; }
-	
+	string getName(int tilex, int tiley) { return _tiles[tilex][tiley].name; }
+	int getMove(int tilex, int tiley) { return _tiles[tilex][tiley].isMove; }
+	int getDef(int tilex, int tiley) { return _tiles[tilex][tiley].def; }
+	int getAvo(int tilex, int tiley) { return _tiles[tilex][tiley].avo; }
 };
 

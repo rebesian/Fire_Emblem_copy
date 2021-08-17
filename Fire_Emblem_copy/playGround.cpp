@@ -21,13 +21,10 @@ HRESULT playGround::init()
 	IMAGEMANAGER->addFrameImage("TR_Grass", "image/Tileset/TR_GRASS.bmp", 288, 336, 6, 7, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("TR_KingDom", "image/Tileset/TR_KingDom.bmp", 144, 336, 3, 7, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("TR_MT", "image/Tileset/TR_MT.bmp", 384, 288, 8, 6, true, RGB(255, 0, 255));
-	_mapTool = new mapTool;
-	_tileSet = new tileSet;
-	_mapTool->init();
-	_tileSet->init();
-	_mapTool->setLinkMemoryTileSet(_tileSet);
-	_mapTool->setUp();
-
+	
+	SCENEMANAGER->addScene("맵툴", new mapToolScene);
+	SCENEMANAGER->addScene("스테이지", new stageScene);
+	SCENEMANAGER->changeScene("맵툴");
 	return S_OK;
 }
 
@@ -45,8 +42,7 @@ void playGround::update()
 	gameNode::update();
 
 	
-	_mapTool->update();
-	
+	SCENEMANAGER->update();
 
 
 }
@@ -57,11 +53,9 @@ void playGround::render()
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//================제발 이 사이에 좀 그립시다==========================
 
-	_tileSet->render();
-	_mapTool->render();
-	char str[20];
-	sprintf_s(str, "x : %d, y : %d", _ptMouse.x, _ptMouse.y);
-	TextOut(getMemDC(), _ptMouse.x, _ptMouse.y, str, strlen(str));
+	SCENEMANAGER->render();
+
+
 
 	//==================================================
 	this->getBackBuffer()->render(getHDC(), 0, 0);

@@ -52,6 +52,12 @@
     <Filter Include="2DGameFramework\action">
       <UniqueIdentifier>{936fa078-09d7-4d41-8553-9de447d9f438}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\scene">
+      <UniqueIdentifier>{d1c3efd9-1f40-41c3-a36d-14c318329731}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\tile">
+      <UniqueIdentifier>{2bd1885c-8247-4868-b0ce-bd1de4bdf011}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -129,14 +135,20 @@
     <ClInclude Include="iniDataManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="mapTool.h">
-      <Filter>playGround</Filter>
-    </ClInclude>
-    <ClInclude Include="tileSet.h">
-      <Filter>playGround</Filter>
-    </ClInclude>
     <ClInclude Include="cameraManager.h">
       <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="mapToolScene.h">
+      <Filter>playGround\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="stageScene.h">
+      <Filter>playGround\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="tileSet.h">
+      <Filter>playGround\tile</Filter>
+    </ClInclude>
+    <ClInclude Include="mapTool.h">
+      <Filter>playGround\tile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -203,14 +215,20 @@
     <ClCompile Include="iniDataManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="mapTool.cpp">
-      <Filter>playGround</Filter>
-    </ClCompile>
-    <ClCompile Include="tileSet.cpp">
-      <Filter>playGround</Filter>
-    </ClCompile>
     <ClCompile Include="cameraManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="mapToolScene.cpp">
+      <Filter>playGround\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="stageScene.cpp">
+      <Filter>playGround\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="tileSet.cpp">
+      <Filter>playGround\tile</Filter>
+    </ClCompile>
+    <ClCompile Include="mapTool.cpp">
+      <Filter>playGround\tile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

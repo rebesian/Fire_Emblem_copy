@@ -8,7 +8,7 @@ HRESULT tileSet::init()
 	_tileBuffer = new image;
 	_tileBuffer->init(BACKGROUNDX, BACKGROUNDY);
 	setup();
-	CAMERAMANAGER->setCamera(0, 0);
+	CAMERAMANAGER->setCamera(400, 400);
 	return S_OK;
 }
 
@@ -306,7 +306,7 @@ void tileSet::save()
 	WriteFile(file, tile, sizeof(tagTile) *_tileX * _tileY, &write, NULL);
 
 	CloseHandle(file);
-	delete[] tile;
+	//delete[] tile;
 }
 
 void tileSet::load()
@@ -332,6 +332,6 @@ void tileSet::load()
 	_tileY = _tileY;
 
 	CloseHandle(file);
-	delete[] tile;
+	//delete[] tile;
 }
 
