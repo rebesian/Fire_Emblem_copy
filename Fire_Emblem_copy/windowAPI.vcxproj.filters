@@ -58,6 +58,9 @@
     <Filter Include="playGround\tile">
       <UniqueIdentifier>{2bd1885c-8247-4868-b0ce-bd1de4bdf011}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\unit">
+      <UniqueIdentifier>{fa790018-767c-4548-8b1d-bb1dac18ea50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -150,6 +153,9 @@
     <ClInclude Include="mapTool.h">
       <Filter>playGround\tile</Filter>
     </ClInclude>
+    <ClInclude Include="unit.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -229,6 +235,9 @@
     </ClCompile>
     <ClCompile Include="mapTool.cpp">
       <Filter>playGround\tile</Filter>
+    </ClCompile>
+    <ClCompile Include="unit.cpp">
+      <Filter>playGround\unit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
