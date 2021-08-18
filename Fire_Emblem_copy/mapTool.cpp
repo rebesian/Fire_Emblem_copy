@@ -462,14 +462,12 @@ void mapTool::setUp()
 {
 	_catalog = GRASS;
 
-	_ctrSelect = CTRL_TERRAINDRAW;
-
 	_currentTile.terrain = TR_NONE;
 	_currentTile.terrainFrameX = 0;
 	_currentTile.terrainFrameY = 0;
 
-	resizeX = to_string(_tileSet->getTileX());
-	resizeY = to_string(_tileSet->getTileY());
+	resizeX = to_string(_tileSet->getSizeX());
+	resizeY = to_string(_tileSet->getSizeY());
 
 	DRAW = RectMake(0, 0, CAMERAX, CAMERAY);
 	leftCatalog = RectMakeCenter(TILESIZE * 20 + 150, 50, 25, 25);

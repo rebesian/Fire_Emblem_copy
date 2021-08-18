@@ -13,6 +13,7 @@ HRESULT stageScene::init()
 void stageScene::update()
 {
 	_tileSet->update();
+
 }
 
 void stageScene::release()

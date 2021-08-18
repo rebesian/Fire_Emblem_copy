@@ -19,7 +19,7 @@ HRESULT playGround::init()
 	inputImage();
 	SCENEMANAGER->addScene("맵툴", new mapToolScene);
 	SCENEMANAGER->addScene("스테이지", new stageScene);
-	SCENEMANAGER->changeScene("맵툴");
+	SCENEMANAGER->changeScene("스테이지");
 	return S_OK;
 }
 

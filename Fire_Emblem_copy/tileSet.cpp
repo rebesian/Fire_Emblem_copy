@@ -8,7 +8,7 @@ HRESULT tileSet::init()
 	_tileBuffer = new image;
 	_tileBuffer->init(BACKGROUNDX, BACKGROUNDY);
 	setup();
-	CAMERAMANAGER->setCamera(400, 400);
+	CAMERAMANAGER->setCamera(0, 20);
 	return S_OK;
 }
 
@@ -125,8 +125,8 @@ void tileSet::drawTile(TERRAIN _terrain, int frameX, int frameY)
 void tileSet::drawTile(TERRAIN _terrain, int startx, int starty, int endx, int endy)
 {
 	int presentx ,presenty;
-	int qjadnlX = endx - startx;
-	int qjadnlY = endy - starty;
+	int rangeX = endx - startx;
+	int rangeY = endy - starty;
 	for (int y = 0; y < _tileY; ++y)
 	{
 		for (int x = 0; x < _tileX; ++x)
@@ -143,9 +143,9 @@ void tileSet::drawTile(TERRAIN _terrain, int startx, int starty, int endx, int e
 	}
 
 	
-	for (int y = 0; y <= qjadnlY; ++y)
+	for (int y = 0; y <= rangeY; ++y)
 	{
-		for (int x = 0; x <= qjadnlX; ++x)
+		for (int x = 0; x <= rangeX; ++x)
 		{ 
 			_tiles[presenty + y][presentx + x].terrain = _terrain;
 			_tiles[presenty + y][presentx + x].terrainFrameX = startx + x;

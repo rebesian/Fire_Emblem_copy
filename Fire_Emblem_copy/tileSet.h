@@ -1,6 +1,5 @@
 #pragma once
 #include "gameNode.h"
-#define TILESIZE 48
 
 class mapTool;
 
@@ -40,8 +39,12 @@ public:
 	void save();
 	void load();
 
-	int getTileX() { return _tileX; }
-	int getTileY() { return _tileY; }
+
+	int getSizeX() { return _tileX; }
+	int getSizeY() { return _tileY; }
+	TERRAIN getTerrain(int tilex, int tiley) { return _tiles[tilex][tiley].terrain; }
+	HDC getMapDC() { return _tileBuffer->getMemDC(); }
+	RECT getRect(int tilex, int tiley) { return _tiles[tilex][tiley].rc; }
 	string getName(int tilex, int tiley) { return _tiles[tilex][tiley].name; }
 	int getMove(int tilex, int tiley) { return _tiles[tilex][tiley].isMove; }
 	int getDef(int tilex, int tiley) { return _tiles[tilex][tiley].def; }
