@@ -26,7 +26,7 @@ void warrior::update()
 	if (stageRenderCount % 7 == 0)
 	{
 		stageRenderX++;
-		if (stageRenderX == 4)
+		if (stageRenderX == 3)
 		{
 			stageRenderX = 0;
 		}
@@ -44,5 +44,5 @@ void warrior::release()
 
 void warrior::render()
 {
-	_img->frameRender(getMemDC(), stageX, stageY, stageRenderX,stageRenderY);
+	_img->frameRender(CAMERAMANAGER->getCameraBuffer(), stageX, stageY, stageRenderX,stageRenderY);
 }

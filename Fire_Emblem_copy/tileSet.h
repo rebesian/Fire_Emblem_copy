@@ -42,12 +42,13 @@ public:
 
 	int getSizeX() { return _tileX; }
 	int getSizeY() { return _tileY; }
-	TERRAIN getTerrain(int tilex, int tiley) { return _tiles[tilex][tiley].terrain; }
+	TERRAIN getTerrain(int tilex, int tiley) { return _tiles[tiley][tilex].terrain; }
 	HDC getMapDC() { return _tileBuffer->getMemDC(); }
-	RECT getRect(int tilex, int tiley) { return _tiles[tilex][tiley].rc; }
-	string getName(int tilex, int tiley) { return _tiles[tilex][tiley].name; }
-	int getMove(int tilex, int tiley) { return _tiles[tilex][tiley].isMove; }
-	int getDef(int tilex, int tiley) { return _tiles[tilex][tiley].def; }
-	int getAvo(int tilex, int tiley) { return _tiles[tilex][tiley].avo; }
+	image* getTileBuffer() { return _tileBuffer; }
+	RECT getRect(int tilex, int tiley) { return _tiles[tiley][tilex].rc; }
+	string getName(int tilex, int tiley) { return _tiles[tiley][tilex].name; }
+	int getMove(int tilex, int tiley) { return _tiles[tiley][tilex].isMove; }
+	int getDef(int tilex, int tiley) { return _tiles[tiley][tilex].def; }
+	int getAvo(int tilex, int tiley) { return _tiles[tiley][tilex].avo; }
 };
 
