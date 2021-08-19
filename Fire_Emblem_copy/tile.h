@@ -24,14 +24,12 @@ private:
 
 	tileSet* _map;
 	tile* _parentNode; //제일 상위 타일 
-
-	COLORREF _color;
-	HBRUSH   _brush;
-	HPEN	 _pen;
+	
+	image* 
 	
 	string _attribute;
 	int _parentNodenumber;
-
+	
 public:
 	tile();
 	~tile();

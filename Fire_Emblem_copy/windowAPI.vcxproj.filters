@@ -168,12 +168,6 @@
     <ClInclude Include="warrior.h">
       <Filter>playGround\unit</Filter>
     </ClInclude>
-    <ClInclude Include="playerManger.h">
-      <Filter>playGround\unit</Filter>
-    </ClInclude>
-    <ClInclude Include="enemyManger.h">
-      <Filter>playGround\unit</Filter>
-    </ClInclude>
     <ClInclude Include="Swordsman.h">
       <Filter>playGround\unit</Filter>
     </ClInclude>
@@ -212,6 +206,12 @@
     </ClInclude>
     <ClInclude Include="troubadour.h">
       <Filter>playGround\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyManger.h">
+      <Filter>playGround</Filter>
+    </ClInclude>
+    <ClInclude Include="playerManger.h">
+      <Filter>playGround</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -308,12 +308,6 @@
     <ClCompile Include="warrior.cpp">
       <Filter>playGround\unit</Filter>
     </ClCompile>
-    <ClCompile Include="enemyManger.cpp">
-      <Filter>playGround\unit</Filter>
-    </ClCompile>
-    <ClCompile Include="playerManger.cpp">
-      <Filter>playGround\unit</Filter>
-    </ClCompile>
     <ClCompile Include="Swordsman.cpp">
       <Filter>playGround\unit</Filter>
     </ClCompile>
@@ -349,6 +343,12 @@
     </ClCompile>
     <ClCompile Include="troubadour.cpp">
       <Filter>playGround\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyManger.cpp">
+      <Filter>playGround</Filter>
+    </ClCompile>
+    <ClCompile Include="playerManger.cpp">
+      <Filter>playGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

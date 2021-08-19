@@ -10,8 +10,8 @@ class aStarTest : public gameNode
 {
 private:
 	//전체 타일 담을 벡터
-	vector<tile*> _vTotalList;
-	vector<tile*>::iterator _viTotalList;
+	vector<vector<tile*>> _vTotalList;
+	vector<vector<tile*>> ::iterator _viTotalList;
 	//갈 수 있는 타일 담을 벡터
 	vector<tile*> _vOpenList;
 	vector<tile*>::iterator _viOpenList;
@@ -39,7 +39,7 @@ public:
 	aStarTest();
 	~aStarTest();
 
-	HRESULT init(int playerX, int playerY,int moveRange);
+	HRESULT init(int playerX, int playerY,int moveRange, int attackRange);
 	void release();
 	void update();
 	void render();

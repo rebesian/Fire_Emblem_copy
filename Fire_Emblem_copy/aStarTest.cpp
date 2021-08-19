@@ -12,13 +12,13 @@ aStarTest::~aStarTest()
 
 }
 
-HRESULT aStarTest::init(int playerX, int playerY, int moveRange)
+HRESULT aStarTest::init(int playerX, int playerY, int moveRange , int attackRange)
 {
 	_count = _damagecount = 0;
 	_start = false;
 	damage = false;
-	_TotaltileX = moveRange;
-	_TotaltileY = moveRange;
+	_TotaltileX = moveRange + attackRange;
+	_TotaltileY = moveRange + attackRange;
 	setTile(playerX, playerY);
 	time = TIMEMANAGER->getWorldTime();
 
@@ -54,22 +54,23 @@ void aStarTest::setTile(int playerX, int playerY)
 
 	_currentTile = _startTile;
 
-	for (int i = playerY; i < _TotaltileY; ++i)
+	for (int i = (playerY- _TotaltileY); i < _TotaltileY; ++i)
 	{
+		vector<tile*> TotalList;
 		for (int j = playerX; j < _TotaltileX; ++j)
 		{
-
 			if (j == _startTile->getIdX() && i == _startTile->getIdY())
 			{
 				_startTile->setColor(RGB(0, 255, 0));
-				_vTotalList.push_back(_startTile);
+				TotalList.push_back(_startTile);
 				continue;
 			}
 			tile* node = new tile;
 			node->setLinkRandomMap(_map);
 			node->init(j, i);
-			_vTotalList.push_back(node);
+			TotalList.push_back(node);
 		}
+		_vTotalList.push_back(TotalList);
 	}
 
 }
