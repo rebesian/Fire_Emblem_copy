@@ -33,7 +33,7 @@ void aStarTest::release()
 void aStarTest::update()
 {
 
-	pathFinder(_currentTile);
+	//pathFinder(_currentTile);
 
 }
 
@@ -54,21 +54,15 @@ void aStarTest::setTile(int playerX, int playerY)
 
 	_currentTile = _startTile;
 
-	for (int i = 0; i < _TotaltileY; ++i)
+	for (int i = playerY; i < _TotaltileY; ++i)
 	{
-		for (int j = 0; j < _TotaltileX; ++j)
+		for (int j = playerX; j < _TotaltileX; ++j)
 		{
 
 			if (j == _startTile->getIdX() && i == _startTile->getIdY())
 			{
 				_startTile->setColor(RGB(0, 255, 0));
 				_vTotalList.push_back(_startTile);
-				continue;
-			}
-			if (j == _endTile->getIdX() && i == _endTile->getIdY())
-			{
-				_endTile->setColor(RGB(255, 0, 255));
-				_vTotalList.push_back(_endTile);
 				continue;
 			}
 			tile* node = new tile;

@@ -15,12 +15,12 @@ protected:
 
 	int _hp;
 	int attack;
-	int avoid;
 	int critcal;
 	int speed;
 	float stageX, stageY;
 	float battleX, battleY;
 	float exp;
+	int avoid;
 
 	int stageRenderX;
 	int stageRenderY;

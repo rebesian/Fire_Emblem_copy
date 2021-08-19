@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "unit.h"
-
+#include "aStarTest.h"
 HRESULT unit::init(int idx, int idy)
 {
 	indexX = idx;
