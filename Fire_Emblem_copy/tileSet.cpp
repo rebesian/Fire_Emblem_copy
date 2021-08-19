@@ -61,7 +61,6 @@ void tileSet::render()
 	{
 		for (int j = 0; j < _tileX; ++j)
 		{
-			Rectangle(_tileBuffer->getMemDC(), _tiles[i][j].rc);
 			switch (_tiles[i][j].terrain)
 			{
 			case TR_NONE:
@@ -80,9 +79,14 @@ void tileSet::render()
 				break;
 
 			}
+			if (KEYMANAGER->isToggleKey(VK_TAB))
+			{
+				HBRUSH myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+				SelectObject(_tileBuffer->getMemDC(), myBrush);
+				Rectangle(_tileBuffer->getMemDC(), _tiles[i][j].rc);
+			}
 		}
 	}
-	CAMERAMANAGER->render(_tileBuffer, getMemDC());
 }
 
 void tileSet::setup()

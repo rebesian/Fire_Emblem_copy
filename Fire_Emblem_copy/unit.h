@@ -12,6 +12,8 @@ protected:
 	TYPE type;
 	int indexX, indexY;
 	int moveRange;
+
+	int _hp;
 	int attack;
 	int avoid;
 	int critcal;
@@ -36,6 +38,7 @@ public:
 
 	int getIndexX() { return indexX; }
 	int getIndexY() { return indexY; }
+	int gethp() { return _hp; }
 	int getMoveRange() { return moveRange; }
 	int getAttack() { return attack; }
 	int getAvoid() { return avoid; }
@@ -44,6 +47,6 @@ public:
 	float getExp() { return exp; }
 
 	void setLinkMap(tileSet* map) { _map = map; }
-
+	void sethp(int hp) { _hp = hp; }
 };
 

@@ -43,7 +43,7 @@ public:
 	int getSizeX() { return _tileX; }
 	int getSizeY() { return _tileY; }
 	TERRAIN getTerrain(int tilex, int tiley) { return _tiles[tiley][tilex].terrain; }
-	HDC getMapDC() { return _tileBuffer->getMemDC(); }
+	HDC getMapDC() {return _tileBuffer->getMemDC(); }
 	image* getTileBuffer() { return _tileBuffer; }
 	RECT getRect(int tilex, int tiley) { return _tiles[tiley][tilex].rc; }
 	string getName(int tilex, int tiley) { return _tiles[tiley][tilex].name; }

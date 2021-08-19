@@ -26,4 +26,5 @@ void mapToolScene::render()
 {
 	_tileSet->render();
 	_mapTool->render();
+	CAMERAMANAGER->render(_tileSet->getTileBuffer(), getMemDC());
 }

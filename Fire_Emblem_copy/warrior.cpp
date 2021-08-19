@@ -44,5 +44,5 @@ void warrior::release()
 
 void warrior::render()
 {
-	_img->frameRender(CAMERAMANAGER->getCameraBuffer(), stageX, stageY, stageRenderX,stageRenderY);
+	_img->frameRender(_map->getMapDC(), stageX - (TILESIZE / 2), stageY - (TILESIZE), stageRenderX, stageRenderY);
 }

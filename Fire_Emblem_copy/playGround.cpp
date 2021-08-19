@@ -69,69 +69,69 @@ void playGround::inputImage()
 
 	//병과아이콘
 	//아군 Idle
-	IMAGEMANAGER->addFrameImage("소셜나이트Idle", "image/MapSprite/소셜나이트Idle.bmp", 192,128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("팔라딘Idle", "image/MapSprite/팔라딘Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("로이Idle", "image/MapSprite/로이Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("페가수스나이트Idle", "image/MapSprite/페가수스나이트Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("검사Idle", "image/MapSprite/검사Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("메이지Idle", "image/MapSprite/메이지Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("용병Idle", "image/MapSprite/용병Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("전사Idle", "image/MapSprite/전사Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("프리스트Idle", "image/MapSprite/프리스트Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("트루버돌Idle", "image/MapSprite/트루버돌Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("아처Idle", "image/MapSprite/아처Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("아머나이트Idle", "image/MapSprite/아머나이트Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("수송대Idle", "image/MapSprite/수송대Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("소셜나이트Idle", "image/MapSprite/소셜나이트Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("팔라딘Idle", "image/MapSprite/팔라딘Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("로이Idle", "image/MapSprite/로이Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("페가수스나이트Idle", "image/MapSprite/페가수스나이트Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("검사Idle", "image/MapSprite/검사Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("메이지Idle", "image/MapSprite/메이지Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("용병Idle", "image/MapSprite/용병Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("전사Idle", "image/MapSprite/전사Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("프리스트Idle", "image/MapSprite/프리스트Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("트루버돌Idle", "image/MapSprite/트루버돌Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("아처Idle", "image/MapSprite/아처Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("아머나이트Idle", "image/MapSprite/아머나이트Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("수송대Idle", "image/MapSprite/수송대Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
 	//아군 move
-	IMAGEMANAGER->addFrameImage("소셜나이트move", "image/MapSprite/소셜나이트move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("팔라딘move", "image/MapSprite/팔라딘move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("로이move", "image/MapSprite/로이move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("페가수스나이트move", "image/MapSprite/페가수스나이트move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("검사move", "image/MapSprite/검사move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("메이지move", "image/MapSprite/메이지move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("용병move", "image/MapSprite/용병move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("전사move", "image/MapSprite/전사move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("프리스트move", "image/MapSprite/프리스트move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("트루버돌move", "image/MapSprite/트루버돌move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("아처move", "image/MapSprite/아처move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("아머나이트move", "image/MapSprite/아머나이트move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("수송대move", "image/MapSprite/수송대move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("소셜나이트move", "image/MapSprite/소셜나이트move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("팔라딘move", "image/MapSprite/팔라딘move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("로이move", "image/MapSprite/로이move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("페가수스나이트move", "image/MapSprite/페가수스나이트move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("검사move", "image/MapSprite/검사move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("메이지move", "image/MapSprite/메이지move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("용병move", "image/MapSprite/용병move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("전사move", "image/MapSprite/전사move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("프리스트move", "image/MapSprite/프리스트move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("트루버돌move", "image/MapSprite/트루버돌move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("아처move", "image/MapSprite/아처move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("아머나이트move", "image/MapSprite/아머나이트move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("수송대move", "image/MapSprite/수송대move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
 
 
 
 	//적 Idle
-	IMAGEMANAGER->addFrameImage("enemy소셜나이트Idle", "image/MapSprite/enemy소셜나이트Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy아머나이트Idle", "image/MapSprite/enemy아머나이트Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy전사Idle", "image/MapSprite/enemy전사Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("군인Idle", "image/MapSprite/군인Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy아처Idle", "image/MapSprite/enemy아처Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("산적Idle", "image/MapSprite/산적Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy소셜나이트Idle", "image/MapSprite/enemy소셜나이트Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy아머나이트Idle", "image/MapSprite/enemy아머나이트Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy전사Idle", "image/MapSprite/enemy전사Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("군인Idle", "image/MapSprite/군인Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy아처Idle", "image/MapSprite/enemy아처Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("산적Idle", "image/MapSprite/산적Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
 	
 	//적 move
-	IMAGEMANAGER->addFrameImage("enemy소셜나이트move", "image/MapSprite/enemy소셜나이트move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy아머나이트move", "image/MapSprite/enemy아머나이트move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy전사move", "image/MapSprite/enemy전사move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy아처move", "image/MapSprite/enemy아처move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("군인move", "image/MapSprite/군인move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("산적move", "image/MapSprite/산적move.bmp", 256, 256, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy소셜나이트move", "image/MapSprite/enemy소셜나이트move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy아머나이트move", "image/MapSprite/enemy아머나이트move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy전사move", "image/MapSprite/enemy전사move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy아처move", "image/MapSprite/enemy아처move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("군인move", "image/MapSprite/군인move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("산적move", "image/MapSprite/산적move.bmp", 384, 384, 4, 4, true, RGB(255, 0, 255));
 
 
 	//used
-	IMAGEMANAGER->addFrameImage("used소셜나이트Idle", "image/MapSprite/used소셜나이트Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("used팔라딘Idle", "image/MapSprite/used팔라딘Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("used로이Idle", "image/MapSprite/used로이Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("used페가수스나이트Idle", "image/MapSprite/used페가수스나이트Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("used검사Idle", "image/MapSprite/used검사Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("used메이지Idle", "image/MapSprite/used메이지Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("used용병Idle", "image/MapSprite/used용병Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("used전사Idle", "image/MapSprite/used전사Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("used프리스트Idle", "image/MapSprite/used프리스트Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("used트루버돌Idle", "image/MapSprite/used트루버돌Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("used아처Idle", "image/MapSprite/used아처Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("used아머나이트Idle", "image/MapSprite/used아머나이트Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("used수송대Idle", "image/MapSprite/used수송대Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("used군인Idle", "image/MapSprite/used군인Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("used산적Idle", "image/MapSprite/used산적Idle.bmp", 192, 128, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("used소셜나이트Idle", "image/MapSprite/used소셜나이트Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("used팔라딘Idle", "image/MapSprite/used팔라딘Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("used로이Idle", "image/MapSprite/used로이Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("used페가수스나이트Idle", "image/MapSprite/used페가수스나이트Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("used검사Idle", "image/MapSprite/used검사Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("used메이지Idle", "image/MapSprite/used메이지Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("used용병Idle", "image/MapSprite/used용병Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("used전사Idle", "image/MapSprite/used전사Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("used프리스트Idle", "image/MapSprite/used프리스트Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("used트루버돌Idle", "image/MapSprite/used트루버돌Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("used아처Idle", "image/MapSprite/used아처Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("used아머나이트Idle", "image/MapSprite/used아머나이트Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("used수송대Idle", "image/MapSprite/used수송대Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("used군인Idle", "image/MapSprite/used군인Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("used산적Idle", "image/MapSprite/used산적Idle.bmp", 288, 192, 3, 2, true, RGB(255, 0, 255));
 
 
 	//전투
