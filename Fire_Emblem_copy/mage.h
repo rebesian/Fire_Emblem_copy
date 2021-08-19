@@ -1,9 +1,7 @@
 #pragma once
 #include "unit.h"
-
-class Roy : public unit 
+class mage : public unit
 {
-
 public:
 	HRESULT init(int idx, int idy, TYPE type = PLAYER);
 	void update();

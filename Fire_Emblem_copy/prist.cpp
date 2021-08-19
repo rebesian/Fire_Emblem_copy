@@ -1,10 +1,12 @@
 #include "stdafx.h"
-#include "Roy.h"
+#include "prist.h"
 
-HRESULT Roy::init(int idx, int idy, TYPE type)
+HRESULT prist::init(int idx, int idy, TYPE type)
 {
 	unit::init(idx, idy, type);
-	_img = IMAGEMANAGER->findImage("로이Idle");
+	
+	_img = IMAGEMANAGER->findImage("프리스트Idle");
+
 	stageX = _map->getRect(idx, idy).left;
 	stageY = _map->getRect(idx, idy).top;
 	stageRenderX = 0;
@@ -12,15 +14,15 @@ HRESULT Roy::init(int idx, int idy, TYPE type)
 	return S_OK;
 }
 
-void Roy::update()
+void prist::update()
 {
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)
 	{
 		if (stageRenderX == 2)
 		{
-			if(stageRenderCount>20)
-			stageRenderX = 0;
+			if (stageRenderCount > 20)
+				stageRenderX = 0;
 		}
 		else
 		{
@@ -30,14 +32,11 @@ void Roy::update()
 	}
 }
 
-void Roy::release()
+void prist::release()
 {
-
 }
 
-void Roy::render()
+void prist::render()
 {
-	_img->frameRender(_map->getMapDC(), stageX-(TILESIZE/2), stageY-(TILESIZE), stageRenderX, stageRenderY);
-
-
+	_img->frameRender(_map->getMapDC(), stageX - (TILESIZE / 2), stageY - (TILESIZE), stageRenderX, stageRenderY);
 }

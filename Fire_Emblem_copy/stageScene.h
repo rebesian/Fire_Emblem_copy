@@ -10,7 +10,9 @@ private:
 	tileSet* _tileSet;
 	warrior* _warrior;
 	Roy* _roy;
+
 public:
+
 	HRESULT init();
 	void update();
 	void release();

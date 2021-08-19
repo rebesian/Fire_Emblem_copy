@@ -3,6 +3,7 @@
 
 HRESULT stageScene::init()
 {
+
 	_tileSet = new tileSet;
 	_tileSet->init();
 	_tileSet->load();
@@ -20,9 +21,11 @@ HRESULT stageScene::init()
 
 void stageScene::update()
 {
+
 	_tileSet->update();
 	_warrior->update();
 	_roy->update();
+
 }
 
 void stageScene::release()
@@ -37,4 +40,5 @@ void stageScene::render()
 	_warrior->render();
 	_roy->render();
 	CAMERAMANAGER->render(_tileSet->getTileBuffer(), getMemDC());
+
 }

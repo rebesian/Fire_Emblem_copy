@@ -9,7 +9,7 @@ protected:
 	tileSet* _map;
 
 	image* _img;
-	TYPE type;
+	TYPE _type;
 	int indexX, indexY;
 	int moveRange;
 
@@ -30,7 +30,7 @@ protected:
 	int stageRenderCount;
 	int battleRenderCount;
 public:
-	virtual HRESULT init(int idx, int idy);
+	virtual HRESULT init(int idx, int idy, TYPE type);
 	virtual void update();
 	virtual void release();
 	virtual void render();

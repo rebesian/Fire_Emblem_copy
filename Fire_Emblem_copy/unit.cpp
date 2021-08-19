@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "unit.h"
 #include "aStarTest.h"
-HRESULT unit::init(int idx, int idy)
+
+HRESULT unit::init(int idx, int idy ,TYPE type)
 {
+	_type = type;
 	indexX = idx;
 	indexY = idy;
 	exp = 0;
@@ -13,7 +15,14 @@ HRESULT unit::init(int idx, int idy)
 
 void unit::update()
 {
+	if (_type == PLAYER)
+	{
 
+	}
+	else if (_type  == ENEMY)
+	{
+
+	}
 }
 
 void unit::release()

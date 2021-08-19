@@ -1,10 +1,12 @@
 #include "stdafx.h"
-#include "Roy.h"
+#include "mage.h"
 
-HRESULT Roy::init(int idx, int idy, TYPE type)
+HRESULT mage::init(int idx, int idy, TYPE type)
 {
 	unit::init(idx, idy, type);
-	_img = IMAGEMANAGER->findImage("로이Idle");
+
+	_img = IMAGEMANAGER->findImage("메이지Idle");
+
 	stageX = _map->getRect(idx, idy).left;
 	stageY = _map->getRect(idx, idy).top;
 	stageRenderX = 0;
@@ -12,15 +14,15 @@ HRESULT Roy::init(int idx, int idy, TYPE type)
 	return S_OK;
 }
 
-void Roy::update()
+void mage::update()
 {
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)
 	{
 		if (stageRenderX == 2)
 		{
-			if(stageRenderCount>20)
-			stageRenderX = 0;
+			if (stageRenderCount > 20)
+				stageRenderX = 0;
 		}
 		else
 		{
@@ -30,14 +32,11 @@ void Roy::update()
 	}
 }
 
-void Roy::release()
+void mage::release()
 {
-
 }
 
-void Roy::render()
+void mage::render()
 {
-	_img->frameRender(_map->getMapDC(), stageX-(TILESIZE/2), stageY-(TILESIZE), stageRenderX, stageRenderY);
-
-
+	_img->frameRender(_map->getMapDC(), stageX - (TILESIZE / 2), stageY - (TILESIZE), stageRenderX, stageRenderY);
 }

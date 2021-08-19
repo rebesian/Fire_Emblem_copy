@@ -72,9 +72,6 @@
     <ClInclude Include="targetver.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="commonMacroFunction.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -171,6 +168,51 @@
     <ClInclude Include="warrior.h">
       <Filter>playGround\unit</Filter>
     </ClInclude>
+    <ClInclude Include="playerManger.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyManger.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Swordsman.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="socialKnight.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="mercenary.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="mage.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="prist.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="paladin.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="soider.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmorKnight.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="archer.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Pegasus.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="transport.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="troubadour.h">
+      <Filter>playGround\unit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -264,6 +306,48 @@
       <Filter>playGround\unit</Filter>
     </ClCompile>
     <ClCompile Include="warrior.cpp">
+      <Filter>playGround\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyManger.cpp">
+      <Filter>playGround\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="playerManger.cpp">
+      <Filter>playGround\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Swordsman.cpp">
+      <Filter>playGround\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="socialKnight.cpp">
+      <Filter>playGround\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="prist.cpp">
+      <Filter>playGround\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="soider.cpp">
+      <Filter>playGround\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="paladin.cpp">
+      <Filter>playGround\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="mercenary.cpp">
+      <Filter>playGround\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="mage.cpp">
+      <Filter>playGround\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="ArmorKnight.cpp">
+      <Filter>playGround\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="archer.cpp">
+      <Filter>playGround\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Pegasus.cpp">
+      <Filter>playGround\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="transport.cpp">
+      <Filter>playGround\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="troubadour.cpp">
       <Filter>playGround\unit</Filter>
     </ClCompile>
   </ItemGroup>

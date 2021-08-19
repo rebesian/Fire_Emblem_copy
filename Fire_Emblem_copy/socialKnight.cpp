@@ -1,16 +1,16 @@
 #include "stdafx.h"
-#include "warrior.h"
+#include "socialKnight.h"
 
-HRESULT warrior::init(int idx, int idy ,TYPE type)
+HRESULT socialKnight::init(int idx, int idy, TYPE type)
 {
-	unit::init(idx, idy , type);
+	unit::init(idx, idy,type);
 	switch (type)
 	{
 	case PLAYER:
-		_img = IMAGEMANAGER->findImage("전사Idle");
+		_img = IMAGEMANAGER->findImage("소셜나이트Idle");
 		break;
 	case ENEMY:
-		_img = IMAGEMANAGER->findImage("enemy전사Idle");
+		_img = IMAGEMANAGER->findImage("enemy소셜나이트Idle");
 		break;
 	}
 	stageX = _map->getRect(idx, idy).left;
@@ -20,29 +20,29 @@ HRESULT warrior::init(int idx, int idy ,TYPE type)
 	return S_OK;
 }
 
-void warrior::update()
+void socialKnight::update()
 {
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)
 	{
-		stageRenderX++;
-		if (stageRenderX == 3)
+		if (stageRenderX == 2)
 		{
-			stageRenderX = 0;
+			if (stageRenderCount > 20)
+				stageRenderX = 0;
 		}
 		else
 		{
+			stageRenderX++;
 			stageRenderCount = 0;
 		}
 	}
 }
 
-void warrior::release()
+void socialKnight::release()
 {
-
 }
 
-void warrior::render()
+void socialKnight::render()
 {
 	_img->frameRender(_map->getMapDC(), stageX - (TILESIZE / 2), stageY - (TILESIZE), stageRenderX, stageRenderY);
 }
