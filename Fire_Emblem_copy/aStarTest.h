@@ -27,13 +27,13 @@ private:
 	PLAYER_ENEMY_DIRECTION _dir;
 
 	int _count;// 그냥렌더용
-	int _damagecount;
+	int _movecount,_attackCount;
+	int _totalRange , _moveRange, _attackRange;
 	float time;
 	bool _start; // 그냥 시작용
 	bool ismove;
 	bool damage;
 	bool isMiniboss;
-	int _TotaltileX,_TotaltileY;
 
 public:
 	aStarTest();
@@ -50,7 +50,7 @@ public:
 	//길 찾는 함수
 	void pathFinder(tile* currentTile);
 	void endmove(int playerIndexX, int playerIndexY);
-	void start();
+	//void start();
 	void move(int X ,int Y);
 	void actionMove(int X, int Y);
 	void callPathFinder(int x, int y);

@@ -21,15 +21,16 @@ private:
 	float _costToGoal;
 
 	bool _isOpen; // 갈수있는 타일인지 알아보자
-
+	bool _route;
 	tileSet* _map;
 	tile* _parentNode; //제일 상위 타일 
 	
-	image* 
-	
+	image* _img;
+	image* _routeimg;
 	string _attribute;
 	int _parentNodenumber;
 	
+	int _count,_renderX;
 public:
 	tile();
 	~tile();
@@ -63,13 +64,6 @@ public:
 	void setAttribute(string attribute) { _attribute = attribute; }
 	void setparentNumber(int number) { _parentNodenumber = number; }
 	void setLinkRandomMap(tileSet* map) { _map = map; }
-
-	void setColor(COLORREF color)
-	{
-		DeleteObject(_brush);
-		_color = color;
-		_brush = CreateSolidBrush(_color);
-	}
 
 };
 
