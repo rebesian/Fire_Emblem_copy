@@ -4,10 +4,16 @@
 
 HRESULT unit::init(int idx, int idy ,TYPE type)
 {
+	_astar = new aStarTest;
+	_astar->setLinkMap(_map);
 	_astar->init(idx, idy, 5, 1);
 	_type = type;
 	indexX = idx;
 	indexY = idy;
+	stageX = _map->getRect(idx, idy).left;
+	stageY = _map->getRect(idx, idy).top;
+	stageRenderX = 0;
+	stageRenderY = 0;
 	exp = 0;
 	stageRenderCount = 0;
 	battleRenderCount = 0;

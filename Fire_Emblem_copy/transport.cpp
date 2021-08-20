@@ -7,10 +7,6 @@ HRESULT transport::init(int idx, int idy, TYPE type)
 
 	_img = IMAGEMANAGER->findImage("¼ö¼Û´ëIdle");
 	
-	stageX = _map->getRect(idx, idy).left;
-	stageY = _map->getRect(idx, idy).top;
-	stageRenderX = 0;
-	stageRenderY = 0;
 	return S_OK;
 }
 

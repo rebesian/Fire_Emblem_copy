@@ -66,7 +66,7 @@ void playGround::inputImage()
 	IMAGEMANAGER->addFrameImage("TR_Grass", "image/Tileset/TR_GRASS.bmp", 288, 336, 6, 7, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("TR_KingDom", "image/Tileset/TR_KingDom.bmp", 144, 336, 3, 7, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("TR_MT", "image/Tileset/TR_MT.bmp", 384, 288, 8, 6, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("movement", "image/Tileset/movement.bmp", 768, 144, 16, 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("movement", "image/MapSprite/movement.bmp", 768, 144, 16, 3, true, RGB(255, 0, 255));
 	
 
 	//병과아이콘

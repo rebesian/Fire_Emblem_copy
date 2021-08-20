@@ -18,7 +18,7 @@ tile::~tile()
 
 HRESULT tile::init(int idX, int idY)
 {
-
+	_img = IMAGEMANAGER->findImage("movement");
 	_idX = idX;
 	_idY = idY;
 	_rc = _map->getRect(_idX, _idY);
@@ -39,7 +39,7 @@ void tile::update()
 	if (_count % 5 == 0)
 	{
 		_renderX++;
-		if (_renderX > 7)
+		if (_renderX > 15)
 		{
 			_renderX = 0;
 		}
@@ -51,15 +51,15 @@ void tile::render()
 {
 	if(_attribute == "move")
 	{
-		_img->frameRender(_map->getMapDC(), _rc.left, _rc.top, _renderX, 0);
+		_img->alphaFrameRender(_map->getMapDC(), _rc.left, _rc.top, _renderX, 0 ,200);
 	}
 	else if(_attribute == "attack")
 	{
-		_img->frameRender(_map->getMapDC(), _rc.left, _rc.top, _renderX, 1);
+		_img->alphaFrameRender(_map->getMapDC(), _rc.left, _rc.top, _renderX, 1, 200);
 	}
 	else if (_attribute == "heal")
 	{
-		_img->frameRender(_map->getMapDC(), _rc.left, _rc.top, _renderX, 2);
+		_img->alphaFrameRender(_map->getMapDC(), _rc.left, _rc.top, _renderX, 2, 200);
 	}
 	
 }

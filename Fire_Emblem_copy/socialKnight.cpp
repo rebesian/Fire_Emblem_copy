@@ -13,11 +13,8 @@ HRESULT socialKnight::init(int idx, int idy, TYPE type)
 		_img = IMAGEMANAGER->findImage("enemy¼Ò¼È³ªÀÌÆ®Idle");
 		break;
 	}
-	stageX = _map->getRect(idx, idy).left;
-	stageY = _map->getRect(idx, idy).top;
-	stageRenderX = 0;
-	stageRenderY = 0;
 	return S_OK;
+
 }
 
 void socialKnight::update()

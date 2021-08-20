@@ -29,6 +29,7 @@ private:
 	int _count;// 그냥렌더용
 	int _movecount,_attackCount;
 	int _totalRange , _moveRange, _attackRange;
+	int playerIdx, playerIdy;
 	float time;
 	bool _start; // 그냥 시작용
 	bool ismove;
@@ -56,7 +57,7 @@ public:
 	void callPathFinder(int x, int y);
 	void enemyAttack();
 
-	void setLinkrandomMap(tileSet* map) { _map = map; }
+	void setLinkMap(tileSet* map) { _map = map; }
 
 	//겟터
 	int getEnemyTileX() { return _startTile->getIdX(); }

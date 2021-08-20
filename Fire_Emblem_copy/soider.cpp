@@ -5,10 +5,6 @@ HRESULT soider::init(int idx, int idy, TYPE type)
 {
 	unit::init(idx, idy, type);
 	_img = IMAGEMANAGER->findImage("±ºÀÎIdle");
-	stageX = _map->getRect(idx, idy).left;
-	stageY = _map->getRect(idx, idy).top;
-	stageRenderX = 0;
-	stageRenderY = 0;
 	return S_OK;
 }
 

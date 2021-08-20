@@ -550,6 +550,130 @@ void image::alphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int
 	//조금있다 
 }
 
+void image::alphaFrameRender(HDC hdc, int destX, int destY, BYTE alpha)
+{
+	_blendFunc.SourceConstantAlpha = alpha;
+
+	if (_trans)
+	{
+		BitBlt(
+			_blendImage->hMemDC,
+			0,
+			0,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			hdc,
+			destX,
+			destY,
+			SRCCOPY);
+		GdiTransparentBlt(
+			_blendImage->hMemDC,
+			0,
+			0,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_imageInfo->hMemDC,
+			_imageInfo->currentFrameX*_imageInfo->frameWidth,
+			_imageInfo->currentFrameY*_imageInfo->frameHeight,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_transColor
+		);
+
+		AlphaBlend(
+			hdc,
+			destX,
+			destY,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_blendImage->hMemDC,
+			0,
+			0,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_blendFunc);
+	}
+	else
+	{
+		AlphaBlend(
+			hdc,
+			destX,
+			destY,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_blendImage->hMemDC,
+			0,
+			0,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_blendFunc);
+	}
+
+}
+
+void image::alphaFrameRender(HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY, BYTE alpha)
+{
+	_blendFunc.SourceConstantAlpha = alpha;
+
+	_imageInfo->currentFrameX = currentFrameX;
+	_imageInfo->currentFrameY = currentFrameY;
+
+	if (_trans)
+	{
+		BitBlt(
+			_blendImage->hMemDC,
+			0,
+			0,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			hdc,
+			destX,
+			destY,
+			SRCCOPY);
+		GdiTransparentBlt(
+			_blendImage->hMemDC,
+			0,
+			0,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_imageInfo->hMemDC,
+			_imageInfo->currentFrameX*_imageInfo->frameWidth,
+			_imageInfo->currentFrameY*_imageInfo->frameHeight,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_transColor
+		);
+
+		AlphaBlend(
+			hdc,
+			destX,
+			destY,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_blendImage->hMemDC,
+			0,
+			0,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_blendFunc);
+	}
+	else
+	{
+		AlphaBlend(
+			hdc,
+			destX,
+			destY,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_blendImage->hMemDC,
+			0,
+			0,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_blendFunc);
+	}
+}
+
 void image::aniRender(HDC hdc, int destX, int destY, animation* ani)
 {
 	render(hdc, destX, destY, ani->getFramePos().x, ani->getFramePos().y, ani->getFrameWidth(), ani->getFrameHeight());

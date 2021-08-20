@@ -6,11 +6,6 @@ HRESULT mage::init(int idx, int idy, TYPE type)
 	unit::init(idx, idy, type);
 
 	_img = IMAGEMANAGER->findImage("¸ÞÀÌÁöIdle");
-
-	stageX = _map->getRect(idx, idy).left;
-	stageY = _map->getRect(idx, idy).top;
-	stageRenderX = 0;
-	stageRenderY = 0;
 	return S_OK;
 }
 

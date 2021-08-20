@@ -198,9 +198,6 @@
     <ClInclude Include="Pegasus.h">
       <Filter>playGround\unit</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>playGround\unit</Filter>
-    </ClInclude>
     <ClInclude Include="transport.h">
       <Filter>playGround\unit</Filter>
     </ClInclude>
@@ -212,6 +209,9 @@
     </ClInclude>
     <ClInclude Include="playerManger.h">
       <Filter>playGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

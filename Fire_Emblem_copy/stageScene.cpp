@@ -10,7 +10,7 @@ HRESULT stageScene::init()
 
 	_warrior = new warrior;
 	_warrior->setLinkMap(_tileSet);
-	_warrior->init(2,5,ENEMY);
+	_warrior->init(6, 5,ENEMY);
 	
 	_roy = new Roy;
 	_roy->setLinkMap(_tileSet);

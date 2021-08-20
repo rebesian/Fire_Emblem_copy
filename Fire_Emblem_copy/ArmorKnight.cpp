@@ -7,10 +7,6 @@ HRESULT ArmorKnight::init(int idx, int idy, TYPE type)
 	
 	_img = IMAGEMANAGER->findImage("아머나이트Idle");
 
-	stageX = _map->getRect(idx, idy).left;
-	stageY = _map->getRect(idx, idy).top;
-	stageRenderX = 0;
-	stageRenderY = 0;
 	return S_OK;
 }
 
