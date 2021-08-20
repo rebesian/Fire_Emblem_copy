@@ -1,15 +1,17 @@
 #pragma once
 #include "gameNode.h"
 #include "tileSet.h"
-
+#include "aStarTest.h"
 class unit : public gameNode
 {
 protected:
 
 	tileSet* _map;
+	aStarTest* _astar;
 
 	image* _img;
 	TYPE _type;
+
 	int indexX, indexY;
 	int moveRange;
 

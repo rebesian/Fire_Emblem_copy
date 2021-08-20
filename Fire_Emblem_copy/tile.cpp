@@ -44,9 +44,22 @@ void tile::update()
 			_renderX = 0;
 		}
 	}
+
 }
 
 void tile::render()
 {
-	_img->frameRender(_map->getMapDC(), _rc.left, _rc.top , _renderX, 1);
+	if(_attribute == "move")
+	{
+		_img->frameRender(_map->getMapDC(), _rc.left, _rc.top, _renderX, 0);
+	}
+	else if(_attribute == "attack")
+	{
+		_img->frameRender(_map->getMapDC(), _rc.left, _rc.top, _renderX, 1);
+	}
+	else if (_attribute == "heal")
+	{
+		_img->frameRender(_map->getMapDC(), _rc.left, _rc.top, _renderX, 2);
+	}
+	
 }

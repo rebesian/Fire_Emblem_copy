@@ -4,6 +4,7 @@
 
 HRESULT unit::init(int idx, int idy ,TYPE type)
 {
+	_astar->init(idx, idy, 5, 1);
 	_type = type;
 	indexX = idx;
 	indexY = idy;
@@ -15,6 +16,7 @@ HRESULT unit::init(int idx, int idy ,TYPE type)
 
 void unit::update()
 {
+
 	if (_type == PLAYER)
 	{
 
@@ -23,6 +25,8 @@ void unit::update()
 	{
 
 	}
+	_astar->update();
+	
 }
 
 void unit::release()
@@ -32,5 +36,5 @@ void unit::release()
 
 void unit::render()
 {
-
+	_astar->render();
 }

@@ -35,16 +35,28 @@ void aStarTest::update()
 {
 
 	//pathFinder(_currentTile);
-
+	if (KEYMANAGER->isToggleKey(VK_TAB))
+	{
+		for (int y = 0; y < _vTotalList.size(); ++y)
+		{
+			for (int x = 0; x < _vTotalList[y].size(); ++x)
+			{
+				_vTotalList[y][x]->update();
+			}
+		}
+	}
 }
 
 void aStarTest::render()
 {
-	for (int y = 0; y < _vTotalList.size(); ++y)
+	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
-		for (int x = 0; x < _vTotalList[y].size(); ++x)
+		for (int y = 0; y < _vTotalList.size(); ++y)
 		{
-			_vTotalList[y][x]->render();
+			for (int x = 0; x < _vTotalList[y].size(); ++x)
+			{
+				_vTotalList[y][x]->render();
+			}
 		}
 	}
 }
@@ -84,7 +96,8 @@ void aStarTest::setTile(int playerX, int playerY)
 	//상 Move넣기
 	for (int i = 0; i <= _totalRange; ++i)
 	{
-
+		if (playerY - i < 0)
+			continue;
 		if (_movecount != 0)
 		{
 			if (_map->getTerrain(playerX + _totalRange, playerY + _totalRange - i) == TR_MOUNTIN)
@@ -117,7 +130,8 @@ void aStarTest::setTile(int playerX, int playerY)
 	//하 Move넣기
 	for (int i = 0; i <= _totalRange; ++i)
 	{
-
+		if (playerY + i > _map->getSizeY())
+			continue;
 		if (_movecount != 0)
 		{
 			if (_map->getTerrain(playerX + _totalRange, playerY + _totalRange + i) == TR_MOUNTIN)
@@ -150,6 +164,8 @@ void aStarTest::setTile(int playerX, int playerY)
 	//좌 move넣기
 	for (int i = 0; i < _totalRange; ++i)
 	{
+		if (playerX - i < 0)
+			continue;
 		if (_movecount != 0)
 		{
 			if (_map->getTerrain(playerX + _totalRange - i, playerY + _totalRange) == TR_MOUNTIN)
@@ -182,6 +198,8 @@ void aStarTest::setTile(int playerX, int playerY)
 	//우 move넣기
 	for (int i = 0; i < _totalRange; ++i)
 	{
+		if (playerX + i > 0)
+			continue;
 		if (_movecount != 0)
 		{
 			if (_map->getTerrain(playerX + _totalRange+i, playerY + _totalRange) == TR_MOUNTIN)
@@ -212,8 +230,12 @@ void aStarTest::setTile(int playerX, int playerY)
 	//1사분면 move넣기
 	for(int y =1; y<= _totalRange; ++y)
 	{
+		if (playerY - y < 0)
+			continue;
 		for (int x = 1; x <= _totalRange - y; ++x)
 		{
+			if (playerX + x > _map->getSizeX())
+				continue;
 			if (_movecount != 0)
 			{
 				_vTotalList[_totalRange - y][_totalRange + x]->setAttribute("move");
@@ -236,9 +258,12 @@ void aStarTest::setTile(int playerX, int playerY)
 	//2사분면 move넣기
 	for (int y = 1; y <= _totalRange; ++y)
 	{
+		if (playerY - y < 0)
+			continue;
 		for (int x = 1; x <= _totalRange - y; ++x)
 		{
-	
+			if (playerX - x > 0)
+				continue;
 			if (_movecount != 0)
 			{
 				_vTotalList[_totalRange - y][_totalRange - x]->setAttribute("move");
@@ -261,8 +286,12 @@ void aStarTest::setTile(int playerX, int playerY)
 	//3사분면 move넣기
 	for (int y = 1; y <= _totalRange; ++y)
 	{
+		if (playerY + y > _map->getSizeY())
+			continue;
 		for (int x = 1; x <= _totalRange - y; ++x)
 		{
+			if (playerX - x > 0)
+				continue;
 			if (_movecount != 0)
 			{
 				_vTotalList[_totalRange + y][_totalRange - x]->setAttribute("move");
@@ -285,8 +314,12 @@ void aStarTest::setTile(int playerX, int playerY)
 	//4사분면 move넣기
 	for (int y = 1; y <= _totalRange; ++y)
 	{
+		if (playerY + y > _map->getSizeY())
+			continue;
 		for (int x = 1; x <= _totalRange - y; ++x)
 		{
+			if (playerX + x > _map->getSizeX())
+				continue;
 			if (_movecount != 0)
 			{
 				_vTotalList[_totalRange + y][_totalRange + x]->setAttribute("move");

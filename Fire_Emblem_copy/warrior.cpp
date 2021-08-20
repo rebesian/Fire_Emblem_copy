@@ -22,6 +22,7 @@ HRESULT warrior::init(int idx, int idy ,TYPE type)
 
 void warrior::update()
 {
+	unit::update();
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)
 	{
@@ -44,5 +45,7 @@ void warrior::release()
 
 void warrior::render()
 {
+	unit::render();
 	_img->frameRender(_map->getMapDC(), stageX - (TILESIZE / 2), stageY - (TILESIZE), stageRenderX, stageRenderY);
+
 }
