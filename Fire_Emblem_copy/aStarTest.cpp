@@ -19,7 +19,7 @@ HRESULT aStarTest::init(int playerX, int playerY, int moveRange , int attackRang
 	damage = false;
 	_totalRange = moveRange + attackRange;
 	_moveRange = moveRange;
-	_attackRange = moveRange;
+	_attackRange = attackRange;
 	setTile(playerX, playerY);
 	time = TIMEMANAGER->getWorldTime();
 
@@ -48,16 +48,18 @@ void aStarTest::update()
 }
 
 void aStarTest::render()
-{
+{				
 	char str[12];
 	sprintf_s(str, "중심여기><");
 
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
-		for (int y = 0; y < _vTotalList.size(); ++y)
+		for (int y = 0; y < _vTotalList.size(); ++y)					
 		{
 			for (int x = 0; x < _vTotalList[y].size(); ++x)
 			{
+				RECT temp = _vTotalList[y][x]->getRect();
+				Rectangle(_map->getMapDC(), temp);
 				_vTotalList[y][x]->render();
 				if (x == playerIdx && y == playerIdy)
 					TextOut(_map->getMapDC(), _vTotalList[y][x]->getRect().left, _vTotalList[y][x]->getRect().top, str, strlen(str));
@@ -69,279 +71,253 @@ void aStarTest::render()
 //타일 셋팅 함수
 void aStarTest::setTile(int playerX, int playerY)
 {
-	//_startTile = new tile;
-	//_startTile->setLinkRandomMap(_map);
-	//_startTile->init(playerX, playerY);
-	//
-	//_currentTile = _startTile;
+	_startTile = new tile;
+	_startTile->setLinkRandomMap(_map);
+	_startTile->init(playerX, playerY);
+	_startTile->setAttribute("move");
+
+	_currentTile = _startTile;
 	
-	
+	int idx = 0;
+	int idy = 0;
 	for (int y = playerY - _totalRange; y <= _totalRange + playerY; ++y)
 	{
 		vector<tile*> TotalList;
+		idx = 0;
 		for (int x = playerX - _totalRange ; x <= _totalRange + playerX; ++x)
 		{
-			
+					
 			if (y < 0 || x<0 || x>_map->getSizeX() || y>_map->getSizeY())
 			{
 				continue;
 			}
+			if (x == playerX && playerY == y)
+			{
+				TotalList.push_back(_startTile);
+				playerIdx = idx;
+				playerIdy = idy;
+				continue;
+			}
+			++idx;
 			tile* node = new tile;
 			node->setLinkRandomMap(_map);
 			node->init(x, y);
 	
 			TotalList.push_back(node);
 		}
+		++idy;
 		_vTotalList.push_back(TotalList);
 	}
 
 	_movecount = _moveRange;
-	_attackCount = _attackRange;
 
 	//상 Move넣기
-	for (int i = 0; i <= playerIdy; ++i)
+	for (int i = 1; i < playerIdy; ++i)
 	{
-		
-		_vTotalList[0]
-		//if (_movecount != 0)
-		//{
-		//	if (_map->getTerrain(playerX + _totalRange, playerY + _totalRange - i) == TR_MOUNTIN)
-		//	{
-		//		_vTotalList[playerIdy - i][playerIdx]->setAttribute("attack");
-		//		break;
-		//	}
-		//	else
-		//	{
-		//		_vTotalList[playerIdy - i][playerIdx]->setAttribute("move");
-		//		_movecount--;
-		//	}
-		//}
-		//else
-		//{
-		//	if (_attackCount != 0)
-		//	{
-		//		_vTotalList[playerIdy - i][playerIdx]->setAttribute("attack");
-		//		--_attackCount;
-		//	}
-		//	else
-		//		break;
-		//}
+		if (playerIdy - i < 0) break;
+		if (_map->getTerrain(playerX, playerY-i) == TR_MOUNTIN) _movecount = 0;
+		if (_movecount != 0)
+		{
+			_vTotalList[playerIdy - i][playerIdx]->setAttribute("move");
+			--_movecount;
+		}
+		else
+			break;
 
 	}
 
 	_movecount = _moveRange;
-	_attackCount = _attackRange;
+	
 
 	//하 Move넣기
-	for (int i = 0; i <= _vTotalList.size()-playerIdy; ++i)
+	for (int i = 1; i <=_vTotalList.size()-playerIdy; ++i)
 	{
-		//if (playerY + i > _map->getSizeY())
-		//	continue;
+		if (playerY + i > _map->getSizeY()) break;
+		if (_map->getTerrain(playerX, playerY + i) == TR_MOUNTIN) _movecount = 0;
 		if (_movecount != 0)
 		{
-			if (_map->getTerrain(playerX + _totalRange, playerY + _totalRange + i) == TR_MOUNTIN)
-			{
-				_vTotalList[playerIdy + i][playerIdx]->setAttribute("attack");
-				_movecount = _totalRange;
-				break;
-			}
-			else
-			{
-				_vTotalList[playerIdy + i][playerIdx]->setAttribute("move");
-				_movecount--;
-			}
+			_vTotalList[playerIdy + i][playerIdx]->setAttribute("move");
+			_movecount--;
 		}
 		else
-		{
-			if (_attackCount != 0)
-			{
-				_vTotalList[playerIdy + i][playerIdx]->setAttribute("attack");
-				--_attackCount;
-			}
-			else
-				break;
-		}
+			break;
 	}
-
+	
 	_movecount = _moveRange;
-	_attackCount = _attackRange;
 
+	
 	//좌 move넣기
-	for (int i = 0; i <= playerIdx; ++i)
+	for (int i = 1; i <= playerIdx; ++i)
 	{
-		//if (playerX - i < 0)
-		//	continue;
-		if (_movecount != 0)
+		if (playerX - i < 0) break;
+		if (_map->getTerrain(playerX-i,playerY) == TR_MOUNTIN) _movecount=0;
+		if (_movecount > 0)
 		{
-			if (_map->getTerrain(playerX + _totalRange - i, playerY + _totalRange) == TR_MOUNTIN)
-			{
-				_vTotalList[playerIdy][playerIdx - i]->setAttribute("attack");
-				_movecount = _totalRange;
-				break;
-			}
-			else
-			{
-				_vTotalList[playerIdy][playerIdx - i]->setAttribute("move");
-				_movecount--;
-			}
+			_vTotalList[playerIdy][playerIdx - i]->setAttribute("move");
+			--_movecount;
 		}
 		else
-		{
-			if (_attackCount != 0)
-			{
-				_vTotalList[playerIdy][playerIdx - i]->setAttribute("attack");
-				--_attackCount;
-			}
-			else
-				break;
-		}
+			break;
+
 	}
-
+	
 	_movecount = _moveRange;
-	_attackCount = _attackRange;
-
-	//우 move넣기
-	for (int i = 0; i < _vTotalList[playerIdy].size() - playerIdx; ++i)
+	
+	//우 move넣기			
+	for (int i = 1; i <= _vTotalList[playerIdy].size()-playerIdx; ++i)
 	{
-		//if (playerX + i > 0)
-		//	continue;
-		if (_movecount != 0)
+		if (playerX + i > _map->getSizeX()) break;
+		if (_map->getTerrain(playerX + i, playerY) == TR_MOUNTIN) _movecount = 0;
+		if (_movecount > 0)
 		{
-			if (_map->getTerrain(playerX + _totalRange+i, playerY + _totalRange) == TR_MOUNTIN)
-			{
-				_vTotalList[playerIdy][playerIdx + i]->setAttribute("attack");
-				_movecount = _totalRange;
-				break;
-			}
-			else
-			{
-				_vTotalList[playerIdy][playerIdx + i]->setAttribute("move");
-				_movecount--;
-			}
+			_vTotalList[playerIdy][playerIdx + i]->setAttribute("move");
+			--_movecount;
 		}
 		else
-		{
-			if (_attackCount != 0)
-			{
-				_vTotalList[playerIdy][playerIdx + i]->setAttribute("attack");
-				--_attackCount;
-			}
-			else
-				break;
-		}
+			break;
 	}
-	_movecount = _moveRange;
-	_attackCount = _attackRange;
+
 	//1사분면 move넣기
-	for(int y = 1; y<= playerIdy; ++y)
+	for(int y = 1; y < playerIdy; ++y)
 	{
-		//if (playerY - y < 0)
-		//	continue;
-		for (int x = 1; x <= (_vTotalList[playerIdy].size()-playerIdx)- y; ++x)
+		_movecount = _moveRange;
+
+		if (playerY - y < 0)
+			break;
+		_movecount -= y;
+		for (int x = 1; x <= (_vTotalList[playerIdy].size() - playerIdx) - y ; ++x)
 		{
-			//if (playerX + x > _map->getSizeX())
-			//	continue;
-			if (_movecount != 0)
+			if (playerX + x > _map->getSizeX())
+				break;
+			if (_map->getTerrain(playerX + x, playerY - y) == TR_MOUNTIN) _movecount = 0;
+			if (_movecount > 0)
 			{
 				_vTotalList[playerIdy - y][playerIdx + x]->setAttribute("move");
 				--_movecount;
 			}
 			else
-			{
-				if (_attackCount != 0)
-				{
-					_vTotalList[playerIdy - y][playerIdx + x]->setAttribute("attack");
-					--_attackCount;
-				}
-				else
-					break;
-			}
+				break;
+
 		}
 	}
-	_movecount = _moveRange;
-	_attackCount = _attackRange;
 	//2사분면 move넣기
-	for (int y = 1; y <= playerIdy; ++y)
+	for (int y = 1; y < playerIdy; ++y)
 	{
-		//if (playerY - y < 0)
-		//	continue;
+		_movecount = _moveRange;
+
+		if (playerY - y < 0)
+			break;
+		_movecount -= y;
 		for (int x = 1; x <= playerIdx - y; ++x)
 		{
-			//if (playerX - x > 0)
-			//	continue;
-			if (_movecount != 0)
+			if (playerX - x < 0)
+				break;
+			if (_map->getTerrain(playerX - x, playerY - y) == TR_MOUNTIN) _movecount = 0;
+			if (_movecount > 0)
 			{
 				_vTotalList[playerIdy - y][playerIdx - x]->setAttribute("move");
 				--_movecount;
 			}
 			else
-			{
-				if (_attackCount != 0)
-				{
-					_vTotalList[playerIdy - y][playerIdx - x]->setAttribute("attack");
-					--_attackCount;
-				}
-				else
-					break;
-			}
+				break;
+		
 		}
 	}
-	_movecount = _moveRange;
-	_attackCount = _attackRange;
+	
 	//3사분면 move넣기
 	for (int y = 1; y <= _vTotalList.size() - playerIdy; ++y)
 	{
-		//if (playerY + y > _map->getSizeY())
-		//	continue;
-		for (int x = 1; x <= playerIdx; ++x)
+		_movecount = _moveRange;
+		
+		if (playerY + y > _map->getSizeY())
+			break;
+		_movecount -= y;
+		for (int x = 1; x <= playerIdx - y; ++x)
 		{
-			//if (playerX - x > 0)
-			//	continue;
-			if (_movecount != 0)
+			if (playerX - x < 0)
+				break;
+			if (_map->getTerrain(playerX - x, playerY + y) == TR_MOUNTIN) _movecount = 0;
+			if (_movecount > 0)
 			{
 				_vTotalList[playerIdy + y][playerIdx - x]->setAttribute("move");
 				--_movecount;
 			}
 			else
-			{
-				if (_attackCount != 0)
-				{
-					_vTotalList[playerIdy + y][playerIdx - x]->setAttribute("attack");
-					--_attackCount;
-				}
-				else
-					break;
-			}
+				break;
+
 		}
 	}
-	_movecount = _moveRange;
-	_attackCount = _attackRange;
 	//4사분면 move넣기
 	for (int y = 1; y <= _vTotalList.size() - playerIdy; ++y)
 	{
-		//if (playerY + y > _map->getSizeY())
-		//	continue;
-		for (int x = 1; x <= (_vTotalList[playerIdy].size() - playerIdx) - y; ++x)
+		_movecount = _moveRange;
+		
+		if (playerY + y > _map->getSizeY())
+			break;
+		_movecount -= y;
+		for (int x = 1; x < (_vTotalList[playerIdy].size() - playerIdx) - y; ++x)
 		{
-			//if (playerX + x > _map->getSizeX())
-			//	continue;
-			if (_movecount != 0)
+			if (playerX + x > _map->getSizeX())
+				break;
+			if (_map->getTerrain(playerX + x, playerY + y) == TR_MOUNTIN) _movecount = 0;
+			if (_movecount > 0)
 			{
 				_vTotalList[playerIdy + y][playerIdx + x]->setAttribute("move");
 				--_movecount;
 			}
 			else
+				break;
+		}
+	}
+
+
+	//attack넣기
+	for (int y = 0; y < _vTotalList.size(); ++y)
+	{
+		for (int x = 0; x < _vTotalList[y].size(); ++x)
+		{
+			if (_vTotalList[y][x]->getAttribute() == "move")
 			{
-				if (_attackCount != 0)
+				int range = 0;
+				//왼쪽
+				for (int i = -_attackRange; i <= _attackRange; ++i)
 				{
-					_vTotalList[playerIdy + y][playerIdx + x]->setAttribute("attack");
-					--_attackCount;
+					for (int j = 0; j < _attackRange; ++j)
+					{
+						if (_vTotalList[y + i][x + range + j]->getAttribute() == "none")
+						{
+							_vTotalList[y + i][x + range + j]->setAttribute("attack");
+						}
+						
+					}
+					if (i < 0)
+						range++;
+					else
+						range--;
 				}
-				else
-					break;
+
+				range = 0;
+				//오른쪽
+				for (int i = -_attackRange; i <= _attackRange; ++i)
+				{
+					for (int j = 0; j < _attackRange; ++j)
+					{
+						if (x - range - j < 0) continue;
+						if (_vTotalList[y + i][x - range - j]->getAttribute() == "none")
+						{
+							_vTotalList[y + i][x - range - j]->setAttribute("attack");
+						}
+
+					}
+					if (i < 0)
+						range++;
+					else
+						range--;
+				}
 			}
 		}
 	}
+
 }
 //갈수있는길추가함수
 vector<tile*> aStarTest::addOpenList(tile * currentTile)

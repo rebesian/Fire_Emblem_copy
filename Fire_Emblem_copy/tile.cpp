@@ -54,7 +54,7 @@ void tile::render()
 		_img->alphaFrameRender(_map->getMapDC(), _rc.left, _rc.top, _renderX, 0 ,200);
 	}
 	else if(_attribute == "attack")
-	{
+	{				
 		_img->alphaFrameRender(_map->getMapDC(), _rc.left, _rc.top, _renderX, 1, 200);
 	}
 	else if (_attribute == "heal")

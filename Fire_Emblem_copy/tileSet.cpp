@@ -79,12 +79,12 @@ void tileSet::render()
 				break;
 
 			}
-			if (KEYMANAGER->isToggleKey(VK_TAB))
-			{
-				HBRUSH myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-				SelectObject(_tileBuffer->getMemDC(), myBrush);
-				Rectangle(_tileBuffer->getMemDC(), _tiles[i][j].rc);
-			}
+			//if (KEYMANAGER->isToggleKey(VK_TAB))
+			//{
+			//	HBRUSH myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+			//	SelectObject(_tileBuffer->getMemDC(), myBrush);
+			//	Rectangle(_tileBuffer->getMemDC(), _tiles[i][j].rc);
+			//}
 		}
 	}
 }
