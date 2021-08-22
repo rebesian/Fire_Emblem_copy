@@ -63,7 +63,7 @@ public:
 	void setIsOpen(bool isOpen) { _isOpen = isOpen; }
 	void setAttribute(string attribute) { _attribute = attribute; }
 	void setparentNumber(int number) { _parentNodenumber = number; }
-	void setLinkRandomMap(tileSet* map) { _map = map; }
+	void setLinkMap(tileSet* map) { _map = map; }
 
 };
 

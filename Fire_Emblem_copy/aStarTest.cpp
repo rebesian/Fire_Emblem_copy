@@ -41,6 +41,7 @@ void aStarTest::update()
 		{
 			for (int x = 0; x < _vTotalList[y].size(); ++x)
 			{
+				if(_vTotalList[y][x]->getAttribute()!="none")
 				_vTotalList[y][x]->update();
 			}
 		}
@@ -58,11 +59,16 @@ void aStarTest::render()
 		{
 			for (int x = 0; x < _vTotalList[y].size(); ++x)
 			{
-				RECT temp = _vTotalList[y][x]->getRect();
-				Rectangle(_map->getMapDC(), temp);
-				_vTotalList[y][x]->render();
-				if (x == playerIdx && y == playerIdy)
-					TextOut(_map->getMapDC(), _vTotalList[y][x]->getRect().left, _vTotalList[y][x]->getRect().top, str, strlen(str));
+				if(_vTotalList[y][x]->getAttribute()!="none")
+				{ 
+					HBRUSH myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+					SelectObject(_map->getMapDC(), myBrush);
+					RECT temp = _vTotalList[y][x]->getRect();
+					Rectangle(_map->getMapDC(), temp);
+					_vTotalList[y][x]->render();
+				}
+				//if (x == playerIdx && y == playerIdy)
+				//	TextOut(_map->getMapDC(), _vTotalList[y][x]->getRect().left, _vTotalList[y][x]->getRect().top, str, strlen(str));
 			}
 		}
 	}
@@ -72,7 +78,7 @@ void aStarTest::render()
 void aStarTest::setTile(int playerX, int playerY)
 {
 	_startTile = new tile;
-	_startTile->setLinkRandomMap(_map);
+	_startTile->setLinkMap(_map);
 	_startTile->init(playerX, playerY);
 	_startTile->setAttribute("move");
 
@@ -100,7 +106,7 @@ void aStarTest::setTile(int playerX, int playerY)
 			}
 			++idx;
 			tile* node = new tile;
-			node->setLinkRandomMap(_map);
+			node->setLinkMap(_map);
 			node->init(x, y);
 	
 			TotalList.push_back(node);
@@ -486,10 +492,32 @@ void aStarTest::pathFinder(tile * currentTile)
 
 }
 
-void aStarTest::endmove(int playerIndexX, int playerIndexY)
+void aStarTest::enemyEndSelect(int enemyIndexX, int enemyIndexY , int playerIndexX, int playerIndexY)
 {
+	int SelectX = abs(enemyIndexX - playerIndexX);
+	int SelectY = abs(enemyIndexY - playerIndexY);
+	if (SelectX > _totalRange)
+	{
+		SelectX = _totalRange;
+		if (enemyIndexX < playerIndexX)
+			SelectY *= -1;
+	}
+	if (SelectY > _totalRange)
+	{
+		SelectY = _totalRange;
+		if (enemyIndexY < playerIndexY)
+			SelectY *= -1;
+	}
+
+
+	_endTile = new tile;
+	_endTile->setLinkMap(_map);
+	_endTile->init(enemyIndexX + SelectX, enemyIndexY + SelectY);
+
+	_vTotalList[playerIdy + SelectY].erase(_vTotalList[playerIdy + SelectY].begin() + (playerIdx + SelectX));
+	_vTotalList[playerIdy + SelectY].insert(_vTotalList[playerIdy + SelectY].begin() + (playerIdx + SelectX), _endTile);
 	//RECT rc;
-	//tile* node;
+	
 	//if (_endTile->getIdX() != playerIndexX || _endTile->getIdY() != playerIndexY)
 	//{
 	//	ismove = true;

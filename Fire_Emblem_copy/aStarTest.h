@@ -50,7 +50,7 @@ public:
 	vector<tile*> addOpenList(tile* currentTile);
 	//길 찾는 함수
 	void pathFinder(tile* currentTile);
-	void endmove(int playerIndexX, int playerIndexY);
+	void enemyEndSelect(int enemyIndexX, int enemyIndexY, int playerIndexX, int playerIndexY);
 	//void start();
 	void move(int X ,int Y);
 	void actionMove(int X, int Y);

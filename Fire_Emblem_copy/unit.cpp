@@ -29,7 +29,10 @@ void unit::update()
 	}
 	else if (_type  == ENEMY)
 	{
-
+		if (KEYMANAGER->isOnceKeyDown('S'))
+		{
+			_astar->enemyEndSelect(indexX, indexY , , );
+		}
 	}
 	_astar->update();
 	

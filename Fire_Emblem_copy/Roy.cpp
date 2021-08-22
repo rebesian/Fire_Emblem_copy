@@ -10,6 +10,7 @@ HRESULT Roy::init(int idx, int idy, TYPE type)
 
 void Roy::update()
 {
+	unit::update();
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)
 	{
