@@ -43,6 +43,8 @@ void warrior::release()
 void warrior::render()
 {
 	unit::render();
-	_img->frameRender(_map->getMapDC(), stageX - (TILESIZE / 2), stageY - (TILESIZE), stageRenderX, stageRenderY);
-
+	if (!_render)
+	{
+		_img->frameRender(_map->getMapDC(), stageX - (TILESIZE / 2), stageY - (TILESIZE), stageRenderX, stageRenderY);
+	}
 }

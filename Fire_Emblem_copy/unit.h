@@ -8,9 +8,11 @@ protected:
 
 	tileSet* _map;
 	aStarTest* _astar;
-
+	RECT _rc;
 	image* _img;
 	TYPE _type;
+	PLAYER_ENEMY_DIRECTION _dir;
+
 
 	int indexX, indexY;
 	int moveRange;
@@ -24,9 +26,10 @@ protected:
 	float exp;
 	int avoid;
 
+
 	int stageRenderX;
 	int stageRenderY;
-
+	bool _render;
 	int battleRender;
 
 	int stageRenderCount;

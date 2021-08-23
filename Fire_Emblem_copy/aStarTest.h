@@ -27,7 +27,7 @@ private:
 	PLAYER_ENEMY_DIRECTION _dir;
 
 	int _count;// 그냥렌더용
-	int _movecount,_attackCount;
+	int _movecount,_attackCount , _moveTileCount;
 	int _totalRange , _moveRange, _attackRange;
 	int playerIdx, playerIdy;
 	float time;
@@ -51,7 +51,7 @@ public:
 	//길 찾는 함수
 	void pathFinder(tile* currentTile);
 	void enemyEndSelect(int enemyIndexX, int enemyIndexY, int playerIndexX, int playerIndexY);
-	//void start();
+	void start();
 	void move(int X ,int Y);
 	void actionMove(int X, int Y);
 	void callPathFinder();
@@ -72,6 +72,7 @@ public:
 
 	//셋터
 	void setDamage(bool _damage) { damage = _damage; }
+	void setStart(bool start) { _start = start; }
 	void clear() { _vCloseList.clear(); _vOpenList.clear(); }
 };
 
