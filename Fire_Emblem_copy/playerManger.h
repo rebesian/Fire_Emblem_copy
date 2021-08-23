@@ -14,6 +14,8 @@
 
 class playerManger
 {
+	Roy* roy;
+	vector<unit*> _vplayer;
 public:
 	HRESULT init(int idx, int idy, TYPE type = PLAYER);
 	void update();

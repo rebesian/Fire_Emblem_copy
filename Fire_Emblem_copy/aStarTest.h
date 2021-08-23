@@ -54,7 +54,7 @@ public:
 	//void start();
 	void move(int X ,int Y);
 	void actionMove(int X, int Y);
-	void callPathFinder(int x, int y);
+	void callPathFinder();
 	void enemyAttack();
 
 	void setLinkMap(tileSet* map) { _map = map; }

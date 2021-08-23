@@ -34,7 +34,6 @@ void aStarTest::release()
 void aStarTest::update()
 {
 
-	//pathFinder(_currentTile);
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
 		for (int y = 0; y < _vTotalList.size(); ++y)
@@ -46,12 +45,13 @@ void aStarTest::update()
 			}
 		}
 	}
+
 }
 
 void aStarTest::render()
 {				
 	char str[12];
-	sprintf_s(str, "중심여기><");
+	sprintf_s(str, "타겟여기><");
 
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
@@ -67,16 +67,24 @@ void aStarTest::render()
 					Rectangle(_map->getMapDC(), temp);
 					_vTotalList[y][x]->render();
 				}
-				//if (x == playerIdx && y == playerIdy)
-				//	TextOut(_map->getMapDC(), _vTotalList[y][x]->getRect().left, _vTotalList[y][x]->getRect().top, str, strlen(str));
+				//sprintf_s(str, "x:%d,y:%d", x,y);
+				//TextOut(_map->getMapDC(), _vTotalList[y][x]->getRect().left, _vTotalList[y][x]->getRect().top, str, strlen(str));
 			}
 		}
+		//for (int i = 0; i < _vCloseList.size(); ++i)
+		//{
+		//
+		//	RECT temp = _vCloseList[i]->getRect();
+		//	Rectangle(_map->getMapDC(), temp);
+		//}
 	}
 }
 
 //타일 셋팅 함수
 void aStarTest::setTile(int playerX, int playerY)
 {
+	_vTotalList.clear();
+
 	_startTile = new tile;
 	_startTile->setLinkMap(_map);
 	_startTile->init(playerX, playerY);
@@ -108,7 +116,6 @@ void aStarTest::setTile(int playerX, int playerY)
 			tile* node = new tile;
 			node->setLinkMap(_map);
 			node->init(x, y);
-	
 			TotalList.push_back(node);
 		}
 		++idy;
@@ -250,7 +257,6 @@ void aStarTest::setTile(int playerX, int playerY)
 			}
 			else
 				break;
-
 		}
 	}
 	//4사분면 move넣기
@@ -325,12 +331,14 @@ void aStarTest::setTile(int playerX, int playerY)
 	}
 
 }
+
 //갈수있는길추가함수
 vector<tile*> aStarTest::addOpenList(tile * currentTile)
 {
 
 	int startX = currentTile->getIdX();
 	int startY = currentTile->getIdY();
+
 
 
 	for (int i = 0; i < 4; ++i)
@@ -340,7 +348,6 @@ vector<tile*> aStarTest::addOpenList(tile * currentTile)
 			tile* node = _vTotalList[startY][startX-1+i];
 			//예외처리
 			if (!node->getIsOpen()) continue;
-			if (node->getAttribute() == "none" || node->getAttribute() == "attack") continue;
 
 			//현재 타일 계속 갱신해준다.
 			node->setParentNode(_currentTile);
@@ -373,8 +380,7 @@ vector<tile*> aStarTest::addOpenList(tile * currentTile)
 			tile* node = _vTotalList[startY-2+i][startX];
 			//예외처리
 			if (!node->getIsOpen()) continue;
-			if (node->getAttribute() == "enemy") continue;
-			if (node->getAttribute() == "wall") continue;
+
 			//현재 타일 계속 갱신해준다.
 			node->setParentNode(_currentTile);
 			//node->setparentNumber(_currentTile->getparentNumber() + 1);
@@ -392,8 +398,8 @@ vector<tile*> aStarTest::addOpenList(tile * currentTile)
 			}
 
 
-			////현재 노드가 끝노드가아니면 색칠해준다
-			//if (node->getAttribute() != "player") node->setColor(RGB(128, 64, 28));
+			//현재 노드가 끝노드가아니면 색칠해준다
+			//if (node->getAttribute() != "player");
 
 			//이미 체크된애는 건너뛴다
 			if (!addObj) continue;
@@ -406,6 +412,7 @@ vector<tile*> aStarTest::addOpenList(tile * currentTile)
 	
 	return _vOpenList;
 }
+
 //길 찾는 함수
 void aStarTest::pathFinder(tile * currentTile)
 {
@@ -428,7 +435,7 @@ void aStarTest::pathFinder(tile * currentTile)
 		//G값연산 (처음지점에서 현재지점까지)
 		_vOpenList[i]->setCostFromStart(getDistance(center1.x, center1.y, center2.x, center2.y));
 
-		//F = G + H 총값더하기
+		//F = G + H 총값더하기sv
 		_vOpenList[i]->setTotalCost(_vOpenList[i]->getFromCost() + _vOpenList[i]->getToGoal());
 		//그렇게 뽑아낸 총 경로 비용들을 임의의 경로비용과 연산하여 가장 작은값을 계속 뽑아낸다.
 		if (tempTotalCost > _vOpenList[i]->getTotalCost())
@@ -463,15 +470,14 @@ void aStarTest::pathFinder(tile * currentTile)
 	{
 		return;
 	}
-	else if (tempTile->getAttribute() == "player")
+	else if (tempTile->getIsEnd())
 	{
 		//최단경로를 색칠해줘라
 		while (_currentTile->getParentNode() != NULL)
 		{
 			_vCloseList.emplace_back(_currentTile);
-			//_vOpenList.clear();
+			_vOpenList.clear();
 			_currentTile = _currentTile->getParentNode();
-			_start = true;
 		}
 		return;
 	}
@@ -488,7 +494,7 @@ void aStarTest::pathFinder(tile * currentTile)
 	}
 
 	_currentTile = tempTile;
-	//pathFinder(_currentTile);
+	pathFinder(_currentTile);
 
 }
 
@@ -499,21 +505,23 @@ void aStarTest::enemyEndSelect(int enemyIndexX, int enemyIndexY , int playerInde
 	if (SelectX > _totalRange)
 	{
 		SelectX = _totalRange;
-		if (enemyIndexX < playerIndexX)
-			SelectY *= -1;
+	
 	}
 	if (SelectY > _totalRange)
 	{
 		SelectY = _totalRange;
-		if (enemyIndexY < playerIndexY)
-			SelectY *= -1;
 	}
+	if (enemyIndexX > playerIndexX)
+		SelectX *= -1;
+	if (enemyIndexY > playerIndexY)
+		SelectY *= -1;
 
 
 	_endTile = new tile;
 	_endTile->setLinkMap(_map);
-	_endTile->init(enemyIndexX + SelectX, enemyIndexY + SelectY);
-
+	_endTile->init(playerIndexX, playerIndexY);
+	_endTile->setAttribute("heal");
+	_endTile->setIsEnd(true);
 	_vTotalList[playerIdy + SelectY].erase(_vTotalList[playerIdy + SelectY].begin() + (playerIdx + SelectX));
 	_vTotalList[playerIdy + SelectY].insert(_vTotalList[playerIdy + SelectY].begin() + (playerIdx + SelectX), _endTile);
 	//RECT rc;
@@ -752,11 +760,10 @@ void aStarTest::actionMove(int X, int Y)
 	//_vTotalList.insert(_vTotalList.begin() + (Y*_TotaltileX + X), _startTile);
 }
 
-void aStarTest::callPathFinder(int x,int y)
+void aStarTest::callPathFinder()
 {
 	_vCloseList.clear();
 	_vOpenList.clear();
-	actionMove(x, y);
 	pathFinder(_startTile);
 }
 

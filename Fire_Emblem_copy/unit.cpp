@@ -31,7 +31,11 @@ void unit::update()
 	{
 		if (KEYMANAGER->isOnceKeyDown('S'))
 		{
-			_astar->enemyEndSelect(indexX, indexY , , );
+			_astar->enemyEndSelect(indexX, indexY , 2, 10);
+		}
+		if (KEYMANAGER->isOnceKeyDown('V'))
+		{
+			_astar->callPathFinder();
 		}
 	}
 	_astar->update();

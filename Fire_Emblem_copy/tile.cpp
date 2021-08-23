@@ -6,7 +6,7 @@
 tile::tile()
 	:_totalCost(0), _costFromStart(0),
 	_costToGoal(0), _parentNode(NULL),_parentNodenumber(0),
-	_idX(0), _idY(0), _isOpen(true) , _attribute("none")
+	_idX(0), _idY(0), _isOpen(true),_isEnd(false),_attribute("none")
 {
 }
 

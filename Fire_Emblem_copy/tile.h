@@ -28,6 +28,7 @@ private:
 	image* _img;
 	image* _routeimg;
 	string _attribute;
+	bool _isEnd;
 	int _parentNodenumber;
 	
 	int _count,_renderX;
@@ -50,6 +51,7 @@ public:
 	string getAttribute() { return _attribute; }
 	tile* getParentNode() { return _parentNode; }
 	bool getIsOpen() { return _isOpen; }
+	bool getIsEnd() { return _isEnd; }
 	int getparentNumber() { return _parentNodenumber; }
 
 	void setIdX(int idx) { _idX = idx; }
@@ -61,6 +63,7 @@ public:
 	void setCostToGoal(float costToGoal) { _costToGoal = costToGoal; }
 	void setParentNode(tile* t) { _parentNode = t; }
 	void setIsOpen(bool isOpen) { _isOpen = isOpen; }
+	void setIsEnd(bool isEnd) { _isEnd = isEnd; }
 	void setAttribute(string attribute) { _attribute = attribute; }
 	void setparentNumber(int number) { _parentNodenumber = number; }
 	void setLinkMap(tileSet* map) { _map = map; }
