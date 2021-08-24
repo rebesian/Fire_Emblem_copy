@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "playerManger.h"
 
-HRESULT playerManger::init(int idx, int idy, TYPE type)
+
+HRESULT playerManger::init(TYPE type)
 {
 
 	return S_OK;

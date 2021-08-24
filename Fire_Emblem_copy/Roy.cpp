@@ -10,6 +10,7 @@ HRESULT Roy::init(int idx, int idy, TYPE type)
 
 void Roy::update()
 {
+
 	unit::update();
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)
@@ -34,7 +35,7 @@ void Roy::release()
 
 void Roy::render()
 {
-	//unit::render();
+	unit::render();
 	_img->frameRender(_map->getMapDC(), stageX-(TILESIZE/2), stageY-(TILESIZE), stageRenderX, stageRenderY);
 
 

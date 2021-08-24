@@ -15,7 +15,7 @@ aStarTest::~aStarTest()
 HRESULT aStarTest::init(int playerX, int playerY, int moveRange , int attackRange)
 {
 	_count = _moveTileCount = 0;
-	_start = false;
+	_start = _render = false;
 	damage = false;
 	_totalRange = moveRange + attackRange;
 	_moveRange = moveRange;
@@ -31,10 +31,10 @@ void aStarTest::release()
 
 }
 
-void aStarTest::update()
+void aStarTest::update(bool render)
 {
-
-	if (KEYMANAGER->isToggleKey(VK_TAB))
+	_render = render;
+	if (_render)
 	{
 		for (int y = 0; y < _vTotalList.size(); ++y)
 		{
@@ -53,7 +53,7 @@ void aStarTest::render()
 	char str[12];
 	sprintf_s(str, "타겟여기><");
 
-	if (KEYMANAGER->isToggleKey(VK_TAB))
+	if (_render)
 	{
 		for (int y = 0; y < _vTotalList.size(); ++y)					
 		{
@@ -75,12 +75,7 @@ void aStarTest::render()
 				//TextOut(_map->getMapDC(), _vTotalList[y][x]->getRect().left, _vTotalList[y][x]->getRect().top, str, strlen(str));
 			}
 		}
-		for (int i = 0; i < _vCloseList.size(); ++i)
-		{
-		
-			RECT temp = _vCloseList[i]->getRect();
-			Rectangle(_map->getMapDC(), temp);
-		}
+
 	}
 }
 
@@ -130,6 +125,7 @@ vector<tile*> aStarTest::addOpenList(tile * currentTile)
 	{
 		if (i == 0 || i == 2)
 		{
+			if (startX - 1 + i < 0 || startX - 1 + i >= _map->getSizeX()) continue;
 			tile* node = _vTotalList[startY][startX-1+i];
 			//예외처리
 			if (!node->getIsOpen()) continue;
@@ -161,7 +157,7 @@ vector<tile*> aStarTest::addOpenList(tile * currentTile)
 		}
 		if (i == 1 || i == 3)
 		{
-
+			if (startY - 2 + i < 0 || startY - 2 + i >= _map->getSizeY()) continue;
 			tile* node = _vTotalList[startY-2+i][startX];
 			//예외처리
 			if (!node->getIsOpen()) continue;
@@ -285,16 +281,16 @@ void aStarTest::pathFinder(tile * currentTile)
 
 }
 
-void aStarTest::enemyEndSelect(int enemyIndexX, int enemyIndexY , int playerIndexX, int playerIndexY)
+void aStarTest::EndSelect(int endIndexX, int endIndexY)
 {
 	
 	_endTile = new tile;
 	_endTile->setLinkMap(_map);
-	_endTile->init(playerIndexX, playerIndexY);
+	_endTile->init(endIndexX, endIndexY);
 	_endTile->setAttribute("heal");
 	_endTile->setIsEnd(true);
-	_vTotalList[playerIndexY].erase(_vTotalList[playerIndexY].begin() + (playerIndexX));
-	_vTotalList[playerIndexY].insert(_vTotalList[playerIndexY].begin() + (playerIndexX), _endTile);
+	_vTotalList[endIndexY].erase(_vTotalList[endIndexY].begin() + (endIndexX));
+	_vTotalList[endIndexY].insert(_vTotalList[endIndexY].begin() + (endIndexX), _endTile);
 	
 }
 
@@ -325,7 +321,7 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 	for (int i = 1; i <= _moveRange; ++i)
 	{
 		if (playerY - i < 0) break;
-		if (_map->getTerrain(playerX, playerY - i) == TR_MOUNTIN) _movecount = 0;
+		if (!_map->getMove(playerX, playerY - i)) _movecount = 0;
 		if (_movecount > 0)
 		{
 			_vTotalList[playerY - i][playerX]->setAttribute("move");
@@ -344,7 +340,7 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 	for (int i = 1; i <= _moveRange; ++i)
 	{
 		if (playerY + i > _map->getSizeY()) break;
-		if (_map->getTerrain(playerX, playerY + i) == TR_MOUNTIN) _movecount = 0;
+		if (!_map->getMove(playerX, playerY + i)) _movecount = 0;
 		if (_movecount > 0)
 		{
 			_vTotalList[playerY + i][playerX]->setAttribute("move");
@@ -362,7 +358,7 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 	for (int i = 1; i <= _moveRange; ++i)
 	{
 		if (playerX - i < 0) break;
-		if (_map->getTerrain(playerX - i, playerY) == TR_MOUNTIN) _movecount = 0;
+		if (!_map->getMove(playerX - i, playerY)) _movecount = 0;
 		if (_movecount > 0)
 		{
 			_vTotalList[playerY][playerX - i]->setAttribute("move");
@@ -380,7 +376,7 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 	for (int i = 1; i <= _moveRange; ++i)
 	{
 		if (playerX + i > _map->getSizeX()) break;
-		if (_map->getTerrain(playerX + i, playerY) == TR_MOUNTIN) _movecount = 0;
+		if (!_map->getMove(playerX + i, playerY)) _movecount = 0;
 		if (_movecount > 0)
 		{
 			_vTotalList[playerY][playerX + i]->setAttribute("move");
@@ -403,7 +399,7 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 		{
 			if (playerX + x > _map->getSizeX())
 				break;
-			if (_map->getTerrain(playerX + x, playerY - y) == TR_MOUNTIN) _movecount = 0;
+			if (!_map->getMove(playerX + x, playerY - y)) _movecount = 0;
 			if (_movecount > 0)
 			{
 				_vTotalList[playerY - y][playerX + x]->setAttribute("move");
@@ -427,7 +423,7 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 		{
 			if (playerX - x < 0)
 				break;
-			if (_map->getTerrain(playerX - x, playerY - y) == TR_MOUNTIN) _movecount = 0;
+			if (!_map->getMove(playerX - x, playerY - y)) _movecount = 0;
 			if (_movecount > 0)
 			{
 				_vTotalList[playerY - y][playerX - x]->setAttribute("move");
@@ -452,7 +448,7 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 		{
 			if (playerX - x < 0)
 				break;
-			if (_map->getTerrain(playerX - x, playerY + y) == TR_MOUNTIN) _movecount = 0;
+			if (!_map->getMove(playerX - x, playerY + y)) _movecount = 0;
 			if (_movecount > 0)
 			{
 				_vTotalList[playerY + y][playerX - x]->setAttribute("move");
@@ -476,7 +472,7 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 		{
 			if (playerX + x > _map->getSizeX())
 				break;
-			if (_map->getTerrain(playerX + x, playerY + y) == TR_MOUNTIN) _movecount = 0;
+			if (!_map->getMove(playerX + x, playerY + y)) _movecount = 0;
 			if (_movecount > 0)
 			{
 				_vTotalList[playerY + y][playerX + x]->setAttribute("move");
@@ -547,6 +543,7 @@ void aStarTest::move(int X, int Y)
 	tile* node = new tile;
 	node->setLinkMap(_map);
 	node->init(_startTile->getIdX(), _startTile->getIdY());
+	node->setAttribute("move");
 	_startTile->setIdX(X);
 	_startTile->setIdY(Y);
 	rc = _map->getRect(_startTile->getIdX(), _startTile->getIdY());

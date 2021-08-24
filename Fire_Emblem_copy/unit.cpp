@@ -17,7 +17,7 @@ HRESULT unit::init(int idx, int idy ,TYPE type)
 	stageRenderY = 0;
 	exp = 0;
 
-	battle = _render = false;
+	battle = _moving = _pointing = false;
 	stageRenderCount = 0;
 	battleRenderCount = 0;
 	return S_OK;
@@ -28,13 +28,17 @@ void unit::update()
 
 	if (_type == PLAYER)
 	{
-
+		if (_pointing)
+		{
+			//_astar->EndSelect(endX, endY);
+			stageRenderY = 1;
+		}
 	}
 	else if (_type  == ENEMY)
 	{
 		if (KEYMANAGER->isOnceKeyDown('S'))
 		{
-			_astar->enemyEndSelect(indexX, indexY , 2, 10);
+			_astar->EndSelect(2, 10);
 		}
 		if (KEYMANAGER->isOnceKeyDown('V'))
 		{
@@ -44,7 +48,7 @@ void unit::update()
 		{
 			if (_astar->getCloseListsize() > 0)
 			{
-				if (!_render)
+				if (!_moving)
 				{
 					int pastX = indexX;
 					int pastY = indexY;
@@ -79,7 +83,7 @@ void unit::update()
 							}
 						}
 						_rc = _map->getRect(indexX, indexY);
-						_render = true;
+						_moving = true;
 					}
 					else
 					{
@@ -92,7 +96,7 @@ void unit::update()
 				{
 					if (stageX == _rc.left  && stageY == _rc.top)
 					{
-						_render = false;
+						_moving = false;
 						_astar->move(indexX, indexY);
 					}
 					else
@@ -132,7 +136,7 @@ void unit::update()
 			}
 		}
 	}
-	_astar->update();
+	_astar->update(_pointing);
 	
 }
 

@@ -72,7 +72,24 @@ void stageScene::update()
 	}
 	if (KEYMANAGER->isOnceKeyDown('Z'))
 	{
-		_pt.indexX = 
+		if (_pt.indexX == _warrior->getIndexX() && _pt.indexY == _warrior->getIndexY())
+		{
+			if (_warrior->getPointing())
+				_warrior->setpointing(false);
+			else
+				_warrior->setpointing(true);
+		}
+		if (_pt.indexX == _roy->getIndexX() && _pt.indexY == _roy->getIndexY())
+		{
+			if (_roy->getPointing())
+				_roy->setpointing(false);
+			else
+				_roy->setpointing(true);
+		}
+	}
+	if (_pt.indexX == _roy->getIndexX() && _pt.indexY == _roy->getIndexY())
+	{
+		
 	}
 	_warrior->update();
 	_roy->update();
@@ -87,10 +104,12 @@ void stageScene::release()
 void stageScene::render()
 {
 	
+
 	_tileSet->render();
 	_warrior->render();
 	_roy->render();
 	_pt._img->render(_tileSet->getMapDC() , _pt._rc.left,_pt._rc.top);
+
 	CAMERAMANAGER->render(_tileSet->getTileBuffer(), getMemDC());
 
 }

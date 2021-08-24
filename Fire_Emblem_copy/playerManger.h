@@ -14,10 +14,20 @@
 
 class playerManger
 {
-	Roy* roy;
+	Roy* _roy;
+	mage* _mage;
+	warrior* _warrior;
+	paladin* _paladin;
+	archer* _archer;
+	ArmorKnight* _armor;
+	Pegasus* _Pegasus;
+	socialKnight* _social;
+	transport* _transport;
+	Swordsman* _sword;
+
 	vector<unit*> _vplayer;
 public:
-	HRESULT init(int idx, int idy, TYPE type = PLAYER);
+	HRESULT init(TYPE type = PLAYER);
 	void update();
 	void release();
 	void render();

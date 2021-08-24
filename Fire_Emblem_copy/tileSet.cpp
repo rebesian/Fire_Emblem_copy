@@ -304,6 +304,95 @@ void tileSet::load()
 	_tileX = _tileX;
 	_tileY = _tileY;
 
+
+	for (int y = 0; y < _tileY; ++y)
+	{
+		for (int x = 0; x < _tileX; ++x)
+		{ 
+	
+			if (_tiles[y][x].terrain == TR_GRASS)
+			{
+
+				if ((_tiles[y][x].terrainFrameX == 3 || _tiles[y][x].terrainFrameX == 4)&& _tiles[y][x].terrainFrameY ==5)
+				{
+					_tiles[y][x].name = "풀";
+					_tiles[y][x].isMove = true;
+					_tiles[y][x].def = 1;
+					_tiles[y][x].avo = 20;
+				}
+				else if (_tiles[y][x].terrainFrameX == 5&& _tiles[y][x].terrainFrameY == 6)
+				{
+					_tiles[y][x].name = "숲";
+					_tiles[y][x].isMove = true;
+					_tiles[y][x].def = 1;
+					_tiles[y][x].avo = 20;
+				}
+				else
+				{
+					_tiles[y][x].name = "평지";
+					_tiles[y][x].isMove = true;
+					_tiles[y][x].def = 0;
+					_tiles[y][x].avo = 0;
+				}
+			}
+			else if (_tiles[y][x].terrain == TR_MOUNTIN)
+			{
+				_tiles[y][x].name = "산맥";
+				_tiles[y][x].isMove = false;
+				_tiles[y][x].def = 0;
+				_tiles[y][x].avo = 0;
+			}
+			else if (_tiles[y][x].terrain == TR_KINGDOM)
+			{
+				if (_tiles[y][x].terrainFrameX == 1&& _tiles[y][x].terrainFrameY == 2)
+				{
+					_tiles[y][x].name = "마을";
+					_tiles[y][x].isMove = true;
+					_tiles[y][x].def = 0;
+					_tiles[y][x].avo = 10;
+				}
+				else if (_tiles[y][x].terrainFrameX == 1 && _tiles[y][x].terrainFrameY == 5)
+				{
+					_tiles[y][x].name = "성문";
+					_tiles[y][x].isMove = true;
+					_tiles[y][x].def = 0;
+					_tiles[y][x].avo = 10;
+				}
+				else if (_tiles[y][x].terrainFrameX == 0 && _tiles[y][x].terrainFrameY == 6)
+				{
+					_tiles[y][x].name = "민가";
+					_tiles[y][x].isMove = true;
+					_tiles[y][x].def = 0;
+					_tiles[y][x].avo = 10;
+				}
+				else if (_tiles[y][x].terrainFrameX == 1 && _tiles[y][x].terrainFrameY ==6)
+				{
+					_tiles[y][x].name = "상점";
+					_tiles[y][x].isMove = true;
+					_tiles[y][x].def = 0;
+					_tiles[y][x].avo = 10;
+				}
+				//새? def2 
+				else if (_tiles[y][x].terrainFrameX == 2 && _tiles[y][x].terrainFrameY == 6)
+				{
+					_tiles[y][x].name = "요새";
+					_tiles[y][x].isMove = true;
+					_tiles[y][x].def = 0;
+					_tiles[y][x].avo = 10;
+				}
+				else
+				{
+					_tiles[y][x].name = "성벽";
+					_tiles[y][x].isMove = false;
+					_tiles[y][x].def = 0;
+					_tiles[y][x].avo = 10;
+				}
+			}
+		}
+	}
+
+
+
 	CloseHandle(file);
 	//delete[] tile;
 }

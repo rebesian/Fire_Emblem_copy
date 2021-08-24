@@ -14,7 +14,7 @@ protected:
 	PLAYER_ENEMY_DIRECTION _dir;
 
 
-	int indexX, indexY;
+	int indexX, indexY, endX, endY;
 	int moveRange;
 
 	int _hp;
@@ -30,7 +30,7 @@ protected:
 
 	int stageRenderX;
 	int stageRenderY;
-	bool _render;
+	bool _moving, _pointing;
 	int battleRender;
 
 	int stageRenderCount;
@@ -50,9 +50,12 @@ public:
 	int getAvoid() { return avoid; }
 	int getCritcal() { return critcal; }
 	int getSpeed() { return speed; }
+	bool getPointing() { return _pointing; }
 	float getExp() { return exp; }
 
 	void setLinkMap(tileSet* map) { _map = map; }
 	void sethp(int hp) { _hp = hp; }
+	void setpointing(bool pointing) { _pointing = pointing; }
+	void setendIndex(int endx, int endy) { endX = endx; endY = endy; }
 };
 
