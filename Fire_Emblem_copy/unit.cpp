@@ -17,7 +17,7 @@ HRESULT unit::init(int idx, int idy ,TYPE type)
 	stageRenderY = 0;
 	exp = 0;
 
-	_render = false;
+	battle = _render = false;
 	stageRenderCount = 0;
 	battleRenderCount = 0;
 	return S_OK;
@@ -83,6 +83,8 @@ void unit::update()
 					}
 					else
 					{
+						indexX = pastX;
+						indexY = pastY;
 						_astar->clear();
 					}
 				}
@@ -120,12 +122,14 @@ void unit::update()
 			else
 			{
 				_astar->setStart(false);
+				if (indexX - 1 == _astar->getTargetTileX() ||
+					indexX + 1 == _astar->getTargetTileX() ||
+					indexY - 1 == _astar->getTargetTileY() ||
+					indexY + 1 == _astar->getTargetTileY())
+					battle = true;
+				_astar->setMoveTile(indexX, indexY);
 				stageRenderY = 0;
 			}
-		}
-		else
-		{
-			_astar->setMoveTile(indexX, indexY);
 		}
 	}
 	_astar->update();
@@ -139,5 +143,7 @@ void unit::release()
 
 void unit::render()
 {
+
 	_astar->render();
+
 }

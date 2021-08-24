@@ -50,20 +50,25 @@ public:
 	vector<tile*> addOpenList(tile* currentTile);
 	//길 찾는 함수
 	void pathFinder(tile* currentTile);
+
+
+
 	void enemyEndSelect(int enemyIndexX, int enemyIndexY, int playerIndexX, int playerIndexY);
 	void setMoveTile(int playerX, int playerY);
 
-	void start();
+
 	void move(int X ,int Y);
-	void actionMove(int X, int Y);
 	void callPathFinder();
-	void enemyAttack();
+	
 
 	void setLinkMap(tileSet* map) { _map = map; }
+
 
 	//겟터
 	int getEnemyTileX() { return _startTile->getIdX(); }
 	int getEnemyTileY() { return _startTile->getIdY(); }
+	int getTargetTileX() { return _endTile->getIdX(); }
+	int getTargetTileY() { return _endTile->getIdY(); }
 	bool getDamage() { return damage; }
 	bool getStart() { return _start; }
 	PLAYER_ENEMY_DIRECTION getDirection() { return _dir; };

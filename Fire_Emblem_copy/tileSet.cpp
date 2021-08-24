@@ -14,38 +14,7 @@ HRESULT tileSet::init()
 
 void tileSet::update()
 {
-	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
-	{
-		CAMERAMANAGER->setCameraCenterX(CAMERAMANAGER->getCameraCenterX() - 5);
-		if (CAMERAMANAGER->getCameraLEFT() <= 0)
-		{
-			CAMERAMANAGER->setCameraX(0);
-		}
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
-	{
-		CAMERAMANAGER->setCameraCenterX(CAMERAMANAGER->getCameraCenterX() + 5);
-		if (CAMERAMANAGER->getCameraRIGHT() >= _tileX * TILESIZE && _tileX*TILESIZE >= CAMERAX)
-		{
-			CAMERAMANAGER->setCameraX(_tileX*TILESIZE - CAMERAX);
-		}
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_UP))
-	{
-		CAMERAMANAGER->setCameraCenterY(CAMERAMANAGER->getCameraCenterY() - 5);
-		if (CAMERAMANAGER->getCameraTOP() <= 0)
-		{
-			CAMERAMANAGER->setCameraY(0);
-		}
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
-	{
-		CAMERAMANAGER->setCameraCenterY(CAMERAMANAGER->getCameraCenterY() + 5);
-		if (CAMERAMANAGER->getCameraBOTTOM() >= _tileY * TILESIZE && _tileY*TILESIZE >= CAMERAY)
-		{
-			CAMERAMANAGER->setCameraY(_tileY*TILESIZE - CAMERAY);
-		}
-	}
+	
 }
 
 void tileSet::release()

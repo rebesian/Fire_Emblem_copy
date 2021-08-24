@@ -67,6 +67,6 @@ public:
 	void setAttribute(string attribute) { _attribute = attribute; }
 	void setparentNumber(int number) { _parentNodenumber = number; }
 	void setLinkMap(tileSet* map) { _map = map; }
-
+	void setRenderCounter() { _renderX = 0; }
 };
 

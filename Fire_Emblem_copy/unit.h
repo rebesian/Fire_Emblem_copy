@@ -26,6 +26,7 @@ protected:
 	float exp;
 	int avoid;
 
+	bool battle;
 
 	int stageRenderX;
 	int stageRenderY;
