@@ -50,41 +50,48 @@ void unit::update()
 					int pastY = indexY;
 					indexX = _astar->getClosebackX();
 					indexY = _astar->getClosebackY();
-
-					if (pastX == indexX)
+					if (_astar->getAttribute(indexX, indexY) != "attack")
 					{
-						if (pastY > indexY)
+						if (pastX == indexX)
 						{
-							_dir = UP;
+							if (pastY > indexY)
+							{
+								_dir = UP;
+								stageRenderY = 3;
+							}
+							else if (pastY < indexY)
+							{
+								_dir = DOWN;
+								stageRenderY = 2;
+							}
 						}
-						else if (pastY < indexY)
+						else if (pastY == indexY)
 						{
-							_dir = DOWN;
+							if (pastX > indexX)
+							{
+								_dir = LEFT;
+								stageRenderY = 0;
+							}
+							else
+							{
+								_dir = RIGHT;
+								stageRenderY = 1;
+							}
 						}
+						_rc = _map->getRect(indexX, indexY);
+						_render = true;
 					}
-					else if (pastY == indexY)
+					else
 					{
-						if (pastX > indexX)
-						{
-							_dir = LEFT;
-						}
-						else
-						{
-							_dir = RIGHT;
-						}
+						_astar->clear();
 					}
-
-
-					_rc = _map->getRect(indexX, indexY);
-					_astar->move(indexX, indexY);
-					_render = true;
-					_img = IMAGEMANAGER->findImage("");
 				}
 				else
 				{
 					if (stageX == _rc.left  && stageY == _rc.top)
 					{
 						_render = false;
+						_astar->move(indexX, indexY);
 					}
 					else
 					{
@@ -104,7 +111,7 @@ void unit::update()
 							break;
 						case DOWN:
 							stageY += 5;
-							if (stageX < _rc.top) stageX = _rc.top;
+							if (stageY > _rc.top) stageY = _rc.top;
 							break;
 						}
 					}
@@ -113,7 +120,12 @@ void unit::update()
 			else
 			{
 				_astar->setStart(false);
+				stageRenderY = 0;
 			}
+		}
+		else
+		{
+			_astar->setMoveTile(indexX, indexY);
 		}
 	}
 	_astar->update();

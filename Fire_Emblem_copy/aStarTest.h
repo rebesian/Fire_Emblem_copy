@@ -51,6 +51,8 @@ public:
 	//길 찾는 함수
 	void pathFinder(tile* currentTile);
 	void enemyEndSelect(int enemyIndexX, int enemyIndexY, int playerIndexX, int playerIndexY);
+	void setMoveTile(int playerX, int playerY);
+
 	void start();
 	void move(int X ,int Y);
 	void actionMove(int X, int Y);
@@ -65,6 +67,7 @@ public:
 	bool getDamage() { return damage; }
 	bool getStart() { return _start; }
 	PLAYER_ENEMY_DIRECTION getDirection() { return _dir; };
+	string getAttribute(int x, int y) { return _vTotalList[y][x]->getAttribute(); }
 	int getCloseListsize() { return _vCloseList.size(); }
 	int getClosebackX() { return _vCloseList.back()->getIdX(); }
 	int getClosebackY() { return _vCloseList.back()->getIdY(); }
