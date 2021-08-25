@@ -17,7 +17,7 @@ HRESULT unit::init(int idx, int idy ,TYPE type)
 	stageRenderY = 0;
 	exp = 0;
 
-	battle = _moving = _pointing = _Select = false;
+	battle = _moving = _pointing = _playerSelect = _moveSelect = false;
 	stageRenderCount = 0;
 	battleRenderCount = 0;
 	return S_OK;
@@ -31,12 +31,107 @@ void unit::update(int idx, int idy)
 			stageRenderY = 1;
 		else
 			stageRenderY = 0;
-		if (_Select)
+		if (_playerSelect)
 		{
-			if (!(idx == _astar->getTargetTileX() && idy == _astar->getTargetTileY()))
+			if (!(idx == _astar->getTargetTileX() && idy == _astar->getTargetTileY())&&
+				_astar->getAttribute(idx, idy) == "move")
 			{
 				_astar->EndSelect(idx, idy);
 				_astar->callPathFinder();
+			}
+		}
+		if (_moveSelect)
+		{
+			if (_astar->getStart())
+			{
+				if (_astar->getCloseListsize() > 0)
+				{
+					if (!_moving)
+					{
+						int pastX = indexX;
+						int pastY = indexY;
+						indexX = _astar->getClosebackX();
+						indexY = _astar->getClosebackY();
+						if (_astar->getAttribute(indexX, indexY) != "attack")
+						{
+							if (pastX == indexX)
+							{
+								if (pastY > indexY)
+								{
+									_dir = UP;
+									stageRenderY = 3;
+								}
+								else if (pastY < indexY)
+								{
+									_dir = DOWN;
+									stageRenderY = 2;
+								}
+							}
+							else if (pastY == indexY)
+							{
+								if (pastX > indexX)
+								{
+									_dir = LEFT;
+									stageRenderY = 0;
+								}
+								else
+								{
+									_dir = RIGHT;
+									stageRenderY = 1;
+								}
+							}
+							_rc = _map->getRect(indexX, indexY);
+							_moving = true;
+						}
+						else
+						{
+							indexX = pastX;
+							indexY = pastY;
+							_astar->clear();
+						}
+					}
+					else
+					{
+						if (stageX == _rc.left  && stageY == _rc.top)
+						{
+							_moving = false;
+							_astar->move(indexX, indexY);
+						}
+						else
+						{
+							switch (_dir)
+							{
+							case LEFT:
+								stageX -= 5;
+								if (stageX < _rc.left) stageX = _rc.left;
+								break;
+							case RIGHT:
+								stageX += 5;
+								if (stageX > _rc.left) stageX = _rc.left;
+								break;
+							case UP:
+								stageY -= 5;
+								if (stageY < _rc.top) stageY = _rc.top;
+								break;
+							case DOWN:
+								stageY += 5;
+								if (stageY > _rc.top) stageY = _rc.top;
+								break;
+							}
+						}
+					}
+				}
+				else
+				{
+					_astar->setStart(false);
+					if (indexX - 1 == _astar->getTargetTileX() ||
+						indexX + 1 == _astar->getTargetTileX() ||
+						indexY - 1 == _astar->getTargetTileY() ||
+						indexY + 1 == _astar->getTargetTileY())
+						battle = true;
+					_astar->setMoveTile(indexX, indexY);
+					stageRenderY = 0;
+				}
 			}
 		}
 	}
@@ -142,7 +237,7 @@ void unit::update(int idx, int idy)
 			}
 		}
 	}
-	_astar->update(_Select);
+	_astar->update(_playerSelect);
 	
 }
 

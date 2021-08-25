@@ -30,7 +30,7 @@ protected:
 
 	int stageRenderX;
 	int stageRenderY;
-	bool _moving, _pointing, _Select;
+	bool _moving, _pointing, _playerSelect, _moveSelect;
 	int battleRender;
 
 	int stageRenderCount;
@@ -51,12 +51,13 @@ public:
 	int getCritcal() { return critcal; }
 	int getSpeed() { return speed; }
 	bool getPointing() { return _pointing; }
-	bool getSelect() { return _Select; }
+	bool getPlayerSelect() { return _playerSelect; }
 	float getExp() { return exp; }
 
 	void setLinkMap(tileSet* map) { _map = map; }
 	void sethp(int hp) { _hp = hp; }
 	void setpointing(bool pointing) { _pointing = pointing; }
-	void setSelect(bool Select) { _Select = Select; }
+	void setPlayerSelect(bool Select) { _playerSelect = Select; }
+	void setMoveSelect(bool Select) { _moveSelect = Select; }
 };
 

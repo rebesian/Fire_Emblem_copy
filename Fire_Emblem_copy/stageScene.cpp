@@ -72,24 +72,29 @@ void stageScene::update()
 	}
 	if (KEYMANAGER->isOnceKeyDown('Z'))
 	{
+		if (_roy->getPlayerSelect())
+		{
+			_roy->setMoveSelect(true);
+		}
 		if (_pt.indexX == _warrior->getIndexX() && _pt.indexY == _warrior->getIndexY())
 		{
-			if (!_warrior->getSelect())
-				_warrior->setSelect(true);
+			if (!_warrior->getPlayerSelect())
+				_warrior->setPlayerSelect(true);
 		}
 		if (_pt.indexX == _roy->getIndexX() && _pt.indexY == _roy->getIndexY())
 		{
-			if (!_roy->getSelect())
-				_roy->setSelect(true);
+			if (!_roy->getPlayerSelect())
+				_roy->setPlayerSelect(true);
 		}
+
 	}
 	if (KEYMANAGER->isOnceKeyDown('X'))
 	{
-		if (_warrior->getSelect())
-			_warrior->setSelect(false);
+		if (_warrior->getPlayerSelect())
+			_warrior->setPlayerSelect(false);
 	
-		if (_roy->getSelect())
-			_roy->setSelect(false);
+		if (_roy->getPlayerSelect())
+			_roy->setPlayerSelect(false);
 	}
 	if (_pt.indexX == _roy->getIndexX() && _pt.indexY == _roy->getIndexY())
 	{

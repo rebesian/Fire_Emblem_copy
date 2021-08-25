@@ -71,19 +71,16 @@ void aStarTest::render()
 					Rectangle(_map->getMapDC(), temp);
 					_vTotalList[y][x]->render();
 				}
-				//sprintf_s(str, "x:%d,y:%d", x,y);
-				//TextOut(_map->getMapDC(), _vTotalList[y][x]->getRect().left, _vTotalList[y][x]->getRect().top, str, strlen(str));
+			
 			}
 		}
-	
-	}
-	if (_start)
-	{
 		for (int i = 0; i < _vCloseList.size(); ++i)
 		{
 			_vCloseList[i]->routeRender(0, 3);
 		}
+	
 	}
+
 }
 
 //타일 셋팅 함수
@@ -271,7 +268,7 @@ void aStarTest::pathFinder(tile * currentTile)
 		while (_currentTile != _startTile)
 		{
 			_vCloseList.emplace_back(_currentTile);
-			_vOpenList.clear();
+			//_vOpenList.clear();
 			_start = true;
 			_currentTile = _currentTile->getParentNode();
 		}
@@ -591,11 +588,16 @@ void aStarTest::move(int X, int Y)
 
 void aStarTest::callPathFinder()
 {
-	_vCloseList.clear();
+	for (int i = 0; i < _vCloseList.size(); ++i)
+	{
+		_vTotalList[_vCloseList[i]->getIdY()][_vCloseList[i]->getIdX()]->setIsOpen(true);
+	}
 	for (int i = 0; i < _vOpenList.size(); ++i)
 	{
-		_vOpenList[i]->setIsOpen(true);
+		_vTotalList[_vOpenList[i]->getIdY()][_vOpenList[i]->getIdX()]->setIsOpen(true);
 	}
+	
+	_vCloseList.clear();
 	_vOpenList.clear();
 	pathFinder(_startTile);
 }

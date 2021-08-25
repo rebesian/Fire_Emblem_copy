@@ -12,6 +12,15 @@ void Roy::update(int idx, int idy)
 {
 
 	unit::update(idx, idy);
+	if (_astar->getStart())
+	{
+		_img = IMAGEMANAGER->findImage("로이move");
+	}
+	else
+	{
+		_img = IMAGEMANAGER->findImage("로이Idle");
+	
+	}
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)
 	{
