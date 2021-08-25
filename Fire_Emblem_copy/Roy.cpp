@@ -8,10 +8,10 @@ HRESULT Roy::init(int idx, int idy, TYPE type)
 	return S_OK;
 }
 
-void Roy::update()
+void Roy::update(int idx, int idy)
 {
 
-	unit::update();
+	unit::update(idx, idy);
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)
 	{

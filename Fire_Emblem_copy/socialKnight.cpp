@@ -17,7 +17,7 @@ HRESULT socialKnight::init(int idx, int idy, TYPE type)
 
 }
 
-void socialKnight::update()
+void socialKnight::update(int idx, int idy)
 {
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)

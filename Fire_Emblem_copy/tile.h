@@ -39,6 +39,7 @@ public:
 	void release();
 	void update();
 	void render();
+	void routeRender(int frameX, int frameY);
 
 	int getIdX() { return _idX; }
 	int getIdY() { return _idY; }

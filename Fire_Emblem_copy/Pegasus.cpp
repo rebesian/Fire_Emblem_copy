@@ -11,7 +11,7 @@ HRESULT Pegasus::init(int idx, int idy, TYPE type)
 	return S_OK;
 }
 
-void Pegasus::update()
+void Pegasus::update(int idx, int idy)
 {
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)

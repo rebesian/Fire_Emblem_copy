@@ -19,6 +19,7 @@ tile::~tile()
 HRESULT tile::init(int idX, int idY)
 {
 	_img = IMAGEMANAGER->findImage("movement");
+	_routeimg = IMAGEMANAGER->findImage("route");
 	_idX = idX;
 	_idY = idY;
 	_rc = _map->getRect(_idX, _idY);
@@ -62,4 +63,9 @@ void tile::render()
 		_img->alphaFrameRender(_map->getMapDC(), _rc.left, _rc.top, _renderX, 2, 200);
 	}
 	
+}
+
+void tile::routeRender(int frameX, int frameY)
+{
+	_routeimg->frameRender(_map->getMapDC(), _rc.left, _rc.top, frameX, frameY);
 }

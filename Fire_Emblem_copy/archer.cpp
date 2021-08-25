@@ -10,7 +10,7 @@ HRESULT archer::init(int idx, int idy, TYPE type)
 	return S_OK;
 }
 
-void archer::update()
+void archer::update(int idx, int idy)
 {
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)

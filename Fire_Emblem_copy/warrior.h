@@ -4,7 +4,7 @@ class warrior : public unit
 {
 public:
 	HRESULT init(int idx, int idy,TYPE type = PLAYER);
-	void update();
+	void update(int idx, int idy);
 	void release();
 	void render();
 };

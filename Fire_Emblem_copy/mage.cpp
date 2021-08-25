@@ -9,7 +9,7 @@ HRESULT mage::init(int idx, int idy, TYPE type)
 	return S_OK;
 }
 
-void mage::update()
+void mage::update(int idx, int idy)
 {
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)

@@ -74,25 +74,33 @@ void stageScene::update()
 	{
 		if (_pt.indexX == _warrior->getIndexX() && _pt.indexY == _warrior->getIndexY())
 		{
-			if (_warrior->getPointing())
-				_warrior->setpointing(false);
-			else
-				_warrior->setpointing(true);
+			if (!_warrior->getSelect())
+				_warrior->setSelect(true);
 		}
 		if (_pt.indexX == _roy->getIndexX() && _pt.indexY == _roy->getIndexY())
 		{
-			if (_roy->getPointing())
-				_roy->setpointing(false);
-			else
-				_roy->setpointing(true);
+			if (!_roy->getSelect())
+				_roy->setSelect(true);
 		}
+	}
+	if (KEYMANAGER->isOnceKeyDown('X'))
+	{
+		if (_warrior->getSelect())
+			_warrior->setSelect(false);
+	
+		if (_roy->getSelect())
+			_roy->setSelect(false);
 	}
 	if (_pt.indexX == _roy->getIndexX() && _pt.indexY == _roy->getIndexY())
 	{
-		
+		_roy->setpointing(true);
 	}
-	_warrior->update();
-	_roy->update();
+	else
+	{
+		_roy->setpointing(false);
+	}
+	_warrior->update(_pt.indexX,_pt.indexY);
+	_roy->update(_pt.indexX, _pt.indexY);
 
 }
 

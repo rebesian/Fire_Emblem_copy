@@ -10,7 +10,7 @@ HRESULT ArmorKnight::init(int idx, int idy, TYPE type)
 	return S_OK;
 }
 
-void ArmorKnight::update()
+void ArmorKnight::update(int idx, int idy)
 {
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)

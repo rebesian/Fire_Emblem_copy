@@ -17,9 +17,9 @@ HRESULT warrior::init(int idx, int idy ,TYPE type)
 	return S_OK;
 }
 
-void warrior::update()
+void warrior::update(int idx, int idy)
 {
-	unit::update();
+	unit::update(idx,idy);
 	if (_astar->getStart())
 	{
 		switch (_type)

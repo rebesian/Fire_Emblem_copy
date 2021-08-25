@@ -75,7 +75,14 @@ void aStarTest::render()
 				//TextOut(_map->getMapDC(), _vTotalList[y][x]->getRect().left, _vTotalList[y][x]->getRect().top, str, strlen(str));
 			}
 		}
-
+	
+	}
+	if (_start)
+	{
+		for (int i = 0; i < _vCloseList.size(); ++i)
+		{
+			_vCloseList[i]->routeRender(0, 3);
+		}
 	}
 }
 
@@ -88,6 +95,13 @@ void aStarTest::setTile(int playerX, int playerY)
 	_startTile->setLinkMap(_map);
 	_startTile->init(playerX, playerY);
 	_startTile->setAttribute("move");
+
+	_endTile = new tile;
+	_endTile->setLinkMap(_map);
+	_endTile->init(playerX, playerY);
+	_endTile->setAttribute("heal");
+	_endTile->setIsEnd(true);
+
 
 	_currentTile = _startTile;
 	
@@ -283,15 +297,28 @@ void aStarTest::pathFinder(tile * currentTile)
 
 void aStarTest::EndSelect(int endIndexX, int endIndexY)
 {
-	
-	_endTile = new tile;
-	_endTile->setLinkMap(_map);
-	_endTile->init(endIndexX, endIndexY);
-	_endTile->setAttribute("heal");
-	_endTile->setIsEnd(true);
-	_vTotalList[endIndexY].erase(_vTotalList[endIndexY].begin() + (endIndexX));
-	_vTotalList[endIndexY].insert(_vTotalList[endIndexY].begin() + (endIndexX), _endTile);
-	
+	if(endIndexX == _startTile->getIdX() && endIndexY == _startTile->getIdY())
+	{
+		
+	}
+	else
+	{
+		RECT rc;
+		tile* node = new tile;
+		node->setLinkMap(_map);
+		node->init(_endTile->getIdX(), _endTile->getIdY());
+		node->setAttribute("move");
+		_endTile->setIdX(endIndexX);
+		_endTile->setIdY(endIndexY);
+		rc = _map->getRect(_endTile->getIdX(), _endTile->getIdY());
+		_endTile->setCetner(PointMake((rc.left + rc.right) / 2, (rc.bottom + rc.top) / 2));
+		_endTile->setRect(rc);
+		_vTotalList[node->getIdY()].erase(_vTotalList[node->getIdY()].begin() + node->getIdX());
+		_vTotalList[node->getIdY()].insert(_vTotalList[node->getIdY()].begin() + node->getIdX(), node);
+		_vTotalList[endIndexY].erase(_vTotalList[endIndexY].begin() + endIndexX);
+		_vTotalList[endIndexY].insert(_vTotalList[endIndexY].begin() + endIndexX, _endTile);
+
+	}
 }
 
 void aStarTest::setMoveTile(int playerX , int playerY)
@@ -565,6 +592,10 @@ void aStarTest::move(int X, int Y)
 void aStarTest::callPathFinder()
 {
 	_vCloseList.clear();
+	for (int i = 0; i < _vOpenList.size(); ++i)
+	{
+		_vOpenList[i]->setIsOpen(true);
+	}
 	_vOpenList.clear();
 	pathFinder(_startTile);
 }

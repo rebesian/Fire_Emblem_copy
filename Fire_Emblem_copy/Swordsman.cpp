@@ -9,7 +9,7 @@ HRESULT Swordsman::init(int idx, int idy,TYPE type)
 	return S_OK;
 }
 
-void Swordsman::update()
+void Swordsman::update(int idx, int idy)
 {
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)

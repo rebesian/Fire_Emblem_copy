@@ -66,6 +66,7 @@ void playGround::inputImage()
 	IMAGEMANAGER->addFrameImage("TR_MT", "image/Tileset/TR_MT.bmp", 384, 288, 8, 6, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("movement", "image/MapSprite/movement.bmp", 768, 144, 16, 3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("현재타일", "image/MapSprite/현재타일.bmp", 48, 48, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("route", "image/MapSprite/route.bmp", 48, 48, 4, 4, true, RGB(255, 0, 255));
 
 	//병과아이콘
 	//아군 Idle

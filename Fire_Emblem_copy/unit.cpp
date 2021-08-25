@@ -17,21 +17,27 @@ HRESULT unit::init(int idx, int idy ,TYPE type)
 	stageRenderY = 0;
 	exp = 0;
 
-	battle = _moving = _pointing = false;
+	battle = _moving = _pointing = _Select = false;
 	stageRenderCount = 0;
 	battleRenderCount = 0;
 	return S_OK;
 }
 
-void unit::update()
+void unit::update(int idx, int idy)
 {
-
 	if (_type == PLAYER)
 	{
 		if (_pointing)
-		{
-			//_astar->EndSelect(endX, endY);
 			stageRenderY = 1;
+		else
+			stageRenderY = 0;
+		if (_Select)
+		{
+			if (!(idx == _astar->getTargetTileX() && idy == _astar->getTargetTileY()))
+			{
+				_astar->EndSelect(idx, idy);
+				_astar->callPathFinder();
+			}
 		}
 	}
 	else if (_type  == ENEMY)
@@ -136,7 +142,7 @@ void unit::update()
 			}
 		}
 	}
-	_astar->update(_pointing);
+	_astar->update(_Select);
 	
 }
 

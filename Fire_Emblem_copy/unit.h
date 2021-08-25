@@ -14,7 +14,7 @@ protected:
 	PLAYER_ENEMY_DIRECTION _dir;
 
 
-	int indexX, indexY, endX, endY;
+	int indexX, indexY;
 	int moveRange;
 
 	int _hp;
@@ -30,14 +30,14 @@ protected:
 
 	int stageRenderX;
 	int stageRenderY;
-	bool _moving, _pointing;
+	bool _moving, _pointing, _Select;
 	int battleRender;
 
 	int stageRenderCount;
 	int battleRenderCount;
 public:
 	virtual HRESULT init(int idx, int idy, TYPE type);
-	virtual void update();
+	virtual void update(int idx, int idy);
 	virtual void release();
 	virtual void render();
 
@@ -51,11 +51,12 @@ public:
 	int getCritcal() { return critcal; }
 	int getSpeed() { return speed; }
 	bool getPointing() { return _pointing; }
+	bool getSelect() { return _Select; }
 	float getExp() { return exp; }
 
 	void setLinkMap(tileSet* map) { _map = map; }
 	void sethp(int hp) { _hp = hp; }
 	void setpointing(bool pointing) { _pointing = pointing; }
-	void setendIndex(int endx, int endy) { endX = endx; endY = endy; }
+	void setSelect(bool Select) { _Select = Select; }
 };
 

@@ -10,7 +10,7 @@ HRESULT prist::init(int idx, int idy, TYPE type)
 	return S_OK;
 }
 
-void prist::update()
+void prist::update(int idx, int idy)
 {
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)
