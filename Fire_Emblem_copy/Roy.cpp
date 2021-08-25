@@ -12,7 +12,7 @@ void Roy::update(int idx, int idy)
 {
 
 	unit::update(idx, idy);
-	if (_astar->getStart())
+	if (_astar->getStart()&& _moveSelect)
 	{
 		_img = IMAGEMANAGER->findImage("∑Œ¿Ãmove");
 	}

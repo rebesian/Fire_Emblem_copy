@@ -123,13 +123,10 @@ void unit::update(int idx, int idy)
 				}
 				else
 				{
+
 					_astar->setStart(false);
-					if (indexX - 1 == _astar->getTargetTileX() ||
-						indexX + 1 == _astar->getTargetTileX() ||
-						indexY - 1 == _astar->getTargetTileY() ||
-						indexY + 1 == _astar->getTargetTileY())
-						battle = true;
 					_astar->setMoveTile(indexX, indexY);
+					_moveSelect = false;
 					stageRenderY = 0;
 				}
 			}
