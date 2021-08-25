@@ -22,6 +22,7 @@ void Roy::update(int idx, int idy)
 	
 	}
 	stageRenderCount++;
+	
 	if (stageRenderCount % 7 == 0)
 	{
 		if (stageRenderX == 2)

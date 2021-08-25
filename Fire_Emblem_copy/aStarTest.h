@@ -30,6 +30,7 @@ private:
 	int _movecount,_attackCount , _moveTileCount;
 	int _totalRange , _moveRange, _attackRange;
 	int playerIdx, playerIdy;
+	int routeX, routeY;
 
 	float time;
 	bool _start; // 그냥 시작용
@@ -61,6 +62,7 @@ public:
 	void move(int X ,int Y);
 	void callPathFinder();
 	
+
 
 	void setLinkMap(tileSet* map) { _map = map; }
 

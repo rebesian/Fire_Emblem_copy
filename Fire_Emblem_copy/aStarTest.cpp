@@ -74,11 +74,177 @@ void aStarTest::render()
 			
 			}
 		}
-		for (int i = 0; i < _vCloseList.size(); ++i)
+		if (_vCloseList.size() > 0)
 		{
-			_vCloseList[i]->routeRender(0, 3);
+			if (_vCloseList.size() > 2)
+			{
+				if (_startTile->getIdX() == _vCloseList.front()->getIdX())
+				{
+					if (_startTile->getIdY() > _vCloseList.front()->getIdY())
+					{
+						_startTile->routeRender(2, 0);
+						//여기부터해
+						//클로즈타일 첫번째
+					}
+					else
+					{
+						_startTile->routeRender(3, 0);
+						//여기부터해
+						//클로즈타일 첫번째
+					}
+				}
+				else if (_startTile->getIdY() == _vCloseList.front()->getIdY())
+				{
+					if (_startTile->getIdX() > _vCloseList.front()->getIdX())
+					{
+						routeX = 0;
+						_startTile->routeRender(0, 0);
+						//_vCloseList.front()->routeRender(0, 3);
+					}
+					else
+					{
+						routeX = 1;
+						_startTile->routeRender(1, 0);
+						//_vCloseList.front()->routeRender(1, 3);
+					}
+				}
+				for (int i = 1; i < _vCloseList.size()-1 ; ++i)
+				{
+					if (_vCloseList[i - 1]->getIdX() == _vCloseList[i]->getIdX())
+					{
+						if (_vCloseList[i - 1]->getIdY() > _vCloseList[i]->getIdY())
+						{
+							if (_vCloseList[i]->getIdX() == _vCloseList[i+1]->getIdX())
+							{
+								routeY = 1;
+								routeX = 2;
+							}
+							else
+							{
+								if (_vCloseList[i]->getIdX() > _vCloseList[i+1]->getIdX())
+								{
+									routeY = 2;
+									routeX = 2;
+								}
+								else
+								{
+									routeY = 2;
+									routeX = 3;
+								}
+							}
+						}
+						else
+						{
+							if (_vCloseList[i]->getIdX() == _vCloseList[i]->getIdX())
+							{
+								routeY = 1;
+								routeX = 2;
+							}
+							else
+							{
+								if (_vCloseList[i]->getIdX() > _vCloseList[i + 1]->getIdX())
+								{
+									routeY = 2;
+									routeX = 0;
+								}
+								else
+								{
+									routeY = 2;
+									routeX = 1;
+								}
+							}
+						}
+
+					}
+					else if (_vCloseList[i - 1]->getIdY() == _vCloseList[i]->getIdY())
+					{
+						if (_vCloseList[i - 1]->getIdX() < _vCloseList[i]->getIdX())
+						{
+							if (_vCloseList[i]->getIdY() == _vCloseList[i + 1]->getIdY())
+							{
+								routeY = 1;
+								routeX = 1;
+							}
+							else
+							{
+								if (_vCloseList[i]->getIdY() > _vCloseList[i + 1]->getIdY())
+								{
+									routeY = 2;
+									routeX = 0;
+								}
+								else
+								{
+									routeY = 2;
+									routeX = 2;
+								}
+							}
+						}
+						else 
+						{
+							if (_vCloseList[i]->getIdY() == _vCloseList[i + 1]->getIdY())
+							{
+								routeY = 1;
+								routeX = 1;
+							}
+							else
+							{
+								if (_vCloseList[i]->getIdY() > _vCloseList[i + 1]->getIdY())
+								{
+									routeY = 2;
+									routeX = 1;
+								}
+								else
+								{
+									routeY = 2;
+									routeX = 3;
+								}
+							}
+						}
+					}
+					_vCloseList[i]->routeRender(routeX, routeY);
+				}
+				_vCloseList.back();
+			}
+			if (_vCloseList.size()<=2)
+			{
+
+			}
 		}
-	
+		else
+		{
+			if (_startTile->getIdX() == _endTile->getIdX())
+			{
+				if (_startTile->getIdY() > _endTile->getIdY())
+				{
+					routeX = 2;
+					_startTile->routeRender(2, 0);
+					_endTile->routeRender(2, 3);
+				}
+				else
+				{
+					routeX = 3;
+					_startTile->routeRender(3, 0);
+					_endTile->routeRender(3, 3);
+				}
+			}
+			else if (_startTile->getIdY() == _endTile->getIdY())
+			{
+				if (_startTile->getIdX() > _endTile->getIdX())
+				{
+					routeX = 0;
+					_startTile->routeRender(0, 0);
+					_endTile->routeRender(0, 3);
+				}
+				else
+				{
+					routeX = 1;
+					_startTile->routeRender(1, 0);
+					_endTile->routeRender(1, 3);
+				}
+			}
+		}
+
+		_startTile->routeRender(routeX, 0);
 	}
 
 }
@@ -96,7 +262,7 @@ void aStarTest::setTile(int playerX, int playerY)
 	_endTile = new tile;
 	_endTile->setLinkMap(_map);
 	_endTile->init(playerX, playerY);
-	_endTile->setAttribute("heal");
+	_endTile->setAttribute("move");
 	_endTile->setIsEnd(true);
 
 
@@ -399,7 +565,7 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 	//우 move넣기			
 	for (int i = 1; i <= _moveRange; ++i)
 	{
-		if (playerX + i > _map->getSizeX()) break;
+		if (playerX + i >= _map->getSizeX()) break;
 		if (!_map->getMove(playerX + i, playerY)) _movecount = 0;
 		if (_movecount > 0)
 		{
@@ -421,7 +587,7 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 		_movecount -= y;
 		for (int x = 1; x <= _moveRange - y; ++x)
 		{
-			if (playerX + x > _map->getSizeX())
+			if (playerX + x >= _map->getSizeX())
 				break;
 			if (!_map->getMove(playerX + x, playerY - y)) _movecount = 0;
 			if (_movecount > 0)
@@ -465,7 +631,7 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 	{
 		_movecount = _moveRange;
 
-		if (playerY + y > _map->getSizeY())
+		if (playerY + y >= _map->getSizeY())
 			break;
 		_movecount -= y;
 		for (int x = 1; x <= _moveRange; ++x)
@@ -489,12 +655,12 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 	{
 		_movecount = _moveRange;
 
-		if (playerY + y > _map->getSizeY())
+		if (playerY + y >= _map->getSizeY())
 			break;
 		_movecount -= y;
 		for (int x = 1; x <=_moveRange - y; ++x)
 		{
-			if (playerX + x > _map->getSizeX())
+			if (playerX + x >= _map->getSizeX())
 				break;
 			if (!_map->getMove(playerX + x, playerY + y)) _movecount = 0;
 			if (_movecount > 0)
@@ -527,10 +693,11 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 				{
 					for (int j = 0; j <= abs(i+z); ++j)
 					{
-						if (y + i <0 || y + i > _map->getSizeY() || x + j >_map->getSizeX()) continue;
+						if (y + i <0 || y + i >= _map->getSizeY() || x + j >=_map->getSizeX()) continue;
 						if (_vTotalList[y + i][x + j]->getAttribute() == "none")
 						{
 							_vTotalList[y + i][x + j]->setAttribute("attack");
+							_vTotalList[y + i][x + j]->setIsOpen(false);
 						}
 
 					}
@@ -544,10 +711,11 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 				{
 					for (int j = 0; j <= abs(i + z); ++j)
 					{
-						if ( y+i <0|| y + i > _map->getSizeY() || x - j < 0) continue;
+						if ( y+i <0|| y + i >= _map->getSizeY() || x - j < 0) continue;
 						if (_vTotalList[y + i][x - j]->getAttribute() == "none")
 						{
 							_vTotalList[y + i][x - j]->setAttribute("attack");
+							_vTotalList[y + i][x + j]->setIsOpen(false);
 						}
 
 					}

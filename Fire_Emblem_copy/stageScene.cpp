@@ -31,7 +31,7 @@ void stageScene::update()
 
 	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 	{	
-		_pt.indexX -= 1;
+		if(_pt.indexX > 0 ) _pt.indexX -= 1;
 		_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
 		//CAMERAMANAGER->setCameraCenterX(CAMERAMANAGER->getCameraCenterX() - 5);
 		if (CAMERAMANAGER->getCameraLEFT() <= 0)
@@ -41,7 +41,7 @@ void stageScene::update()
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{
-		_pt.indexX += 1;
+		if (_pt.indexX <= _tileSet->getSizeX()) _pt.indexX += 1;
 		_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
 		//CAMERAMANAGER->setCameraCenterX(CAMERAMANAGER->getCameraCenterX() + 5);
 		if (CAMERAMANAGER->getCameraRIGHT() >= mapSizeX * TILESIZE && mapSizeX*TILESIZE >= CAMERAX)
@@ -52,7 +52,7 @@ void stageScene::update()
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
 
-		_pt.indexY -= 1;
+		if (_pt.indexY > 0)_pt.indexY -= 1;
 		_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
 		//CAMERAMANAGER->setCameraCenterY(CAMERAMANAGER->getCameraCenterY() - 5);
 		if (CAMERAMANAGER->getCameraTOP() <= 0)
@@ -62,7 +62,7 @@ void stageScene::update()
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 	{
-		_pt.indexY += 1;
+		if (_pt.indexY < _tileSet->getSizeY()) _pt.indexY += 1;
 		_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
 		//CAMERAMANAGER->setCameraCenterY(CAMERAMANAGER->getCameraCenterY() + 5);
 		if (CAMERAMANAGER->getCameraBOTTOM() >= mapSizeY * TILESIZE && mapSizeY*TILESIZE >= CAMERAY)
