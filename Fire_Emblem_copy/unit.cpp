@@ -177,7 +177,7 @@ void unit::update(int idx, int idy)
 					{
 						_moving = false;
 						_astar->move(indexX, indexY);
-						_astar->setMoveTile(indexX, indexY);
+						//_astar->setMoveTile(indexX, indexY);
 						_moveSelect = false;
 					}
 					else
