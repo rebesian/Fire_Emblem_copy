@@ -62,7 +62,7 @@ public:
 	void move(int X ,int Y);
 	void callPathFinder();
 	
-
+	void route();
 
 	void setLinkMap(tileSet* map) { _map = map; }
 

@@ -74,576 +74,7 @@ void aStarTest::render()
 			
 			}
 		}
-		if (_vCloseList.size() > 0)
-		{
-			if (_vCloseList.size() > 2)
-			{
-				if (_startTile->getIdX() == _vCloseList.front()->getIdX())
-				{
-					if (_startTile->getIdY() > _vCloseList.front()->getIdY())
-					{
-						_startTile->routeRender(2, 0);
-						//여기부터해
-						//클로즈타일 첫번째
-						if (_vCloseList.front()->getIdX() == _vCloseList[1]->getIdX())
-						{
-							_vCloseList.front()->routeRender(2, 1);
-						}
-						else
-						{
-							if(_vCloseList.front()->getIdX() > _vCloseList[1]->getIdX())
-							{
-								_vCloseList.front()->routeRender(0, 2);
-							}
-							else
-							{
-								_vCloseList.front()->routeRender(1, 2);
-							}
-						}
-					}
-					else
-					{
-						_startTile->routeRender(3, 0);
-						//여기부터해
-						//클로즈타일 첫번째
-						if (_vCloseList.front()->getIdX() == _vCloseList[1]->getIdX())
-						{
-							_vCloseList.front()->routeRender(2, 1);
-						}
-						else
-						{
-							if (_vCloseList.front()->getIdX() > _vCloseList[1]->getIdX())
-							{
-								_vCloseList.front()->routeRender(2, 2);
-							}
-							else
-							{
-								_vCloseList.front()->routeRender(3, 2);
-							}
-						}
-					}
-				}
-				else if (_startTile->getIdY() == _vCloseList.front()->getIdY())
-				{
-					if (_startTile->getIdX() > _vCloseList.front()->getIdX())
-					{
-						_startTile->routeRender(0, 0);
-						if (_vCloseList.front()->getIdY() == _vCloseList[1]->getIdY())
-						{
-							_vCloseList.front()->routeRender(0, 1);
-						}
-						else
-						{
-							if (_vCloseList.front()->getIdY() > _vCloseList[1]->getIdY())
-							{
-								_vCloseList.front()->routeRender(0,2);
-							}
-							else
-							{
-								_vCloseList.front()->routeRender(2, 2);
-							}
-						}
-					}
-					else
-					{
-						_startTile->routeRender(1, 0);
-						if (_vCloseList.front()->getIdY() == _vCloseList[1]->getIdY())
-						{
-							_vCloseList.front()->routeRender(1, 1);
-						}
-						else
-						{
-							if (_vCloseList.front()->getIdY() > _vCloseList[1]->getIdY())
-							{
-								_vCloseList.front()->routeRender(1, 2);
-							}
-							else
-							{
-								_vCloseList.front()->routeRender(3, 2);
-							}
-						}
-					}
-				}
-				for (int i = 1; i < _vCloseList.size()-1 ; ++i)
-				{
-					if (_vCloseList[i - 1]->getIdX() == _vCloseList[i]->getIdX())
-					{
-						if (_vCloseList[i - 1]->getIdY() > _vCloseList[i]->getIdY())
-						{
-							if (_vCloseList[i]->getIdY() == _vCloseList[i+1]->getIdY())
-							{
-								routeY = 1;
-								routeX = 2;
-							}
-							else
-							{
-								if (_vCloseList[i]->getIdX() > _vCloseList[i+1]->getIdX())
-								{
-									routeY = 2;
-									routeX = 2;
-								}
-								else
-								{
-									routeY = 2;
-									routeX = 3;
-								}
-							}
-						}
-						else
-						{
-							if (_vCloseList[i]->getIdX() == _vCloseList[i]->getIdX())
-							{
-								routeY = 1;
-								routeX = 2;
-							}
-							else
-							{
-								if (_vCloseList[i]->getIdX() > _vCloseList[i + 1]->getIdX())
-								{
-									routeY = 2;
-									routeX = 0;
-								}
-								else
-								{
-									routeY = 2;
-									routeX = 1;
-								}
-							}
-						}
-
-					}
-					else if (_vCloseList[i - 1]->getIdY() == _vCloseList[i]->getIdY())
-					{
-						if (_vCloseList[i - 1]->getIdX() < _vCloseList[i]->getIdX())
-						{
-							if (_vCloseList[i]->getIdY() == _vCloseList[i + 1]->getIdY())
-							{
-								routeY = 1;
-								routeX = 1;
-							}
-							else
-							{
-								if (_vCloseList[i]->getIdY() > _vCloseList[i + 1]->getIdY())
-								{
-									routeY = 2;
-									routeX = 0;
-								}
-								else
-								{
-									routeY = 2;
-									routeX = 2;
-								}
-							}
-						}
-						else 
-						{
-							if (_vCloseList[i]->getIdY() == _vCloseList[i + 1]->getIdY())
-							{
-								routeY = 1;
-								routeX = 1;
-							}
-							else
-							{
-								if (_vCloseList[i]->getIdY() > _vCloseList[i + 1]->getIdY())
-								{
-									routeY = 2;
-									routeX = 1;
-								}
-								else
-								{
-									routeY = 2;
-									routeX = 3;
-								}
-							}
-						}
-					}
-					_vCloseList[i]->routeRender(routeX, routeY);
-				}
-				if (_endTile->getIdX() == _vCloseList.back()->getIdX())
-				{
-					if (_vCloseList.back()->getIdY() > _endTile->getIdY())
-					{
-						_endTile->routeRender(2, 3);
-						if (_vCloseList.back()->getIdX() == _vCloseList[_vCloseList.size() - 2]->getIdX())
-						{
-							_vCloseList.back()->routeRender( 2, 1);
-						}
-						else
-						{
-							if (_vCloseList.back()->getIdX() > _vCloseList[_vCloseList.size() - 2]->getIdX())
-							{
-								_vCloseList.back()->routeRender(0, 2);
-							}
-							else
-							{
-								_vCloseList.back()->routeRender(1, 2);
-							}
-						}
-					}
-					else
-					{
-						_endTile->routeRender(3, 3);
-						if (_vCloseList.back()->getIdY() == _vCloseList[_vCloseList.size() - 2]->getIdY())
-						{
-							_vCloseList.back()->routeRender(2, 1);
-						}
-						else
-						{
-							if (_vCloseList.back()->getIdY() > _vCloseList[_vCloseList.size() - 2]->getIdY())
-							{
-								_vCloseList.back()->routeRender(2, 2);
-							}
-							else
-							{
-								_vCloseList.back()->routeRender(3, 2);
-							}
-						}
-					}
-				}
-				else if (_endTile->getIdY() == _vCloseList.back()->getIdY())
-				{
-					if (_vCloseList.back()->getIdX() > _endTile->getIdX())
-					{
-						_endTile->routeRender(0, 3);
-						if (_vCloseList.back()->getIdY()== _vCloseList[_vCloseList.size()-2]->getIdY())
-						{
-							_vCloseList.back()->routeRender(0,1);
-						}
-						else
-						{
-							if (_vCloseList.back()->getIdY() > _vCloseList[_vCloseList.size() - 2]->getIdY())
-							{
-								_vCloseList.back()->routeRender(0, 2);
-							}
-							else
-							{
-								_vCloseList.back()->routeRender(2,2);
-							}
-						}
-					}
-					else
-					{
-						_endTile->routeRender(1, 3);
-						if(_vCloseList.back()->getIdX() == _vCloseList[_vCloseList.size() - 2]->getIdX())
-						{
-							_vCloseList.back()->routeRender(1, 1);
-						}
-						else
-						{
-							if (_vCloseList.back()->getIdX() > _vCloseList[_vCloseList.size() - 2]->getIdX())
-							{
-								_vCloseList.back()->routeRender(1 ,2);
-							}
-							else
-							{
-								_vCloseList.back()->routeRender(3,2);
-							}
-						}
-					}
-				}
-			}
-			if (_vCloseList.size()==2)
-			{
-				if (_startTile->getIdX() == _vCloseList[0]->getIdX())
-				{
-					if (_startTile->getIdY() > _vCloseList[0]->getIdY())
-					{
-						_startTile->routeRender(2,0);
-						if (_vCloseList[0]->getIdX() == _vCloseList[1]->getIdX())
-						{
-							_vCloseList[0]->routeRender(2,1);
-						}
-						else
-						{
-							if (_vCloseList[0]->getIdX() > _vCloseList[1]->getIdX())
-							{
-								_vCloseList[0]->routeRender(2, 2);
-							}
-							else
-							{
-								_vCloseList[0]->routeRender(3, 2);
-							}
-						}
-					}
-					else
-					{
-						_startTile->routeRender(3,0);
-						if (_vCloseList[0]->getIdX() == _vCloseList[1]->getIdX())
-						{
-							_vCloseList[0]->routeRender(3, 1);
-						}
-						else
-						{
-							if (_vCloseList[0]->getIdX() > _vCloseList[1]->getIdX())
-							{
-								_vCloseList[0]->routeRender(0, 2);
-							}
-							else
-							{
-								_vCloseList[0]->routeRender(1, 2);
-							}
-						}
-					}
-				}
-				else if(_startTile->getIdY() == _vCloseList[0]->getIdY())
-				{
-					if (_startTile->getIdX() > _vCloseList[0]->getIdX())
-					{
-						_startTile->routeRender(0,0);
-						if (_vCloseList[0]->getIdY() == _vCloseList[0]->getIdY())
-						{
-							_vCloseList[0]->routeRender(0, 1);
-						}
-						else
-						{
-							if (_vCloseList[0]->getIdY() > _vCloseList[0]->getIdY())
-							{
-								_vCloseList[0]->routeRender(1, 2);
-							}
-							else
-							{
-								_vCloseList[0]->routeRender(3, 2);
-							}
-						}
-					}
-					else
-					{
-						_startTile->routeRender(1,0);
-						if (_vCloseList[0]->getIdY() == _vCloseList[1]->getIdY())
-						{
-							_vCloseList[0]->routeRender(1, 1);
-						}
-						else
-						{
-							if (_vCloseList[0]->getIdY() > _vCloseList[1]->getIdY())
-							{
-								_vCloseList[0]->routeRender( 0, 2);
-							}
-							else
-							{
-								_vCloseList[0]->routeRender( 2, 2);
-							}
-						}
-					}
-				}
-
-
-
-				if (_endTile->getIdX() == _vCloseList[1]->getIdX())
-				{
-					if (_endTile->getIdY() > _vCloseList[1]->getIdY())
-					{
-						_endTile->routeRender(2, 3);
-						if (_vCloseList[1]->getIdX() == _vCloseList[0]->getIdX())
-						{
-							_vCloseList[1]->routeRender( 2, 1);
-						}
-						else
-						{
-							if (_vCloseList[1]->getIdX() > _vCloseList[0]->getIdX())
-							{
-								_vCloseList[1]->routeRender(0, 2);
-							}
-							else
-							{
-								_vCloseList[1]->routeRender(1, 2);
-							}
-						}
-					}
-					else
-					{
-						_endTile->routeRender(3, 3);
-						if (_vCloseList[1]->getIdX() == _vCloseList[0]->getIdX())
-						{
-							_vCloseList[1]->routeRender(3,1);
-						}
-						else
-						{
-							if (_vCloseList[1]->getIdX() > _vCloseList[0]->getIdX())
-							{
-								_vCloseList[1]->routeRender(2, 2);
-							}
-							else
-							{
-								_vCloseList[1]->routeRender(3, 2);
-							}
-						}
-					}
-				}
-				else if (_endTile->getIdY() == _vCloseList[1]->getIdY())
-				{
-					if (_endTile->getIdX() > _vCloseList[1]->getIdX())
-					{
-						_endTile->routeRender(0, 3);
-						if (_vCloseList[1]->getIdY() == _vCloseList[0]->getIdY())
-						{
-							_vCloseList[1]->routeRender(0, 1);
-						}
-						else
-						{
-							if (_vCloseList[1]->getIdY() > _vCloseList[0]->getIdY())
-							{
-								_vCloseList[1]->routeRender( 1,2);
-							}
-							else
-							{
-								_vCloseList[1]->routeRender(3,2);
-							}
-						}
-					}
-					else
-					{
-						_endTile->routeRender(1, 3);
-						if (_vCloseList[1]->getIdY() == _vCloseList[0]->getIdY())
-						{
-							_vCloseList[1]->routeRender(1, 1);
-						}
-						else
-						{
-							if (_vCloseList[1]->getIdY() > _vCloseList[0]->getIdY())
-							{
-								_vCloseList[1]->routeRender(0,2);
-							}
-							else
-							{
-								_vCloseList[1]->routeRender(2,2);
-							}
-						}
-					}
-				}
-
-			}
-			if (_vCloseList.size() == 1)
-			{
-				if (_startTile->getIdX() == _vCloseList[0]->getIdX())
-				{
-					if (_startTile->getIdY() > _vCloseList[0]->getIdY())
-					{
-						_startTile->routeRender(2, 0);
-						if (_vCloseList[0]->getIdX() == _endTile->getIdX())
-						{
-							_vCloseList[0]->routeRender( 2, 1);
-							_endTile->routeRender(2, 3);
-						}
-						else
-						{
-							if (_vCloseList[0]->getIdX() > _endTile->getIdX())
-							{
-								_vCloseList[0]->routeRender(2, 2);
-								_endTile->routeRender(3, 3);
-							}
-							else
-							{
-								_vCloseList[0]->routeRender(3, 2);
-								_endTile->routeRender(3, 3);
-							}
-						}
-					}
-					else
-					{
-						_startTile->routeRender(3, 0);
-						if (_vCloseList[0]->getIdX() == _endTile->getIdX())
-						{
-							_vCloseList[0]->routeRender(3, 1);
-							_endTile->routeRender(3, 3);
-						}
-						else
-						{
-							if (_vCloseList[0]->getIdX() > _endTile->getIdX())
-							{
-								_vCloseList[0]->routeRender(0, 2);
-								_endTile->routeRender(2, 3);
-							}
-							else
-							{
-								_vCloseList[0]->routeRender(1, 2);
-								_endTile->routeRender(2, 3);
-							}
-						}
-					}
-				}
-				else if (_startTile->getIdY() == _vCloseList[0]->getIdY())
-				{
-					if (_startTile->getIdX() > _vCloseList[0]->getIdX())
-					{
-						_startTile->routeRender(0, 0);
-						if (_vCloseList[0]->getIdY() == _endTile->getIdY())
-						{
-							_vCloseList[0]->routeRender(0, 1);
-							_endTile->routeRender(0, 3);
-						}
-						else
-						{
-							if (_vCloseList[0]->getIdY() > _endTile->getIdY())
-							{
-								_vCloseList[0]->routeRender(1,2);
-								_endTile->routeRender(2, 3);
-							}
-							else
-							{
-								_vCloseList[0]->routeRender(3,2);
-								_endTile->routeRender(3, 3);
-							}
-						}
-					}
-					else
-					{
-						_startTile->routeRender(1, 0);
-						if(_vCloseList[0]->getIdY() == _endTile->getIdY())
-						{
-							_vCloseList[0]->routeRender(1, 1);
-							_endTile->routeRender(1, 3);
-						}
-						else
-						{
-							if (_vCloseList[0]->getIdY() > _endTile->getIdY())
-							{
-								_vCloseList[0]->routeRender(0,2);
-								_endTile->routeRender(2, 3);
-							}
-							else
-							{
-								_vCloseList[0]->routeRender(2,2);
-								_endTile->routeRender(3, 3);
-							}
-						}
-					}
-				}
-			}
-		}
-		else
-		{
-			if (_startTile->getIdX() == _endTile->getIdX())
-			{
-				if (_startTile->getIdY() > _endTile->getIdY())
-				{
-					
-					_startTile->routeRender(2, 0);
-					_endTile->routeRender(2, 3);
-				}
-				else
-				{
-					
-					_startTile->routeRender(3, 0);
-					_endTile->routeRender(3, 3);
-				}
-			}
-			else if (_startTile->getIdY() == _endTile->getIdY())
-			{
-				if (_startTile->getIdX() > _endTile->getIdX())
-				{
-					
-					_startTile->routeRender(0, 0);
-					_endTile->routeRender(0, 3);
-				}
-				else
-				{
-					
-					_startTile->routeRender(1, 0);
-					_endTile->routeRender(1, 3);
-				}
-			}
-		}
+		route();
 	}
 
 }
@@ -1114,7 +545,7 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 						if (_vTotalList[y + i][x - j]->getAttribute() == "none")
 						{
 							_vTotalList[y + i][x - j]->setAttribute("attack");
-							_vTotalList[y + i][x + j]->setIsOpen(false);
+							_vTotalList[y + i][x - j]->setIsOpen(false);
 						}
 
 					}
@@ -1167,6 +598,576 @@ void aStarTest::callPathFinder()
 	_vCloseList.clear();
 	_vOpenList.clear();
 	pathFinder(_startTile);
+}
+
+void aStarTest::route()
+{
+	if (_vCloseList.size() > 0)
+	{
+		if (_vCloseList.size() > 2)
+		{
+			if (_startTile->getIdX() == _vCloseList.back()->getIdX())
+			{
+				if (_startTile->getIdY() > _vCloseList.back()->getIdY())
+				{
+					_startTile->routeRender(2, 0);
+					if (_vCloseList.back()->getIdX() == _vCloseList[_vCloseList.size() - 2]->getIdX())
+					{
+						_vCloseList.back()->routeRender(2, 1);
+					}
+					else
+					{
+						if (_vCloseList.back()->getIdX() > _vCloseList[_vCloseList.size() - 2]->getIdX())
+						{
+							_vCloseList.back()->routeRender(0, 2);
+						}
+						else
+						{
+							_vCloseList.back()->routeRender(3, 2);
+						}
+					}
+				}
+				else
+				{
+					_startTile->routeRender(3, 0);
+					if (_vCloseList.back()->getIdX() == _vCloseList[_vCloseList.size() - 2]->getIdX())
+					{
+						_vCloseList.back()->routeRender(2, 1);
+					}
+					else
+					{
+						if (_vCloseList.back()->getIdX() > _vCloseList[_vCloseList.size() - 2]->getIdX())
+						{
+							_vCloseList.back()->routeRender(2, 2);
+						}
+						else
+						{
+							_vCloseList.back()->routeRender(1, 2);
+						}
+					}
+				}
+			}
+			else if (_startTile->getIdY() == _vCloseList.back()->getIdY())
+			{
+				if (_startTile->getIdX() > _vCloseList.back()->getIdX())
+				{
+					_startTile->routeRender(0, 0);
+					if (_vCloseList.back()->getIdY() == _vCloseList[_vCloseList.size() - 2]->getIdY())
+					{
+						_vCloseList.back()->routeRender(0, 1);
+					}
+					else
+					{
+						if (_vCloseList.back()->getIdY() > _vCloseList[_vCloseList.size() - 2]->getIdY())
+						{
+							_vCloseList.back()->routeRender(1, 2);
+						}
+						else
+						{
+							_vCloseList.back()->routeRender(3, 2);
+						}
+					}
+				}
+				else
+				{
+					_startTile->routeRender(1, 0);
+					if (_vCloseList.back()->getIdY() == _vCloseList[_vCloseList.size() - 2]->getIdY())
+					{
+						_vCloseList.back()->routeRender(1, 1);
+					}
+					else
+					{
+						if (_vCloseList.back()->getIdY() > _vCloseList[_vCloseList.size() - 2]->getIdY())
+						{
+							_vCloseList.back()->routeRender(0, 2);
+						}
+						else
+						{
+							_vCloseList.back()->routeRender(2, 2);
+						}
+					}
+				}
+			}
+			for (int i = 1; i < _vCloseList.size() - 1; ++i)
+			{
+				if (_vCloseList[i - 1]->getIdX() == _vCloseList[i]->getIdX())
+				{
+					if (_vCloseList[i - 1]->getIdY() > _vCloseList[i]->getIdY())
+					{
+						if (_vCloseList[i]->getIdX() == _vCloseList[i + 1]->getIdX())
+						{
+							routeY = 1;
+							routeX = 2;
+						}
+						else
+						{
+							if (_vCloseList[i]->getIdX() > _vCloseList[i + 1]->getIdX())
+							{
+								routeY = 2;
+								routeX = 2;
+							}
+							else
+							{
+								routeY = 2;
+								routeX = 3;
+							}
+						}
+					}
+					else
+					{
+						if (_vCloseList[i]->getIdX() == _vCloseList[i + 1]->getIdX())
+						{
+							routeY = 1;
+							routeX = 2;
+						}
+						else
+						{
+							if (_vCloseList[i]->getIdX() > _vCloseList[i + 1]->getIdX())
+							{
+								routeY = 2;
+								routeX = 0;
+							}
+							else
+							{
+								routeY = 2;
+								routeX = 1;
+							}
+						}
+					}
+
+				}
+				else if (_vCloseList[i - 1]->getIdY() == _vCloseList[i]->getIdY())
+				{
+					if (_vCloseList[i - 1]->getIdX() < _vCloseList[i]->getIdX())
+					{
+						if (_vCloseList[i]->getIdY() == _vCloseList[i + 1]->getIdY())
+						{
+							routeY = 1;
+							routeX = 1;
+						}
+						else
+						{
+							if (_vCloseList[i]->getIdY() > _vCloseList[i + 1]->getIdY())
+							{
+								routeY = 2;
+								routeX = 0;
+							}
+							else
+							{
+								routeY = 2;
+								routeX = 2;
+							}
+						}
+					}
+					else
+					{
+						if (_vCloseList[i]->getIdY() == _vCloseList[i + 1]->getIdY())
+						{
+							routeY = 1;
+							routeX = 1;
+						}
+						else
+						{
+							if (_vCloseList[i]->getIdY() > _vCloseList[i + 1]->getIdY())
+							{
+								routeY = 2;
+								routeX = 1;
+							}
+							else
+							{
+								routeY = 2;
+								routeX = 3;
+							}
+						}
+					}
+				}
+				_vCloseList[i]->routeRender(routeX, routeY);
+			}
+			if (_endTile->getIdX() == _vCloseList.front()->getIdX())
+			{
+				if (_vCloseList.front()->getIdY() > _endTile->getIdY())
+				{
+					_endTile->routeRender(2, 3);
+					if (_vCloseList.front()->getIdX() == _vCloseList[1]->getIdX())
+					{
+						_vCloseList.front()->routeRender(2, 1);
+					}
+					else
+					{
+						if (_vCloseList.front()->getIdX() > _vCloseList[1]->getIdX())
+						{
+							_vCloseList.front()->routeRender(0, 2);
+						}
+						else
+						{
+							_vCloseList.front()->routeRender(1, 2);
+						}
+					}
+				}
+				else
+				{
+					_endTile->routeRender(3, 3);
+					if (_vCloseList.front()->getIdX() == _vCloseList[1]->getIdX())
+					{
+						_vCloseList.front()->routeRender(2, 1);
+					}
+					else
+					{
+						if (_vCloseList.front()->getIdX() > _vCloseList[1]->getIdX())
+						{
+							_vCloseList.front()->routeRender(2, 2);
+						}
+						else
+						{
+							_vCloseList.front()->routeRender(3, 2);
+						}
+					}
+				}
+			}
+			else if (_endTile->getIdY() == _vCloseList.front()->getIdY())
+			{
+				if (_vCloseList.front()->getIdX() > _endTile->getIdX())
+				{
+					_endTile->routeRender(0, 3);
+					if (_vCloseList.front()->getIdY() == _vCloseList[1]->getIdY())
+					{
+						_vCloseList.front()->routeRender(0, 1);
+					}
+					else
+					{
+						if (_vCloseList.front()->getIdY() > _vCloseList[1]->getIdY())
+						{
+							_vCloseList.front()->routeRender(0, 2);
+						}
+						else
+						{
+							_vCloseList.front()->routeRender(2, 2);
+						}
+					}
+				}
+				else
+				{
+					_endTile->routeRender(1, 3);
+					if (_vCloseList.front()->getIdY() == _vCloseList[1]->getIdY())
+					{
+						_vCloseList.front()->routeRender(1, 1);
+					}
+					else
+					{
+						if (_vCloseList.front()->getIdY() > _vCloseList[1]->getIdY())
+						{
+							_vCloseList.front()->routeRender(1, 2);
+						}
+						else
+						{
+							_vCloseList.front()->routeRender(3, 2);
+						}
+					}
+				}
+			}
+		}
+		if (_vCloseList.size() == 2)
+		{
+			if (_startTile->getIdX() == _vCloseList[1]->getIdX())
+			{
+				if (_startTile->getIdY() > _vCloseList[1]->getIdY())
+				{
+					_startTile->routeRender(2, 0);
+					if (_vCloseList[0]->getIdX() == _vCloseList[1]->getIdX())
+					{
+						_vCloseList[1]->routeRender(2, 1);
+					}
+					else
+					{
+						if (_vCloseList[0]->getIdX() > _vCloseList[1]->getIdX())
+						{
+							_vCloseList[1]->routeRender(3, 2);
+						}
+						else
+						{
+							_vCloseList[1]->routeRender(2, 2);
+						}
+					}
+				}
+				else
+				{
+					_startTile->routeRender(3, 0);
+					if (_vCloseList[0]->getIdX() == _vCloseList[1]->getIdX())
+					{
+						_vCloseList[1]->routeRender(3, 1);
+					}
+					else
+					{
+						if (_vCloseList[0]->getIdX() > _vCloseList[1]->getIdX())
+						{
+							_vCloseList[1]->routeRender(1, 2);
+						}
+						else
+						{
+							_vCloseList[1]->routeRender(0, 2);
+						}
+					}
+				}
+			}
+			else if (_startTile->getIdY() == _vCloseList[1]->getIdY())
+			{
+				if (_startTile->getIdX() > _vCloseList[1]->getIdX())
+				{
+					_startTile->routeRender(0, 0);
+					if (_vCloseList[0]->getIdY() == _vCloseList[1]->getIdY())
+					{
+						_vCloseList[1]->routeRender(0, 1);
+					}
+					else
+					{
+						if (_vCloseList[1]->getIdY() > _vCloseList[0]->getIdY())
+						{
+							_vCloseList[1]->routeRender(1, 2);
+						}
+						else
+						{
+							_vCloseList[1]->routeRender(3, 2);
+						}
+					}
+				}
+				else
+				{
+					_startTile->routeRender(1, 0);
+					if (_vCloseList[0]->getIdY() == _vCloseList[1]->getIdY())
+					{
+						_vCloseList[1]->routeRender(1, 1);
+					}
+					else
+					{
+						if (_vCloseList[1]->getIdY() > _vCloseList[0]->getIdY())
+						{
+							_vCloseList[1]->routeRender(0, 2);
+						}
+						else
+						{
+							_vCloseList[1]->routeRender(2, 2);
+						}
+					}
+				}
+			}
+
+
+
+			if (_endTile->getIdX() == _vCloseList[0]->getIdX())
+			{
+				if (_endTile->getIdY() > _vCloseList[0]->getIdY())
+				{
+					_endTile->routeRender(3, 3);
+					if (_vCloseList[1]->getIdX() == _vCloseList[0]->getIdX())
+					{
+						_vCloseList[0]->routeRender(2, 1);
+					}
+					else
+					{
+						if (_vCloseList[1]->getIdX() > _vCloseList[0]->getIdX())
+						{
+							_vCloseList[0]->routeRender(3, 2);
+						}
+						else
+						{
+							_vCloseList[0]->routeRender(2, 2);
+						}
+					}
+				}
+				else
+				{
+					_endTile->routeRender(2, 3);
+					if (_vCloseList[1]->getIdX() == _vCloseList[0]->getIdX())
+					{
+						_vCloseList[0]->routeRender(3, 1);
+					}
+					else
+					{
+						if (_vCloseList[1]->getIdX() > _vCloseList[0]->getIdX())
+						{
+							_vCloseList[0]->routeRender(1, 2);
+						}
+						else
+						{
+							_vCloseList[0]->routeRender(3, 2);
+						}
+					}
+				}
+			}
+			else if (_endTile->getIdY() == _vCloseList[0]->getIdY())
+			{
+				if (_endTile->getIdX() > _vCloseList[0]->getIdX())
+				{
+					_endTile->routeRender(1, 3);
+					if (_vCloseList[1]->getIdY() == _vCloseList[0]->getIdY())
+					{
+						_vCloseList[0]->routeRender(0, 1);
+					}
+					else
+					{
+						if (_vCloseList[1]->getIdY() > _vCloseList[0]->getIdY())
+						{
+							_vCloseList[0]->routeRender(3, 2);
+						}
+						else
+						{
+							_vCloseList[0]->routeRender(1, 2);
+						}
+					}
+				}
+				else
+				{
+					_endTile->routeRender(0, 3);
+					if (_vCloseList[1]->getIdY() == _vCloseList[0]->getIdY())
+					{
+						_vCloseList[0]->routeRender(1, 1);
+					}
+					else
+					{
+						if (_vCloseList[1]->getIdY() > _vCloseList[0]->getIdY())
+						{
+							_vCloseList[0]->routeRender(2, 2);
+						}
+						else
+						{
+							_vCloseList[0]->routeRender(0, 2);
+						}
+					}
+				}
+			}
+
+		}
+		if (_vCloseList.size() == 1)
+		{
+			if (_startTile->getIdX() == _vCloseList[0]->getIdX())
+			{
+				if (_startTile->getIdY() > _vCloseList[0]->getIdY())
+				{
+					_startTile->routeRender(2, 0);
+					if (_vCloseList[0]->getIdX() == _endTile->getIdX())
+					{
+						_vCloseList[0]->routeRender(2, 1);
+						_endTile->routeRender(2, 3);
+					}
+					else
+					{
+						if (_vCloseList[0]->getIdX() > _endTile->getIdX())
+						{
+							_vCloseList[0]->routeRender(2, 2);
+							_endTile->routeRender(3, 3);
+						}
+						else
+						{
+							_vCloseList[0]->routeRender(3, 2);
+							_endTile->routeRender(1, 3);
+						}
+					}
+				}
+				else
+				{
+					_startTile->routeRender(3, 0);
+					if (_vCloseList[0]->getIdX() == _endTile->getIdX())
+					{
+						_vCloseList[0]->routeRender(3, 1);
+						_endTile->routeRender(3, 3);
+					}
+					else
+					{
+						if (_vCloseList[0]->getIdX() > _endTile->getIdX())
+						{
+							_vCloseList[0]->routeRender(0, 2);
+							_endTile->routeRender(2, 3);
+						}
+						else
+						{
+							_vCloseList[0]->routeRender(1, 2);
+							_endTile->routeRender(2, 3);
+						}
+					}
+				}
+			}
+			else if (_startTile->getIdY() == _vCloseList[0]->getIdY())
+			{
+				if (_startTile->getIdX() > _vCloseList[0]->getIdX())
+				{
+					_startTile->routeRender(0, 0);
+					if (_vCloseList[0]->getIdY() == _endTile->getIdY())
+					{
+						_vCloseList[0]->routeRender(0, 1);
+						_endTile->routeRender(0, 3);
+					}
+					else
+					{
+						if (_vCloseList[0]->getIdY() > _endTile->getIdY())
+						{
+							_vCloseList[0]->routeRender(1, 2);
+							_endTile->routeRender(2, 3);
+						}
+						else
+						{
+							_vCloseList[0]->routeRender(3, 2);
+							_endTile->routeRender(3, 3);
+						}
+					}
+				}
+				else
+				{
+					_startTile->routeRender(1, 0);
+					if (_vCloseList[0]->getIdY() == _endTile->getIdY())
+					{
+						_vCloseList[0]->routeRender(1, 1);
+						_endTile->routeRender(1, 3);
+					}
+					else
+					{
+						if (_vCloseList[0]->getIdY() > _endTile->getIdY())
+						{
+							_vCloseList[0]->routeRender(0, 2);
+							_endTile->routeRender(2, 3);
+						}
+						else
+						{
+							_vCloseList[0]->routeRender(2, 2);
+							_endTile->routeRender(3, 3);
+						}
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		if (_startTile->getIdX() == _endTile->getIdX())
+		{
+			if (_startTile->getIdY() > _endTile->getIdY())
+			{
+
+				_startTile->routeRender(2, 0);
+				_endTile->routeRender(2, 3);
+			}
+			else
+			{
+
+				_startTile->routeRender(3, 0);
+				_endTile->routeRender(3, 3);
+			}
+		}
+		else if (_startTile->getIdY() == _endTile->getIdY())
+		{
+			if (_startTile->getIdX() > _endTile->getIdX())
+			{
+
+				_startTile->routeRender(0, 0);
+				_endTile->routeRender(0, 3);
+			}
+			else
+			{
+
+				_startTile->routeRender(1, 0);
+				_endTile->routeRender(1, 3);
+			}
+		}
+	}
 }
 
 
