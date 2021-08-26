@@ -14,6 +14,7 @@ protected:
 	PLAYER_ENEMY_DIRECTION _dir;
 
 
+
 	int indexX, indexY;
 	int moveRange;
 
@@ -30,7 +31,7 @@ protected:
 
 	int stageRenderX;
 	int stageRenderY;
-	bool _moving, _pointing, _playerSelect, _moveSelect;
+	bool _render , _moving, _pointing, _playerSelect, _moveSelect ,_attackSelect;
 	int battleRender;
 
 	int stageRenderCount;

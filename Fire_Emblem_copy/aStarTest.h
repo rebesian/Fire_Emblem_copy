@@ -18,6 +18,8 @@ private:
 	//가장 가까운 경로를 담을 벡터
 	vector<tile*> _vCloseList;
 	vector<tile*>::iterator _viCloseList;
+	//적의 좌표정보를 어떻게 가져와야하나
+	vector<tile*> _vEnemy;
 
 	tile* _startTile; //시작타일 
 	tile* _endTile; //끝타일
@@ -29,7 +31,6 @@ private:
 	int _count;// 그냥렌더용
 	int _movecount,_attackCount , _moveTileCount;
 	int _totalRange , _moveRange, _attackRange;
-	int playerIdx, playerIdy;
 	int routeX, routeY;
 
 	float time;
@@ -57,7 +58,7 @@ public:
 
 	void EndSelect(int endIndexX, int endIndexY);
 	void setMoveTile(int playerX, int playerY);
-
+	void setAttackTile(int playerX, int playerY);
 
 	void move(int X ,int Y);
 	void callPathFinder();

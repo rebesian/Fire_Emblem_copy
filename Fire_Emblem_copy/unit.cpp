@@ -16,8 +16,15 @@ HRESULT unit::init(int idx, int idy ,TYPE type)
 	stageRenderX = 0;
 	stageRenderY = 0;
 	exp = 0;
-
-	battle = _moving = _pointing = _playerSelect = _moveSelect = false;
+	if (_type == PLAYER)
+	{
+		_map->setIsPlayer(idx, idy, true);
+	}
+	else if(_type == ENEMY)
+	{
+		_map->setIsEnemy(idx, idy, true);
+	}
+	battle = _render =_moving = _pointing = _playerSelect = _moveSelect = false;
 	stageRenderCount = 0;
 	battleRenderCount = 0;
 	return S_OK;
@@ -27,11 +34,11 @@ void unit::update(int idx, int idy)
 {
 	if (_type == PLAYER)
 	{
-		if (_pointing)
+		if (_pointing && !_moveSelect)
 			stageRenderY = 1;
-		else
+		else if(!_pointing && !_moveSelect)
 			stageRenderY = 0;
-		if (_playerSelect&& !_moveSelect)
+		if (_playerSelect)
 		{
 			if (!(idx == _astar->getTargetTileX() && idy == _astar->getTargetTileY())&&
 				_astar->getAttribute(idx, idy) == "move")
@@ -39,9 +46,13 @@ void unit::update(int idx, int idy)
 				_astar->EndSelect(idx, idy);
 				_astar->callPathFinder();
 			}
+			if(!_render) _render = true;
 		}
 		if (_moveSelect)
 		{
+			_playerSelect = false;
+			if (_render) _render = false;
+
 			if (_astar->getStart())
 			{
 				if (_astar->getCloseListsize() > 0)
@@ -177,8 +188,11 @@ void unit::update(int idx, int idy)
 					{
 						_moving = false;
 						_astar->move(indexX, indexY);
-						//_astar->setMoveTile(indexX, indexY);
+						_astar->setAttackTile(indexX, indexY);
+						//여기가 적 탐색하는곳
+
 						_moveSelect = false;
+						_attackSelect = true;
 					}
 					else
 					{
@@ -187,27 +201,32 @@ void unit::update(int idx, int idy)
 						case LEFT:
 							stageX -= 5;
 							if (stageX < _rc.left) stageX = _rc.left;
+							stageRenderY = 0;
 							break;
 						case RIGHT:
 							stageX += 5;
 							if (stageX > _rc.left) stageX = _rc.left;
+							stageRenderY = 1;
 							break;
 						case UP:
 							stageY -= 5;
 							if (stageY < _rc.top) stageY = _rc.top;
+							stageRenderY = 3;
 							break;
 						case DOWN:
 							stageY += 5;
 							if (stageY > _rc.top) stageY = _rc.top;
+							stageRenderY = 2;
 							break;
 						}
 					}
 				}
 			}
 		}
-		else
+		if (_attackSelect)
 		{
-			stageRenderY = 0;
+			if (!_render) _render = true;
+ 			
 		}
 	}
 	else if (_type  == ENEMY)
@@ -312,7 +331,7 @@ void unit::update(int idx, int idy)
 			}
 		}
 	}
-	_astar->update(_playerSelect);
+	_astar->update(_render);
 	
 }
 

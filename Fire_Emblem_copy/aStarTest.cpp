@@ -559,6 +559,76 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 
 }
 
+void aStarTest::setAttackTile(int playerX, int playerY)
+{
+	for (int y = 0; y < _vTotalList.size(); ++y)
+	{
+		for (int x = 0; x < _vTotalList[y].size(); ++x)
+		{
+			_vTotalList[y][x]->setAttribute("none");
+		}
+	}
+
+
+	_vEnemy.clear();
+		
+	int z = _attackRange;
+	//¿ÞÂÊ
+	for (int i = -_attackRange; i <= _attackRange; ++i)
+	{
+		for (int j = 0; j <= abs(i + z); ++j)
+		{
+			if (playerY + i < 0 || playerY + i >= _map->getSizeY() || playerX + j >= _map->getSizeX()) continue;
+			if (playerY + i == playerY && playerX + j == playerX) continue;
+			if (_vTotalList[playerY + i][playerX + j]->getAttribute() == "none")
+			{
+				_vTotalList[playerY + i][playerX + j]->setAttribute("attack");
+				if (_map->getIsEnemy(playerX + j, playerY + i))
+				{
+					_vEnemy.push_back(_vTotalList[playerY + i][playerX + j]);
+				}
+			}
+
+		}
+		if (i >= 0)
+			z = -_attackRange;
+	}
+
+	z = _attackRange;
+	//¿À¸¥ÂÊ
+	for (int i = -_attackRange; i <= _attackRange; ++i)
+	{
+		for (int j = 0; j <= abs(i + z); ++j)
+		{
+			if (playerY + i < 0 || playerY + i >= _map->getSizeY() || playerX - j < 0) continue;
+			if (playerY + i == playerY && playerX + j == playerX) continue;
+			if (_vTotalList[playerY + i][playerX - j]->getAttribute() == "none")
+			{
+				_vTotalList[playerY + i][playerX - j]->setAttribute("attack");
+				if (_map->getIsEnemy(playerX + j, playerY + i))
+				{
+					bool istrue = false;
+					for (int q = 0; q < _vEnemy.size(); ++q)
+					{
+						if (_vEnemy[q]->getIdX() == playerX + j
+							|| _vEnemy[q]->getIdY() == playerY + i)
+							istrue = true;
+
+					}
+					if(!istrue)
+						_vEnemy.push_back(_vTotalList[playerY + i][playerX + j]);
+				}
+			}
+		}
+		if (i >= 0)
+			z = -_attackRange;
+	}
+	
+	
+	
+	
+}
+
 void aStarTest::move(int X, int Y)
 {
 	RECT rc;

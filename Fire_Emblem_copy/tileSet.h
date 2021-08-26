@@ -13,6 +13,8 @@ struct tagTile
 	int indexX;
 	int indexY;
 	bool isMove = true;
+	bool isPlayer;
+	bool isEnemy;
 	int def;
 	int avo;
 };
@@ -46,9 +48,14 @@ public:
 	HDC getMapDC() {return _tileBuffer->getMemDC(); }
 	image* getTileBuffer() { return _tileBuffer; }
 	RECT getRect(int tilex, int tiley) { return _tiles[tiley][tilex].rc; }
+	bool getIsEnemy(int tilex, int tiley) { return _tiles[tiley][tilex].isEnemy; }
+	bool getIsPlayer(int tilex, int tiley) { return _tiles[tiley][tilex].isPlayer; }
 	string getName(int tilex, int tiley) { return _tiles[tiley][tilex].name; }
 	int getMove(int tilex, int tiley) { return _tiles[tiley][tilex].isMove; }
 	int getDef(int tilex, int tiley) { return _tiles[tiley][tilex].def; }
 	int getAvo(int tilex, int tiley) { return _tiles[tiley][tilex].avo; }
+
+	void setIsEnemy(int tilex, int tiley, bool istrue) { _tiles[tiley][tilex].isEnemy = istrue; }
+	void setIsPlayer(int tilex, int tiley, bool istrue) { _tiles[tiley][tilex].isPlayer = istrue; }
 };
 
