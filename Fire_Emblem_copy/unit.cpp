@@ -190,9 +190,16 @@ void unit::update(int idx, int idy)
 						_astar->move(indexX, indexY);
 						_astar->setAttackTile(indexX, indexY);
 						//여기가 적 탐색하는곳
+						if (_astar->getEnemysize()>0)
+						{
+							_attackSelect = true;
 
+						}
+						else
+						{
+							use = true;
+						}
 						_moveSelect = false;
-						_attackSelect = true;
 					}
 					else
 					{

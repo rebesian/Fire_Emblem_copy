@@ -21,6 +21,7 @@ private:
 
 	int mapSizeX;
 	int mapSizeY;
+	int selectEnemy;
 
 public:
 

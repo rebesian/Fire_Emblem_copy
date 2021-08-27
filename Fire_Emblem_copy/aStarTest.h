@@ -80,7 +80,10 @@ public:
 	int getCloseListsize() { return _vCloseList.size(); }
 	int getClosebackX() { return _vCloseList.back()->getIdX(); }
 	int getClosebackY() { return _vCloseList.back()->getIdY(); }
-
+	
+	int getEnemysize() { return _vEnemy.size(); }
+	int getEnemyX(int i) { return _vEnemy[i]->getIdX(); }
+	int getEnemyY(int i) { return _vEnemy[i]->getIdY(); }
 
 	//╪бем
 	void setDamage(bool _damage) { damage = _damage; }

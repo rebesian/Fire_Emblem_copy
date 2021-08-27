@@ -310,6 +310,8 @@ void tileSet::load()
 		for (int x = 0; x < _tileX; ++x)
 		{ 
 	
+			_tiles[y][x].isPlayer = false;
+			_tiles[y][x].isEnemy = false;
 			if (_tiles[y][x].terrain == TR_GRASS)
 			{
 

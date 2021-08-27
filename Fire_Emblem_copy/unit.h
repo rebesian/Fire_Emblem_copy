@@ -5,7 +5,6 @@
 class unit : public gameNode
 {
 protected:
-
 	tileSet* _map;
 	aStarTest* _astar;
 	RECT _rc;
@@ -27,7 +26,7 @@ protected:
 	float exp;
 	int avoid;
 
-	bool battle;
+	bool use ,battle;
 
 	int stageRenderX;
 	int stageRenderY;
@@ -53,12 +52,18 @@ public:
 	int getSpeed() { return speed; }
 	bool getPointing() { return _pointing; }
 	bool getPlayerSelect() { return _playerSelect; }
+	bool getAttackSelect() { return _attackSelect; }
+	int getEnemySize() { return _astar->getEnemysize(); }
+	int getEnemyX(int i) { return _astar->getEnemyX(i); }
+	int getEnemyY(int i) { return _astar->getEnemyY(i); }
 	float getExp() { return exp; }
+
 
 	void setLinkMap(tileSet* map) { _map = map; }
 	void sethp(int hp) { _hp = hp; }
 	void setpointing(bool pointing) { _pointing = pointing; }
 	void setPlayerSelect(bool Select) { _playerSelect = Select; }
 	void setMoveSelect(bool Select) { _moveSelect = Select; }
+	void setBattle(bool _battle) { battle = _battle; }
 };
 

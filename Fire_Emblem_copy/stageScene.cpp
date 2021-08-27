@@ -31,6 +31,7 @@ void stageScene::update()
 
 	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 	{	
+		
 		if(_pt.indexX > 0 ) _pt.indexX -= 1;
 		_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
 		//CAMERAMANAGER->setCameraCenterX(CAMERAMANAGER->getCameraCenterX() - 5);
@@ -51,10 +52,22 @@ void stageScene::update()
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
-
-		if (_pt.indexY > 0)_pt.indexY -= 1;
-		_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
-		//CAMERAMANAGER->setCameraCenterY(CAMERAMANAGER->getCameraCenterY() - 5);
+		if (_roy->getAttackSelect())
+		{
+			selectEnemy++;
+			if (selectEnemy > _roy->getEnemySize() || selectEnemy > _roy->getEnemySize())
+			{
+				selectEnemy = 0;
+			}
+			_pt.indexX = _roy->getEnemyX(selectEnemy);
+			_pt.indexY = _roy->getEnemyY(selectEnemy);
+			_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
+		}
+		else
+		{
+			if (_pt.indexY > 0)_pt.indexY -= 1;
+			_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
+		}
 		if (CAMERAMANAGER->getCameraTOP() <= 0)
 		{
 			CAMERAMANAGER->setCameraY(0);
@@ -75,6 +88,10 @@ void stageScene::update()
 		if (_roy->getPlayerSelect())
 		{
 			_roy->setMoveSelect(true);
+		}
+		if (_roy->getAttackSelect())
+		{
+			_roy->setBattle(true);
 		}
 		if (_pt.indexX == _warrior->getIndexX() && _pt.indexY == _warrior->getIndexY())
 		{
