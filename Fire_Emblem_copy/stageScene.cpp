@@ -13,7 +13,7 @@ HRESULT stageScene::init()
 
 	_warrior = new warrior;
 	_warrior->setLinkMap(_tileSet);
-	_warrior->init(6, 5,ENEMY);
+	_warrior->init(3,7,ENEMY);
 
 	_roy = new Roy;
 	_roy->setLinkMap(_tileSet);
@@ -55,7 +55,7 @@ void stageScene::update()
 		if (_roy->getAttackSelect())
 		{
 			selectEnemy++;
-			if (selectEnemy > _roy->getEnemySize() || selectEnemy > _roy->getEnemySize())
+			if (selectEnemy > _roy->getEnemySize() || _roy->getEnemySize() == 1)
 			{
 				selectEnemy = 0;
 			}
@@ -75,8 +75,22 @@ void stageScene::update()
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 	{
-		if (_pt.indexY < _tileSet->getSizeY()) _pt.indexY += 1;
-		_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
+		if (_roy->getAttackSelect())
+		{
+			selectEnemy++;
+			if (selectEnemy > _roy->getEnemySize() || _roy->getEnemySize() == 1)
+			{
+				selectEnemy = 0;
+			}
+			_pt.indexX = _roy->getEnemyX(selectEnemy);
+			_pt.indexY = _roy->getEnemyY(selectEnemy);
+			_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
+		}
+		else
+		{
+			if (_pt.indexY < _tileSet->getSizeY()) _pt.indexY += 1;
+			_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
+		}
 		//CAMERAMANAGER->setCameraCenterY(CAMERAMANAGER->getCameraCenterY() + 5);
 		if (CAMERAMANAGER->getCameraBOTTOM() >= mapSizeY * TILESIZE && mapSizeY*TILESIZE >= CAMERAY)
 		{
