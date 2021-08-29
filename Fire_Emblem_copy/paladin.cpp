@@ -12,6 +12,20 @@ HRESULT paladin::init(int idx, int idy, TYPE type)
 
 void paladin::update(int idx, int idy)
 {
+	unit::update(idx, idy);
+	if (_astar->getStart() && _moveSelect)
+	{
+		_img = IMAGEMANAGER->findImage("∆»∂ÛµÚmove");
+	}
+	else if (use)
+	{
+		_img = IMAGEMANAGER->findImage("used∆»∂ÛµÚIdle");
+	}
+	else
+	{
+		_img = IMAGEMANAGER->findImage("∆»∂ÛµÚIdle");
+
+	}
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)
 	{

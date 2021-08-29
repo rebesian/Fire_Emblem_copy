@@ -12,6 +12,35 @@ HRESULT ArmorKnight::init(int idx, int idy, TYPE type)
 
 void ArmorKnight::update(int idx, int idy)
 {
+	unit::update(idx, idy);
+	if (_astar->getStart())
+	{
+		switch (_type)
+		{
+		case PLAYER:
+			_img = IMAGEMANAGER->findImage("아머나이트move");
+			break;
+		case ENEMY:
+			_img = IMAGEMANAGER->findImage("enemy아머나이트move");
+			break;
+		}
+	}
+	else if (use)
+	{
+		_img = IMAGEMANAGER->findImage("used아머나이트Idle");
+	}
+	else
+	{
+		switch (_type)
+		{
+		case PLAYER:
+			_img = IMAGEMANAGER->findImage("아머나이트Idle");
+			break;
+		case ENEMY:
+			_img = IMAGEMANAGER->findImage("enemy아머나이트Idle");
+			break;
+		}
+	}
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)
 	{

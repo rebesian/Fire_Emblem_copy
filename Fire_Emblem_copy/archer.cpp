@@ -12,6 +12,35 @@ HRESULT archer::init(int idx, int idy, TYPE type)
 
 void archer::update(int idx, int idy)
 {
+	unit::update(idx, idy);
+	if (_astar->getStart())
+	{
+		switch (_type)
+		{
+		case PLAYER:
+			_img = IMAGEMANAGER->findImage("전사move");
+			break;
+		case ENEMY:
+			_img = IMAGEMANAGER->findImage("enemy전사move");
+			break;
+		}
+	}
+	else if (use)
+	{
+		_img = IMAGEMANAGER->findImage("used전사Idle");
+	}
+	else
+	{
+		switch (_type)
+		{
+		case PLAYER:
+			_img = IMAGEMANAGER->findImage("전사Idle");
+			break;
+		case ENEMY:
+			_img = IMAGEMANAGER->findImage("enemy전사Idle");
+			break;
+		}
+	}
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)
 	{

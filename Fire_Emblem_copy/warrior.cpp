@@ -32,7 +32,11 @@ void warrior::update(int idx, int idy)
 			break;
 		}
 	}
-	else
+	else if (use)
+	{
+		_img = IMAGEMANAGER->findImage("usedÀü»çIdle");
+	}
+	else 
 	{
 		switch (_type)
 		{
@@ -44,6 +48,7 @@ void warrior::update(int idx, int idy)
 			break;
 		}
 	}
+
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)
 	{

@@ -338,8 +338,12 @@ void unit::update(int idx, int idy)
 			}
 		}
 	}
+	if(use)
+	{
+		_render = false;
+	}
 	_astar->update(_render);
-	
+
 }
 
 void unit::release()

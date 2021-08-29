@@ -64,6 +64,8 @@ public:
 	void setpointing(bool pointing) { _pointing = pointing; }
 	void setPlayerSelect(bool Select) { _playerSelect = Select; }
 	void setMoveSelect(bool Select) { _moveSelect = Select; }
+	void setAttackSelect(bool Select) { _attackSelect = Select; }
 	void setBattle(bool _battle) { battle = _battle; }
+	void setUse(bool _use) { use = _use; }
 };
 

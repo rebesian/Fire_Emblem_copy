@@ -67,6 +67,8 @@ void playGround::inputImage()
 	IMAGEMANAGER->addFrameImage("movement", "image/MapSprite/movement.bmp", 768, 144, 16, 3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("현재타일", "image/MapSprite/현재타일.bmp", 48, 48, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("route", "image/MapSprite/route.bmp", 192, 192, 4, 4, true, RGB(255, 0, 255));
+	
+	IMAGEMANAGER->addImage("전투Hud", "image/전투Hud1.bmp", 960, 600, true, RGB(255, 0, 255));
 
 	//병과아이콘
 	//아군 Idle
@@ -145,7 +147,7 @@ void playGround::inputImage()
 	IMAGEMANAGER->addFrameImage("enemy소셜나이트검attack", "image/character/enemy소셜나이트검attack.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("전사attack", "image/character/전사attack.bmp", 1236, 56, 12, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("2전사attack", "image/character/2전사attack.bmp", 1236, 56, 12, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy전사attack", "image/character/enemy전사attack.bmp", 1236, 56, 12, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy전사attack", "image/character/enemy전사attack.bmp", 4944, 244, 12, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아머나이트attack", "image/character/아머나이트attack.bmp", 1236, 56, 19, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("enemy아머나이트attack", "image/character/enemy아머나이트attack.bmp", 1957,78, 19, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아처attack", "image/character/아처attack.bmp", 768, 42, 16, 1, true, RGB(255, 0, 255));
@@ -153,7 +155,7 @@ void playGround::inputImage()
 	IMAGEMANAGER->addFrameImage("용병attack", "image/character/용병attack.bmp", 2890, 139, 34, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("군인attack", "image/character/군인attack.bmp", 1157,61, 13, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("메이지attack", "image/character/메이지attack.bmp",1403, 41, 23, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("로이attack", "image/character/로이attack.bmp", 2350, 64, 25, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("로이attack", "image/character/로이attack.bmp", 9400, 256, 25, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("산적attack", "image/character/산적attack.bmp", 612, 53, 6, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("팔라딘검attack", "image/character/팔라딘검attack.bmp", 3146, 96, 26, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("팔라딘창attack", "image/character/팔라딘창attack.bmp", 3751, 96, 31, 1, true, RGB(255, 0, 255));

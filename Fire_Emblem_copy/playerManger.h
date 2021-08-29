@@ -11,7 +11,7 @@
 #include "socialKnight.h"
 #include "transport.h"
 
-
+class tileSet;
 class playerManger
 {
 	Roy* _roy;
@@ -24,12 +24,16 @@ class playerManger
 	socialKnight* _social;
 	transport* _transport;
 	Swordsman* _sword;
+	 
+	tileSet* _map;
 
 	vector<unit*> _vplayer;
+	vector<unit*>::iterator _viplayer;
 public:
 	HRESULT init(TYPE type = PLAYER);
-	void update();
+	void update(int idx , int idy);
 	void release();
 	void render();
+	void setLinkMap(tileSet* map) { _map = map; }
 };
 

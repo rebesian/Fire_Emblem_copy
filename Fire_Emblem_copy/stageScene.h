@@ -1,8 +1,9 @@
 #pragma once
 #include "gameNode.h"
 #include "tileSet.h"
-#include "warrior.h"
-#include "Roy.h"
+#include "playerManger.h"
+#include "enemyManger.h"
+#include "battleScene.h"
 class stageScene : public gameNode
 {
 private:
@@ -15,13 +16,19 @@ private:
 	};
 
 	tileSet* _tileSet;
+	battleScene* _battleScene;
 	warrior* _warrior;
 	Roy* _roy;
 	POINTER _pt;
 
+	playerManger* _pm;
+	enemyManger* _em;
+
 	int mapSizeX;
 	int mapSizeY;
 	int selectEnemy;
+
+	bool isbattle;
 
 public:
 
