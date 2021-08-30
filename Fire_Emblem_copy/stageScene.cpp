@@ -62,7 +62,10 @@ void stageScene::update()
 		//	_roy->setpointing(false);
 		//}
 
-		if(useCount>)
+		if (useCount >= _pm->getMaxPlayer())
+		{
+			truePlayerFalseEnemy = false;
+		}
 		if (!isMoveSelect)
 		{
 			_playerPoint = _pm->isPoint(_pt.indexX, _pt.indexY);
@@ -221,7 +224,10 @@ void stageScene::update()
 	else if(!truePlayerFalseEnemy && !isbattle)
 	{
 
-
+		if ()
+		{
+			truePlayerFalseEnemy = true;
+		}
 		_pm->update(_pt.indexX, _pt.indexY);
 		_em->update(_pt.indexX, _pt.indexY);
 	}
