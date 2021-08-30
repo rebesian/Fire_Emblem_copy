@@ -59,7 +59,8 @@ public:
 	}
 	void getEnemy(string name, int enemyHp, int enemyAttack, int enemyHit, int enemyCrit)
 	{
-		_enemyName = name;
+		_enemyName = "enemy";
+		_enemyName += name;
 		_enemyHp = enemyHp;
 		_enemyAttack = enemyAttack;
 		_enemyHit = enemyHit;

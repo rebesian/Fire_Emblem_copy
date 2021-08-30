@@ -3,7 +3,7 @@
 
 HRESULT Swordsman::init(int idx, int idy,TYPE type)
 {
-	unit::init(idx, idy,type);
+	unit::init(idx, idy, 5,type);
 
 	_img = IMAGEMANAGER->findImage("∞ÀªÁIdle");
 	return S_OK;

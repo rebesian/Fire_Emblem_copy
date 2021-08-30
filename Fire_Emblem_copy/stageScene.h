@@ -24,15 +24,20 @@ private:
 	playerManger* _pm;
 	enemyManger* _em;
 
+
 	int mapSizeX;
 	int mapSizeY;
+	
+	int useCount;
 	int selectEnemy;
 	int _playerPoint;
 	int _enemyPoint;
 
+
 	bool isbattle;
 	bool isMoveSelect;
-
+	bool isAttackSelect;
+	bool truePlayerFalseEnemy;
 public:
 
 	HRESULT init();

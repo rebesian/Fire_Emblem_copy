@@ -3,7 +3,7 @@
 
 HRESULT transport::init(int idx, int idy, TYPE type)
 {
-	unit::init(idx, idy, type);
+	unit::init(idx, idy, 7,type);
 
 	_img = IMAGEMANAGER->findImage("¼ö¼Û´ëIdle");
 	

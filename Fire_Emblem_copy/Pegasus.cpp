@@ -3,7 +3,7 @@
 
 HRESULT Pegasus::init(int idx, int idy, TYPE type)
 {
-	unit::init(idx, idy, type);
+	unit::init(idx, idy,7 ,type);
 
 	_img = IMAGEMANAGER->findImage("페가수스나이트Idle");
 	

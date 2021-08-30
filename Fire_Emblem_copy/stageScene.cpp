@@ -16,17 +16,6 @@ HRESULT stageScene::init()
 	_battleScene->init();
 	_battleScene->setLinkMap(_tileSet);
 
-	_playerPoint = 0;
-	_enemyPoint = 0;
-	isbattle = isMoveSelect = false;
-	//_warrior = new warrior;
-	//_warrior->setLinkMap(_tileSet);
-	//_warrior->init(3,7,ENEMY);
-	//
-	//_roy = new Roy;
-	//_roy->setLinkMap(_tileSet);
-	//_roy->init(2, 10);
-
 	_pm = new playerManger;
 	_pm->setLinkMap(_tileSet);
 	_pm->init();
@@ -34,6 +23,12 @@ HRESULT stageScene::init()
 	_em = new enemyManger;
 	_em->setLinkMap(_tileSet);
 	_em->init();
+
+	truePlayerFalseEnemy = true;
+	_playerPoint = 0;
+	_enemyPoint = 0;
+	useCount = 0;
+	isbattle = isAttackSelect = isMoveSelect = false;
 
 	_pt.indexX = 2;
 	_pt.indexY = 10;
@@ -55,7 +50,8 @@ void stageScene::update()
 			//_roy->setUse(true);
 		}
 	}
-	else
+
+	if(truePlayerFalseEnemy && !isbattle)
 	{
 		//if (_pt.indexX == _roy->getIndexX() && _pt.indexY == _roy->getIndexY())
 		//{
@@ -65,9 +61,20 @@ void stageScene::update()
 		//{
 		//	_roy->setpointing(false);
 		//}
-		
-		_playerPoint = _pm->isPoint(_pt.indexX, _pt.indexY);
-		_enemyPoint = _em->isPoint(_pt.indexX, _pt.indexY);
+
+		if(useCount>)
+		if (!isMoveSelect)
+		{
+			_playerPoint = _pm->isPoint(_pt.indexX, _pt.indexY);
+			_enemyPoint = _em->isPoint(_pt.indexX, _pt.indexY);
+		}
+		else
+		{
+			if (_pm->getUse(_playerPoint))
+			{
+				isMoveSelect = false;
+			}
+		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 		{
@@ -145,16 +152,32 @@ void stageScene::update()
 			//	isbattle = false;
 			//}
 
-			if (_playerPoint != 255)
-			{
-				if(!_pm->getPlayerSelect(_playerPoint))
-					_pm->setPlayerSelect(_playerPoint , true);
-
-			}
 			if (isMoveSelect)
 			{
-
+				if (_pm->getPlayerSelect(_playerPoint))
+				{
+					_pm->setMoveSelect(_playerPoint, true);
+				}
 			}
+			if (_pm->getAttackSelect(_playerPoint))
+			{
+				//_pm->setBattle(true);
+				isbattle = true;
+				_pm->setAttackSelect(_playerPoint,false);
+				_battleScene->setAction(true);
+				_battleScene->getPlayer(, _roy->gethp(), _roy->getAttack(), 0, _roy->getCritcal());
+				_battleScene->getEnemy("ภüป็", _warrior->gethp(), _warrior->getAttack(), 0, _warrior->getCritcal());
+			}
+			if (_playerPoint != 255)
+			{
+				if (!_pm->getPlayerSelect(_playerPoint)&& !_pm->getUse(_playerPoint))
+				{
+					_pm->setPlayerSelect(_playerPoint, true);
+				}
+				isMoveSelect = true;
+			}
+		
+
 			//if (_roy->getPlayerSelect())
 			//{
 			//	_roy->setMoveSelect(true);
@@ -189,11 +212,22 @@ void stageScene::update()
 			//	_roy->setPlayerSelect(false);
 		}
 
-
+		
 
 
 		_pm->update(_pt.indexX, _pt.indexY);
 		_em->update(_pt.indexX, _pt.indexY);
+	}
+	else if(!truePlayerFalseEnemy && !isbattle)
+	{
+
+
+		_pm->update(_pt.indexX, _pt.indexY);
+		_em->update(_pt.indexX, _pt.indexY);
+	}
+	else if(isbattle)
+	{
+		
 	}
 }
 

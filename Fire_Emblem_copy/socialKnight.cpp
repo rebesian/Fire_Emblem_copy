@@ -3,7 +3,7 @@
 
 HRESULT socialKnight::init(int idx, int idy, TYPE type)
 {
-	unit::init(idx, idy,type);
+	unit::init(idx, idy, 7,type);
 	switch (type)
 	{
 	case PLAYER:
@@ -70,5 +70,6 @@ void socialKnight::release()
 
 void socialKnight::render()
 {
+	unit::render();
 	_img->frameRender(_map->getMapDC(), stageX - (TILESIZE / 2), stageY - (TILESIZE), stageRenderX, stageRenderY);
 }

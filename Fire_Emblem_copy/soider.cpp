@@ -3,7 +3,7 @@
 
 HRESULT soider::init(int idx, int idy, TYPE type)
 {
-	unit::init(idx, idy, type);
+	unit::init(idx, idy, 5,type);
 	_img = IMAGEMANAGER->findImage("±ºÀÎIdle");
 	return S_OK;
 }
@@ -32,5 +32,6 @@ void soider::release()
 
 void soider::render()
 {
+	unit::render();
 	_img->frameRender(_map->getMapDC(), stageX - (TILESIZE / 2), stageY - (TILESIZE), stageRenderX, stageRenderY);
 }

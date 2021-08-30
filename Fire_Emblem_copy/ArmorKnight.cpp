@@ -3,7 +3,7 @@
 
 HRESULT ArmorKnight::init(int idx, int idy, TYPE type)
 {
-	unit::init(idx, idy, type);
+	unit::init(idx, idy, 5,type);
 	
 	_img = IMAGEMANAGER->findImage("아머나이트Idle");
 
@@ -63,5 +63,6 @@ void ArmorKnight::release()
 
 void ArmorKnight::render()
 {
+	unit::render();
 	_img->frameRender(_map->getMapDC(), stageX - (TILESIZE / 2), stageY - (TILESIZE), stageRenderX, stageRenderY);
 }

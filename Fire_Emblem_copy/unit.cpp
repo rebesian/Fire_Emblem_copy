@@ -2,11 +2,11 @@
 #include "unit.h"
 #include "aStarTest.h"
 
-HRESULT unit::init(int idx, int idy ,TYPE type)
+HRESULT unit::init(int idx, int idy , int moveRange, TYPE type)
 {
 	_astar = new aStarTest;
 	_astar->setLinkMap(_map);
-	_astar->init(idx, idy, 5, 1);
+	_astar->init(idx, idy, moveRange, 1);
 	_type = type;
 	indexX = idx;
 	indexY = idy;
@@ -46,13 +46,16 @@ void unit::update(int idx, int idy)
 				_astar->EndSelect(idx, idy);
 				_astar->callPathFinder();
 			}
-			if(!_render) _render = true;
+			if (!_render)
+			{
+				_astar->setMoveTile(idx, idy);
+				_render = true;
+			}
 		}
 		if (_moveSelect)
 		{
 			_playerSelect = false;
 			if (_render) _render = false;
-
 			if (_astar->getStart())
 			{
 				if (_astar->getCloseListsize() > 0)

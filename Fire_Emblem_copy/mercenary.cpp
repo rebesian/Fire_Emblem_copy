@@ -3,7 +3,7 @@
 
 HRESULT mercenary::init(int idx, int idy, TYPE type)
 {
-	unit::init(idx, idy, type);
+	unit::init(idx, idy, 7,type);
 
 	_img = IMAGEMANAGER->findImage("¿ëº´Idle");
 

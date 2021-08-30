@@ -3,7 +3,7 @@
 
 HRESULT archer::init(int idx, int idy, TYPE type)
 {
-	unit::init(idx, idy, type);
+	unit::init(idx, idy, 6,type);
 	
 	_img = IMAGEMANAGER->findImage("¾ÆÃ³Idle");
 

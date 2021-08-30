@@ -3,7 +3,7 @@
 
 HRESULT warrior::init(int idx, int idy ,TYPE type)
 {
-	unit::init(idx, idy , type);
+	unit::init(idx, idy , 5, type);
 	switch (type)
 	{
 	case PLAYER:
