@@ -22,6 +22,8 @@ public:
 	void update(int idx, int idy);
 	void release();
 	void render();
+	int isPoint(int _ptx, int _pty);
+
 	void setLinkMap(tileSet* map) { _map = map; }
 };
 

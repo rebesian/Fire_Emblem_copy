@@ -27,8 +27,11 @@ private:
 	int mapSizeX;
 	int mapSizeY;
 	int selectEnemy;
+	int _playerPoint;
+	int _enemyPoint;
 
 	bool isbattle;
+	bool isMoveSelect;
 
 public:
 

@@ -60,3 +60,23 @@ void playerManger::render()
 		(*_viplayer)->render();
 	}
 }
+
+int playerManger::isPoint(int _ptx, int _pty )
+{
+	int pointing = 255;
+	for (int i = 0;  i < _vplayer.size(); ++i)
+	{
+		if (_vplayer[i]->getIndexX() == _ptx && _vplayer[i]->getIndexY() == _pty)
+		{
+			_vplayer[i]->setpointing(true);
+			pointing = i;
+		}
+		else
+		{
+			_vplayer[i]->setpointing(false);
+		}
+	}
+	
+	return pointing;
+
+}

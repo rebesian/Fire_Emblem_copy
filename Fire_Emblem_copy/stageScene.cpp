@@ -16,6 +16,9 @@ HRESULT stageScene::init()
 	_battleScene->init();
 	_battleScene->setLinkMap(_tileSet);
 
+	_playerPoint = 0;
+	_enemyPoint = 0;
+	isbattle = isMoveSelect = false;
 	//_warrior = new warrior;
 	//_warrior->setLinkMap(_tileSet);
 	//_warrior->init(3,7,ENEMY);
@@ -42,122 +45,6 @@ HRESULT stageScene::init()
 void stageScene::update()
 {
 
-	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
-	{	
-		
-		if(_pt.indexX > 0 ) _pt.indexX -= 1;
-		_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
-		//CAMERAMANAGER->setCameraCenterX(CAMERAMANAGER->getCameraCenterX() - 5);
-		if (CAMERAMANAGER->getCameraLEFT() <= 0)
-		{
-			CAMERAMANAGER->setCameraX(0);
-		}
-	}
-	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
-	{
-		if (_pt.indexX <= _tileSet->getSizeX()) _pt.indexX += 1;
-		_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
-		//CAMERAMANAGER->setCameraCenterX(CAMERAMANAGER->getCameraCenterX() + 5);
-		if (CAMERAMANAGER->getCameraRIGHT() >= mapSizeX * TILESIZE && mapSizeX*TILESIZE >= CAMERAX)
-		{
-			CAMERAMANAGER->setCameraX(mapSizeX*TILESIZE - CAMERAX);
-		}
-	}
-	if (KEYMANAGER->isOnceKeyDown(VK_UP))
-	{
-
-		//if (_roy->getAttackSelect())
-		//{
-		//	selectEnemy++;
-		//	if (selectEnemy > _roy->getEnemySize() || _roy->getEnemySize() == 1)
-		//	{
-		//		selectEnemy = 0;
-		//	}
-		//	_pt.indexX = _roy->getEnemyX(selectEnemy);
-		//	_pt.indexY = _roy->getEnemyY(selectEnemy);
-		//	_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
-		//}
-		//else
-		//{
-			if (_pt.indexY > 0)_pt.indexY -= 1;
-			_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
-		//}
-		if (CAMERAMANAGER->getCameraTOP() <= 0)
-		{
-			CAMERAMANAGER->setCameraY(0);
-		}
-	}
-	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
-	{
-		//if (_roy->getAttackSelect())
-		//{
-		//	selectEnemy++;
-		//	if (selectEnemy > _roy->getEnemySize() || _roy->getEnemySize() == 1)
-		//	{
-		//		selectEnemy = 0;
-		//	}
-		//	_pt.indexX = _roy->getEnemyX(selectEnemy);
-		//	_pt.indexY = _roy->getEnemyY(selectEnemy);
-		//	_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
-		//}
-		//else
-		//{
-			if (_pt.indexY < _tileSet->getSizeY()) _pt.indexY += 1;
-			_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
-		//}
-		//CAMERAMANAGER->setCameraCenterY(CAMERAMANAGER->getCameraCenterY() + 5);
-		if (CAMERAMANAGER->getCameraBOTTOM() >= mapSizeY * TILESIZE && mapSizeY*TILESIZE >= CAMERAY)
-		{
-			CAMERAMANAGER->setCameraY(mapSizeY*TILESIZE - CAMERAY);
-		}
-	}
-	if (KEYMANAGER->isOnceKeyDown('Z'))
-	{
-		if (isbattle)
-		{
-			isbattle = false;
-		}
-		//if (_roy->getPlayerSelect())
-		//{
-		//	_roy->setMoveSelect(true);
-		//}
-		//if (_roy->getAttackSelect())
-		//{
-		//	_roy->setBattle(true);
-		//	isbattle = true;
-		//	_roy->setAttackSelect(false);
-		//	_battleScene->setAction(true);
-		//	_battleScene->getPlayer("로이", _roy->gethp(), _roy->getAttack(), 0, _roy->getCritcal());
-		//	_battleScene->getEnemy("enemy전사", _warrior->gethp(), _warrior->getAttack(), 0, _warrior->getCritcal());
-		//}
-		//if (_pt.indexX == _warrior->getIndexX() && _pt.indexY == _warrior->getIndexY())
-		//{
-		//	if (!_warrior->getPlayerSelect())
-		//		_warrior->setPlayerSelect(true);
-		//}
-		//if (_pt.indexX == _roy->getIndexX() && _pt.indexY == _roy->getIndexY())
-		//{
-		//	if (!_roy->getPlayerSelect())
-		//		_roy->setPlayerSelect(true);
-		//}
-
-	}
-	if (KEYMANAGER->isOnceKeyDown('X'))
-	{
-		//if (_warrior->getPlayerSelect())
-		//	_warrior->setPlayerSelect(false);
-		//
-		//if (_roy->getPlayerSelect())
-		//	_roy->setPlayerSelect(false);
-	}
-	//if (_pt.indexX == _roy->getIndexX() && _pt.indexY == _roy->getIndexY())
-	//{
-	//	_roy->setpointing(true);
-	//}
-	//else
-	//{
-	//	_roy->setpointing(false);
-	//}
 	if (isbattle)
 	{
 		_battleScene->update();
@@ -170,6 +57,141 @@ void stageScene::update()
 	}
 	else
 	{
+		//if (_pt.indexX == _roy->getIndexX() && _pt.indexY == _roy->getIndexY())
+		//{
+		//	_roy->setpointing(true);
+		//}
+		//else
+		//{
+		//	_roy->setpointing(false);
+		//}
+		
+		_playerPoint = _pm->isPoint(_pt.indexX, _pt.indexY);
+		_enemyPoint = _em->isPoint(_pt.indexX, _pt.indexY);
+
+		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
+		{
+
+			if (_pt.indexX > 0) _pt.indexX -= 1;
+			_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
+			//CAMERAMANAGER->setCameraCenterX(CAMERAMANAGER->getCameraCenterX() - 5);
+			if (CAMERAMANAGER->getCameraLEFT() <= 0)
+			{
+				CAMERAMANAGER->setCameraX(0);
+			}
+		}
+		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+		{
+			if (_pt.indexX <= _tileSet->getSizeX()) _pt.indexX += 1;
+			_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
+			//CAMERAMANAGER->setCameraCenterX(CAMERAMANAGER->getCameraCenterX() + 5);
+			if (CAMERAMANAGER->getCameraRIGHT() >= mapSizeX * TILESIZE && mapSizeX*TILESIZE >= CAMERAX)
+			{
+				CAMERAMANAGER->setCameraX(mapSizeX*TILESIZE - CAMERAX);
+			}
+		}
+		if (KEYMANAGER->isOnceKeyDown(VK_UP))
+		{
+
+			//if (_roy->getAttackSelect())
+			//{
+			//	selectEnemy++;
+			//	if (selectEnemy > _roy->getEnemySize() || _roy->getEnemySize() == 1)
+			//	{
+			//		selectEnemy = 0;
+			//	}
+			//	_pt.indexX = _roy->getEnemyX(selectEnemy);
+			//	_pt.indexY = _roy->getEnemyY(selectEnemy);
+			//	_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
+			//}
+			//else
+			//{
+			if (_pt.indexY > 0)_pt.indexY -= 1;
+			_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
+			//}
+			if (CAMERAMANAGER->getCameraTOP() <= 0)
+			{
+				CAMERAMANAGER->setCameraY(0);
+			}
+		}
+		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+		{
+			//if (_roy->getAttackSelect())
+			//{
+			//	selectEnemy++;
+			//	if (selectEnemy > _roy->getEnemySize() || _roy->getEnemySize() == 1)
+			//	{
+			//		selectEnemy = 0;
+			//	}
+			//	_pt.indexX = _roy->getEnemyX(selectEnemy);
+			//	_pt.indexY = _roy->getEnemyY(selectEnemy);
+			//	_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
+			//}
+			//else
+			//{
+			if (_pt.indexY < _tileSet->getSizeY()) _pt.indexY += 1;
+			_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
+			//}
+			//CAMERAMANAGER->setCameraCenterY(CAMERAMANAGER->getCameraCenterY() + 5);
+			if (CAMERAMANAGER->getCameraBOTTOM() >= mapSizeY * TILESIZE && mapSizeY*TILESIZE >= CAMERAY)
+			{
+				CAMERAMANAGER->setCameraY(mapSizeY*TILESIZE - CAMERAY);
+			}
+		}
+		if (KEYMANAGER->isOnceKeyDown('Z'))
+		{
+			//if (isbattle)
+			//{
+			//	isbattle = false;
+			//}
+
+			if (_playerPoint != 255)
+			{
+				if(!_pm->getPlayerSelect(_playerPoint))
+					_pm->setPlayerSelect(_playerPoint , true);
+
+			}
+			if (isMoveSelect)
+			{
+
+			}
+			//if (_roy->getPlayerSelect())
+			//{
+			//	_roy->setMoveSelect(true);
+			//}
+			//if (_roy->getAttackSelect())
+			//{
+			//	_roy->setBattle(true);
+			//	isbattle = true;
+			//	_roy->setAttackSelect(false);
+			//	_battleScene->setAction(true);
+			//	_battleScene->getPlayer("로이", _roy->gethp(), _roy->getAttack(), 0, _roy->getCritcal());
+			//	_battleScene->getEnemy("enemy전사", _warrior->gethp(), _warrior->getAttack(), 0, _warrior->getCritcal());
+			//}
+			//if (_pt.indexX == _warrior->getIndexX() && _pt.indexY == _warrior->getIndexY())
+			//{
+			//	if (!_warrior->getPlayerSelect())
+			//		_warrior->setPlayerSelect(true);
+			//}
+			//if (_pt.indexX == _roy->getIndexX() && _pt.indexY == _roy->getIndexY())
+			//{
+			//	if (!_roy->getPlayerSelect())
+			//		_roy->setPlayerSelect(true);
+			//}
+
+		}
+		if (KEYMANAGER->isOnceKeyDown('X'))
+		{
+			//if (_warrior->getPlayerSelect())
+			//	_warrior->setPlayerSelect(false);
+			//
+			//if (_roy->getPlayerSelect())
+			//	_roy->setPlayerSelect(false);
+		}
+
+
+
+
 		_pm->update(_pt.indexX, _pt.indexY);
 		_em->update(_pt.indexX, _pt.indexY);
 	}

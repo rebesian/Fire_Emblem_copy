@@ -34,6 +34,14 @@ public:
 	void update(int idx , int idy);
 	void release();
 	void render();
+
+	int isPoint(int _ptx, int _pty );
+	bool getPlayerSelect(int pointed) { return _vplayer[pointed]->getPlayerSelect(); }
+	bool getAttackSelect(int pointed) { return _vplayer[pointed]->getAttackSelect(); }
+
+	void setPlayerSelect(int pointed, bool Select) { _vplayer[pointed]->setPlayerSelect(Select); }
+	void setMoveSelect(int pointed, bool Select) { _vplayer[pointed]->setMoveSelect(Select); }
+	void setAttackSelect(int pointed , bool Select) { _vplayer[pointed]->setAttackSelect(Select); }
 	void setLinkMap(tileSet* map) { _map = map; }
 };
 

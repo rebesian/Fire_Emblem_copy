@@ -45,3 +45,21 @@ void enemyManger::render()
 		(*_viEnemy)->render();
 	}
 }
+
+int enemyManger::isPoint(int _ptx, int _pty)
+{
+	int pointing = 255;
+	for (int i = 0; i < _vEnemy.size(); ++i)
+	{
+		if (_vEnemy[i]->getIndexX() == _ptx && _vEnemy[i]->getIndexY() == _pty)
+		{
+			_vEnemy[i]->setpointing(true);
+			pointing = i;
+		}
+		else
+		{
+			_vEnemy[i]->setpointing(false);
+		}
+	}
+	return pointing;
+}
