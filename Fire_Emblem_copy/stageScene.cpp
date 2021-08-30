@@ -29,6 +29,7 @@ HRESULT stageScene::init()
 	_enemyPoint = 0;
 	useCount = 0;
 	isbattle = isAttackSelect = isMoveSelect = false;
+	enemytargetOn = false;
 
 	_pt.indexX = 2;
 	_pt.indexY = 10;
@@ -65,11 +66,17 @@ void stageScene::update()
 		if (useCount >= _pm->getMaxPlayer())
 		{
 			truePlayerFalseEnemy = false;
+			_enemyPoint = 0;
 		}
+		else
+		{
+			useCount = 0;
+		}
+
 		if (!isMoveSelect)
 		{
 			_playerPoint = _pm->isPoint(_pt.indexX, _pt.indexY);
-			_enemyPoint = _em->isPoint(_pt.indexX, _pt.indexY);
+			//_enemyPoint = _em->isPoint(_pt.indexX, _pt.indexY);
 		}
 		else
 		{
@@ -168,7 +175,7 @@ void stageScene::update()
 				isbattle = true;
 				_pm->setAttackSelect(_playerPoint,false);
 				_battleScene->setAction(true);
-				_battleScene->getPlayer(, _roy->gethp(), _roy->getAttack(), 0, _roy->getCritcal());
+				_battleScene->getPlayer(_pm->getName(_playerPoint), _roy->gethp(), _roy->getAttack(), 0, _roy->getCritcal());
 				_battleScene->getEnemy("ภüป็", _warrior->gethp(), _warrior->getAttack(), 0, _warrior->getCritcal());
 			}
 			if (_playerPoint != 255)
@@ -216,7 +223,11 @@ void stageScene::update()
 		}
 
 		
-
+		for (int i = 0; i < _pm->getMaxPlayer(); ++i)
+		{
+			if (_pm->getUse(i))
+				useCount++;
+		}
 
 		_pm->update(_pt.indexX, _pt.indexY);
 		_em->update(_pt.indexX, _pt.indexY);
@@ -224,12 +235,38 @@ void stageScene::update()
 	else if(!truePlayerFalseEnemy && !isbattle)
 	{
 
-		if ()
+	
+		if (!_em->getUse(_enemyPoint))
 		{
-			truePlayerFalseEnemy = true;
+			if (!enemytargetOn) {
+				int random = RND->getInt(_pm->getMaxPlayer());
+				_em->targetOn(_enemyPoint, _pm->getIndexX(random), _pm->getIndexY(random));
+				enemytargetOn = true;
+			}
 		}
+		else
+		{
+			enemytargetOn = false;
+			_enemyPoint++;
+		}
+	
+		if (enemyCount >= _em->getMaxEnemy())
+		{
+			for (int i = 0; i < _pm->getMaxPlayer(); ++i)
+			{
+				_pm->setUse(i, false);
+
+			}
+			truePlayerFalseEnemy = true;
+			useCount = 0;
+			enemyCount = 0;
+		}
+
+
+
 		_pm->update(_pt.indexX, _pt.indexY);
 		_em->update(_pt.indexX, _pt.indexY);
+		
 	}
 	else if(isbattle)
 	{

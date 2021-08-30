@@ -42,6 +42,7 @@ public:
 	virtual void release();
 	virtual void render();
 
+	void targetOn(int idx, int idy) { _astar->EndSelect(idx, idy); _astar->callPathFinder(); }
 
 	int getIndexX() { return indexX; }
 	int getIndexY() { return indexY; }
@@ -55,6 +56,7 @@ public:
 	bool getPlayerSelect() { return _playerSelect; }
 	bool getAttackSelect() { return _attackSelect; }
 	bool getUse() { return use; }
+	string getName() { return name; }
 	int getEnemySize() { return _astar->getEnemysize(); }
 	int getEnemyX(int i) { return _astar->getEnemyX(i); }
 	int getEnemyY(int i) { return _astar->getEnemyY(i); }

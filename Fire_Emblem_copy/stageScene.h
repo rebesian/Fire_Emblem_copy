@@ -33,11 +33,14 @@ private:
 	int _playerPoint;
 	int _enemyPoint;
 
+	int enemyCount;
 
 	bool isbattle;
 	bool isMoveSelect;
 	bool isAttackSelect;
 	bool truePlayerFalseEnemy;
+	bool enemytargetOn;
+
 public:
 
 	HRESULT init();

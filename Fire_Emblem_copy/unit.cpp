@@ -239,16 +239,12 @@ void unit::update(int idx, int idy)
  			
 		}
 	}
-	else if (_type  == ENEMY)
+	else if (_type == ENEMY)
 	{
-		if (KEYMANAGER->isOnceKeyDown('S'))
-		{
-			_astar->EndSelect(2, 10);
-		}
-		if (KEYMANAGER->isOnceKeyDown('V'))
-		{
-			_astar->callPathFinder();
-		}
+		
+		//	_astar->EndSelect(2, 10);
+		//	_astar->callPathFinder();
+		
 		if (_astar->getStart())
 		{
 			if (_astar->getCloseListsize() > 0)
@@ -337,6 +333,7 @@ void unit::update(int idx, int idy)
 					indexY + 1 == _astar->getTargetTileY())
 					battle = true;
 				_astar->setMoveTile(indexX, indexY);
+				use = true;
 				stageRenderY = 0;
 			}
 		}

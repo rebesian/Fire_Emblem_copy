@@ -37,9 +37,12 @@ public:
 
 	int isPoint(int _ptx, int _pty );
 	int getMaxPlayer() { return _vplayer.size(); }
+	int getIndexX(int pointed) { return _vplayer[pointed]->getIndexX(); }
+	int getIndexY(int pointed) { return _vplayer[pointed]->getIndexY(); }
 	bool getPlayerSelect(int pointed) { return _vplayer[pointed]->getPlayerSelect(); }
 	bool getAttackSelect(int pointed) { return _vplayer[pointed]->getAttackSelect(); }
 	bool getUse(int pointed) { return _vplayer[pointed]->getUse(); }
+	string getName(int pointed) { return _vplayer[pointed]->getName(); }
 	int gethp(int pointed) { return _vplayer[pointed]->gethp(); }
 	int getMoveRange(int pointed) { return _vplayer[pointed]->getMoveRange(); }
 	int getAttack(int pointed) { return _vplayer[pointed]->getAttack();}
@@ -51,6 +54,7 @@ public:
 
 	void sethp(int pointed , int hp) { _vplayer[pointed]->sethp(hp); }
 	void setExp(int pointed, float exp) { _vplayer[pointed]->setExp(exp); }
+	void setUse(int pointed, bool use) { _vplayer[pointed]->setUse(use); }
 	void setPlayerSelect(int pointed, bool Select) { _vplayer[pointed]->setPlayerSelect(Select); }
 	void setMoveSelect(int pointed, bool Select) { _vplayer[pointed]->setMoveSelect(Select); }
 	void setAttackSelect(int pointed , bool Select) { _vplayer[pointed]->setAttackSelect(Select); }
