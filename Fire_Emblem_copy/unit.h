@@ -64,6 +64,7 @@ public:
 	
 
 	void setLinkMap(tileSet* map) { _map = map; }
+	void setMoveTile(int idx, int idy) { _astar->setMoveTile(idx, idy); }
 	void sethp(int hp) { _hp = hp; }
 	void setExp(float Exp) { exp = Exp; }
 	void setrender(bool render) { _render = render; }

@@ -23,6 +23,13 @@ HRESULT enemyManger::init(TYPE type)
 	_armor->init(10, 4, type);
 	_vEnemy.push_back(_armor);
 
+
+
+	for (int i = 0; i < _vEnemy.size(); ++i)
+	{
+		_vEnemy[i]->setMoveTile(_vEnemy[i]->getIndexX(), _vEnemy[i]->getIndexY());
+	}
+
 	return S_OK;
 }
 

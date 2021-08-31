@@ -43,6 +43,7 @@ void unit::update(int idx, int idy)
 			if (!(idx == _astar->getTargetTileX() && idy == _astar->getTargetTileY())&&
 				_astar->getAttribute(idx, idy) == "move")
 			{
+				_map->setIsPlayer(indexX, indexY, false);
 				_astar->EndSelect(idx, idy);
 				_astar->callPathFinder();
 			}
@@ -191,7 +192,9 @@ void unit::update(int idx, int idy)
 					{
 						_moving = false;
 						_astar->move(indexX, indexY);
+						_map->setIsPlayer(indexX, indexY, true);
 						_astar->setAttackTile(indexX, indexY);
+
 						//여기가 적 탐색하는곳
 						if (_astar->getEnemysize()>0)
 						{
@@ -241,10 +244,6 @@ void unit::update(int idx, int idy)
 	}
 	else if (_type == ENEMY)
 	{
-		
-		//	_astar->EndSelect(2, 10);
-		//	_astar->callPathFinder();
-
 		if (_astar->getStart())
 		{
 			if (_astar->getCloseListsize() > 0)
@@ -327,6 +326,7 @@ void unit::update(int idx, int idy)
 			else
 			{
 				_astar->setStart(false);
+				_map->setIsEnemy(indexX, indexY, true);
 				if (indexX - 1 == _astar->getTargetTileX() ||
 					indexX + 1 == _astar->getTargetTileX() ||
 					indexY - 1 == _astar->getTargetTileY() ||
@@ -360,6 +360,8 @@ void unit::render()
 
 void unit::targetOn(int idx, int idy)
 {
-	 _astar->EndSelect(idx, idy);
-	 _astar->callPathFinder();
+	_map->setIsEnemy(indexX, indexY, false);
+	_astar->EndSelect(idx, idy);
+	_astar->callPathFinder();
+
 }

@@ -120,7 +120,7 @@ void aStarTest::setTile(int playerX, int playerY)
 		_vTotalList.push_back(TotalList);
 	}
 
-	setMoveTile(playerX, playerY);
+	//setMoveTile(playerX, playerY);
 }
 
 //갈수있는길추가함수
@@ -331,10 +331,9 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 				_vTotalList[y][x]->setIsOpen(true);
 				continue;
 			}
-			if(_map->getMove(x,y))
-				_vTotalList[y][x]->setIsOpen(true);
-			else
+			if(!_map->getMove(x,y) || _map->getIsEnemy(x,y) || _map->getIsPlayer(x,y))
 				_vTotalList[y][x]->setIsOpen(false);
+
 			_vTotalList[y][x]->setAttribute("none");
 		}
 	}

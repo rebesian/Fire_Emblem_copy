@@ -32,6 +32,10 @@ HRESULT playerManger::init(TYPE type)
 	_social->init(2, 11, type);
 	_vplayer.push_back(_social);
 
+	for (int i = 0; i < _vplayer.size(); ++i)
+	{
+		_vplayer[i]->setMoveTile(_vplayer[i]->getIndexX(), _vplayer[i]->getIndexY());
+	}
 	//_transport = new transport;
 	//_transport->setLinkMap(_map);
 	//_transport->init(2, 10, type);

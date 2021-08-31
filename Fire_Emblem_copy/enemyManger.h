@@ -40,6 +40,7 @@ public:
 	int getSpeed(int pointed) { return  _vEnemy[pointed]->getSpeed(); }
 
 	void targetOn(int pointed, int idx, int idy) { _vEnemy[pointed]->targetOn(idx, idy); }
+	void setMoveTile(int pointed, int idx, int idy) { _vEnemy[pointed]->setMoveTile(idx, idy); }
 	void sethp(int pointed, int hp) { _vEnemy[pointed]->sethp(hp); }
 	void setExp(int pointed, float exp) { _vEnemy[pointed]->setExp(exp); }
 	void setUse(int pointed, bool use) { _vEnemy[pointed]->setUse(use); }

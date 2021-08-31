@@ -181,7 +181,7 @@ void stageScene::update()
 				_pm->setAttackSelect(_playerPoint,false);
 				_battleScene->setAction(true);
 				_battleScene->getPlayer(_pm->getName(_playerPoint), _roy->gethp(), _roy->getAttack(), 0, _roy->getCritcal());
-				_battleScene->getEnemy("전사", _warrior->gethp(), _warrior->getAttack(), 0, _warrior->getCritcal());
+				_battleScene->getEnemy("전사" , _warrior->gethp(), _warrior->getAttack(), 0, _warrior->getCritcal());
 			}
 			if (_playerPoint != 255)
 			{
@@ -263,6 +263,7 @@ void stageScene::update()
 			enemyCount = 0;
 			_enemyPoint = 0;
 		}
+
 		_pm->update(_pt.indexX, _pt.indexY);
 		_em->update(_pt.indexX, _pt.indexY);
 		

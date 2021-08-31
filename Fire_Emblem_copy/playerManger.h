@@ -52,6 +52,7 @@ public:
 
 
 
+	void setMoveTile(int pointed, int idx, int idy) { _vplayer[pointed]->setMoveTile(idx, idy); }
 	void sethp(int pointed , int hp) { _vplayer[pointed]->sethp(hp); }
 	void setExp(int pointed, float exp) { _vplayer[pointed]->setExp(exp); }
 	void setUse(int pointed, bool use) { _vplayer[pointed]->setUse(use); }
