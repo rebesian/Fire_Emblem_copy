@@ -20,6 +20,7 @@ HRESULT aStarTest::init(int playerX, int playerY, int moveRange , int attackRang
 	_totalRange = moveRange + attackRange;
 	_moveRange = moveRange;
 	_attackRange = attackRange;
+	_stop = false;
 	setTile(playerX, playerY);
 	time = TIMEMANAGER->getWorldTime();
 
@@ -258,6 +259,7 @@ void aStarTest::pathFinder(tile * currentTile)
 
 	if (tempTile == nullptr)
 	{
+		_stop = true;
 		return;
 	}
 	else if (tempTile->getIsEnd())
@@ -316,7 +318,7 @@ void aStarTest::EndSelect(int endIndexX, int endIndexY)
 	}
 }
 
-void aStarTest::setMoveTile(int playerX , int playerY)
+void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 {
 
 	for (int y = 0; y < _vTotalList.size(); ++y)
@@ -331,9 +333,12 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 				_vTotalList[y][x]->setIsOpen(true);
 				continue;
 			}
-			if(!_map->getMove(x,y) || _map->getIsEnemy(x,y) || _map->getIsPlayer(x,y))
+			if(!_map->getMove(x,y) || _map->getIsEnemy(x,y)|| _map->getIsPlayer(x, y))
 				_vTotalList[y][x]->setIsOpen(false);
-
+			else
+			{
+				_vTotalList[y][x]->setIsOpen(true);
+			}
 			_vTotalList[y][x]->setAttribute("none");
 		}
 	}
@@ -531,7 +536,6 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 						if (_vTotalList[y + i][x + j]->getAttribute() == "none")
 						{
 							_vTotalList[y + i][x + j]->setAttribute("attack");
-							//_vTotalList[y + i][x + j]->setIsOpen(false);
 						}
 
 					}
@@ -560,6 +564,25 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 			}
 		}
 	}
+
+	for (int y = 0; y < _vTotalList.size(); ++y)
+	{
+		for (int x = 0; x < _vTotalList[y].size(); ++x)
+		{
+			if (type == PLAYER)
+			{
+				if (_map->getIsEnemy(x, y))
+					_vTotalList[y][x]->setAttribute("attack");
+			}
+			if (type == ENEMY)
+			{
+				if (_map->getIsPlayer(x, y))
+					_vTotalList[y][x]->setAttribute("attack");
+			}
+		
+		}
+	}
+
 
 }
 

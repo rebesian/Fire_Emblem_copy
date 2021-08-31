@@ -38,9 +38,12 @@ public:
 	int getAvoid(int pointed) { return _vEnemy[pointed]->getAvoid(); }
 	int getCritcal(int pointed) { return _vEnemy[pointed]->getCritcal(); }
 	int getSpeed(int pointed) { return  _vEnemy[pointed]->getSpeed(); }
+	TYPE getType(int pointed) { return _vEnemy[pointed]->getType(); }
+
+
 
 	void targetOn(int pointed, int idx, int idy) { _vEnemy[pointed]->targetOn(idx, idy); }
-	void setMoveTile(int pointed, int idx, int idy) { _vEnemy[pointed]->setMoveTile(idx, idy); }
+	void setMoveTile(int pointed, int idx, int idy , TYPE type) { _vEnemy[pointed]->setMoveTile(idx, idy , type); }
 	void sethp(int pointed, int hp) { _vEnemy[pointed]->sethp(hp); }
 	void setExp(int pointed, float exp) { _vEnemy[pointed]->setExp(exp); }
 	void setUse(int pointed, bool use) { _vEnemy[pointed]->setUse(use); }

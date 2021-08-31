@@ -34,7 +34,7 @@ HRESULT playerManger::init(TYPE type)
 
 	for (int i = 0; i < _vplayer.size(); ++i)
 	{
-		_vplayer[i]->setMoveTile(_vplayer[i]->getIndexX(), _vplayer[i]->getIndexY());
+		_vplayer[i]->setMoveTile(_vplayer[i]->getIndexX(), _vplayer[i]->getIndexY() , type);
 	}
 	//_transport = new transport;
 	//_transport->setLinkMap(_map);

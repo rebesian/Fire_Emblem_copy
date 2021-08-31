@@ -27,7 +27,7 @@ HRESULT enemyManger::init(TYPE type)
 
 	for (int i = 0; i < _vEnemy.size(); ++i)
 	{
-		_vEnemy[i]->setMoveTile(_vEnemy[i]->getIndexX(), _vEnemy[i]->getIndexY());
+		_vEnemy[i]->setMoveTile(_vEnemy[i]->getIndexX(), _vEnemy[i]->getIndexY() , type);
 	}
 
 	return S_OK;

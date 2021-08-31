@@ -34,7 +34,7 @@ private:
 	int routeX, routeY;
 
 	float time;
-	bool _start; // 그냥 시작용
+	bool _start , _stop;
 	bool ismove, _render;
 	bool damage;
 	bool isMiniboss;
@@ -57,7 +57,7 @@ public:
 
 
 	void EndSelect(int endIndexX, int endIndexY);
-	void setMoveTile(int playerX, int playerY);
+	void setMoveTile(int playerX, int playerY , TYPE type);
 	void setAttackTile(int playerX, int playerY);
 
 	void move(int X ,int Y);
@@ -75,6 +75,7 @@ public:
 	int getTargetTileY() { return _endTile->getIdY(); }
 	bool getDamage() { return damage; }
 	bool getStart() { return _start; }
+	bool getStop() { return _stop; }
 	PLAYER_ENEMY_DIRECTION getDirection() { return _dir; };
 	string getAttribute(int x, int y) { return _vTotalList[y][x]->getAttribute(); }
 	int getCloseListsize() { return _vCloseList.size(); }
@@ -88,6 +89,7 @@ public:
 	//셋터
 	void setDamage(bool _damage) { damage = _damage; }
 	void setStart(bool start) { _start = start; }
+	void setStop(bool stop) { _stop = stop; }
 	void clear() { _vCloseList.clear(); _vOpenList.clear(); }
 };
 

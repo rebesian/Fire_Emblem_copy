@@ -49,7 +49,7 @@ void unit::update(int idx, int idy)
 			}
 			if (!_render)
 			{
-				_astar->setMoveTile(idx, idy);
+				_astar->setMoveTile(idx, idy , _type);
 				_render = true;
 			}
 		}
@@ -244,6 +244,7 @@ void unit::update(int idx, int idy)
 	}
 	else if (_type == ENEMY)
 	{
+		
 		if (_astar->getStart())
 		{
 			if (_astar->getCloseListsize() > 0)
@@ -332,12 +333,19 @@ void unit::update(int idx, int idy)
 					indexY - 1 == _astar->getTargetTileY() ||
 					indexY + 1 == _astar->getTargetTileY())
 					battle = true;
-				_astar->setMoveTile(indexX, indexY);
+				_astar->setMoveTile(indexX, indexY , _type);
 				use = true;
 				stageRenderY = 0;
 			}
 		}
+		else if (_astar->getStop())
+		{
+			_astar->setStop(false);
+			use = true;
+			stageRenderY = 0;
+		}
 	}
+
 	if(use)
 	{
 		_render = false;

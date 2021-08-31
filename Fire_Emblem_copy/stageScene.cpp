@@ -69,7 +69,11 @@ void stageScene::update()
 			for (int i = 0; i < _pm->getMaxPlayer(); ++i)
 			{
 				_pm->setUse(i, false);
-
+				
+			}
+			for (int i = 0; i < _em->getMaxEnemy(); i++)
+			{
+				_em->setMoveTile(i, _em->getIndexX(i), _em->getIndexY(i), ENEMY);
 			}
 			_enemyPoint = 0;
 		}
@@ -239,6 +243,7 @@ void stageScene::update()
 		{
 			if (!enemytargetOn) {
 				int random = RND->getInt(_pm->getMaxPlayer());
+
 				_em->targetOn(_enemyPoint, _pm->getIndexX(random), _pm->getIndexY(random));
 				_em->setRender(_enemyPoint, true);
 				enemytargetOn = true;
