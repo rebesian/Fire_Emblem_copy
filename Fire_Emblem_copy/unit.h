@@ -42,7 +42,7 @@ public:
 	virtual void release();
 	virtual void render();
 
-	void targetOn(int idx, int idy) { _astar->EndSelect(idx, idy); _astar->callPathFinder(); }
+	void targetOn(int idx, int idy);
 
 	int getIndexX() { return indexX; }
 	int getIndexY() { return indexY; }
@@ -66,6 +66,7 @@ public:
 	void setLinkMap(tileSet* map) { _map = map; }
 	void sethp(int hp) { _hp = hp; }
 	void setExp(float Exp) { exp = Exp; }
+	void setrender(bool render) { _render = render; }
 	void setpointing(bool pointing) { _pointing = pointing; }
 	void setPlayerSelect(bool Select) { _playerSelect = Select; }
 	void setMoveSelect(bool Select) { _moveSelect = Select; }

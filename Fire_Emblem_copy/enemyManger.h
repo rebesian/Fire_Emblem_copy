@@ -43,6 +43,7 @@ public:
 	void sethp(int pointed, int hp) { _vEnemy[pointed]->sethp(hp); }
 	void setExp(int pointed, float exp) { _vEnemy[pointed]->setExp(exp); }
 	void setUse(int pointed, bool use) { _vEnemy[pointed]->setUse(use); }
+	void setRender(int pointed, bool render) { _vEnemy[pointed]->setrender(render); }
 	void setPlayerSelect(int pointed, bool Select) { _vEnemy[pointed]->setPlayerSelect(Select); }
 	void setMoveSelect(int pointed, bool Select) { _vEnemy[pointed]->setMoveSelect(Select); }
 	void setAttackSelect(int pointed, bool Select) { _vEnemy[pointed]->setAttackSelect(Select); }

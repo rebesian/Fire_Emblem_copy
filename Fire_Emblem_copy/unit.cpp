@@ -244,7 +244,7 @@ void unit::update(int idx, int idy)
 		
 		//	_astar->EndSelect(2, 10);
 		//	_astar->callPathFinder();
-		
+
 		if (_astar->getStart())
 		{
 			if (_astar->getCloseListsize() > 0)
@@ -356,4 +356,10 @@ void unit::render()
 
 	_astar->render();
 
+}
+
+void unit::targetOn(int idx, int idy)
+{
+	 _astar->EndSelect(idx, idy);
+	 _astar->callPathFinder();
 }

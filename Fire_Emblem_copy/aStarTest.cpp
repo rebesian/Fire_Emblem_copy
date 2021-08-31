@@ -104,6 +104,7 @@ void aStarTest::setTile(int playerX, int playerY)
 		vector<tile*> TotalList;
 		for (int x =0 ; x <_map->getSizeX(); ++x)
 		{
+
 			if (x == playerX && playerY == y)
 			{
 				TotalList.push_back(_startTile);
@@ -111,6 +112,7 @@ void aStarTest::setTile(int playerX, int playerY)
 				continue;
 			}
 			tile* node = new tile;
+
 			node->setLinkMap(_map);
 			node->init(x, y);
 			TotalList.push_back(node);
@@ -329,7 +331,10 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 				_vTotalList[y][x]->setIsOpen(true);
 				continue;
 			}
-			_vTotalList[y][x]->setIsOpen(true);
+			if(_map->getMove(x,y))
+				_vTotalList[y][x]->setIsOpen(true);
+			else
+				_vTotalList[y][x]->setIsOpen(false);
 			_vTotalList[y][x]->setAttribute("none");
 		}
 	}
@@ -527,7 +532,7 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 						if (_vTotalList[y + i][x + j]->getAttribute() == "none")
 						{
 							_vTotalList[y + i][x + j]->setAttribute("attack");
-							_vTotalList[y + i][x + j]->setIsOpen(false);
+							//_vTotalList[y + i][x + j]->setIsOpen(false);
 						}
 
 					}
@@ -545,7 +550,7 @@ void aStarTest::setMoveTile(int playerX , int playerY)
 						if (_vTotalList[y + i][x - j]->getAttribute() == "none")
 						{
 							_vTotalList[y + i][x - j]->setAttribute("attack");
-							_vTotalList[y + i][x - j]->setIsOpen(false);
+							//_vTotalList[y + i][x - j]->setIsOpen(false);
 						}
 
 					}

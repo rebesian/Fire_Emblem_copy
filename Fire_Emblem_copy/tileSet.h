@@ -51,7 +51,7 @@ public:
 	bool getIsEnemy(int tilex, int tiley) { return _tiles[tiley][tilex].isEnemy; }
 	bool getIsPlayer(int tilex, int tiley) { return _tiles[tiley][tilex].isPlayer; }
 	string getName(int tilex, int tiley) { return _tiles[tiley][tilex].name; }
-	int getMove(int tilex, int tiley) { return _tiles[tiley][tilex].isMove; }
+	bool getMove(int tilex, int tiley) { return _tiles[tiley][tilex].isMove; }
 	int getDef(int tilex, int tiley) { return _tiles[tiley][tilex].def; }
 	int getAvo(int tilex, int tiley) { return _tiles[tiley][tilex].avo; }
 

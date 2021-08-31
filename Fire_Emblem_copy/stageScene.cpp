@@ -66,6 +66,11 @@ void stageScene::update()
 		if (useCount >= _pm->getMaxPlayer())
 		{
 			truePlayerFalseEnemy = false;
+			for (int i = 0; i < _pm->getMaxPlayer(); ++i)
+			{
+				_pm->setUse(i, false);
+
+			}
 			_enemyPoint = 0;
 		}
 		else
@@ -186,8 +191,6 @@ void stageScene::update()
 				}
 				isMoveSelect = true;
 			}
-		
-
 			//if (_roy->getPlayerSelect())
 			//{
 			//	_roy->setMoveSelect(true);
@@ -211,7 +214,6 @@ void stageScene::update()
 			//	if (!_roy->getPlayerSelect())
 			//		_roy->setPlayerSelect(true);
 			//}
-
 		}
 		if (KEYMANAGER->isOnceKeyDown('X'))
 		{
@@ -222,7 +224,6 @@ void stageScene::update()
 			//	_roy->setPlayerSelect(false);
 		}
 
-		
 		for (int i = 0; i < _pm->getMaxPlayer(); ++i)
 		{
 			if (_pm->getUse(i))
@@ -234,36 +235,34 @@ void stageScene::update()
 	}
 	else if(!truePlayerFalseEnemy && !isbattle)
 	{
-
-	
 		if (!_em->getUse(_enemyPoint))
 		{
 			if (!enemytargetOn) {
 				int random = RND->getInt(_pm->getMaxPlayer());
 				_em->targetOn(_enemyPoint, _pm->getIndexX(random), _pm->getIndexY(random));
+				_em->setRender(_enemyPoint, true);
 				enemytargetOn = true;
 			}
 		}
 		else
 		{
 			enemytargetOn = false;
+			_em->setRender(_enemyPoint, false);
 			_enemyPoint++;
+			enemyCount++;
 		}
 	
 		if (enemyCount >= _em->getMaxEnemy())
 		{
-			for (int i = 0; i < _pm->getMaxPlayer(); ++i)
+			for (int i = 0; i < _em->getMaxEnemy(); ++i)
 			{
-				_pm->setUse(i, false);
-
+				_em->setUse(i, false);
 			}
 			truePlayerFalseEnemy = true;
 			useCount = 0;
 			enemyCount = 0;
+			_enemyPoint = 0;
 		}
-
-
-
 		_pm->update(_pt.indexX, _pt.indexY);
 		_em->update(_pt.indexX, _pt.indexY);
 		

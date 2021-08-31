@@ -10,6 +10,7 @@ HRESULT soider::init(int idx, int idy, TYPE type)
 
 void soider::update(int idx, int idy)
 {
+	unit::update(idx, idy);
 	stageRenderCount++;
 	if (stageRenderCount % 7 == 0)
 	{
