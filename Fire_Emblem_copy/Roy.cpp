@@ -4,6 +4,13 @@
 HRESULT Roy::init(int idx, int idy, TYPE type)
 {
 	unit::init(idx, idy, 5,type);
+	name = "로이";
+	_hp = 20;
+	attack = 10;
+	critcal = 10;
+	speed = 10;
+	exp = 50;
+	avoid = 55;
 	_img = IMAGEMANAGER->findImage("로이Idle");
 	return S_OK;
 }

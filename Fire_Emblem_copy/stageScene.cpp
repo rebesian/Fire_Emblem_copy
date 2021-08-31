@@ -184,8 +184,8 @@ void stageScene::update()
 				isbattle = true;
 				_pm->setAttackSelect(_playerPoint,false);
 				_battleScene->setAction(true);
-				_battleScene->getPlayer(_pm->getName(_playerPoint), _roy->gethp(), _roy->getAttack(), 0, _roy->getCritcal());
-				_battleScene->getEnemy("ภüป็" , _warrior->gethp(), _warrior->getAttack(), 0, _warrior->getCritcal());
+				_battleScene->getPlayer(_pm->getName(_playerPoint), _pm->gethp(_playerPoint), _pm->getAttack(_playerPoint), 0, _pm->getCritcal(_playerPoint));
+				_battleScene->getEnemy(_em->getName(_playerPoint), _em->gethp(_playerPoint), _em->getAttack(_playerPoint), 0, _em->getCritcal(_playerPoint));
 			}
 			if (_playerPoint != 255)
 			{

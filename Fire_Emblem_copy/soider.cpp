@@ -5,6 +5,13 @@ HRESULT soider::init(int idx, int idy, TYPE type)
 {
 	unit::init(idx, idy, 5,type);
 	_img = IMAGEMANAGER->findImage("군인Idle");
+	name = "군인";
+	_hp = 20;
+	attack = 7;
+	critcal = 10;
+	speed = 10;
+	exp = 50;
+	avoid = 33;
 	return S_OK;
 }
 

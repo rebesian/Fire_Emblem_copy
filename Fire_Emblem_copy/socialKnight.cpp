@@ -4,13 +4,26 @@
 HRESULT socialKnight::init(int idx, int idy, TYPE type)
 {
 	unit::init(idx, idy, 7,type);
+	name = "소셜나이트";
 	switch (type)
 	{
 	case PLAYER:
 		_img = IMAGEMANAGER->findImage("소셜나이트Idle");
+		_hp = 20;
+		attack = 10;
+		critcal = 10;
+		speed = 10;
+		exp = 50;
+		avoid = 55;
 		break;
 	case ENEMY:
 		_img = IMAGEMANAGER->findImage("enemy소셜나이트Idle");
+		_hp = 20;
+		attack = 7;
+		critcal = 10;
+		speed = 10;
+		exp = 50;
+		avoid = 33;
 		break;
 	}
 	return S_OK;
