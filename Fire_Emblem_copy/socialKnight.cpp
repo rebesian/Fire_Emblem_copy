@@ -33,7 +33,7 @@ HRESULT socialKnight::init(int idx, int idy, TYPE type)
 void socialKnight::update(int idx, int idy)
 {
 	unit::update(idx, idy);
-	if (_astar->getStart())
+	if (_astar->getStart() && _moveSelect)
 	{
 		switch (_type)
 		{

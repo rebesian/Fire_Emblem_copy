@@ -43,18 +43,35 @@ void stageScene::update()
 
 	if (isbattle)
 	{
-		_battleScene->update();
-		if (!_battleScene->getAction())
+		if (truePlayerFalseEnemy)
 		{
-			isbattle = false;
-			_pm->setMoveSelect(_playerPoint, false);
-			_pm->setAttackSelect(_playerPoint , false);
-			_pm->setUse(_playerPoint, true);
-			isMoveSelect = false;
+			_battleScene->update();
+			if (!_battleScene->getAction())
+			{
+				isbattle = false;
+				_pm->setPlayerSelect(_playerPoint, false);
+				_pm->setMoveSelect(_playerPoint, false);
+				_pm->setAttackSelect(_playerPoint, false);
+				_pm->setUse(_playerPoint, true);
+				isMoveSelect = false;
+			}
+		}
+		else
+		{
+			_battleScene->update();
+			if (!_battleScene->getAction())
+			{
+				isbattle = false;
+				_em->setPlayerSelect(_enemyPoint, false);
+				_em->setMoveSelect(_enemyPoint, false);
+				_em->setAttackSelect(_enemyPoint, false);
+				_em->setUse(_enemyPoint, true);
+				isMoveSelect = false;
+			}
 		}
 	}
 
-	if(truePlayerFalseEnemy && !isbattle)
+	if (truePlayerFalseEnemy && !isbattle)
 	{
 		//if (_pt.indexX == _roy->getIndexX() && _pt.indexY == _roy->getIndexY())
 		//{
@@ -71,11 +88,7 @@ void stageScene::update()
 			for (int i = 0; i < _pm->getMaxPlayer(); ++i)
 			{
 				_pm->setUse(i, false);
-				
-			}
-			for (int i = 0; i < _em->getMaxEnemy(); i++)
-			{
-				_em->setMoveTile(i, _em->getIndexX(i), _em->getIndexY(i), ENEMY);
+
 			}
 			_enemyPoint = 0;
 		}
@@ -84,7 +97,12 @@ void stageScene::update()
 			useCount = 0;
 		}
 
-		if (!isMoveSelect)
+		if (_playerPoint != 255 && _pm->getAttackSelect(_playerPoint))
+		{
+			isAttackSelect= true;
+		}
+
+		if (!isMoveSelect && !isAttackSelect)
 		{
 			_playerPoint = _pm->isPoint(_pt.indexX, _pt.indexY);
 			//_enemyPoint = _em->isPoint(_pt.indexX, _pt.indexY);
@@ -94,6 +112,7 @@ void stageScene::update()
 			if (_pm->getUse(_playerPoint))
 			{
 				isMoveSelect = false;
+				isAttackSelect = false;
 			}
 		}
 
@@ -177,10 +196,14 @@ void stageScene::update()
 				if (_playerPoint != 255 && _pm->getPlayerSelect(_playerPoint))
 				{
 					_pm->setMoveSelect(_playerPoint, true);
+					
+					isMoveSelect = false;
+					
 				}
 			}
 			if (_playerPoint != 255 && _pm->getAttackSelect(_playerPoint))
 			{
+
 				if(_tileSet->getIsEnemy(_pt.indexX, _pt.indexY))
 				{
 					for (int i = 0; i < _em->getMaxEnemy(); ++i)
@@ -205,17 +228,16 @@ void stageScene::update()
 				if (!_pm->getPlayerSelect(_playerPoint)&& !_pm->getUse(_playerPoint))
 				{
 					_pm->setPlayerSelect(_playerPoint, true);
+					_pm->setMoveTile(_playerPoint, _pm->getIndexX(_playerPoint), _pm->getIndexY(_playerPoint), PLAYER);
+					isMoveSelect = true;
 				}
-				isMoveSelect = true;
 			}
 		}
 		if (KEYMANAGER->isOnceKeyDown('X'))
 		{
-			//if (_warrior->getPlayerSelect())
-			//	_warrior->setPlayerSelect(false);
-			//
-			//if (_roy->getPlayerSelect())
-			//	_roy->setPlayerSelect(false);
+			if (_pm->getPlayerSelect(_playerPoint))
+				_pm->setPlayerSelect(_playerPoint, false);
+			
 		}
 
 		for (int i = 0; i < _pm->getMaxPlayer(); ++i)
@@ -233,10 +255,24 @@ void stageScene::update()
 		{
 			if (!enemytargetOn) {
 				int random = RND->getInt(_pm->getMaxPlayer());
-
 				_em->targetOn(_enemyPoint, _pm->getIndexX(random), _pm->getIndexY(random));
 				_em->setRender(_enemyPoint, true);
 				enemytargetOn = true;
+			}
+			if (_em->getBattle(_enemyPoint))
+			{
+				isbattle = true;
+				for (int i = 0; i < _pm->getMaxPlayer(); i++)
+				{
+					if (_pm->getIndexX(i) == _em->getBattleX(_enemyPoint) && _pm->getIndexY(i) == _em->getBattleY(_enemyPoint))
+					{
+						_playerPoint = i;
+						break;
+					}
+				}
+				_battleScene->setAction(true);
+				_battleScene->getPlayer(_pm->getName(_playerPoint), _pm->gethp(_playerPoint), _pm->getAttack(_playerPoint), 0, _pm->getCritcal(_playerPoint));
+				_battleScene->getEnemy(_em->getName(_enemyPoint), _em->gethp(_enemyPoint), _em->getAttack(_enemyPoint), 0, _em->getCritcal(_enemyPoint));
 			}
 		}
 		else
@@ -256,15 +292,12 @@ void stageScene::update()
 			truePlayerFalseEnemy = true;
 			useCount = 0;
 			enemyCount = 0;
+			_playerPoint = 255;
 			_enemyPoint = 0;
 		}
 
 		_pm->update(_pt.indexX, _pt.indexY);
 		_em->update(_pt.indexX, _pt.indexY);
-		
-	}
-	else if(isbattle)
-	{
 		
 	}
 }

@@ -43,7 +43,6 @@ void unit::update(int idx, int idy)
 			if (!(idx == _astar->getTargetTileX() && idy == _astar->getTargetTileY())&&
 				_astar->getAttribute(idx, idy) == "move")
 			{
-				_map->setIsPlayer(indexX, indexY, false);
 				_astar->EndSelect(idx, idy);
 				_astar->callPathFinder();
 			}
@@ -55,6 +54,8 @@ void unit::update(int idx, int idy)
 		}
 		if (_moveSelect)
 		{
+
+			_map->setIsPlayer(indexX, indexY, false);
 			_playerSelect = false;
 			if (_render) _render = false;
 			if (_astar->getStart())
@@ -193,7 +194,7 @@ void unit::update(int idx, int idy)
 						_moving = false;
 						_astar->move(indexX, indexY);
 						_map->setIsPlayer(indexX, indexY, true);
-						_astar->setAttackTile(indexX, indexY);
+						_astar->setAttackTile(indexX, indexY , PLAYER);
 
 						//여기가 적 탐색하는곳
 						if (_astar->getEnemysize()>0)
@@ -328,10 +329,10 @@ void unit::update(int idx, int idy)
 			{
 				_astar->setStart(false);
 				_map->setIsEnemy(indexX, indexY, true);
-				if (indexX - 1 == _astar->getTargetTileX() ||
-					indexX + 1 == _astar->getTargetTileX() ||
-					indexY - 1 == _astar->getTargetTileY() ||
-					indexY + 1 == _astar->getTargetTileY())
+				if (indexX == _astar->getTargetTileX() - 1 ||
+					indexX == _astar->getTargetTileX() + 1 ||
+					indexY == _astar->getTargetTileY() - 1 ||
+					indexY == _astar->getTargetTileY() + 1)
 					battle = true;
 				_astar->setMoveTile(indexX, indexY , _type);
 				use = true;
@@ -341,6 +342,7 @@ void unit::update(int idx, int idy)
 		else if (_astar->getStop())
 		{
 			_astar->setStop(false);
+
 			use = true;
 			stageRenderY = 0;
 		}
@@ -368,8 +370,21 @@ void unit::render()
 
 void unit::targetOn(int idx, int idy)
 {
-	_map->setIsEnemy(indexX, indexY, false);
-	_astar->EndSelect(idx, idy);
-	_astar->callPathFinder();
-
+	_astar->setAttackTile(indexX, indexY , ENEMY);
+	if(_astar->getEnemysize()>0)
+	{
+		int i = RND->getInt(_astar->getEnemysize());
+		if (_map->getIsPlayer(_astar->getEnemyX(i), _astar->getEnemyY(i)))
+		{
+			battle = true;
+			battleX = _astar->getEnemyX(i);
+			battleY = _astar->getEnemyY(i);
+		}
+	}
+	else
+	{
+		_astar->setMoveTile(indexX, indexY , ENEMY);
+		_astar->EndSelect(idx, idy);
+		_astar->callPathFinder();
+	}
 }

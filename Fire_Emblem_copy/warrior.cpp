@@ -33,7 +33,7 @@ HRESULT warrior::init(int idx, int idy ,TYPE type)
 void warrior::update(int idx, int idy)
 {
 	unit::update(idx,idy);
-	if (_astar->getStart())
+	if (_astar->getStart() && _moveSelect)
 	{
 		switch (_type)
 		{
@@ -86,10 +86,5 @@ void warrior::render()
 {
 	unit::render();
 	_img->frameRender(_map->getMapDC(), stageX - (TILESIZE / 2), stageY - (TILESIZE), stageRenderX, stageRenderY);
-	if (battle)
-	{
-		char str[125];
-		sprintf_s(str, "½Î¿ò!");
-		TextOut(_map->getMapDC(), _rc.left, _rc.top, str, strlen(str));
-	}
+	
 }

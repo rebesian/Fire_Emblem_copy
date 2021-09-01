@@ -586,7 +586,7 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 
 }
 
-void aStarTest::setAttackTile(int playerX, int playerY)
+void aStarTest::setAttackTile(int playerX, int playerY , TYPE type)
 {
 	for (int y = 0; y < _vTotalList.size(); ++y)
 	{
@@ -610,9 +610,18 @@ void aStarTest::setAttackTile(int playerX, int playerY)
 			if (_vTotalList[playerY + i][playerX + j]->getAttribute() == "none")
 			{
 				_vTotalList[playerY + i][playerX + j]->setAttribute("attack");
-				if (_map->getIsEnemy(playerX + j, playerY + i))
+				if (type == PLAYER) {
+					if (_map->getIsEnemy(playerX + j, playerY + i))
+					{
+						_vEnemy.push_back(_vTotalList[playerY + i][playerX + j]);
+					}
+				}
+				else if (type == ENEMY)
 				{
-					_vEnemy.push_back(_vTotalList[playerY + i][playerX + j]);
+					if (_map->getIsPlayer(playerX + j, playerY + i))
+					{
+						_vEnemy.push_back(_vTotalList[playerY + i][playerX + j]);
+					}
 				}
 			}
 
@@ -632,18 +641,37 @@ void aStarTest::setAttackTile(int playerX, int playerY)
 			if (_vTotalList[playerY + i][playerX - j]->getAttribute() == "none")
 			{
 				_vTotalList[playerY + i][playerX - j]->setAttribute("attack");
-				if (_map->getIsEnemy(playerX + j, playerY + i))
+				if (type == PLAYER)
 				{
-					bool istrue = false;
-					for (int q = 0; q < _vEnemy.size(); ++q)
+					if (_map->getIsEnemy(playerX + j, playerY + i))
 					{
-						if (_vEnemy[q]->getIdX() == playerX + j
-							|| _vEnemy[q]->getIdY() == playerY + i)
-							istrue = true;
+						bool istrue = false;
+						for (int q = 0; q < _vEnemy.size(); ++q)
+						{
+							if (_vEnemy[q]->getIdX() == playerX + j
+								|| _vEnemy[q]->getIdY() == playerY + i)
+								istrue = true;
 
+						}
+						if (!istrue)
+							_vEnemy.push_back(_vTotalList[playerY + i][playerX + j]);
 					}
-					if(!istrue)
-						_vEnemy.push_back(_vTotalList[playerY + i][playerX + j]);
+				}
+				else if (type == ENEMY)
+				{
+					if (_map->getIsPlayer(playerX + j, playerY + i))
+					{
+						bool istrue = false;
+						for (int q = 0; q < _vEnemy.size(); ++q)
+						{
+							if (_vEnemy[q]->getIdX() == playerX + j
+								|| _vEnemy[q]->getIdY() == playerY + i)
+								istrue = true;
+
+						}
+						if (!istrue)
+							_vEnemy.push_back(_vTotalList[playerY + i][playerX + j]);
+					}
 				}
 			}
 		}

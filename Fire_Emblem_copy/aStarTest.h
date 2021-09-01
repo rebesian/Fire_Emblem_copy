@@ -58,7 +58,7 @@ public:
 
 	void EndSelect(int endIndexX, int endIndexY);
 	void setMoveTile(int playerX, int playerY , TYPE type);
-	void setAttackTile(int playerX, int playerY);
+	void setAttackTile(int playerX, int playerY , TYPE type);
 
 	void move(int X ,int Y);
 	void callPathFinder();

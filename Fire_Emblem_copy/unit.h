@@ -56,11 +56,14 @@ public:
 	bool getPointing() { return _pointing; }
 	bool getPlayerSelect() { return _playerSelect; }
 	bool getAttackSelect() { return _attackSelect; }
+	bool getBattle() { return battle; }
 	bool getUse() { return use; }
 	string getName() { return name; }
 	int getEnemySize() { return _astar->getEnemysize(); }
 	int getEnemyX(int i) { return _astar->getEnemyX(i); }
 	int getEnemyY(int i) { return _astar->getEnemyY(i); }
+	int getBattleX() { return battleX; }
+	int getBattleY() { return battleY; }
 	float getExp() { return exp; }
 	
 

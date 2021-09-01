@@ -30,6 +30,7 @@ public:
 	int getIndexY(int pointed) { return _vEnemy[pointed]->getIndexY(); }
 	bool getPlayerSelect(int pointed) { return _vEnemy[pointed]->getPlayerSelect(); }
 	bool getAttackSelect(int pointed) { return _vEnemy[pointed]->getAttackSelect(); }
+	bool getBattle(int pointed) { return _vEnemy[pointed]->getBattle(); }
 	bool getUse(int pointed) { return _vEnemy[pointed]->getUse(); }
 	string getName(int pointed) { return _vEnemy[pointed]->getName(); }
 	int gethp(int pointed) { return _vEnemy[pointed]->gethp(); }
@@ -38,6 +39,8 @@ public:
 	int getAvoid(int pointed) { return _vEnemy[pointed]->getAvoid(); }
 	int getCritcal(int pointed) { return _vEnemy[pointed]->getCritcal(); }
 	int getSpeed(int pointed) { return  _vEnemy[pointed]->getSpeed(); }
+	int getBattleX(int pointed) { return _vEnemy[pointed]->getBattleX(); }
+	int getBattleY(int pointed) { return _vEnemy[pointed]->getBattleY(); }
 	TYPE getType(int pointed) { return _vEnemy[pointed]->getType(); }
 
 
