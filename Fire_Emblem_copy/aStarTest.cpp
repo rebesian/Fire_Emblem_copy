@@ -643,34 +643,34 @@ void aStarTest::setAttackTile(int playerX, int playerY , TYPE type)
 				_vTotalList[playerY + i][playerX - j]->setAttribute("attack");
 				if (type == PLAYER)
 				{
-					if (_map->getIsEnemy(playerX + j, playerY + i))
+					if (_map->getIsEnemy(playerX - j, playerY + i))
 					{
 						bool istrue = false;
 						for (int q = 0; q < _vEnemy.size(); ++q)
 						{
-							if (_vEnemy[q]->getIdX() == playerX + j
+							if (_vEnemy[q]->getIdX() == playerX - j
 								|| _vEnemy[q]->getIdY() == playerY + i)
 								istrue = true;
 
 						}
 						if (!istrue)
-							_vEnemy.push_back(_vTotalList[playerY + i][playerX + j]);
+							_vEnemy.push_back(_vTotalList[playerY + i][playerX - j]);
 					}
 				}
 				else if (type == ENEMY)
 				{
-					if (_map->getIsPlayer(playerX + j, playerY + i))
+					if (_map->getIsPlayer(playerX - j, playerY + i))
 					{
 						bool istrue = false;
 						for (int q = 0; q < _vEnemy.size(); ++q)
 						{
-							if (_vEnemy[q]->getIdX() == playerX + j
+							if (_vEnemy[q]->getIdX() == playerX - j
 								|| _vEnemy[q]->getIdY() == playerY + i)
 								istrue = true;
 
 						}
 						if (!istrue)
-							_vEnemy.push_back(_vTotalList[playerY + i][playerX + j]);
+							_vEnemy.push_back(_vTotalList[playerY + i][playerX - j]);
 					}
 				}
 			}

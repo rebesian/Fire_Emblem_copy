@@ -47,6 +47,7 @@ public:
 
 	void targetOn(int pointed, int idx, int idy) { _vEnemy[pointed]->targetOn(idx, idy); }
 	void setMoveTile(int pointed, int idx, int idy , TYPE type) { _vEnemy[pointed]->setMoveTile(idx, idy , type); }
+	void setBattle(int pointed, bool is) { _vEnemy[pointed]->setBattle(is); }
 	void sethp(int pointed, int hp) { _vEnemy[pointed]->sethp(hp); }
 	void setExp(int pointed, float exp) { _vEnemy[pointed]->setExp(exp); }
 	void setUse(int pointed, bool use) { _vEnemy[pointed]->setUse(use); }

@@ -7,5 +7,7 @@ public:
 	void update(int idx, int idy);
 	void release();
 	void render();
+
+	void action();
 };
 

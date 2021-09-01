@@ -61,3 +61,7 @@ void Roy::render()
 
 
 }
+
+void Roy::action()
+{
+}

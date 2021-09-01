@@ -24,6 +24,9 @@ private:
 	int _enemyCrit;
 
 
+	float _playerActionX, _playerActionY;
+	float _enemyActionX, _enemyActionY;
+
 	int _playerCount;
 	int _playerIndex;
 	int _playerRenderX;
@@ -41,7 +44,7 @@ public:
 
 	HRESULT init();
 	void release();
-	void update();
+	void update(TYPE type);
 	void render(int x , int y);
 
 	void setLinkMap(tileSet* map) { _map = map; }
@@ -56,6 +59,7 @@ public:
 		char str[20];
 		_playerName += "attack";
 		playerimage = IMAGEMANAGER->findImage(_playerName);
+		playerStart(_playerName);
 	}
 	void getEnemy(string name, int enemyHp, int enemyAttack, int enemyHit, int enemyCrit)
 	{
@@ -67,7 +71,13 @@ public:
 		_enemyCrit = enemyCrit;
 		_enemyName += "attack";
 		enemyimage = IMAGEMANAGER->findImage(_enemyName);
+		enemyStart(_enemyName);
 	}
+
+	void playerStart(string name);
+	void enemyStart(string name);
+	void playerAction(string name);
+	void enemyAction(string name);
 
 	bool getAction() { return action; };
 	void setAction(bool isaction) { action = isaction; }

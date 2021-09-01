@@ -377,8 +377,8 @@ void unit::targetOn(int idx, int idy)
 		if (_map->getIsPlayer(_astar->getEnemyX(i), _astar->getEnemyY(i)))
 		{
 			battle = true;
-			battleX = _astar->getEnemyX(i);
-			battleY = _astar->getEnemyY(i);
+			targetPlayerX = _astar->getEnemyX(i);
+			targetPlayerY = _astar->getEnemyY(i);
 		}
 	}
 	else

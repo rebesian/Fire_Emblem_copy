@@ -45,7 +45,7 @@ void stageScene::update()
 	{
 		if (truePlayerFalseEnemy)
 		{
-			_battleScene->update();
+			_battleScene->update(PLAYER);
 			if (!_battleScene->getAction())
 			{
 				isbattle = false;
@@ -58,7 +58,7 @@ void stageScene::update()
 		}
 		else
 		{
-			_battleScene->update();
+			_battleScene->update(ENEMY);
 			if (!_battleScene->getAction())
 			{
 				isbattle = false;
@@ -73,15 +73,7 @@ void stageScene::update()
 
 	if (truePlayerFalseEnemy && !isbattle)
 	{
-		//if (_pt.indexX == _roy->getIndexX() && _pt.indexY == _roy->getIndexY())
-		//{
-		//	_roy->setpointing(true);
-		//}
-		//else
-		//{
-		//	_roy->setpointing(false);
-		//}
-
+		
 		if (useCount >= _pm->getMaxPlayer())
 		{
 			truePlayerFalseEnemy = false;
@@ -273,6 +265,7 @@ void stageScene::update()
 				_battleScene->setAction(true);
 				_battleScene->getPlayer(_pm->getName(_playerPoint), _pm->gethp(_playerPoint), _pm->getAttack(_playerPoint), 0, _pm->getCritcal(_playerPoint));
 				_battleScene->getEnemy(_em->getName(_enemyPoint), _em->gethp(_enemyPoint), _em->getAttack(_enemyPoint), 0, _em->getCritcal(_enemyPoint));
+				_em->setBattle(_enemyPoint, false);
 			}
 		}
 		else
@@ -322,6 +315,7 @@ void stageScene::render()
 		_pm->render();
 		_pt._img->render(_tileSet->getMapDC(), _pt._rc.left, _pt._rc.top);
 	}
+
 
 	CAMERAMANAGER->render(_tileSet->getTileBuffer(), getMemDC());
 

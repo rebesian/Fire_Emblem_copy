@@ -23,7 +23,7 @@ protected:
 	int critcal;
 	int speed;
 	float stageX, stageY;
-	float battleX, battleY;
+	int targetPlayerX, targetPlayerY;
 	float exp;
 	int avoid;
 
@@ -62,8 +62,8 @@ public:
 	int getEnemySize() { return _astar->getEnemysize(); }
 	int getEnemyX(int i) { return _astar->getEnemyX(i); }
 	int getEnemyY(int i) { return _astar->getEnemyY(i); }
-	int getBattleX() { return battleX; }
-	int getBattleY() { return battleY; }
+	int getBattleX() { return targetPlayerX; }
+	int getBattleY() { return targetPlayerY; }
 	float getExp() { return exp; }
 	
 
