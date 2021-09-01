@@ -47,8 +47,10 @@ void stageScene::update()
 		if (!_battleScene->getAction())
 		{
 			isbattle = false;
-			//_roy->setAttackSelect(false);
-			//_roy->setUse(true);
+			_pm->setMoveSelect(_playerPoint, false);
+			_pm->setAttackSelect(_playerPoint , false);
+			_pm->setUse(_playerPoint, true);
+			isMoveSelect = false;
 		}
 	}
 
@@ -119,22 +121,22 @@ void stageScene::update()
 		if (KEYMANAGER->isOnceKeyDown(VK_UP))
 		{
 
-			//if (_roy->getAttackSelect())
-			//{
-			//	selectEnemy++;
-			//	if (selectEnemy > _roy->getEnemySize() || _roy->getEnemySize() == 1)
-			//	{
-			//		selectEnemy = 0;
-			//	}
-			//	_pt.indexX = _roy->getEnemyX(selectEnemy);
-			//	_pt.indexY = _roy->getEnemyY(selectEnemy);
-			//	_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
-			//}
-			//else
-			//{
-			if (_pt.indexY > 0)_pt.indexY -= 1;
-			_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
-			//}
+			if (_playerPoint!= 255 && _pm->getAttackSelect(_playerPoint))
+			{
+				selectEnemy++;
+				if (selectEnemy >= _pm->getEnemySize(_playerPoint) || _pm->getEnemySize(_playerPoint) == 1)
+				{
+					selectEnemy = 0;
+				}
+				_pt.indexX = _pm->getEnemyX(_playerPoint, selectEnemy);
+				_pt.indexY = _pm->getEnemyY(_playerPoint, selectEnemy);
+				_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
+			}
+			else
+			{
+				if (_pt.indexY > 0)_pt.indexY -= 1;
+				_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
+			}
 			if (CAMERAMANAGER->getCameraTOP() <= 0)
 			{
 				CAMERAMANAGER->setCameraY(0);
@@ -142,22 +144,22 @@ void stageScene::update()
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 		{
-			//if (_roy->getAttackSelect())
-			//{
-			//	selectEnemy++;
-			//	if (selectEnemy > _roy->getEnemySize() || _roy->getEnemySize() == 1)
-			//	{
-			//		selectEnemy = 0;
-			//	}
-			//	_pt.indexX = _roy->getEnemyX(selectEnemy);
-			//	_pt.indexY = _roy->getEnemyY(selectEnemy);
-			//	_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
-			//}
-			//else
-			//{
-			if (_pt.indexY < _tileSet->getSizeY()) _pt.indexY += 1;
-			_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
-			//}
+			if (_playerPoint != 255 && _pm->getAttackSelect(_playerPoint))
+			{
+				selectEnemy++;
+				if (selectEnemy >= _pm->getEnemySize(_playerPoint) || _pm->getEnemySize(_playerPoint) == 1)
+				{
+					selectEnemy = 0;
+				}
+				_pt.indexX = _pm->getEnemyX(_playerPoint,selectEnemy);
+				_pt.indexY = _pm->getEnemyY(_playerPoint,selectEnemy);
+				_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
+			}
+			else
+			{
+				if (_pt.indexY < _tileSet->getSizeY()) _pt.indexY += 1;
+				_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
+			}
 			//CAMERAMANAGER->setCameraCenterY(CAMERAMANAGER->getCameraCenterY() + 5);
 			if (CAMERAMANAGER->getCameraBOTTOM() >= mapSizeY * TILESIZE && mapSizeY*TILESIZE >= CAMERAY)
 			{
@@ -170,22 +172,33 @@ void stageScene::update()
 			//{
 			//	isbattle = false;
 			//}
-
 			if (isMoveSelect)
 			{
-				if (_pm->getPlayerSelect(_playerPoint))
+				if (_playerPoint != 255 && _pm->getPlayerSelect(_playerPoint))
 				{
 					_pm->setMoveSelect(_playerPoint, true);
 				}
 			}
-			if (_pm->getAttackSelect(_playerPoint))
+			if (_playerPoint != 255 && _pm->getAttackSelect(_playerPoint))
 			{
-				//_pm->setBattle(true);
-				isbattle = true;
-				_pm->setAttackSelect(_playerPoint,false);
-				_battleScene->setAction(true);
-				_battleScene->getPlayer(_pm->getName(_playerPoint), _pm->gethp(_playerPoint), _pm->getAttack(_playerPoint), 0, _pm->getCritcal(_playerPoint));
-				_battleScene->getEnemy(_em->getName(_playerPoint), _em->gethp(_playerPoint), _em->getAttack(_playerPoint), 0, _em->getCritcal(_playerPoint));
+				if(_tileSet->getIsEnemy(_pt.indexX, _pt.indexY))
+				{
+					for (int i = 0; i < _em->getMaxEnemy(); ++i)
+					{
+						if (_em->getIndexX(i) == _pt.indexX && _em->getIndexY(i) == _pt.indexY)
+						{
+							_enemyPoint = i;
+							break;
+						}
+					}
+					isbattle = true;
+					_pm->setAttackSelect(_playerPoint, false);
+					_battleScene->setAction(true);
+					_battleScene->getPlayer(_pm->getName(_playerPoint), _pm->gethp(_playerPoint), _pm->getAttack(_playerPoint), 0, _pm->getCritcal(_playerPoint));
+					_battleScene->getEnemy(_em->getName(_enemyPoint), _em->gethp(_enemyPoint), _em->getAttack(_enemyPoint), 0, _em->getCritcal(_enemyPoint));
+				}
+
+	
 			}
 			if (_playerPoint != 255)
 			{
@@ -195,29 +208,6 @@ void stageScene::update()
 				}
 				isMoveSelect = true;
 			}
-			//if (_roy->getPlayerSelect())
-			//{
-			//	_roy->setMoveSelect(true);
-			//}
-			//if (_roy->getAttackSelect())
-			//{
-			//	_roy->setBattle(true);
-			//	isbattle = true;
-			//	_roy->setAttackSelect(false);
-			//	_battleScene->setAction(true);
-			//	_battleScene->getPlayer("로이", _roy->gethp(), _roy->getAttack(), 0, _roy->getCritcal());
-			//	_battleScene->getEnemy("enemy전사", _warrior->gethp(), _warrior->getAttack(), 0, _warrior->getCritcal());
-			//}
-			//if (_pt.indexX == _warrior->getIndexX() && _pt.indexY == _warrior->getIndexY())
-			//{
-			//	if (!_warrior->getPlayerSelect())
-			//		_warrior->setPlayerSelect(true);
-			//}
-			//if (_pt.indexX == _roy->getIndexX() && _pt.indexY == _roy->getIndexY())
-			//{
-			//	if (!_roy->getPlayerSelect())
-			//		_roy->setPlayerSelect(true);
-			//}
 		}
 		if (KEYMANAGER->isOnceKeyDown('X'))
 		{

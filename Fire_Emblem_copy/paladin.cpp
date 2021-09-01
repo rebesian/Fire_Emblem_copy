@@ -4,6 +4,13 @@
 HRESULT paladin::init(int idx, int idy, TYPE type)
 {
 	unit::init(idx, idy, 7,type);
+	name = "∆»∂ÛµÚ";
+	_hp = 20;
+	attack = 10;
+	critcal = 10;
+	speed = 10;
+	exp = 50;
+	avoid = 55;
 
 	_img = IMAGEMANAGER->findImage("∆»∂ÛµÚIdle");
 

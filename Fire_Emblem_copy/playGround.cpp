@@ -67,7 +67,6 @@ void playGround::inputImage()
 	IMAGEMANAGER->addFrameImage("movement", "image/MapSprite/movement.bmp", 768, 144, 16, 3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("현재타일", "image/MapSprite/현재타일.bmp", 48, 48, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("route", "image/MapSprite/route.bmp", 192, 192, 4, 4, true, RGB(255, 0, 255));
-	
 	IMAGEMANAGER->addImage("전투Hud", "image/전투Hud1.bmp", 960, 600, true, RGB(255, 0, 255));
 
 	//병과아이콘
@@ -139,76 +138,76 @@ void playGround::inputImage()
 
 	//전투
 	//attack
-	IMAGEMANAGER->addFrameImage("소셜나이트창attack", "image/character/소셜나이트창attack.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("2소셜나이트창attack", "image/character/2소셜나이트창attack.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy소셜나이트창attack", "image/character/enemy소셜나이트창attack.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("소셜나이트attack", "image/character/소셜나이트창attack.bmp", 6780,336, 15, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("2소셜나이트attack", "image/character/2소셜나이트창attack.bmp", 6780, 336, 15, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy소셜나이트attack", "image/character/enemy소셜나이트창attack.bmp", 6780, 336, 15, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("소셜나이트검attack", "image/character/소셜나이트검attack.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("2소셜나이트검attack", "image/character/2소셜나이트검attack.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("enemy소셜나이트검attack", "image/character/enemy소셜나이트검attack.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("전사attack", "image/character/전사attack.bmp", 1236, 56, 12, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("2전사attack", "image/character/2전사attack.bmp", 1236, 56, 12, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("전사attack", "image/character/전사attack.bmp", 4944, 244, 12, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("2전사attack", "image/character/2전사attack.bmp", 4944, 244, 12, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("enemy전사attack", "image/character/enemy전사attack.bmp", 4944, 244, 12, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("아머나이트attack", "image/character/아머나이트attack.bmp", 1236, 56, 19, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy아머나이트attack", "image/character/enemy아머나이트attack.bmp", 1957,78, 19, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("아머나이트attack", "image/character/아머나이트attack.bmp", 7828, 312, 19, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy아머나이트attack", "image/character/enemy아머나이트attack.bmp", 7828, 312, 19, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아처attack", "image/character/아처attack.bmp", 768, 42, 16, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("enemy아처attack", "image/character/enemy아처attack.bmp", 768, 42, 16, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("용병attack", "image/character/용병attack.bmp", 2890, 139, 34, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("군인attack", "image/character/군인attack.bmp", 1157,61, 13, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("용병attack", "image/character/용병attack.bmp",11560, 556, 34, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy군인attack", "image/character/군인attack.bmp", 4628, 244, 13, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("메이지attack", "image/character/메이지attack.bmp",1403, 41, 23, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("로이attack", "image/character/로이attack.bmp", 9400, 256, 25, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("산적attack", "image/character/산적attack.bmp", 612, 53, 6, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy산적attack", "image/character/산적attack.bmp", 2448, 212, 6, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("팔라딘검attack", "image/character/팔라딘검attack.bmp", 3146, 96, 26, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("팔라딘창attack", "image/character/팔라딘창attack.bmp", 3751, 96, 31, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("팔라딘attack", "image/character/팔라딘창attack.bmp", 15004,384, 31, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("페가수스나이트attack", "image/character/페가수스나이트attack.bmp", 2736, 105, 24, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("검사attack", "image/character/검사attack.bmp", 1150, 69, 15, 1, true, RGB(255, 0, 255));
 
 
 	//critcal
-	IMAGEMANAGER->addFrameImage("소셜나이트창critcal", "image/character/소셜나이트창critcal.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("2소셜나이트창critcal", "image/character/2소셜나이트창critcal.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy소셜나이트창critcal", "image/character/enemy소셜나이트창critcal.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("소셜나이트critcal", "image/character/소셜나이트창critcal.bmp", 6780, 336, 15, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("2소셜나이트critcal", "image/character/2소셜나이트창critcal.bmp", 6780, 336, 15, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy소셜나이트critcal", "image/character/enemy소셜나이트창critcal.bmp", 6780, 336, 15, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("소셜나이트검critcal", "image/character/소셜나이트검critcal.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("2소셜나이트검critcal", "image/character/2소셜나이트검critcal.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("enemy소셜나이트검critcal", "image/character/enemy소셜나이트검critcal.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("전사critcal", "image/character/전사critcal.bmp", 927, 56, 9, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("2전사critcal", "image/character/2전사critcal.bmp", 927, 56, 9, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy전사critcal", "image/character/enemy전사critcal.bmp", 927, 56, 9, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("아머나이트critcal", "image/character/아머나이트critcal.bmp", 1751, 78, 17, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy아머나이트critcal", "image/character/enemy아머나이트critcal.bmp", 1751, 78, 17, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("전사critcal", "image/character/전사critcal.bmp", 3708, 224, 9, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("2전사critcal", "image/character/2전사critcal.bmp", 3708, 224, 9, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy전사critcal", "image/character/enemy전사critcal.bmp", 3708, 224, 9, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("아머나이트critcal", "image/character/아머나이트critcal.bmp", 7004 , 312, 17, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy아머나이트critcal", "image/character/enemy아머나이트critcal.bmp", 7004, 312, 17, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아처critcal", "image/character/아처critcal.bmp", 720, 42, 15, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("enemy아처critcal", "image/character/enemy아처critcal.bmp", 720, 42, 15, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("용병critcal", "image/character/용병critcal.bmp", 4250, 139, 50, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("군인critcal", "image/character/군인critcal.bmp", 1335, 61, 15, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("용병critcal", "image/character/용병critcal.bmp", 17000, 556, 50, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("군인critcal", "image/character/군인critcal.bmp", 5320 ,224 , 15, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("로이critcal", "image/character/로이critcal.bmp", 3760, 64, 25, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("산적critcal", "image/character/산적critcal.bmp", 1224, 53, 12, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("산적critcal", "image/character/산적critcal.bmp", 4896, 212, 12, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("팔라딘검critcal", "image/character/팔라딘검critcal.bmp",2662, 96, 22, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("팔라딘창critcal", "image/character/팔라딘창critcal.bmp", 2662, 96, 22, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("팔라딘critcal", "image/character/팔라딘창critcal.bmp", 10648, 384 , 22, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("페가수스나이트critcal", "image/character/페가수스나이트critcal.bmp",1140, 105, 10, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("검사critcal", "image/character/검사critcal.bmp", 1850, 69, 25, 1, true, RGB(255, 0, 255));
 
 
 
 	//avoid
-	IMAGEMANAGER->addFrameImage("소셜나이트창avoid", "image/character/소셜나이트창avoid.bmp", 339, 84, 3, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("2소셜나이트창avoid", "image/character/2소셜나이트창avoid.bmp", 339, 84, 3, 1,  true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy소셜나이트창avoid", "image/character/enemy소셜나이트창avoid.bmp", 339, 84, 3, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("소셜나이트검avoid", "image/character/소셜나이트검avoid.bmp", 339, 84, 3, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("2소셜나이트검avoid", "image/character/2소셜나이트검avoid.bmp", 339, 84, 3, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy소셜나이트검avoid", "image/character/enemy소셜나이트검avoid.bmp", 339, 84, 3, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("전사avoid", "image/character/전사avoid.bmp", 309, 56, 3, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("2전사avoid", "image/character/2전사avoid.bmp", 309, 56, 3, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy전사avoid", "image/character/enemy전사avoid.bmp", 309, 56, 3, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("아머나이트avoid", "image/character/아머나이트avoid.bmp", 515, 78, 5, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("enemy아머나이트avoid", "image/character/enemy아머나이트avoid.bmp", 515, 78, 5, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("소셜나이트avoid", "image/character/소셜나이트창avoid.bmp", 6780 , 336, 3, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("2소셜나이트avoid", "image/character/2소셜나이트창avoid.bmp", 6780, 336, 3, 1,  true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy소셜나이트avoid", "image/character/enemy소셜나이트창avoid.bmp", 6780, 336, 3, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("소셜나이트검avoid", "image/character/소셜나이트검avoid.bmp", 6780, 336, 3, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("2소셜나이트검avoid", "image/character/2소셜나이트검avoid.bmp", 6780, 336, 3, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy소셜나이트검avoid", "image/character/enemy소셜나이트검avoid.bmp", 6780, 336, 3, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("전사avoid", "image/character/전사avoid.bmp", 1236, 224, 3, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("2전사avoid", "image/character/2전사avoid.bmp", 1236, 224, 3, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy전사avoid", "image/character/enemy전사avoid.bmp", 1236, 224, 3, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("아머나이트avoid", "image/character/아머나이트avoid.bmp", 2060, 312, 5, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy아머나이트avoid", "image/character/enemy아머나이트avoid.bmp", 2060, 312, 5, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아처avoid", "image/character/아처avoid.bmp", 144, 42, 16, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("enemy아처avoid", "image/character/enemy아처avoid.bmp", 144, 42, 3, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("용병avoid", "image/character/용병avoid.bmp", 425, 139, 5, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("군인avoid", "image/character/군인avoid.bmp", 267, 61, 3, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("용병avoid", "image/character/용병avoid.bmp", 1700, 556, 5, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("군인avoid", "image/character/군인avoid.bmp", 1068 , 244, 3, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("메이지avoid", "image/character/메이지avoid.bmp", 183, 41, 3, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("로이avoid", "image/character/로이avoid.bmp", 470, 64, 5, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("산적avoid", "image/character/산적avoid.bmp", 306, 53, 3, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("팔라딘검avoid", "image/character/팔라딘검avoid.bmp", 635, 96, 5, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("팔라딘창avoid", "image/character/팔라딘창avoid.bmp", 635, 96, 5, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("로이avoid", "image/character/로이avoid.bmp", 1880 , 256, 5, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("산적avoid", "image/character/산적avoid.bmp", 1224 , 212, 3, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("팔라딘검avoid", "image/character/팔라딘검avoid.bmp", 2540, 384, 5, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("팔라딘avoid", "image/character/팔라딘창avoid.bmp", 2540 , 384, 5, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("페가수스나이트avoid", "image/character/페가수스나이트avoid.bmp", 342, 105, 3, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("검사avoid", "image/character/검사avoid.bmp", 229, 69, 3, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("검사end", "image/character/검사end.bmp", 814, 69, 11, 1, true, RGB(255, 0, 255));

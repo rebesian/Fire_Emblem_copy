@@ -49,8 +49,9 @@ public:
 	int getAvoid(int pointed) { return _vplayer[pointed]->getAvoid();}
 	int getCritcal(int pointed) { return _vplayer[pointed]->getCritcal(); }
 	int getSpeed(int pointed) { return  _vplayer[pointed]->getSpeed();}
-
-
+	int getEnemySize(int pointed) { return _vplayer[pointed]->getEnemySize(); }
+	int getEnemyX(int pointed ,int i) { return _vplayer[pointed]->getEnemyX(i); }
+	int getEnemyY(int pointed, int i) { return _vplayer[pointed]->getEnemyY(i); }
 
 	void setMoveTile(int pointed, int idx, int idy , TYPE type) { _vplayer[pointed]->setMoveTile(idx, idy , type); }
 	void sethp(int pointed , int hp) { _vplayer[pointed]->sethp(hp); }

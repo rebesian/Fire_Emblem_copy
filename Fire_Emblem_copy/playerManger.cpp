@@ -8,7 +8,6 @@ HRESULT playerManger::init(TYPE type)
 	_roy->setLinkMap(_map);
 	_roy->init(2, 10, type);
 	_vplayer.push_back(_roy);
-	//_mage =new mage;
 
 	_warrior = new warrior;
 	_warrior->setLinkMap(_map);
@@ -19,14 +18,13 @@ HRESULT playerManger::init(TYPE type)
 	_paladin->setLinkMap(_map);
 	_paladin->init(1, 10, type);
 	_vplayer.push_back(_paladin);
-	//_archer = new archer;
-
+	
 	_armor = new ArmorKnight;
 	_armor->setLinkMap(_map);
 	_armor->init(2, 9, type);
 	_vplayer.push_back(_armor);
 
-	//_Pegasus = new Pegasus;
+	
 	_social = new socialKnight;
 	_social->setLinkMap(_map);
 	_social->init(2, 11, type);
@@ -36,11 +34,7 @@ HRESULT playerManger::init(TYPE type)
 	{
 		_vplayer[i]->setMoveTile(_vplayer[i]->getIndexX(), _vplayer[i]->getIndexY() , type);
 	}
-	//_transport = new transport;
-	//_transport->setLinkMap(_map);
-	//_transport->init(2, 10, type);
-	//_vplayer.push_back(_transport);
-	//_sword = new Swordsman;
+
 	return S_OK;
 }
 
