@@ -383,6 +383,7 @@ void unit::targetOn(int idx, int idy)
 	}
 	else
 	{
+		_map->setIsEnemy(indexX, indexY, false);
 		_astar->setMoveTile(indexX, indexY , ENEMY);
 		_astar->EndSelect(idx, idy);
 		_astar->callPathFinder();
