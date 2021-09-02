@@ -5,10 +5,16 @@ class tileSet;
 class battleScene : public gameNode
 {
 private:
+	struct UI
+	{
+		image *hit = IMAGEMANAGER->findImage("hit"), *damage = IMAGEMANAGER->findImage("damage"), *crit = IMAGEMANAGER->findImage("crit"), *hp1 = IMAGEMANAGER->findImage("hpbar1"), *hp2 = IMAGEMANAGER->findImage("hpbar2");
+		image *num1, *num2, *num3, *num4, *num5, *num6, *num7, *num8;
+	};
 
 	image* battleStage;
 	image* playerimage;
 	image* enemyimage;
+	UI _player, _enemy;
 	tileSet* _map;
 
 	string _playerName;
@@ -45,7 +51,7 @@ public:
 	HRESULT init();
 	void release();
 	void update(TYPE type);
-	void render(int x , int y);
+	void render(int x , int y , bool truePlayerFalseEnemy);
 
 	void setLinkMap(tileSet* map) { _map = map; }
 

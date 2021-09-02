@@ -67,7 +67,25 @@ void playGround::inputImage()
 	IMAGEMANAGER->addFrameImage("movement", "image/MapSprite/movement.bmp", 768, 144, 16, 3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("현재타일", "image/MapSprite/현재타일.bmp", 48, 48, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("route", "image/MapSprite/route.bmp", 192, 192, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("전투Hud", "image/전투Hud1.bmp", 960, 600, true, RGB(255, 0, 255));
+	
+	//UI
+	IMAGEMANAGER->addImage("전투Hud", "image/UI/전투Hud1.bmp", 960, 600, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("0", "image/UI/0.bmp", 24,24, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("1", "image/UI/1.bmp", 24, 24,  true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("2", "image/UI/2.bmp", 24, 24, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("3", "image/UI/3.bmp", 24, 24, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("4", "image/UI/4.bmp", 24, 24, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("5", "image/UI/5.bmp", 24, 24, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("6", "image/UI/6.bmp", 24, 24, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("7", "image/UI/7.bmp", 24, 24, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("8", "image/UI/8.bmp", 24, 24, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("9", "image/UI/9.bmp", 24, 24, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("hit", "image/UI/hit.bmp", 39, 24, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("damage", "image/UI/damage.bmp", 45, 24, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("crit", "image/UI/crit.bmp", 39, 24, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("hpbar1", "image/UI/hpbar1.bmp", 256, 26, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("hpbar2", "image/UI/hpbar2.bmp", 256, 26, true, RGB(255, 0, 255));
+
 
 	//병과아이콘
 	//아군 Idle
@@ -144,8 +162,8 @@ void playGround::inputImage()
 	IMAGEMANAGER->addFrameImage("소셜나이트검attack", "image/character/소셜나이트검attack.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("2소셜나이트검attack", "image/character/2소셜나이트검attack.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("enemy소셜나이트검attack", "image/character/enemy소셜나이트검attack.bmp", 1695, 128, 15, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("전사attack", "image/character/전사attack.bmp", 4944, 244, 12, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("2전사attack", "image/character/2전사attack.bmp", 4944, 244, 12, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("전사attack", "image/character/2전사attack.bmp", 4944, 244, 12, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("2전사attack", "image/character/전사attack.bmp", 4944, 244, 12, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("enemy전사attack", "image/character/enemy전사attack.bmp", 4944, 244, 12, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아머나이트attack", "image/character/아머나이트attack.bmp", 7828, 312, 19, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("enemy아머나이트attack", "image/character/enemy아머나이트attack.bmp", 7828, 312, 19, 1, true, RGB(255, 0, 255));
@@ -194,8 +212,8 @@ void playGround::inputImage()
 	IMAGEMANAGER->addFrameImage("소셜나이트검avoid", "image/character/소셜나이트검avoid.bmp", 6780, 336, 3, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("2소셜나이트검avoid", "image/character/2소셜나이트검avoid.bmp", 6780, 336, 3, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("enemy소셜나이트검avoid", "image/character/enemy소셜나이트검avoid.bmp", 6780, 336, 3, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("전사avoid", "image/character/전사avoid.bmp", 1236, 224, 3, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("2전사avoid", "image/character/2전사avoid.bmp", 1236, 224, 3, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("전사avoid", "image/character/2전사avoid.bmp", 1236, 224, 3, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("2전사avoid", "image/character/전사avoid.bmp", 1236, 224, 3, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("enemy전사avoid", "image/character/enemy전사avoid.bmp", 1236, 224, 3, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아머나이트avoid", "image/character/아머나이트avoid.bmp", 2060, 312, 5, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("enemy아머나이트avoid", "image/character/enemy아머나이트avoid.bmp", 2060, 312, 5, 1, true, RGB(255, 0, 255));

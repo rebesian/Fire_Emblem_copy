@@ -45,7 +45,7 @@ void stageScene::update()
 	//{
 	//	if (truePlayerFalseEnemy)
 	//	{
-			_battleScene->update(ENEMY);
+			_battleScene->update(PLAYER);
 	//		if (!_battleScene->getAction())
 	//		{
 	//			isbattle = false;
@@ -263,8 +263,8 @@ void stageScene::update()
 	//				}
 	//			}
 	//			_battleScene->setAction(true);
-	//			_battleScene->getPlayer(_pm->getName(_playerPoint), _pm->gethp(_playerPoint), _pm->getAttack(_playerPoint), 0, _pm->getCritcal(_playerPoint));
-	//			_battleScene->getEnemy(_em->getName(_enemyPoint), _em->gethp(_enemyPoint), _em->getAttack(_enemyPoint), 0, _em->getCritcal(_enemyPoint));
+	//			_battleScene->getPlayer(_pm->getName(_playerPoint), _pm->gethp(_playerPoint), _pm->getAttack(_playerPoint), _pm->getAvoid(_playerPoint), _pm->getCritcal(_playerPoint));
+	//			_battleScene->getEnemy(_em->getName(_enemyPoint), _em->gethp(_enemyPoint), _em->getAttack(_enemyPoint), _em->getAvoid(_enemyPoint), _em->getCritcal(_enemyPoint));
 	//			_em->setBattle(_enemyPoint, false);
 	//		}
 	//	}
@@ -307,7 +307,7 @@ void stageScene::render()
 	//
 	//if (isbattle)
 	//{
-		_battleScene->render(CAMERAMANAGER->getCameraLEFT(), CAMERAMANAGER->getCameraTOP());
+		_battleScene->render(CAMERAMANAGER->getCameraLEFT(), CAMERAMANAGER->getCameraTOP() , true);
 	//}
 	//else
 	//{
