@@ -35,7 +35,6 @@ protected:
 	int battleRender;
 
 	int stageRenderCount;
-	int battleRenderCount;
 public:
 	virtual HRESULT init(int idx, int idy, int moveRange,TYPE type);
 	virtual void update(int idx, int idy);

@@ -8,7 +8,7 @@ private:
 	struct UI
 	{
 		image *hit = IMAGEMANAGER->findImage("hit"), *damage = IMAGEMANAGER->findImage("damage"), *crit = IMAGEMANAGER->findImage("crit"), *hp1 = IMAGEMANAGER->findImage("hpbar1"), *hp2 = IMAGEMANAGER->findImage("hpbar2");
-		image *num1, *num2, *num3, *num4, *num5, *num6, *num7, *num8;
+	
 	};
 
 	image* battleStage;
@@ -16,19 +16,21 @@ private:
 	image* enemyimage;
 	UI _player, _enemy;
 	tileSet* _map;
+	TYPE type;
 
 	string _playerName;
-	int _playerHp;
+	float _playerHp;
+	float _playerCurrentHp;
 	int _playerAttack;
 	int _playerHit;
 	int _playerCrit;
 
 	string _enemyName;
-	int _enemyHp;
+	float _enemyHp;
+	float _enemyCurrentHp;
 	int _enemyAttack;
 	int _enemyHit;
 	int _enemyCrit;
-
 
 	float _playerActionX, _playerActionY;
 	float _enemyActionX, _enemyActionY;
@@ -42,6 +44,7 @@ private:
 	int _enemyRenderX;
 
 	bool action;
+	bool _truePlayerFalseEnemy;
 	bool attack;
 
 public:
@@ -50,7 +53,7 @@ public:
 
 	HRESULT init();
 	void release();
-	void update(TYPE type);
+	void update(TYPE _type);
 	void render(int x , int y , bool truePlayerFalseEnemy);
 
 	void setLinkMap(tileSet* map) { _map = map; }
@@ -58,7 +61,7 @@ public:
 	void getPlayer(string name, int playerHp, int playerAttack, int playerHit, int playerCrit)
 	{
 		_playerName = name;
-		_playerHp = playerHp;
+		_playerCurrentHp = _playerHp = playerHp;
 		_playerAttack = playerAttack;
 		_playerHit = playerHit;
 		_playerCrit = playerCrit;
@@ -71,7 +74,7 @@ public:
 	{
 		_enemyName = "enemy";
 		_enemyName += name;
-		_enemyHp = enemyHp;
+		_enemyCurrentHp = _enemyHp = enemyHp;
 		_enemyAttack = enemyAttack;
 		_enemyHit = enemyHit;
 		_enemyCrit = enemyCrit;

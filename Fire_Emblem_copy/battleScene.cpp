@@ -20,8 +20,18 @@ HRESULT battleScene::init()
 	_enemyName = "enemy소셜나이트attack";
 	playerStart(_playerName);
 	enemyStart(_enemyName);
+	_playerCurrentHp = _playerHp = 20;
+	_playerAttack=10;
+	_playerHit=55;
+	_playerCrit=10;
+
+	_enemyCurrentHp  = _enemyHp = 20;
+	_enemyAttack=7;
+	_enemyHit=30;
+	_enemyCrit=10;
 	action = false;
 	attack = false;
+	_truePlayerFalseEnemy = false;
 	return S_OK;
 }
 
@@ -29,24 +39,15 @@ void battleScene::release()
 {
 }
 
-void battleScene::update(TYPE type)
+void battleScene::update(TYPE _type)
 {
+	type = _type;
 	if (action)
 	{
-		if (type == PLAYER)
-		{
-			//playerAction(_playerName);
+		if(_truePlayerFalseEnemy)
+			playerAction(_playerName);
+		else
 			enemyAction(_enemyName);
-			if (attack)
-			{
-				
-			}
-		}
-		else if (type == ENEMY)
-		{
-
-			enemyAction(_enemyName);
-		}
 	}
 	else
 	{
@@ -57,7 +58,7 @@ void battleScene::update(TYPE type)
 		if (KEYMANAGER->isOnceKeyDown('R'))
 		{
 			action = true;
-
+			_truePlayerFalseEnemy = true;
 		}
 	}
 }
@@ -65,32 +66,137 @@ void battleScene::update(TYPE type)
 void battleScene::render(int x , int y , bool truePlayerFalseEnemy)
 {
 	battleStage->render(_map->getMapDC() , x ,y);
-	_player.hit->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 125, CAMERAMANAGER->getCameraTOP() + 433);
-	_player.damage->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 125, CAMERAMANAGER->getCameraTOP() + 461);
-	_player.crit->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 125, CAMERAMANAGER->getCameraTOP() + 488);
-	_player.hp1->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 195, CAMERAMANAGER->getCameraTOP() + 547);
-	_player.hp2->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 195, CAMERAMANAGER->getCameraTOP() + 547);
-	_enemy.hit->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 799, CAMERAMANAGER->getCameraTOP() + 433);
-	_enemy.damage->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 796, CAMERAMANAGER->getCameraTOP() + 461);
-	_enemy.crit->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 799, CAMERAMANAGER->getCameraTOP() + 488);
-	_enemy.hp2->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 505, CAMERAMANAGER->getCameraTOP() + 547);
-	_enemy.hp1->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 505, CAMERAMANAGER->getCameraTOP() + 547);
+	_enemy.hit->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 125, CAMERAMANAGER->getCameraTOP() + 433);
+	_enemy.damage->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 125, CAMERAMANAGER->getCameraTOP() + 461);
+	_enemy.crit->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 125, CAMERAMANAGER->getCameraTOP() + 488);
+	_enemy.hp2->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 195, CAMERAMANAGER->getCameraTOP() + 547);
+	_enemy.hp1->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 195, CAMERAMANAGER->getCameraTOP() + 547 , 0, 0, (_enemyCurrentHp / _enemyHp) * 256, 26);
+	_player.hit->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 799, CAMERAMANAGER->getCameraTOP() + 433);
+	_player.damage->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 796, CAMERAMANAGER->getCameraTOP() + 461);
+	_player.crit->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 799, CAMERAMANAGER->getCameraTOP() + 488);
+	_player.hp2->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 505, CAMERAMANAGER->getCameraTOP() + 547);
+	_player.hp1->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 505, CAMERAMANAGER->getCameraTOP() + 547,  0 , 0,  (_playerCurrentHp / _playerHp)*256 , 26);
 
-	if (_playerHit > 10)
+	if (_enemyHit >= 10)
 	{
 		char str[12];
-		sprintf_s(str, "%d", _playerHit / 10);
+		sprintf_s(str, "%d", _enemyHit / 10);
 		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 186, CAMERAMANAGER->getCameraTOP() + 433);
-		sprintf_s(str, "%d", _playerHit % 10);
+		sprintf_s(str, "%d", _enemyHit % 10);
 		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT()  + 210, CAMERAMANAGER->getCameraTOP() + 433);
 	}
 	else
 	{
 		char str[12];
-		sprintf_s(str, "%d", _playerHit);
-		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 186, CAMERAMANAGER->getCameraTOP() + 433);
+		sprintf_s(str, "%d", _enemyHit);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 210, CAMERAMANAGER->getCameraTOP() + 433);
 	}
 
+	if (_enemyAttack >= 10)
+	{
+		char str[12];
+		sprintf_s(str, "%d", _enemyAttack / 10);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 186, CAMERAMANAGER->getCameraTOP() + 461);
+		sprintf_s(str, "%d", _enemyAttack % 10);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 210, CAMERAMANAGER->getCameraTOP() + 461);
+	}
+	else
+	{
+		char str[12];
+		sprintf_s(str, "%d", _enemyAttack);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 210, CAMERAMANAGER->getCameraTOP() + 461);
+	}
+
+	if (_enemyCrit >= 10)
+	{
+		char str[12];
+		sprintf_s(str, "%d", _enemyCrit / 10);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 186, CAMERAMANAGER->getCameraTOP() + 488);
+		sprintf_s(str, "%d", _enemyCrit % 10);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 210, CAMERAMANAGER->getCameraTOP() + 488);
+	}
+	else
+	{
+		char str[12];
+		sprintf_s(str, "%d", _playerCrit);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 210, CAMERAMANAGER->getCameraTOP() + 488);
+	}
+
+
+	if (_playerHit >= 10)
+	{
+		char str[12];
+		sprintf_s(str, "%d", _playerHit / 10);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 729, CAMERAMANAGER->getCameraTOP() + 433);
+		sprintf_s(str, "%d", _playerHit % 10);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 753, CAMERAMANAGER->getCameraTOP() + 433);
+	}
+	else
+	{
+		char str[12];
+		sprintf_s(str, "%d", _playerHit);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 753, CAMERAMANAGER->getCameraTOP() + 433);
+	}
+
+	if (_playerAttack >= 10)
+	{
+		char str[12];
+		sprintf_s(str, "%d", _playerAttack / 10);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 729, CAMERAMANAGER->getCameraTOP() + 461);
+		sprintf_s(str, "%d", _playerAttack % 10);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 753, CAMERAMANAGER->getCameraTOP() + 461);
+	}
+	else
+	{
+		char str[12];
+		sprintf_s(str, "%d", _playerAttack);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 753, CAMERAMANAGER->getCameraTOP() + 461);
+	}
+
+	if (_playerCrit >= 10)
+	{
+		char str[12];
+		sprintf_s(str, "%d", _playerCrit / 10);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 729, CAMERAMANAGER->getCameraTOP() + 488);
+		sprintf_s(str, "%d", _playerCrit % 10);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 753, CAMERAMANAGER->getCameraTOP() + 488);
+	}
+	else
+	{
+		char str[12];
+		sprintf_s(str, "%d", _playerCrit);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 753, CAMERAMANAGER->getCameraTOP() + 488);
+	}
+
+	if (_enemyCurrentHp >= 10)
+	{
+		char str[12];
+		sprintf_s(str, "%d", (int)(_enemyCurrentHp / 10));
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 141, CAMERAMANAGER->getCameraTOP() + 547);
+		sprintf_s(str, "%d", (int)((int)_enemyCurrentHp % 10));
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 165, CAMERAMANAGER->getCameraTOP() + 547);
+	}
+	else
+	{
+		char str[12];
+		sprintf_s(str, "%d", (int)_enemyCurrentHp);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 165, CAMERAMANAGER->getCameraTOP() + 547);
+	}
+
+	if (_playerCurrentHp >= 10)
+	{
+		char str[12];
+		sprintf_s(str, "%d", (int)(_playerCurrentHp / 10));
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 774, CAMERAMANAGER->getCameraTOP() + 547);
+		sprintf_s(str, "%d", (int)((int)_playerCurrentHp % 10));
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 798, CAMERAMANAGER->getCameraTOP() + 547);
+	}
+	else
+	{
+		char str[12];
+		sprintf_s(str, "%d", (int)_playerCurrentHp);
+		IMAGEMANAGER->findImage(str)->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 798, CAMERAMANAGER->getCameraTOP() + 547);
+	}
 
 
 
@@ -114,27 +220,27 @@ void battleScene::playerStart(string name)
 	if (name == "로이attack")
 	{
 		_playerActionX = CAMERAMANAGER->getCameraCenterX();
-		_playerActionY = CAMERAMANAGER->getCameraTOP() + 546 - playerimage->getFrameWidth();
+		_playerActionY = CAMERAMANAGER->getCameraTOP() + 524 - playerimage->getFrameWidth();
 	}
 	else if (name == "소셜나이트attack")
 	{
 		_playerActionX = CAMERAMANAGER->getCameraCenterX() - 80;
-		_playerActionY = CAMERAMANAGER->getCameraTOP() + 546 - playerimage->getFrameWidth();
+		_playerActionY = CAMERAMANAGER->getCameraTOP() + 524 - playerimage->getFrameWidth();
 	}
 	else if (name == "전사attack")
 	{
 		_playerActionX = CAMERAMANAGER->getCameraCenterX() - 48;
-		_playerActionY = CAMERAMANAGER->getCameraTOP() + 546 - playerimage->getFrameWidth() + 48;
+		_playerActionY = CAMERAMANAGER->getCameraTOP() + 524 - playerimage->getFrameWidth() + 48;
 	}
 	else if (name == "팔라딘attack")
 	{
 		_playerActionX = CAMERAMANAGER->getCameraCenterX() - 90;
-		_playerActionY = CAMERAMANAGER->getCameraTOP() + 546 - playerimage->getFrameWidth() - 15;
+		_playerActionY = CAMERAMANAGER->getCameraTOP() + 524 - playerimage->getFrameWidth() - 15;
 	}
 	else if (name == "아머나이트attack")
 	{
 		_playerActionX = CAMERAMANAGER->getCameraCenterX() - 80;
-		_playerActionY = CAMERAMANAGER->getCameraTOP() + 546 - playerimage->getFrameWidth() - 20;
+		_playerActionY = CAMERAMANAGER->getCameraTOP() + 524 - playerimage->getFrameWidth() - 20;
 	}
 
 }
@@ -144,22 +250,22 @@ void battleScene::enemyStart(string name)
 	if (name == "enemy소셜나이트attack")
 	{
 		_enemyActionX = CAMERAMANAGER->getCameraCenterX() - enemyimage->getFrameWidth() + 80;
-		_enemyActionY = CAMERAMANAGER->getCameraTOP() + 546 - enemyimage->getFrameWidth();
+		_enemyActionY = CAMERAMANAGER->getCameraTOP() + 524 - enemyimage->getFrameWidth();
 	}
 	else if (name == "enemy전사attack")
 	{
 		_enemyActionX = CAMERAMANAGER->getCameraCenterX() - enemyimage->getFrameWidth() + 50;
-		_enemyActionY = CAMERAMANAGER->getCameraTOP() + 546 - enemyimage->getFrameWidth() + 48;
+		_enemyActionY = CAMERAMANAGER->getCameraTOP() + 524 - enemyimage->getFrameWidth() + 48;
 	}
 	else if (name == "enemy군인attack")
 	{
 		_enemyActionX = CAMERAMANAGER->getCameraCenterX() - enemyimage->getFrameWidth() + 20;
-		_enemyActionY = CAMERAMANAGER->getCameraTOP() + 546 - enemyimage->getFrameWidth();
+		_enemyActionY = CAMERAMANAGER->getCameraTOP() + 524 - enemyimage->getFrameWidth();
 	}
 	else if (name == "enemy아머나이트attack")
 	{
 		_enemyActionX = CAMERAMANAGER->getCameraCenterX() - enemyimage->getFrameWidth() + 80;
-		_enemyActionY = CAMERAMANAGER->getCameraTOP() + 546 - enemyimage->getFrameWidth() - 20;
+		_enemyActionY = CAMERAMANAGER->getCameraTOP() + 524 - enemyimage->getFrameWidth() - 20;
 	}
 }
 
@@ -179,7 +285,7 @@ void battleScene::playerAction(string name)
 		else if (_playerIndex >= 1 && _playerIndex <=3)
 		{
 			_playerCount++;
-			//공격
+		
 			if (_playerIndex == 3)
 			{
 				if (_playerCount > 30)
@@ -199,13 +305,14 @@ void battleScene::playerAction(string name)
 		{
 
 			_playerCount++;
+			//공격
 			if (_playerIndex == 5)
 			{
-				attack = true;
-				if (_playerCount > 30)
+				_enemyCurrentHp -= 0.3;
+				if (_enemyCurrentHp <= _enemyHp -_playerAttack)
 				{
+					_enemyCurrentHp = _enemyHp - _playerAttack;
 					_playerIndex++;
-					attack = false;
 					_playerCount = 0;
 				}
 			}
@@ -272,7 +379,11 @@ void battleScene::playerAction(string name)
 			_playerCount++;
 			if (_playerCount >30)
 			{
-				action = false;
+				_truePlayerFalseEnemy = false;
+				if (type == ENEMY)
+				{
+					action = false;
+				}
 				_playerCount = 0;
 			}
 		}
@@ -315,11 +426,11 @@ void battleScene::playerAction(string name)
 		else if (_playerIndex == 3)
 		{
 			_playerCount++;
-			attack = true;
-			if (_playerCount > 30)
+			_enemyCurrentHp -= 0.3;
+			if (_enemyCurrentHp <= _enemyHp - _playerAttack)
 			{
+				_enemyCurrentHp = _enemyHp - _playerAttack;
 				_playerIndex++;
-				attack = false;
 				_playerCount = 0;
 			}
 		}
@@ -357,7 +468,11 @@ void battleScene::playerAction(string name)
 			_playerCount++;
 			if (_playerCount > 30)
 			{
-				action = false;
+				_truePlayerFalseEnemy = false;
+				if (type == ENEMY)
+				{
+					action = false;
+				}
 				_playerCount = 0;
 			}
 		}
@@ -402,11 +517,11 @@ void battleScene::playerAction(string name)
 		else if (_playerIndex == 5)
 		{
 			_playerCount++;
-			attack = true;
-			if (_playerCount > 30)
+			_enemyCurrentHp -= 0.3;
+			if (_enemyCurrentHp <= _enemyHp - _playerAttack)
 			{
+				_enemyCurrentHp = _enemyHp - _playerAttack;
 				_playerIndex++;
-				attack = false;
 				_playerCount = 0;
 			}
 		}
@@ -438,7 +553,11 @@ void battleScene::playerAction(string name)
 			_playerCount++;
 			if (_playerCount > 30)
 			{
-				action = false;
+				_truePlayerFalseEnemy = false;
+				if (type == ENEMY)
+				{
+					action = false;
+				}
 				_playerCount = 0;
 			}
 		}
@@ -488,11 +607,11 @@ void battleScene::playerAction(string name)
 		else if (_playerIndex == 7)
 		{
 			_playerCount++;
-			attack = true;
-			if (_playerCount > 30)
+			_enemyCurrentHp -= 0.3;
+			if (_enemyCurrentHp <= _enemyHp - _playerAttack)
 			{
+				_enemyCurrentHp = _enemyHp - _playerAttack;
 				_playerIndex++;
-				attack = false;
 				_playerCount = 0;
 			}
 		}
@@ -548,7 +667,11 @@ void battleScene::playerAction(string name)
 			_playerCount++;
 			if (_playerCount > 30)
 			{
-				action = false;
+				_truePlayerFalseEnemy = false;
+				if (type == ENEMY)
+				{
+					action = false;
+				}
 				_playerCount = 0;
 			}
 		}
@@ -591,11 +714,11 @@ void battleScene::playerAction(string name)
 		else if (_playerIndex == 9)
 		{
 			_playerCount++;
-			attack = true;
-			if (_playerCount > 30)
+			_enemyCurrentHp -= 0.3;
+			if (_enemyCurrentHp <= _enemyHp - _playerAttack)
 			{
+				_enemyCurrentHp = _enemyHp - _playerAttack;
 				_playerIndex++;
-				attack = false;
 				_playerCount = 0;
 			}
 		}
@@ -628,7 +751,11 @@ void battleScene::playerAction(string name)
 			_playerCount++;
 			if (_playerCount > 30)
 			{
-				action = false;
+				_truePlayerFalseEnemy = false;
+				if (type == ENEMY)
+				{
+					action = false;
+				}
 				_playerCount = 0;
 			}
 		}
@@ -678,11 +805,11 @@ void battleScene::enemyAction(string name)
 		else if (_enemyIndex == 3)
 		{
 			_enemyCount++;
-			attack = true;
-			if (_enemyCount > 30)
+			_playerCurrentHp -= 0.3;
+			if (_playerCurrentHp <= _playerHp - _enemyAttack)
 			{
+				_playerCurrentHp = _playerHp - _enemyAttack;
 				_enemyIndex++;
-				attack = false;
 				_enemyCount = 0;
 			}
 		}
@@ -720,7 +847,11 @@ void battleScene::enemyAction(string name)
 			_enemyCount++;
 			if (_enemyCount > 30)
 			{
-				action = false;
+				_truePlayerFalseEnemy = true;
+				if (type == PLAYER)
+				{
+					action = false;
+				}
 				_enemyCount = 0;
 			}
 		}
@@ -761,14 +892,15 @@ void battleScene::enemyAction(string name)
 				}
 			}
 		}
+		//공격
 		else if (_enemyIndex == 5)
 		{
 			_enemyCount++;
-			attack = true;
-			if (_enemyCount > 30)
+			_playerCurrentHp -= 0.3;
+			if (_playerCurrentHp <= _playerHp - _enemyAttack)
 			{
+				_playerCurrentHp = _playerHp - _enemyAttack;
 				_enemyIndex++;
-				attack = false;
 				_enemyCount = 0;
 			}
 		}
@@ -800,7 +932,11 @@ void battleScene::enemyAction(string name)
 			_enemyCount++;
 			if (_enemyCount > 30)
 			{
-				action = false;
+				_truePlayerFalseEnemy = true;
+				if (type == PLAYER)
+				{
+					action = false;
+				}
 				_enemyCount = 0;
 			}
 		}
@@ -851,12 +987,11 @@ void battleScene::enemyAction(string name)
 		else if (_enemyIndex == 5)
 		{
 			_enemyCount++;
-			attack = true;
-			if (_enemyCount > 30)
+			_playerCurrentHp -= 0.3;
+			if (_playerCurrentHp <= _playerHp - _enemyAttack)
 			{
+				_playerCurrentHp = _playerHp - _enemyAttack;
 				_enemyIndex++;
-				attack = false;
-				_enemyActionX -= 55;
 				_enemyCount = 0;
 			}
 		}
@@ -885,7 +1020,11 @@ void battleScene::enemyAction(string name)
 			_enemyCount++;
 			if (_enemyCount > 30)
 			{
-				action = false;
+				_truePlayerFalseEnemy = true;
+				if (type == PLAYER)
+				{
+					action = false;
+				}
 				_enemyCount = 0;
 			}
 		}
@@ -924,14 +1063,15 @@ void battleScene::enemyAction(string name)
 				_enemyCount = 0;
 			}
 		}
+		//공격
 		else if (_enemyIndex == 9)
 		{
 			_enemyCount++;
-			attack = true;
-			if (_enemyCount > 30)
+			_playerCurrentHp -= 0.3;
+			if (_playerCurrentHp <= _playerHp - _enemyAttack)
 			{
+				_playerCurrentHp = _playerHp - _enemyAttack;
 				_enemyIndex++;
-				attack = false;
 				_enemyCount = 0;
 			}
 		}
@@ -964,7 +1104,11 @@ void battleScene::enemyAction(string name)
 			_enemyCount++;
 			if (_enemyCount > 30)
 			{
-				action = false;
+				_truePlayerFalseEnemy = true;
+				if (type == PLAYER)
+				{
+					action = false;
+				}
 				_enemyCount = 0;
 			}
 		}

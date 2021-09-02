@@ -26,7 +26,6 @@ HRESULT unit::init(int idx, int idy , int moveRange, TYPE type)
 	}
 	battle = _render =_moving = _pointing = _playerSelect = _moveSelect = false;
 	stageRenderCount = 0;
-	battleRenderCount = 0;
 	return S_OK;
 }
 
