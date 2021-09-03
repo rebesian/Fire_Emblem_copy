@@ -328,11 +328,13 @@ void unit::update(int idx, int idy)
 			{
 				_astar->setStart(false);
 				_map->setIsEnemy(indexX, indexY, true);
-				if (indexX == _astar->getTargetTileX() - 1 ||
-					indexX == _astar->getTargetTileX() + 1 ||
-					indexY == _astar->getTargetTileY() - 1 ||
-					indexY == _astar->getTargetTileY() + 1)
+				if (_map->getIsEnemy(_astar->getTargetTileX() - 1, _astar->getTargetTileY()) ||
+					_map->getIsEnemy(_astar->getTargetTileX() + 1, _astar->getTargetTileY()) ||
+					_map->getIsEnemy(_astar->getTargetTileX(), _astar->getTargetTileY() - 1) ||
+					_map->getIsEnemy(_astar->getTargetTileX(), _astar->getTargetTileY() + 1))
+				{
 					battle = true;
+				}
 				_astar->setMoveTile(indexX, indexY , _type);
 				use = true;
 				stageRenderY = 0;
@@ -362,9 +364,8 @@ void unit::release()
 
 void unit::render()
 {
-
-	_astar->render();
-
+	
+	_astar->render(_type);
 }
 
 void unit::targetOn(int idx, int idy)
@@ -382,6 +383,7 @@ void unit::targetOn(int idx, int idy)
 	}
 	else
 	{
+		battle = false;
 		_map->setIsEnemy(indexX, indexY, false);
 		_astar->setMoveTile(indexX, indexY , ENEMY);
 		_astar->EndSelect(idx, idy);

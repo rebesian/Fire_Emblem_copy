@@ -8,7 +8,6 @@ private:
 	struct UI
 	{
 		image *hit = IMAGEMANAGER->findImage("hit"), *damage = IMAGEMANAGER->findImage("damage"), *crit = IMAGEMANAGER->findImage("crit"), *hp1 = IMAGEMANAGER->findImage("hpbar1"), *hp2 = IMAGEMANAGER->findImage("hpbar2");
-	
 	};
 
 	image* battleStage;
@@ -19,13 +18,16 @@ private:
 	TYPE type;
 
 	string _playerName;
+	string _enemyName;
+
+	string _playerimageName;
 	float _playerHp;
 	float _playerCurrentHp;
 	int _playerAttack;
 	int _playerHit;
 	int _playerCrit;
 
-	string _enemyName;
+	string _enemyimageName;
 	float _enemyHp;
 	float _enemyCurrentHp;
 	int _enemyAttack;
@@ -62,31 +64,33 @@ public:
 	{
 		_playerIndex = 0;
 		_playerCount = 0;
+		_playerimageName = name;
 		_playerName = name;
 		_playerCurrentHp = _playerHp = playerHp;
 		_playerAttack = playerAttack;
 		_playerHit = playerHit;
 		_playerCrit = playerCrit;
 		char str[20];
-		_playerName += "attack";
-		playerimage = IMAGEMANAGER->findImage(_playerName);
+		_playerimageName += "attack";
+		playerimage = IMAGEMANAGER->findImage(_playerimageName);
 		_truePlayerFalseEnemy = true;
-		playerStart(_playerName);
+		playerStart(_playerimageName);
 	}
 	void getEnemy(string name, int enemyHp, int enemyAttack, int enemyHit, int enemyCrit)
 	{
 		_enemyIndex = 0;
 		_enemyCount = 0;
-		_enemyName = "enemy";
-		_enemyName += name;
+		_enemyimageName = "enemy";
+		_enemyimageName += name;
+		_enemyName = name;
 		_enemyCurrentHp = _enemyHp = enemyHp;
 		_enemyAttack = enemyAttack;
 		_enemyHit = enemyHit;
 		_enemyCrit = enemyCrit;
-		_enemyName += "attack";
-		enemyimage = IMAGEMANAGER->findImage(_enemyName);
+		_enemyimageName += "attack";
+		enemyimage = IMAGEMANAGER->findImage(_enemyimageName);
 		_truePlayerFalseEnemy = false;
-		enemyStart(_enemyName);
+		enemyStart(_enemyimageName);
 	}
 
 	void playerStart(string name);

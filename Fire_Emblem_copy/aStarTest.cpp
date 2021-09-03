@@ -49,7 +49,7 @@ void aStarTest::update(bool render)
 
 }
 
-void aStarTest::render()
+void aStarTest::render(TYPE type)
 {				
 	char str[12];
 	sprintf_s(str, "Å¸°Ù¿©±â><");
@@ -75,7 +75,10 @@ void aStarTest::render()
 			
 			}
 		}
-		route();
+		if (type == PLAYER)
+		{
+			route();
+		}
 	}
 
 }
@@ -355,6 +358,22 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 		{
 			_vTotalList[playerY - i][playerX]->setAttribute("move");
 			_moveTileCount++;
+			if (type == PLAYER)
+			{
+				if (_map->getIsEnemy(playerX, playerY - i))
+				{
+					_vTotalList[playerY - i][playerX]->setAttribute("attack");
+					_moveTileCount--;
+				}
+			}
+			if (type == ENEMY)
+			{
+				if (_map->getIsPlayer(playerX, playerY - i))
+				{
+					_vTotalList[playerY - i][playerX]->setAttribute("attack");
+					_moveTileCount--;
+				}
+			}
 			--_movecount;
 		}
 		else
@@ -374,6 +393,22 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 		{
 			_vTotalList[playerY + i][playerX]->setAttribute("move");
 			_moveTileCount++;
+			if (type == PLAYER)
+			{
+				if (_map->getIsEnemy(playerX, playerY + i))
+				{
+					_vTotalList[playerY + i][playerX]->setAttribute("attack");
+					_moveTileCount--;
+				}
+			}
+			if (type == ENEMY)
+			{
+				if (_map->getIsPlayer(playerX, playerY + i))
+				{
+					_vTotalList[playerY + i][playerX]->setAttribute("attack");
+					_moveTileCount--;
+				}
+			}
 			_movecount--;
 		}
 		else
@@ -392,6 +427,22 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 		{
 			_vTotalList[playerY][playerX - i]->setAttribute("move");
 			_moveTileCount++;
+			if (type == PLAYER)
+			{
+				if (_map->getIsEnemy(playerX - i, playerY))
+				{
+					_vTotalList[playerY][playerX - i]->setAttribute("attack");
+					_moveTileCount--;
+				}
+			}
+			if (type == ENEMY)
+			{
+				if (_map->getIsPlayer(playerX - i, playerY))
+				{
+					_vTotalList[playerY][playerX - i]->setAttribute("attack");
+					_moveTileCount--;
+				}
+			}
 			--_movecount;
 		}
 		else
@@ -410,6 +461,22 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 		{
 			_vTotalList[playerY][playerX + i]->setAttribute("move");
 			_moveTileCount++;
+			if (type == PLAYER)
+			{
+				if (_map->getIsEnemy(playerX + i, playerY))
+				{
+					_vTotalList[playerY][playerX + i]->setAttribute("attack");
+					_moveTileCount--;
+				}
+			}
+			if (type == ENEMY)
+			{
+				if (_map->getIsPlayer(playerX + i, playerY))
+				{
+					_vTotalList[playerY][playerX + i]->setAttribute("attack");
+					_moveTileCount--;
+				}
+			}
 			--_movecount;
 		}
 		else
@@ -433,6 +500,22 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 			{
 				_vTotalList[playerY - y][playerX + x]->setAttribute("move");
 				_moveTileCount++;
+				if (type == PLAYER)
+				{
+					if (_map->getIsEnemy(playerX + x, playerY - y))
+					{
+						_vTotalList[playerY - y][playerX + x]->setAttribute("attack");
+						_moveTileCount--;
+					}
+				}
+				if (type == ENEMY)
+				{
+					if (_map->getIsPlayer(playerX + x, playerY - y))
+					{
+						_vTotalList[playerY - y][playerX + x]->setAttribute("attack");
+						_moveTileCount--;
+					}
+				}
 				--_movecount;
 			}
 			else
@@ -457,6 +540,22 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 			{
 				_vTotalList[playerY - y][playerX - x]->setAttribute("move");
 				_moveTileCount++;
+				if (type == PLAYER)
+				{
+					if (_map->getIsEnemy(playerX - x, playerY - y))
+					{
+						_vTotalList[playerY - y][playerX - x]->setAttribute("attack");
+						_moveTileCount--;
+					}
+				}
+				if (type == ENEMY)
+				{
+					if (_map->getIsPlayer(playerX - x, playerY - y))
+					{
+						_vTotalList[playerY - y][playerX - x]->setAttribute("attack");
+						_moveTileCount--;
+					}
+				}
 				--_movecount;
 			}
 			else
@@ -482,6 +581,22 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 			{
 				_vTotalList[playerY + y][playerX - x]->setAttribute("move");
 				_moveTileCount++;
+				if (type == PLAYER)
+				{
+					if (_map->getIsEnemy(playerX - x, playerY + y))
+					{
+						_vTotalList[playerY - y][playerX + x]->setAttribute("attack");
+						_moveTileCount--;
+					}
+				}
+				if (type == ENEMY)
+				{
+					if (_map->getIsPlayer(playerX - x, playerY + y))
+					{
+						_vTotalList[playerY - y][playerX + x]->setAttribute("attack");
+						_moveTileCount--;
+					}
+				}
 				--_movecount;
 			}
 			else
@@ -506,6 +621,22 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 			{
 				_vTotalList[playerY + y][playerX + x]->setAttribute("move");
 				_moveTileCount++;
+				if (type == PLAYER)
+				{
+					if (_map->getIsEnemy(playerX + x, playerY + y))
+					{
+						_vTotalList[playerY - y][playerX + x]->setAttribute("attack");
+						_moveTileCount--;
+					}
+				}
+				if (type == ENEMY)
+				{
+					if (_map->getIsPlayer(playerX + x, playerY + y))
+					{
+						_vTotalList[playerY - y][playerX + x]->setAttribute("attack");
+						_moveTileCount--;
+					}
+				}
 				--_movecount;
 			}
 			else
@@ -565,23 +696,23 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 		}
 	}
 
-	for (int y = 0; y < _vTotalList.size(); ++y)
-	{
-		for (int x = 0; x < _vTotalList[y].size(); ++x)
-		{
-			if (type == PLAYER)
-			{
-				if (_map->getIsEnemy(x, y))
-					_vTotalList[y][x]->setAttribute("attack");
-			}
-			if (type == ENEMY)
-			{
-				if (_map->getIsPlayer(x, y))
-					_vTotalList[y][x]->setAttribute("attack");
-			}
-		
-		}
-	}
+	//for (int y = 0; y < _vTotalList.size(); ++y)
+	//{
+	//	for (int x = 0; x < _vTotalList[y].size(); ++x)
+	//	{
+	//		if (type == PLAYER)
+	//		{
+	//			if (_map->getIsEnemy(x, y))
+	//				_vTotalList[y][x]->setAttribute("attack");
+	//		}
+	//		if (type == ENEMY)
+	//		{
+	//			if (_map->getIsPlayer(x, y))
+	//				_vTotalList[y][x]->setAttribute("attack");
+	//		}
+	//	
+	//	}
+	//}
 
 
 }

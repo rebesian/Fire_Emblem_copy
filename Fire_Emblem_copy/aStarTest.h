@@ -46,7 +46,7 @@ public:
 	HRESULT init(int playerX, int playerY,int moveRange, int attackRange);
 	void release();
 	void update(bool render);
-	void render();
+	void render(TYPE type);
 	//타일 셋팅 함수
 	void setTile(int playerX, int playerY);
 	//갈 수 있는 길을 찾아 담아줄 함수

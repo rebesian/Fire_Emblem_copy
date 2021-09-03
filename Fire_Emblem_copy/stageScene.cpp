@@ -86,7 +86,7 @@ void stageScene::update()
 				_em->setMoveSelect(_enemyPoint, false);
 				_em->setAttackSelect(_enemyPoint, false);
 				_em->setUse(_enemyPoint, true);
-
+				_em->setBattle(_enemyPoint, false);
 				if (_battleScene->getPlayerCurrentHp() > 0)
 				{
 					_pm->sethp(_playerPoint, _battleScene->getPlayerCurrentHp());
@@ -137,7 +137,6 @@ void stageScene::update()
 		if (!isMoveSelect && !isAttackSelect)
 		{
 			_playerPoint = _pm->isPoint(_pt.indexX, _pt.indexY);
-			//_enemyPoint = _em->isPoint(_pt.indexX, _pt.indexY);
 		}
 		else
 		{
@@ -279,6 +278,7 @@ void stageScene::update()
 	}
 	else if(!truePlayerFalseEnemy && !isbattle)
 	{
+
 		if (!_em->getUse(_enemyPoint))
 		{
 			if (!enemytargetOn) {
@@ -295,13 +295,12 @@ void stageScene::update()
 					if (_pm->getIndexX(i) == _em->getBattleX(_enemyPoint) && _pm->getIndexY(i) == _em->getBattleY(_enemyPoint))
 					{
 						_playerPoint = i;
+						_battleScene->setAction(true);
+						_battleScene->getPlayer(_pm->getName(_playerPoint), _pm->gethp(_playerPoint), _pm->getAttack(_playerPoint), _pm->getAvoid(_playerPoint), _pm->getCritcal(_playerPoint));
+						_battleScene->getEnemy(_em->getName(_enemyPoint), _em->gethp(_enemyPoint), _em->getAttack(_enemyPoint), _em->getAvoid(_enemyPoint), _em->getCritcal(_enemyPoint));
 						break;
 					}
 				}
-				_battleScene->setAction(true);
-				_battleScene->getPlayer(_pm->getName(_playerPoint), _pm->gethp(_playerPoint), _pm->getAttack(_playerPoint), _pm->getAvoid(_playerPoint), _pm->getCritcal(_playerPoint));
-				_battleScene->getEnemy(_em->getName(_enemyPoint), _em->gethp(_enemyPoint), _em->getAttack(_enemyPoint), _em->getAvoid(_enemyPoint), _em->getCritcal(_enemyPoint));
-				_em->setBattle(_enemyPoint, false);
 			}
 		}
 		else

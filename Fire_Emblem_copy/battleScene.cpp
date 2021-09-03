@@ -14,23 +14,8 @@ battleScene::~battleScene()
 HRESULT battleScene::init()
 {
 	battleStage = IMAGEMANAGER->findImage("ÀüÅõHud");
-	playerimage = IMAGEMANAGER->findImage("¼Ò¼È³ªÀÌÆ®attack");
-	enemyimage = IMAGEMANAGER->findImage("enemy¼Ò¼È³ªÀÌÆ®attack");
-	_playerName = "¼Ò¼È³ªÀÌÆ®attack";
-	_enemyName = "enemy¼Ò¼È³ªÀÌÆ®attack";
-	//playerStart(_playerName);
-	//enemyStart(_enemyName);
-	//_playerCurrentHp = _playerHp = 20;
-	//_playerAttack=10;
-	//_playerHit=55;
-	//_playerCrit=10;
-	//
-	//_enemyCurrentHp  = _enemyHp = 20;
-	//_enemyAttack=7;
-	//_enemyHit=30;
-	//_enemyCrit=10;
+	
 	action = false;
-	//_truePlayerFalseEnemy = false;
 	return S_OK;
 }
 
@@ -44,9 +29,9 @@ void battleScene::update(TYPE _type)
 	if (action)
 	{
 		if(_truePlayerFalseEnemy)
-			playerAction(_playerName);
+			playerAction(_playerimageName);
 		else
-			enemyAction(_enemyName);
+			enemyAction(_enemyimageName);
 	}
 }
 
@@ -63,6 +48,16 @@ void battleScene::render(int x , int y , bool truePlayerFalseEnemy)
 	_player.crit->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 799, CAMERAMANAGER->getCameraTOP() + 488);
 	_player.hp2->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 505, CAMERAMANAGER->getCameraTOP() + 547);
 	_player.hp1->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 505, CAMERAMANAGER->getCameraTOP() + 547,  0 , 0,  (_playerCurrentHp / 20.0)*256 , 26);
+
+	HFONT font, oldFont;
+	font = CreateFont(50, 0, 0, 0, 100, false, false, false, HANGUL_CHARSET,
+		0, 0, 0, 0, TEXT("HY¾èÀº»ù¹°M"));
+	oldFont = (HFONT)SelectObject(getMemDC(), font);
+	
+	//TextOut(getMemDC(), CAMERAMANAGER->getCameraLEFT() +  890, CAMERAMANAGER->getCameraTOP(), (char)_playerName, strlen(_playerName));
+	
+	DeleteObject(font);
+
 
 	if (_enemyHit >= 10)
 	{
@@ -366,7 +361,14 @@ void battleScene::playerAction(string name)
 			_playerCount++;
 			if (_playerCount >30)
 			{
-				_truePlayerFalseEnemy = false;
+				if (_enemyCurrentHp <= 0)
+				{
+					action = false;
+				}
+				else
+				{
+					_truePlayerFalseEnemy = false;
+				}
 				if (type == ENEMY)
 				{
 					action = false;
@@ -455,7 +457,14 @@ void battleScene::playerAction(string name)
 			_playerCount++;
 			if (_playerCount > 30)
 			{
-				_truePlayerFalseEnemy = false;
+				if (_enemyCurrentHp <= 0)
+				{
+					action = false;
+				}
+				else
+				{
+					_truePlayerFalseEnemy = false;
+				}
 				if (type == ENEMY)
 				{
 					action = false;
@@ -540,7 +549,14 @@ void battleScene::playerAction(string name)
 			_playerCount++;
 			if (_playerCount > 30)
 			{
-				_truePlayerFalseEnemy = false;
+				if (_enemyCurrentHp <= 0)
+				{
+					action = false;
+				}
+				else
+				{
+					_truePlayerFalseEnemy = false;
+				}
 				if (type == ENEMY)
 				{
 					action = false;
@@ -654,7 +670,14 @@ void battleScene::playerAction(string name)
 			_playerCount++;
 			if (_playerCount > 30)
 			{
-				_truePlayerFalseEnemy = false;
+				if (_enemyCurrentHp <= 0)
+				{
+					action = false;
+				}
+				else
+				{
+					_truePlayerFalseEnemy = false;
+				}
 				if (type == ENEMY)
 				{
 					action = false;
@@ -738,7 +761,14 @@ void battleScene::playerAction(string name)
 			_playerCount++;
 			if (_playerCount > 30)
 			{
-				_truePlayerFalseEnemy = false;
+				if (_enemyCurrentHp <= 0)
+				{
+					action = false;
+				}
+				else
+				{
+					_truePlayerFalseEnemy = false;
+				}
 				if (type == ENEMY)
 				{
 					action = false;
@@ -834,7 +864,14 @@ void battleScene::enemyAction(string name)
 			_enemyCount++;
 			if (_enemyCount > 30)
 			{
-				_truePlayerFalseEnemy = true;
+				if (_playerCurrentHp <= 0)
+				{
+					action = false;
+				}
+				else
+				{
+					_truePlayerFalseEnemy = true;
+				}
 				if (type == PLAYER)
 				{
 					action = false;
@@ -919,7 +956,14 @@ void battleScene::enemyAction(string name)
 			_enemyCount++;
 			if (_enemyCount > 30)
 			{
-				_truePlayerFalseEnemy = true;
+				if (_playerCurrentHp <= 0)
+				{
+					action = false;
+				}
+				else
+				{
+					_truePlayerFalseEnemy = true;
+				}
 				if (type == PLAYER)
 				{
 					action = false;
@@ -1007,7 +1051,14 @@ void battleScene::enemyAction(string name)
 			_enemyCount++;
 			if (_enemyCount > 30)
 			{
-				_truePlayerFalseEnemy = true;
+				if (_playerCurrentHp <= 0)
+				{
+					action = false;
+				}
+				else
+				{
+					_truePlayerFalseEnemy = true;
+				}
 				if (type == PLAYER)
 				{
 					action = false;
@@ -1091,7 +1142,14 @@ void battleScene::enemyAction(string name)
 			_enemyCount++;
 			if (_enemyCount > 30)
 			{
-				_truePlayerFalseEnemy = true;
+				if (_playerCurrentHp <= 0)
+				{
+					action = false;
+				}
+				else
+				{
+					_truePlayerFalseEnemy = true;
+				}
 				if (type == PLAYER)
 				{
 					action = false;
