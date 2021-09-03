@@ -60,6 +60,8 @@ public:
 
 	void getPlayer(string name, int playerHp, int playerAttack, int playerHit, int playerCrit)
 	{
+		_playerIndex = 0;
+		_playerCount = 0;
 		_playerName = name;
 		_playerCurrentHp = _playerHp = playerHp;
 		_playerAttack = playerAttack;
@@ -68,10 +70,13 @@ public:
 		char str[20];
 		_playerName += "attack";
 		playerimage = IMAGEMANAGER->findImage(_playerName);
+		_truePlayerFalseEnemy = true;
 		playerStart(_playerName);
 	}
 	void getEnemy(string name, int enemyHp, int enemyAttack, int enemyHit, int enemyCrit)
 	{
+		_enemyIndex = 0;
+		_enemyCount = 0;
 		_enemyName = "enemy";
 		_enemyName += name;
 		_enemyCurrentHp = _enemyHp = enemyHp;
@@ -80,6 +85,7 @@ public:
 		_enemyCrit = enemyCrit;
 		_enemyName += "attack";
 		enemyimage = IMAGEMANAGER->findImage(_enemyName);
+		_truePlayerFalseEnemy = false;
 		enemyStart(_enemyName);
 	}
 
@@ -88,6 +94,8 @@ public:
 	void playerAction(string name);
 	void enemyAction(string name);
 
+	int getPlayerCurrentHp() { return _playerCurrentHp; }
+	int getEnemyCurrentHp() { return _enemyCurrentHp; }
 	bool getAction() { return action; };
 	void setAction(bool isaction) { action = isaction; }
 };

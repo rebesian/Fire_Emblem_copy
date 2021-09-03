@@ -35,6 +35,8 @@ public:
 	void release();
 	void render();
 
+	void dead(int pointed);
+
 	int isPoint(int _ptx, int _pty );
 	int getMaxPlayer() { return _vplayer.size(); }
 	int getIndexX(int pointed) { return _vplayer[pointed]->getIndexX(); }

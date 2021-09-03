@@ -59,6 +59,11 @@ void playerManger::render()
 	}
 }
 
+void playerManger::dead(int pointed)
+{
+	_vplayer.erase(_vplayer.begin() + pointed);
+}
+
 int playerManger::isPoint(int _ptx, int _pty )
 {
 	int pointing = 255;

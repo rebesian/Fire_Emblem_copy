@@ -43,6 +43,7 @@ void enemyManger::update(int idx, int idy)
 
 void enemyManger::release()
 {
+
 }
 
 void enemyManger::render()
@@ -69,4 +70,9 @@ int enemyManger::isPoint(int _ptx, int _pty)
 		}
 	}
 	return pointing;
+}
+
+void enemyManger::dead(int pointed)
+{
+	_vEnemy.erase(_vEnemy.begin() + pointed);
 }

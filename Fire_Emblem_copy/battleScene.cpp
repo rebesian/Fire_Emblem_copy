@@ -14,24 +14,23 @@ battleScene::~battleScene()
 HRESULT battleScene::init()
 {
 	battleStage = IMAGEMANAGER->findImage("전투Hud");
-	playerimage = IMAGEMANAGER->findImage("로이attack");
+	playerimage = IMAGEMANAGER->findImage("소셜나이트attack");
 	enemyimage = IMAGEMANAGER->findImage("enemy소셜나이트attack");
-	_playerName = "로이attack";
+	_playerName = "소셜나이트attack";
 	_enemyName = "enemy소셜나이트attack";
-	playerStart(_playerName);
-	enemyStart(_enemyName);
-	_playerCurrentHp = _playerHp = 20;
-	_playerAttack=10;
-	_playerHit=55;
-	_playerCrit=10;
-
-	_enemyCurrentHp  = _enemyHp = 20;
-	_enemyAttack=7;
-	_enemyHit=30;
-	_enemyCrit=10;
+	//playerStart(_playerName);
+	//enemyStart(_enemyName);
+	//_playerCurrentHp = _playerHp = 20;
+	//_playerAttack=10;
+	//_playerHit=55;
+	//_playerCrit=10;
+	//
+	//_enemyCurrentHp  = _enemyHp = 20;
+	//_enemyAttack=7;
+	//_enemyHit=30;
+	//_enemyCrit=10;
 	action = false;
-	attack = false;
-	_truePlayerFalseEnemy = false;
+	//_truePlayerFalseEnemy = false;
 	return S_OK;
 }
 
@@ -49,18 +48,6 @@ void battleScene::update(TYPE _type)
 		else
 			enemyAction(_enemyName);
 	}
-	else
-	{
-		_playerIndex = 0;
-		_playerCount = 0;
-		_enemyIndex = 0;
-		_enemyCount = 0;
-		if (KEYMANAGER->isOnceKeyDown('R'))
-		{
-			action = true;
-			_truePlayerFalseEnemy = true;
-		}
-	}
 }
 
 void battleScene::render(int x , int y , bool truePlayerFalseEnemy)
@@ -70,12 +57,12 @@ void battleScene::render(int x , int y , bool truePlayerFalseEnemy)
 	_enemy.damage->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 125, CAMERAMANAGER->getCameraTOP() + 461);
 	_enemy.crit->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 125, CAMERAMANAGER->getCameraTOP() + 488);
 	_enemy.hp2->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 195, CAMERAMANAGER->getCameraTOP() + 547);
-	_enemy.hp1->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 195, CAMERAMANAGER->getCameraTOP() + 547 , 0, 0, (_enemyCurrentHp / _enemyHp) * 256, 26);
+	_enemy.hp1->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 195, CAMERAMANAGER->getCameraTOP() + 547 , 0, 0, (_enemyCurrentHp / 20.0) * 256, 26);
 	_player.hit->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 799, CAMERAMANAGER->getCameraTOP() + 433);
 	_player.damage->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 796, CAMERAMANAGER->getCameraTOP() + 461);
 	_player.crit->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 799, CAMERAMANAGER->getCameraTOP() + 488);
 	_player.hp2->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 505, CAMERAMANAGER->getCameraTOP() + 547);
-	_player.hp1->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 505, CAMERAMANAGER->getCameraTOP() + 547,  0 , 0,  (_playerCurrentHp / _playerHp)*256 , 26);
+	_player.hp1->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 505, CAMERAMANAGER->getCameraTOP() + 547,  0 , 0,  (_playerCurrentHp / 20.0)*256 , 26);
 
 	if (_enemyHit >= 10)
 	{

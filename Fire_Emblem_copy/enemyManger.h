@@ -23,7 +23,8 @@ public:
 	void release();
 	void render();
 	int isPoint(int _ptx, int _pty);
-
+	
+	void dead(int pointed);
 
 	int getMaxEnemy() { return _vEnemy.size(); }
 	int getIndexX(int pointed) { return _vEnemy[pointed]->getIndexX(); }
