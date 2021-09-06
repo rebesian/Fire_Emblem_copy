@@ -24,12 +24,16 @@ void tileSet::release()
 
 void tileSet::render()
 {
+	
 	PatBlt(_tileBuffer->getMemDC(), 0, 0, BACKGROUNDX, BACKGROUNDY, WHITENESS);
+	//HBRUSH myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+	//SelectObject(_tileBuffer->getMemDC(), myBrush);
 	char str[123];
 	for (int i = 0; i < _tileY; ++i)
 	{
 		for (int j = 0; j < _tileX; ++j)
 		{
+			Rectangle(_tileBuffer->getMemDC(), _tiles[i][j].rc);
 			switch (_tiles[i][j].terrain)
 			{
 			case TR_NONE:
@@ -268,7 +272,7 @@ void tileSet::save()
 		}
 	}
 
-	file = CreateFile("tile_save.map", GENERIC_WRITE, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	file = CreateFile("tile_sample.map", GENERIC_WRITE, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	WriteFile(file, tile, sizeof(tagTile) *_tileX * _tileY, &write, NULL);
 
@@ -281,7 +285,7 @@ void tileSet::load()
 	HANDLE file;
 	DWORD read;
 	tagTile *tile = new tagTile[_tileX * _tileY];
-	file = CreateFile("tile_save.map", GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	file = CreateFile("tile_sample.map", GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	ReadFile(file, tile, sizeof(tagTile) * _tileX * _tileY, &read, NULL);
 
 	_tiles.clear();
