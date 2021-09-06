@@ -56,7 +56,7 @@ public:
 
 
 
-	void EndSelect(int endIndexX, int endIndexY);
+	void EndSelect(int endIndexX, int endIndexY, bool cancel = false);
 	void setMoveTile(int playerX, int playerY , TYPE type);
 	void setAttackTile(int playerX, int playerY , TYPE type);
 

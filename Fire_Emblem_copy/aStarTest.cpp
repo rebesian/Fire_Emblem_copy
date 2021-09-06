@@ -51,32 +51,26 @@ void aStarTest::update(bool render)
 
 void aStarTest::render(TYPE type)
 {				
-	char str[12];
-	sprintf_s(str, "타겟여기><");
-
 	if (_render)
 	{
-		for (int y = 0; y < _vTotalList.size(); ++y)					
-		{
-			for (int x = 0; x < _vTotalList[y].size(); ++x)
-			{
-				//HBRUSH myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-				//SelectObject(_map->getMapDC(), myBrush);
-				//RECT temp = _vTotalList[y][x]->getRect();
-				//Rectangle(_map->getMapDC(), temp);
-				if(_vTotalList[y][x]->getAttribute()!="none")
-				{ 
-					HBRUSH myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-					SelectObject(_map->getMapDC(), myBrush);
-					RECT temp = _vTotalList[y][x]->getRect();
-					Rectangle(_map->getMapDC(), temp);
-					_vTotalList[y][x]->render();
-				}
-			
-			}
-		}
+		HBRUSH myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+		SelectObject(_map->getMapDC(), myBrush);
 		if (type == PLAYER)
 		{
+			for (int y = 0; y < _vTotalList.size(); ++y)					
+			{
+				for (int x = 0; x < _vTotalList[y].size(); ++x)
+				{
+					if(_vTotalList[y][x]->getAttribute()!="none")
+					{ 
+						RECT temp = _vTotalList[y][x]->getRect();
+						Rectangle(_map->getMapDC(), temp);
+						_vTotalList[y][x]->render();
+					}
+				
+				}
+			}
+	
 			route();
 		}
 	}
@@ -88,21 +82,25 @@ void aStarTest::setTile(int playerX, int playerY)
 {
 	_vTotalList.clear();
 	_moveTileCount = 0;
+
+	//출발 타일은 자기자신 
 	_startTile = new tile;
 	_startTile->setLinkMap(_map);
 	_startTile->init(playerX, playerY);
 	_startTile->setAttribute("move");
-
+	
+	//목적지 타일 초기화는 일단 자기자신으로
 	_endTile = new tile;
 	_endTile->setLinkMap(_map);
 	_endTile->init(playerX, playerY);
 	_endTile->setAttribute("move");
 	_endTile->setIsEnd(true);
 
-
+	//현재타일도 시작타일인 자기자신으로
 	_currentTile = _startTile;
 	
 
+	//토탈리스트 담기
 	for (int y = 0 ; y <_map->getSizeY(); ++y)
 	{
 		vector<tile*> TotalList;
@@ -124,7 +122,6 @@ void aStarTest::setTile(int playerX, int playerY)
 		_vTotalList.push_back(TotalList);
 	}
 
-	//setMoveTile(playerX, playerY);
 }
 
 //갈수있는길추가함수
@@ -143,9 +140,9 @@ vector<tile*> aStarTest::addOpenList(tile * currentTile)
 			//예외처리
 			if (!node->getIsOpen()) continue;
 
-			//현재 타일 계속 갱신해준다.
+			//전 단계 타일 계속 갱신해준다.
 			node->setParentNode(_currentTile);
-			//node->setparentNumber(_currentTile->getparentNumber() + 1);
+
 			//주변타일 검출하면서 체크했는지 유무를 알수있게 임의의 불값을 준다
 			bool addObj = true;
 
@@ -157,10 +154,6 @@ vector<tile*> aStarTest::addOpenList(tile * currentTile)
 					break;
 				}
 			}
-
-
-			////현재 노드가 끝노드가아니면 색칠해준다
-			//if (node->getAttribute() != "player") node->setColor(RGB(128, 64, 28));
 
 			//이미 체크된애는 건너뛴다
 			if (!addObj) continue;
@@ -175,9 +168,8 @@ vector<tile*> aStarTest::addOpenList(tile * currentTile)
 			//예외처리
 			if (!node->getIsOpen()) continue;
 
-			//현재 타일 계속 갱신해준다.
+			//전 단계 타일 계속 갱신해준다.
 			node->setParentNode(_currentTile);
-			//node->setparentNumber(_currentTile->getparentNumber() + 1);
 
 			//주변타일 검출하면서 체크했는지 유무를 알수있게 임의의 불값을 준다
 			bool addObj = true;
@@ -190,10 +182,6 @@ vector<tile*> aStarTest::addOpenList(tile * currentTile)
 					break;
 				}
 			}
-
-
-			//현재 노드가 끝노드가아니면 색칠해준다
-			//if (node->getAttribute() != "player");
 
 			//이미 체크된애는 건너뛴다
 			if (!addObj) continue;
@@ -262,23 +250,23 @@ void aStarTest::pathFinder(tile * currentTile)
 
 	if (tempTile == nullptr)
 	{
+		//아무것도 못찾앗을때 멈춰!
 		_stop = true;
 		return;
 	}
 	else if (tempTile->getIsEnd())
 	{
-		//최단경로를 색칠해줘라
+		//최단경로를 담앗다!
 		while (_currentTile != _startTile)
 		{
 			_vCloseList.emplace_back(_currentTile);
-			//_vOpenList.clear();
 			_start = true;
 			_currentTile = _currentTile->getParentNode();
 		}
 		return;
 	}
 
-	//최단경로를 넣어놧으면
+	//최단 경로를 찾았으면
 	for (_viOpenList = _vOpenList.begin(); _viOpenList != _vOpenList.end(); ++_viOpenList)
 	{
 		//그 오픈리스트에서 삭제해줍시다
@@ -289,17 +277,37 @@ void aStarTest::pathFinder(tile * currentTile)
 		}
 	}
 
+	//현재 타일 갱신
 	_currentTile = tempTile;
 	
+	//갱신한 타일로 현재 함수 재귀로 호출
 	pathFinder(_currentTile);
 
 }
 
-void aStarTest::EndSelect(int endIndexX, int endIndexY)
+void aStarTest::EndSelect(int endIndexX, int endIndexY, bool cancel)
 {
-	if(endIndexX == _startTile->getIdX() && endIndexY == _startTile->getIdY())
+	//도착지 선택
+	if (!cancel)
 	{
-		
+		if (!(endIndexX == _startTile->getIdX() && endIndexY == _startTile->getIdY()))
+		{
+			RECT rc;
+			tile* node = new tile;
+			node->setLinkMap(_map);
+			node->init(_endTile->getIdX(), _endTile->getIdY());
+			node->setAttribute("move");
+			_endTile->setIdX(endIndexX);
+			_endTile->setIdY(endIndexY);
+			rc = _map->getRect(_endTile->getIdX(), _endTile->getIdY());
+			_endTile->setCetner(PointMake((rc.left + rc.right) / 2, (rc.bottom + rc.top) / 2));
+			_endTile->setRect(rc);
+			_vTotalList[node->getIdY()].erase(_vTotalList[node->getIdY()].begin() + node->getIdX());
+			_vTotalList[node->getIdY()].insert(_vTotalList[node->getIdY()].begin() + node->getIdX(), node);
+			_vTotalList[endIndexY].erase(_vTotalList[endIndexY].begin() + endIndexX);
+			_vTotalList[endIndexY].insert(_vTotalList[endIndexY].begin() + endIndexX, _endTile);
+
+		}
 	}
 	else
 	{
@@ -317,13 +325,12 @@ void aStarTest::EndSelect(int endIndexX, int endIndexY)
 		_vTotalList[node->getIdY()].insert(_vTotalList[node->getIdY()].begin() + node->getIdX(), node);
 		_vTotalList[endIndexY].erase(_vTotalList[endIndexY].begin() + endIndexX);
 		_vTotalList[endIndexY].insert(_vTotalList[endIndexY].begin() + endIndexX, _endTile);
-
 	}
 }
 
 void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 {
-
+	//일단 전체 구역에서 갈 수 있는 곳과 갈 수 없는 곳을 분류한다
 	for (int y = 0; y < _vTotalList.size(); ++y)
 	{
 		for (int x = 0; x < _vTotalList[y].size(); ++x)
@@ -346,20 +353,22 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 		}
 	}
 
-
+	//플레이어마다 다른 이동범위 
 	_movecount = _moveRange;
 
 	//상 Move넣기
 	for (int i = 1; i <= _moveRange; ++i)
 	{
-		if (playerY - i < 0) break;
-		if (!_map->getMove(playerX, playerY - i)) _movecount = 0;
-		if (_movecount > 0)
+
+		if (playerY - i < 0) break; // 예외처리
+		if (!_map->getMove(playerX, playerY - i)) _movecount = 0; // 기본적으로 갈 수 없는 곳을 체크
+		if (_movecount > 0) // 갈곳이있다면
 		{
+			//각 유닛좌표를 기준으로 체크해줍니다
 			_vTotalList[playerY - i][playerX]->setAttribute("move");
 			_moveTileCount++;
 			if (type == PLAYER)
-			{
+			{//해당유닛이 플레이어 일때 이동 구간안에 애너미가 있다면 체크
 				if (_map->getIsEnemy(playerX, playerY - i))
 				{
 					_vTotalList[playerY - i][playerX]->setAttribute("attack");
@@ -367,7 +376,7 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 				}
 			}
 			if (type == ENEMY)
-			{
+			{//해당유닛이 애너미 일때 이동 구간안에 플레이어가 있다면 체크
 				if (_map->getIsPlayer(playerX, playerY - i))
 				{
 					_vTotalList[playerY - i][playerX]->setAttribute("attack");
@@ -376,7 +385,7 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 			}
 			--_movecount;
 		}
-		else
+		else//갈 곳 없으면 반복문 끝
 			break;
 
 	}
@@ -387,14 +396,15 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 	//하 Move넣기
 	for (int i = 1; i <= _moveRange; ++i)
 	{
-		if (playerY + i > _map->getSizeY()) break;
-		if (!_map->getMove(playerX, playerY + i)) _movecount = 0;
-		if (_movecount > 0)
+		if (playerY + i > _map->getSizeY()) break;// 예외처리
+		if (!_map->getMove(playerX, playerY + i)) _movecount = 0; // 기본적으로 갈 수 없는 곳을 체크
+		if (_movecount > 0)// 갈곳이있다면
 		{
+			//각 유닛좌표를 기준으로 체크해줍니다
 			_vTotalList[playerY + i][playerX]->setAttribute("move");
 			_moveTileCount++;
 			if (type == PLAYER)
-			{
+			{//해당유닛이 플레이어 일때 이동 구간안에 애너미가 있다면 체크
 				if (_map->getIsEnemy(playerX, playerY + i))
 				{
 					_vTotalList[playerY + i][playerX]->setAttribute("attack");
@@ -402,7 +412,7 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 				}
 			}
 			if (type == ENEMY)
-			{
+			{//해당유닛이 애너미 일때 이동 구간안에 플레이어가 있다면 체크
 				if (_map->getIsPlayer(playerX, playerY + i))
 				{
 					_vTotalList[playerY + i][playerX]->setAttribute("attack");
@@ -411,7 +421,7 @@ void aStarTest::setMoveTile(int playerX , int playerY , TYPE type)
 			}
 			_movecount--;
 		}
-		else
+		else//갈 곳 없으면 반복문 끝
 			break;
 	}
 

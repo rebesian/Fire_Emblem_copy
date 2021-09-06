@@ -32,7 +32,6 @@ protected:
 	int stageRenderX;
 	int stageRenderY;
 	bool _render , _moving, _pointing, _playerSelect, _moveSelect ,_attackSelect;
-	int battleRender;
 
 	int stageRenderCount;
 public:
@@ -73,6 +72,7 @@ public:
 	void setExp(float Exp) { exp = Exp; }
 	void setrender(bool render) { _render = render; }
 	void setpointing(bool pointing) { _pointing = pointing; }
+	void setAstarClear() { _astar->clear(); _astar->setStart(false); _astar->EndSelect(indexX, indexY , true); }
 	void setPlayerSelect(bool Select) { _playerSelect = Select; }
 	void setMoveSelect(bool Select) { _moveSelect = Select; }
 	void setAttackSelect(bool Select) { _attackSelect = Select; }

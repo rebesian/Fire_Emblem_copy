@@ -59,6 +59,7 @@ public:
 	void sethp(int pointed , int hp) { _vplayer[pointed]->sethp(hp); }
 	void setExp(int pointed, float exp) { _vplayer[pointed]->setExp(exp); }
 	void setUse(int pointed, bool use) { _vplayer[pointed]->setUse(use); }
+	void cancel(int pointed) {  _vplayer[pointed]->setrender(false);  _vplayer[pointed]->setAstarClear();}
 	void setPlayerSelect(int pointed, bool Select) { _vplayer[pointed]->setPlayerSelect(Select); }
 	void setMoveSelect(int pointed, bool Select) { _vplayer[pointed]->setMoveSelect(Select); }
 	void setAttackSelect(int pointed , bool Select) { _vplayer[pointed]->setAttackSelect(Select); }
