@@ -27,12 +27,13 @@ private:
 
 	int mapSizeX;
 	int mapSizeY;
-	
+	int phazeAlpha;
+
 	int useCount;
 	int selectEnemy;
 	int _playerPoint;
 	int _enemyPoint;
-
+	
 	int enemyCount;
 
 	bool isbattle;

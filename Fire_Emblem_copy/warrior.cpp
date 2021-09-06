@@ -33,7 +33,7 @@ HRESULT warrior::init(int idx, int idy ,TYPE type)
 void warrior::update(int idx, int idy)
 {
 	unit::update(idx,idy);
-	if (_astar->getStart() && _moveSelect)
+	if (_astar->getStart())
 	{
 		switch (_type)
 		{

@@ -50,12 +50,11 @@ void battleScene::render(int x , int y , bool truePlayerFalseEnemy)
 	_player.hp1->render(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 505, CAMERAMANAGER->getCameraTOP() + 547,  0 , 0,  (_playerCurrentHp / 20.0)*256 , 26);
 
 	HFONT font, oldFont;
-	font = CreateFont(50, 0, 0, 0, 100, false, false, false, HANGUL_CHARSET,
+	font = CreateFont(50, 0, 0, 0, 10, false, false, false, HANGUL_CHARSET,
 		0, 0, 0, 0, TEXT("HY¾èÀº»ù¹°M"));
-	oldFont = (HFONT)SelectObject(getMemDC(), font);
-	
-	//TextOut(getMemDC(), CAMERAMANAGER->getCameraLEFT() +  890, CAMERAMANAGER->getCameraTOP(), (char)_playerName, strlen(_playerName));
-	
+	oldFont = (HFONT)SelectObject(_map->getMapDC(), font);
+	TextOut(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 880 - (strlen(_playerName.c_str()))*8, CAMERAMANAGER->getCameraTOP() + 20, _playerName.c_str() , strlen(_playerName.c_str()));
+	TextOut(_map->getMapDC(), CAMERAMANAGER->getCameraLEFT() + 85 - (strlen(_enemyName.c_str())) * 8, CAMERAMANAGER->getCameraTOP() + 20, _enemyName.c_str(), strlen(_enemyName.c_str()));
 	DeleteObject(font);
 
 
@@ -291,9 +290,20 @@ void battleScene::playerAction(string name)
 			if (_playerIndex == 5)
 			{
 				_enemyCurrentHp -= 0.3;
-				if (_enemyCurrentHp <= _enemyHp -_playerAttack)
+				int damage;
+				if (_enemyHp - _playerAttack <= 0)
 				{
-					_enemyCurrentHp = _enemyHp - _playerAttack;
+					damage = 0;
+				}
+				else
+				{
+					damage = _enemyHp - _playerAttack;
+				}
+
+				if (_enemyCurrentHp <= damage)
+				{
+
+					_enemyCurrentHp = damage;
 					_playerIndex++;
 					_playerCount = 0;
 				}
@@ -416,9 +426,21 @@ void battleScene::playerAction(string name)
 		{
 			_playerCount++;
 			_enemyCurrentHp -= 0.3;
-			if (_enemyCurrentHp <= _enemyHp - _playerAttack)
+
+			int damage;
+			if (_enemyHp - _playerAttack <= 0)
 			{
-				_enemyCurrentHp = _enemyHp - _playerAttack;
+				damage = 0;
+			}
+			else
+			{
+				damage = _enemyHp - _playerAttack;
+			}
+
+			if (_enemyCurrentHp <= damage)
+			{
+
+				_enemyCurrentHp = damage;
 				_playerIndex++;
 				_playerCount = 0;
 			}
@@ -514,9 +536,21 @@ void battleScene::playerAction(string name)
 		{
 			_playerCount++;
 			_enemyCurrentHp -= 0.3;
-			if (_enemyCurrentHp <= _enemyHp - _playerAttack)
+
+			int damage;
+			if (_enemyHp - _playerAttack <= 0)
 			{
-				_enemyCurrentHp = _enemyHp - _playerAttack;
+				damage = 0;
+			}
+			else
+			{
+				damage = _enemyHp - _playerAttack;
+			}
+
+			if (_enemyCurrentHp <= damage)
+			{
+
+				_enemyCurrentHp = damage;
 				_playerIndex++;
 				_playerCount = 0;
 			}
@@ -611,9 +645,21 @@ void battleScene::playerAction(string name)
 		{
 			_playerCount++;
 			_enemyCurrentHp -= 0.3;
-			if (_enemyCurrentHp <= _enemyHp - _playerAttack)
+
+			int damage;
+			if (_enemyHp - _playerAttack <= 0)
 			{
-				_enemyCurrentHp = _enemyHp - _playerAttack;
+				damage = 0;
+			}
+			else
+			{
+				damage = _enemyHp - _playerAttack;
+			}
+
+			if (_enemyCurrentHp <= damage)
+			{
+
+				_enemyCurrentHp = damage;
 				_playerIndex++;
 				_playerCount = 0;
 			}
@@ -725,9 +771,20 @@ void battleScene::playerAction(string name)
 		{
 			_playerCount++;
 			_enemyCurrentHp -= 0.3;
-			if (_enemyCurrentHp <= _enemyHp - _playerAttack)
+			int damage;
+			if (_enemyHp - _playerAttack <= 0)
 			{
-				_enemyCurrentHp = _enemyHp - _playerAttack;
+				damage = 0;
+			}
+			else
+			{
+				damage = _enemyHp - _playerAttack;
+			}
+
+			if (_enemyCurrentHp <= damage)
+			{
+
+				_enemyCurrentHp = damage;
 				_playerIndex++;
 				_playerCount = 0;
 			}
@@ -823,9 +880,21 @@ void battleScene::enemyAction(string name)
 		{
 			_enemyCount++;
 			_playerCurrentHp -= 0.3;
-			if (_playerCurrentHp <= _playerHp - _enemyAttack)
+
+			int damage;
+			if (_playerHp - _enemyAttack <= 0)
 			{
-				_playerCurrentHp = _playerHp - _enemyAttack;
+				damage = 0;
+			}
+			else
+			{
+				damage = _playerHp - _enemyAttack;
+			}
+
+			if (_playerCurrentHp <= damage)
+			{
+
+				_playerCurrentHp = damage;
 				_enemyIndex++;
 				_enemyCount = 0;
 			}
@@ -921,9 +990,20 @@ void battleScene::enemyAction(string name)
 		{
 			_enemyCount++;
 			_playerCurrentHp -= 0.3;
-			if (_playerCurrentHp <= _playerHp - _enemyAttack)
+			int damage;
+			if (_playerHp - _enemyAttack <= 0)
 			{
-				_playerCurrentHp = _playerHp - _enemyAttack;
+				damage = 0;
+			}
+			else
+			{
+				damage = _playerHp - _enemyAttack;
+			}
+
+			if (_playerCurrentHp <= damage)
+			{
+
+				_playerCurrentHp = damage;
 				_enemyIndex++;
 				_enemyCount = 0;
 			}
@@ -1019,9 +1099,20 @@ void battleScene::enemyAction(string name)
 		{
 			_enemyCount++;
 			_playerCurrentHp -= 0.3;
-			if (_playerCurrentHp <= _playerHp - _enemyAttack)
+			int damage;
+			if (_playerHp - _enemyAttack <= 0)
 			{
-				_playerCurrentHp = _playerHp - _enemyAttack;
+				damage = 0;
+			}
+			else
+			{
+				damage = _playerHp - _enemyAttack;
+			}
+
+			if (_playerCurrentHp <= damage)
+			{
+
+				_playerCurrentHp = damage;
 				_enemyIndex++;
 				_enemyCount = 0;
 			}
@@ -1106,9 +1197,20 @@ void battleScene::enemyAction(string name)
 		{
 			_enemyCount++;
 			_playerCurrentHp -= 0.3;
-			if (_playerCurrentHp <= _playerHp - _enemyAttack)
+			int damage;
+			if (_playerHp - _enemyAttack <= 0)
 			{
-				_playerCurrentHp = _playerHp - _enemyAttack;
+				damage = 0;
+			}
+			else
+			{
+				damage = _playerHp - _enemyAttack;
+			}
+
+			if (_playerCurrentHp <= damage)
+			{
+
+				_playerCurrentHp = damage;
 				_enemyIndex++;
 				_enemyCount = 0;
 			}

@@ -28,11 +28,13 @@ HRESULT stageScene::init()
 	_playerPoint = 0;
 	_enemyPoint = 0;
 	useCount = 0;
+	enemyCount = 0;
 	isbattle = isAttackSelect = isMoveSelect = false;
 	enemytargetOn = false;
 
 	_pt.indexX = 2;
 	_pt.indexY = 10;
+	phazeAlpha = 255;
 	_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
 
 	return S_OK;
@@ -40,7 +42,6 @@ HRESULT stageScene::init()
 
 void stageScene::update()
 {
-
 	if (isbattle)
 	{
 		if (truePlayerFalseEnemy)
@@ -95,6 +96,8 @@ void stageScene::update()
 				{
 					_tileSet->setIsPlayer(_pm->getIndexX(_playerPoint), _pm->getIndexY(_playerPoint), false);
 					_pm->dead(_playerPoint);
+					_playerPoint = 255;
+					useCount--;
 				}
 				if (_battleScene->getEnemyCurrentHp() > 0)
 				{
@@ -104,6 +107,15 @@ void stageScene::update()
 				{
 					_tileSet->setIsEnemy(_em->getIndexX(_enemyPoint), _em->getIndexY(_enemyPoint), false);
 					_em->dead(_enemyPoint);
+					enemytargetOn = false;
+				}
+
+				enemyCount = 0;
+
+				for (int i = 0; i < _em->getMaxEnemy(); ++i)
+				{
+					if (_em->getUse(i))
+						enemyCount++;
 				}
 
 				isMoveSelect = false;
@@ -152,7 +164,7 @@ void stageScene::update()
 	
 			if (_pt.indexX > 0) _pt.indexX -= 1;
 			_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
-			//CAMERAMANAGER->setCameraCenterX(CAMERAMANAGER->getCameraCenterX() - 5);
+			//CAMERAMANAGER->setCameraCenterX(CAMERAMANAGER->getCameraCenterX() - 48);
 			if (CAMERAMANAGER->getCameraLEFT() <= 0)
 			{
 				CAMERAMANAGER->setCameraX(0);
@@ -162,7 +174,7 @@ void stageScene::update()
 		{
 			if (_pt.indexX <= _tileSet->getSizeX()) _pt.indexX += 1;
 			_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
-			//CAMERAMANAGER->setCameraCenterX(CAMERAMANAGER->getCameraCenterX() + 5);
+			//CAMERAMANAGER->setCameraCenterX(CAMERAMANAGER->getCameraCenterX() + 48);
 			if (CAMERAMANAGER->getCameraRIGHT() >= mapSizeX * TILESIZE && mapSizeX*TILESIZE >= CAMERAX)
 			{
 				CAMERAMANAGER->setCameraX(mapSizeX*TILESIZE - CAMERAX);
@@ -187,6 +199,7 @@ void stageScene::update()
 				if (_pt.indexY > 0)_pt.indexY -= 1;
 				_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
 			}
+			//CAMERAMANAGER->setCameraCenterY(CAMERAMANAGER->getCameraCenterY() - 48);
 			if (CAMERAMANAGER->getCameraTOP() <= 0)
 			{
 				CAMERAMANAGER->setCameraY(0);
@@ -210,7 +223,7 @@ void stageScene::update()
 				if (_pt.indexY < _tileSet->getSizeY()) _pt.indexY += 1;
 				_pt._rc = _tileSet->getRect(_pt.indexX, _pt.indexY);
 			}
-			//CAMERAMANAGER->setCameraCenterY(CAMERAMANAGER->getCameraCenterY() + 5);
+			//CAMERAMANAGER->setCameraCenterY(CAMERAMANAGER->getCameraCenterY() + 48);
 			if (CAMERAMANAGER->getCameraBOTTOM() >= mapSizeY * TILESIZE && mapSizeY*TILESIZE >= CAMERAY)
 			{
 				CAMERAMANAGER->setCameraY(mapSizeY*TILESIZE - CAMERAY);
@@ -310,7 +323,8 @@ void stageScene::update()
 			_enemyPoint++;
 			enemyCount++;
 		}
-	
+
+		//모든 유닛 전부 Use상태일때,
 		if (enemyCount >= _em->getMaxEnemy())
 		{
 			for (int i = 0; i < _em->getMaxEnemy(); ++i)
@@ -346,6 +360,15 @@ void stageScene::render()
 	}
 	else
 	{
+		if (truePlayerFalseEnemy)
+		{
+			IMAGEMANAGER->findImage("플레이어턴")->alphaRender(_tileSet->getMapDC(), phazeAlpha);
+
+		}
+		else
+		{
+
+		}
 		_em->render();
 		_pm->render();
 		_pt._img->render(_tileSet->getMapDC(), _pt._rc.left, _pt._rc.top);

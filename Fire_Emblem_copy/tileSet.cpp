@@ -48,17 +48,6 @@ void tileSet::render()
 				break;
 
 			}
-
-			if (_tiles[i][j].isPlayer)
-			{
-				sprintf_s(str, "플레이어");
-				TextOut(_tileBuffer->getMemDC(), _tiles[i][j].rc.left, _tiles[i][j].rc.top, str, strlen(str));
-			}
-			if (_tiles[i][j].isEnemy)
-			{
-				sprintf_s(str, "에너미");
-				TextOut(_tileBuffer->getMemDC(), _tiles[i][j].rc.left, _tiles[i][j].rc.top, str, strlen(str));
-			}
 		}
 	}
 }

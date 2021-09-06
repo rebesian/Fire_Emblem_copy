@@ -39,8 +39,8 @@ using namespace SUNFL_UTIL;
 #define WINSIZEY 600	//윈도우 세로크기
 #define CAMERAX 48*20//700
 #define CAMERAY 600//800 //700
-#define BACKGROUNDX 2000
-#define BACKGROUNDY 2000
+#define BACKGROUNDX 48*20
+#define BACKGROUNDY 48*21
 #define WINSTYLE WS_CAPTION | WS_SYSMENU
 
 #define RND				randomFunction::getSingleton()

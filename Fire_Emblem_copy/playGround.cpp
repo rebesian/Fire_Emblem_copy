@@ -85,7 +85,8 @@ void playGround::inputImage()
 	IMAGEMANAGER->addImage("crit", "image/UI/crit.bmp", 39, 24, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("hpbar1", "image/UI/hpbar1.bmp", 256, 26, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("hpbar2", "image/UI/hpbar2.bmp", 256, 26, true, RGB(255, 0, 255));
-
+	IMAGEMANAGER->addImage("에너미페이즈", "image/UI/에너미페이즈.bmp", 960, 600, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("플레이어페이즈", "image/UI/플레이어페이즈.bmp", 960, 600, true, RGB(255, 0, 255));
 
 	//병과아이콘
 	//아군 Idle

@@ -242,24 +242,24 @@ void cameraManager::updateCamera(float centerX, float centerY, float ratioX)
 {
 	if (_isFixed) return;
 
-	if (centerX >= _cameraBuffer->getX() + ratioX * CAMERAX)
+	if (centerY >= _cameraBuffer->getY() + ratioX * CAMERAY)
 	{
 		if (_isHaveToMove)
 		{
-			_cameraBuffer->setX(_cameraBuffer->getX() + 10);
-			if (centerX <= _cameraBuffer->getX() + ratioX * CAMERAX)
+			_cameraBuffer->setY(_cameraBuffer->getY() + 10);
+			if (centerY <= _cameraBuffer->getY() + ratioX * CAMERAY)
 			{
-				_cameraBuffer->setX(centerX - ratioX * CAMERAX);
+				_cameraBuffer->setY(centerY - ratioX * CAMERAY);
 				_isHaveToMove = false;
 			}
 		}
 		else
 		{
-			_cameraBuffer->setX(centerX - ratioX * CAMERAX);
+			_cameraBuffer->setY(centerY - ratioX * CAMERAY);
 		}
 	}
 	cameraRange();
-	x[0] = _cameraBuffer->getX() + ratioX * CAMERAX;
+	x[0] = _cameraBuffer->getY() + ratioX * CAMERAY;
 	x[1] = 0;
 	
 }
