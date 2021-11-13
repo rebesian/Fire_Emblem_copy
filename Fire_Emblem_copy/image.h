@@ -1,5 +1,4 @@
 #pragma once
-#include "animation.h"
 
 class image
 {
@@ -90,7 +89,6 @@ public:
 	void alphaFrameRender(HDC hdc, int destX, int destY, BYTE alpha);
 	void alphaFrameRender(HDC hdc, int destX, int destY,
 		int currentFrameX, int currentFrameY, BYTE alpha);
-	void aniRender(HDC hdc, int destX, int destY, animation* ani);
 
 	//혹시나 런타임 도중에 제거할 픽셀값을 바꿔야한다면
 	void setTransColor(BOOL trans, COLORREF transColor);
